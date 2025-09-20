@@ -1,0 +1,11 @@
+@use '@coreStyles/variables.module' as variables;
+
+.container {
+  height: calc(100% - #{variables.$header-height});
+  margin-top: variables.$header-height;
+}
+
+.main-content-wrapper {
+  display: flow-root;
+  height: 100%;
+}

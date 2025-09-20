@@ -1,0 +1,50 @@
+@use './variables.module' as variables;
+
+.inline-button ,
+%inline-button {
+  background: none !important;
+  color: variables.$link-color !important;
+  padding: 5px !important;
+  text-decoration-line: underline !important;
+}
+
+.item,
+%base-item {
+  color: variables.$primary-text-color;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  position: relative;
+  text-decoration: none;
+}
+
+.item-link,
+%base-item-link {
+  @extend %base-item;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s linear;
+
+  &:hover {
+    color: variables.$primary-text-color;
+    opacity: 0.5;
+  }
+
+  &:focus {
+    color: variables.$primary-text-color;
+  }
+}
+
+.status {
+  &-in-progress {
+    color: #186eb9;
+  }
+
+  &-success {
+    color: variables.$positive-button-main-color;
+  }
+
+  &-error {
+    color: variables.$negative-button-main-color;
+  }
+}

@@ -1,0 +1,11 @@
+npm-debug.log
+node_modules/
+static/
+tmp/
+*.zip
+*.iml
+.idea/
+.env
+.env.local
+.env.production
+.env.development

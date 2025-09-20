@@ -1,0 +1,14 @@
+@use '@coreStyles/variables.module' as variables;
+
+.container,
+%checkbox-group-field {
+  column-gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+
+.checkbox {
+  color: variables.$primary-text-color !important;
+  font-family: 'Cera Pro', sans-serif !important;
+}

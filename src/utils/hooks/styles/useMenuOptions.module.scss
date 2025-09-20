@@ -1,0 +1,18 @@
+@use '@coreStyles/variables.module' as variables;
+@use '@coreStyles/parts.module' as *;
+
+.item {
+  &-active {
+    &::after {
+      background: variables.$primary-button-main-color;
+      border-radius: 3px;
+      bottom: -10px;
+      content: '';
+      height: 3px;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      width: 80%;
+    }
+  }
+}
