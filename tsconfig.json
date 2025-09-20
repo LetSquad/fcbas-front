@@ -1,0 +1,53 @@
+{
+    "ts-node": {
+        "compilerOptions": {
+            "target": "ES6",
+            "module": "CommonJS",
+            "moduleResolution": "node"
+        }
+    },
+    "compilerOptions": {
+        "strict": true,
+        "target": "ES2021",
+        "module": "esnext",
+        "lib": [
+            "ES5",
+            "ES6",
+            "ES2019",
+            "ES2021",
+            "DOM"
+        ],
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "sourceMap": false,
+        "rootDir": "src",
+        "outDir": "assets/js",
+        "noEmitOnError": true,
+        "jsx": "react-jsx",
+        "typeRoots": [ "node_modules/@types", "./custom_typing"],
+        "baseUrl": "src",
+        "incremental": true,
+        "paths": {
+            "@static/*": ["static/*"],
+            "@coreUtils/*": ["utils/*"],
+            "@hooks/*": ["utils/hooks/*"],
+            "@coreStyles/*": ["styles/*"],
+            "@models/*": ["models/*"],
+            "@components/*": ["components/*"],
+            "@commonComponents/*": ["components/common/*"],
+            "@pages/*": ["pages/*"],
+            "@store/*": ["store/*"],
+            "@api/*": ["api/*"],
+            "@mocks/*": ["mocks/*"]
+        }
+    },
+    "include": [
+        "./src/**/*",
+        "./rspack.config.ts",
+        "./custom_typing/**/*"
+    ],
+    "exclude": ["public", "./node_modules"]
+}

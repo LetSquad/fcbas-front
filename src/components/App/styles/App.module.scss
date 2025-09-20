@@ -1,0 +1,10 @@
+@use '@coreStyles/variables.module' as variables;
+
+.app {
+  color: variables.$primary-text-color;
+  display: flex;
+  flex-direction: column;
+  font-family: MoscowSans, sans-serif;
+  height: 100%;
+  overflow: hidden auto;
+}

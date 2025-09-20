@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.input-placeholder {
+  margin-top: 5px !important;
+  max-width: 100% !important;
+
+  &-field {
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    border-radius: 0.28571429rem;
+    height: 38px !important;
+  }
+}

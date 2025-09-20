@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  fcbas-front-keycloak-db:
+    image: postgres:17.0
+    environment:
+      POSTGRES_DB: "fcbas-front-keycloak-db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.3.0
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://fcbas-front-keycloak-db/fcbas-front-keycloak-db
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: postgres
+    ports:
+      - "8080:8080"
+    command:
+      - start-dev
+
+volumes:
+  postgres_data:
