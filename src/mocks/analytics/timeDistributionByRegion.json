@@ -1,0 +1,540 @@
+{
+  "startDate": "2025-01-01",
+  "finishDate": "2025-12-31",
+  "regions": [
+    {
+      "regionId": 1,
+      "morningFlightsCount": 215,
+      "dayMiddleFlightsCount": 260,
+      "eveningFlightsCount": 159
+    },
+    {
+      "regionId": 2,
+      "morningFlightsCount": 207,
+      "dayMiddleFlightsCount": 327,
+      "eveningFlightsCount": 278
+    },
+    {
+      "regionId": 3,
+      "morningFlightsCount": 161,
+      "dayMiddleFlightsCount": 299,
+      "eveningFlightsCount": 149
+    },
+    {
+      "regionId": 4,
+      "morningFlightsCount": 213,
+      "dayMiddleFlightsCount": 285,
+      "eveningFlightsCount": 277
+    },
+    {
+      "regionId": 5,
+      "morningFlightsCount": 199,
+      "dayMiddleFlightsCount": 286,
+      "eveningFlightsCount": 220
+    },
+    {
+      "regionId": 6,
+      "morningFlightsCount": 232,
+      "dayMiddleFlightsCount": 360,
+      "eveningFlightsCount": 182
+    },
+    {
+      "regionId": 7,
+      "morningFlightsCount": 184,
+      "dayMiddleFlightsCount": 314,
+      "eveningFlightsCount": 138
+    },
+    {
+      "regionId": 8,
+      "morningFlightsCount": 148,
+      "dayMiddleFlightsCount": 286,
+      "eveningFlightsCount": 136
+    },
+    {
+      "regionId": 9,
+      "morningFlightsCount": 209,
+      "dayMiddleFlightsCount": 337,
+      "eveningFlightsCount": 216
+    },
+    {
+      "regionId": 10,
+      "morningFlightsCount": 154,
+      "dayMiddleFlightsCount": 324,
+      "eveningFlightsCount": 190
+    },
+    {
+      "regionId": 11,
+      "morningFlightsCount": 215,
+      "dayMiddleFlightsCount": 360,
+      "eveningFlightsCount": 260
+    },
+    {
+      "regionId": 12,
+      "morningFlightsCount": 133,
+      "dayMiddleFlightsCount": 284,
+      "eveningFlightsCount": 190
+    },
+    {
+      "regionId": 13,
+      "morningFlightsCount": 240,
+      "dayMiddleFlightsCount": 397,
+      "eveningFlightsCount": 257
+    },
+    {
+      "regionId": 14,
+      "morningFlightsCount": 131,
+      "dayMiddleFlightsCount": 294,
+      "eveningFlightsCount": 164
+    },
+    {
+      "regionId": 15,
+      "morningFlightsCount": 252,
+      "dayMiddleFlightsCount": 340,
+      "eveningFlightsCount": 196
+    },
+    {
+      "regionId": 16,
+      "morningFlightsCount": 277,
+      "dayMiddleFlightsCount": 436,
+      "eveningFlightsCount": 247
+    },
+    {
+      "regionId": 17,
+      "morningFlightsCount": 204,
+      "dayMiddleFlightsCount": 300,
+      "eveningFlightsCount": 245
+    },
+    {
+      "regionId": 18,
+      "morningFlightsCount": 198,
+      "dayMiddleFlightsCount": 316,
+      "eveningFlightsCount": 256
+    },
+    {
+      "regionId": 19,
+      "morningFlightsCount": 212,
+      "dayMiddleFlightsCount": 332,
+      "eveningFlightsCount": 155
+    },
+    {
+      "regionId": 20,
+      "morningFlightsCount": 242,
+      "dayMiddleFlightsCount": 407,
+      "eveningFlightsCount": 241
+    },
+    {
+      "regionId": 21,
+      "morningFlightsCount": 157,
+      "dayMiddleFlightsCount": 310,
+      "eveningFlightsCount": 149
+    },
+    {
+      "regionId": 22,
+      "morningFlightsCount": 190,
+      "dayMiddleFlightsCount": 299,
+      "eveningFlightsCount": 216
+    },
+    {
+      "regionId": 23,
+      "morningFlightsCount": 172,
+      "dayMiddleFlightsCount": 338,
+      "eveningFlightsCount": 186
+    },
+    {
+      "regionId": 24,
+      "morningFlightsCount": 213,
+      "dayMiddleFlightsCount": 314,
+      "eveningFlightsCount": 192
+    },
+    {
+      "regionId": 25,
+      "morningFlightsCount": 255,
+      "dayMiddleFlightsCount": 313,
+      "eveningFlightsCount": 294
+    },
+    {
+      "regionId": 26,
+      "morningFlightsCount": 209,
+      "dayMiddleFlightsCount": 271,
+      "eveningFlightsCount": 199
+    },
+    {
+      "regionId": 27,
+      "morningFlightsCount": 123,
+      "dayMiddleFlightsCount": 338,
+      "eveningFlightsCount": 198
+    },
+    {
+      "regionId": 28,
+      "morningFlightsCount": 191,
+      "dayMiddleFlightsCount": 341,
+      "eveningFlightsCount": 178
+    },
+    {
+      "regionId": 29,
+      "morningFlightsCount": 272,
+      "dayMiddleFlightsCount": 371,
+      "eveningFlightsCount": 195
+    },
+    {
+      "regionId": 30,
+      "morningFlightsCount": 227,
+      "dayMiddleFlightsCount": 309,
+      "eveningFlightsCount": 151
+    },
+    {
+      "regionId": 31,
+      "morningFlightsCount": 207,
+      "dayMiddleFlightsCount": 346,
+      "eveningFlightsCount": 222
+    },
+    {
+      "regionId": 32,
+      "morningFlightsCount": 182,
+      "dayMiddleFlightsCount": 285,
+      "eveningFlightsCount": 189
+    },
+    {
+      "regionId": 33,
+      "morningFlightsCount": 131,
+      "dayMiddleFlightsCount": 258,
+      "eveningFlightsCount": 198
+    },
+    {
+      "regionId": 34,
+      "morningFlightsCount": 162,
+      "dayMiddleFlightsCount": 268,
+      "eveningFlightsCount": 186
+    },
+    {
+      "regionId": 35,
+      "morningFlightsCount": 233,
+      "dayMiddleFlightsCount": 365,
+      "eveningFlightsCount": 156
+    },
+    {
+      "regionId": 36,
+      "morningFlightsCount": 135,
+      "dayMiddleFlightsCount": 235,
+      "eveningFlightsCount": 136
+    },
+    {
+      "regionId": 37,
+      "morningFlightsCount": 197,
+      "dayMiddleFlightsCount": 344,
+      "eveningFlightsCount": 147
+    },
+    {
+      "regionId": 38,
+      "morningFlightsCount": 115,
+      "dayMiddleFlightsCount": 320,
+      "eveningFlightsCount": 216
+    },
+    {
+      "regionId": 39,
+      "morningFlightsCount": 212,
+      "dayMiddleFlightsCount": 394,
+      "eveningFlightsCount": 286
+    },
+    {
+      "regionId": 40,
+      "morningFlightsCount": 159,
+      "dayMiddleFlightsCount": 355,
+      "eveningFlightsCount": 229
+    },
+    {
+      "regionId": 41,
+      "morningFlightsCount": 174,
+      "dayMiddleFlightsCount": 271,
+      "eveningFlightsCount": 158
+    },
+    {
+      "regionId": 42,
+      "morningFlightsCount": 286,
+      "dayMiddleFlightsCount": 390,
+      "eveningFlightsCount": 265
+    },
+    {
+      "regionId": 43,
+      "morningFlightsCount": 173,
+      "dayMiddleFlightsCount": 427,
+      "eveningFlightsCount": 248
+    },
+    {
+      "regionId": 44,
+      "morningFlightsCount": 127,
+      "dayMiddleFlightsCount": 320,
+      "eveningFlightsCount": 207
+    },
+    {
+      "regionId": 45,
+      "morningFlightsCount": 202,
+      "dayMiddleFlightsCount": 284,
+      "eveningFlightsCount": 200
+    },
+    {
+      "regionId": 46,
+      "morningFlightsCount": 173,
+      "dayMiddleFlightsCount": 327,
+      "eveningFlightsCount": 193
+    },
+    {
+      "regionId": 47,
+      "morningFlightsCount": 174,
+      "dayMiddleFlightsCount": 347,
+      "eveningFlightsCount": 189
+    },
+    {
+      "regionId": 48,
+      "morningFlightsCount": 170,
+      "dayMiddleFlightsCount": 323,
+      "eveningFlightsCount": 207
+    },
+    {
+      "regionId": 49,
+      "morningFlightsCount": 231,
+      "dayMiddleFlightsCount": 332,
+      "eveningFlightsCount": 288
+    },
+    {
+      "regionId": 50,
+      "morningFlightsCount": 163,
+      "dayMiddleFlightsCount": 323,
+      "eveningFlightsCount": 205
+    },
+    {
+      "regionId": 51,
+      "morningFlightsCount": 170,
+      "dayMiddleFlightsCount": 300,
+      "eveningFlightsCount": 153
+    },
+    {
+      "regionId": 52,
+      "morningFlightsCount": 212,
+      "dayMiddleFlightsCount": 370,
+      "eveningFlightsCount": 256
+    },
+    {
+      "regionId": 53,
+      "morningFlightsCount": 154,
+      "dayMiddleFlightsCount": 242,
+      "eveningFlightsCount": 112
+    },
+    {
+      "regionId": 54,
+      "morningFlightsCount": 160,
+      "dayMiddleFlightsCount": 315,
+      "eveningFlightsCount": 175
+    },
+    {
+      "regionId": 55,
+      "morningFlightsCount": 214,
+      "dayMiddleFlightsCount": 274,
+      "eveningFlightsCount": 184
+    },
+    {
+      "regionId": 56,
+      "morningFlightsCount": 266,
+      "dayMiddleFlightsCount": 395,
+      "eveningFlightsCount": 278
+    },
+    {
+      "regionId": 57,
+      "morningFlightsCount": 244,
+      "dayMiddleFlightsCount": 370,
+      "eveningFlightsCount": 276
+    },
+    {
+      "regionId": 58,
+      "morningFlightsCount": 180,
+      "dayMiddleFlightsCount": 208,
+      "eveningFlightsCount": 176
+    },
+    {
+      "regionId": 59,
+      "morningFlightsCount": 180,
+      "dayMiddleFlightsCount": 279,
+      "eveningFlightsCount": 220
+    },
+    {
+      "regionId": 60,
+      "morningFlightsCount": 181,
+      "dayMiddleFlightsCount": 399,
+      "eveningFlightsCount": 178
+    },
+    {
+      "regionId": 61,
+      "morningFlightsCount": 188,
+      "dayMiddleFlightsCount": 357,
+      "eveningFlightsCount": 194
+    },
+    {
+      "regionId": 62,
+      "morningFlightsCount": 191,
+      "dayMiddleFlightsCount": 349,
+      "eveningFlightsCount": 235
+    },
+    {
+      "regionId": 63,
+      "morningFlightsCount": 203,
+      "dayMiddleFlightsCount": 260,
+      "eveningFlightsCount": 215
+    },
+    {
+      "regionId": 64,
+      "morningFlightsCount": 261,
+      "dayMiddleFlightsCount": 373,
+      "eveningFlightsCount": 250
+    },
+    {
+      "regionId": 65,
+      "morningFlightsCount": 167,
+      "dayMiddleFlightsCount": 408,
+      "eveningFlightsCount": 272
+    },
+    {
+      "regionId": 66,
+      "morningFlightsCount": 188,
+      "dayMiddleFlightsCount": 344,
+      "eveningFlightsCount": 196
+    },
+    {
+      "regionId": 67,
+      "morningFlightsCount": 170,
+      "dayMiddleFlightsCount": 287,
+      "eveningFlightsCount": 137
+    },
+    {
+      "regionId": 68,
+      "morningFlightsCount": 177,
+      "dayMiddleFlightsCount": 446,
+      "eveningFlightsCount": 305
+    },
+    {
+      "regionId": 69,
+      "morningFlightsCount": 135,
+      "dayMiddleFlightsCount": 300,
+      "eveningFlightsCount": 208
+    },
+    {
+      "regionId": 70,
+      "morningFlightsCount": 126,
+      "dayMiddleFlightsCount": 250,
+      "eveningFlightsCount": 216
+    },
+    {
+      "regionId": 71,
+      "morningFlightsCount": 157,
+      "dayMiddleFlightsCount": 241,
+      "eveningFlightsCount": 141
+    },
+    {
+      "regionId": 72,
+      "morningFlightsCount": 148,
+      "dayMiddleFlightsCount": 250,
+      "eveningFlightsCount": 189
+    },
+    {
+      "regionId": 73,
+      "morningFlightsCount": 123,
+      "dayMiddleFlightsCount": 225,
+      "eveningFlightsCount": 158
+    },
+    {
+      "regionId": 74,
+      "morningFlightsCount": 272,
+      "dayMiddleFlightsCount": 357,
+      "eveningFlightsCount": 253
+    },
+    {
+      "regionId": 75,
+      "morningFlightsCount": 216,
+      "dayMiddleFlightsCount": 358,
+      "eveningFlightsCount": 258
+    },
+    {
+      "regionId": 76,
+      "morningFlightsCount": 203,
+      "dayMiddleFlightsCount": 309,
+      "eveningFlightsCount": 217
+    },
+    {
+      "regionId": 77,
+      "morningFlightsCount": 103,
+      "dayMiddleFlightsCount": 225,
+      "eveningFlightsCount": 114
+    },
+    {
+      "regionId": 78,
+      "morningFlightsCount": 146,
+      "dayMiddleFlightsCount": 229,
+      "eveningFlightsCount": 181
+    },
+    {
+      "regionId": 79,
+      "morningFlightsCount": 158,
+      "dayMiddleFlightsCount": 300,
+      "eveningFlightsCount": 269
+    },
+    {
+      "regionId": 80,
+      "morningFlightsCount": 151,
+      "dayMiddleFlightsCount": 223,
+      "eveningFlightsCount": 145
+    },
+    {
+      "regionId": 81,
+      "morningFlightsCount": 198,
+      "dayMiddleFlightsCount": 275,
+      "eveningFlightsCount": 231
+    },
+    {
+      "regionId": 82,
+      "morningFlightsCount": 253,
+      "dayMiddleFlightsCount": 298,
+      "eveningFlightsCount": 166
+    },
+    {
+      "regionId": 83,
+      "morningFlightsCount": 129,
+      "dayMiddleFlightsCount": 228,
+      "eveningFlightsCount": 107
+    },
+    {
+      "regionId": 84,
+      "morningFlightsCount": 178,
+      "dayMiddleFlightsCount": 321,
+      "eveningFlightsCount": 210
+    },
+    {
+      "regionId": 85,
+      "morningFlightsCount": 136,
+      "dayMiddleFlightsCount": 248,
+      "eveningFlightsCount": 152
+    },
+    {
+      "regionId": 86,
+      "morningFlightsCount": 278,
+      "dayMiddleFlightsCount": 461,
+      "eveningFlightsCount": 297
+    },
+    {
+      "regionId": 87,
+      "morningFlightsCount": 182,
+      "dayMiddleFlightsCount": 263,
+      "eveningFlightsCount": 172
+    },
+    {
+      "regionId": 88,
+      "morningFlightsCount": 247,
+      "dayMiddleFlightsCount": 375,
+      "eveningFlightsCount": 203
+    },
+    {
+      "regionId": 89,
+      "morningFlightsCount": 182,
+      "dayMiddleFlightsCount": 394,
+      "eveningFlightsCount": 317
+    }
+  ]
+}

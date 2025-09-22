@@ -1,0 +1,362 @@
+{
+  "startDate": "2025-01-01",
+  "finishDate": "2025-12-31",
+  "regions": [
+    {
+      "regionId": 1,
+      "averageFlightDurationSeconds": 491
+    },
+    {
+      "regionId": 2,
+      "averageFlightDurationSeconds": 1621
+    },
+    {
+      "regionId": 3,
+      "averageFlightDurationSeconds": 1852
+    },
+    {
+      "regionId": 4,
+      "averageFlightDurationSeconds": 676
+    },
+    {
+      "regionId": 5,
+      "averageFlightDurationSeconds": 1270
+    },
+    {
+      "regionId": 6,
+      "averageFlightDurationSeconds": 1154
+    },
+    {
+      "regionId": 7,
+      "averageFlightDurationSeconds": 1733
+    },
+    {
+      "regionId": 8,
+      "averageFlightDurationSeconds": 2075
+    },
+    {
+      "regionId": 9,
+      "averageFlightDurationSeconds": 1057
+    },
+    {
+      "regionId": 10,
+      "averageFlightDurationSeconds": 2511
+    },
+    {
+      "regionId": 11,
+      "averageFlightDurationSeconds": 2530
+    },
+    {
+      "regionId": 12,
+      "averageFlightDurationSeconds": 1401
+    },
+    {
+      "regionId": 13,
+      "averageFlightDurationSeconds": 2600
+    },
+    {
+      "regionId": 14,
+      "averageFlightDurationSeconds": 383
+    },
+    {
+      "regionId": 15,
+      "averageFlightDurationSeconds": 902
+    },
+    {
+      "regionId": 16,
+      "averageFlightDurationSeconds": 593
+    },
+    {
+      "regionId": 17,
+      "averageFlightDurationSeconds": 2492
+    },
+    {
+      "regionId": 18,
+      "averageFlightDurationSeconds": 1112
+    },
+    {
+      "regionId": 19,
+      "averageFlightDurationSeconds": 2289
+    },
+    {
+      "regionId": 20,
+      "averageFlightDurationSeconds": 474
+    },
+    {
+      "regionId": 21,
+      "averageFlightDurationSeconds": 2036
+    },
+    {
+      "regionId": 22,
+      "averageFlightDurationSeconds": 2143
+    },
+    {
+      "regionId": 23,
+      "averageFlightDurationSeconds": 985
+    },
+    {
+      "regionId": 24,
+      "averageFlightDurationSeconds": 2283
+    },
+    {
+      "regionId": 25,
+      "averageFlightDurationSeconds": 1750
+    },
+    {
+      "regionId": 26,
+      "averageFlightDurationSeconds": 1941
+    },
+    {
+      "regionId": 27,
+      "averageFlightDurationSeconds": 1243
+    },
+    {
+      "regionId": 28,
+      "averageFlightDurationSeconds": 1829
+    },
+    {
+      "regionId": 29,
+      "averageFlightDurationSeconds": 811
+    },
+    {
+      "regionId": 30,
+      "averageFlightDurationSeconds": 884
+    },
+    {
+      "regionId": 31,
+      "averageFlightDurationSeconds": 1058
+    },
+    {
+      "regionId": 32,
+      "averageFlightDurationSeconds": 2383
+    },
+    {
+      "regionId": 33,
+      "averageFlightDurationSeconds": 1760
+    },
+    {
+      "regionId": 34,
+      "averageFlightDurationSeconds": 1902
+    },
+    {
+      "regionId": 35,
+      "averageFlightDurationSeconds": 1715
+    },
+    {
+      "regionId": 36,
+      "averageFlightDurationSeconds": 2021
+    },
+    {
+      "regionId": 37,
+      "averageFlightDurationSeconds": 404
+    },
+    {
+      "regionId": 38,
+      "averageFlightDurationSeconds": 961
+    },
+    {
+      "regionId": 39,
+      "averageFlightDurationSeconds": 469
+    },
+    {
+      "regionId": 40,
+      "averageFlightDurationSeconds": 330
+    },
+    {
+      "regionId": 41,
+      "averageFlightDurationSeconds": 2102
+    },
+    {
+      "regionId": 42,
+      "averageFlightDurationSeconds": 1936
+    },
+    {
+      "regionId": 43,
+      "averageFlightDurationSeconds": 556
+    },
+    {
+      "regionId": 44,
+      "averageFlightDurationSeconds": 1946
+    },
+    {
+      "regionId": 45,
+      "averageFlightDurationSeconds": 498
+    },
+    {
+      "regionId": 46,
+      "averageFlightDurationSeconds": 819
+    },
+    {
+      "regionId": 47,
+      "averageFlightDurationSeconds": 610
+    },
+    {
+      "regionId": 48,
+      "averageFlightDurationSeconds": 1498
+    },
+    {
+      "regionId": 49,
+      "averageFlightDurationSeconds": 2603
+    },
+    {
+      "regionId": 50,
+      "averageFlightDurationSeconds": 1459
+    },
+    {
+      "regionId": 51,
+      "averageFlightDurationSeconds": 1573
+    },
+    {
+      "regionId": 52,
+      "averageFlightDurationSeconds": 2480
+    },
+    {
+      "regionId": 53,
+      "averageFlightDurationSeconds": 2071
+    },
+    {
+      "regionId": 54,
+      "averageFlightDurationSeconds": 1104
+    },
+    {
+      "regionId": 55,
+      "averageFlightDurationSeconds": 1557
+    },
+    {
+      "regionId": 56,
+      "averageFlightDurationSeconds": 1935
+    },
+    {
+      "regionId": 57,
+      "averageFlightDurationSeconds": 1542
+    },
+    {
+      "regionId": 58,
+      "averageFlightDurationSeconds": 439
+    },
+    {
+      "regionId": 59,
+      "averageFlightDurationSeconds": 2111
+    },
+    {
+      "regionId": 60,
+      "averageFlightDurationSeconds": 2442
+    },
+    {
+      "regionId": 61,
+      "averageFlightDurationSeconds": 1141
+    },
+    {
+      "regionId": 62,
+      "averageFlightDurationSeconds": 2503
+    },
+    {
+      "regionId": 63,
+      "averageFlightDurationSeconds": 2269
+    },
+    {
+      "regionId": 64,
+      "averageFlightDurationSeconds": 1276
+    },
+    {
+      "regionId": 65,
+      "averageFlightDurationSeconds": 1192
+    },
+    {
+      "regionId": 66,
+      "averageFlightDurationSeconds": 987
+    },
+    {
+      "regionId": 67,
+      "averageFlightDurationSeconds": 951
+    },
+    {
+      "regionId": 68,
+      "averageFlightDurationSeconds": 1067
+    },
+    {
+      "regionId": 69,
+      "averageFlightDurationSeconds": 591
+    },
+    {
+      "regionId": 70,
+      "averageFlightDurationSeconds": 1462
+    },
+    {
+      "regionId": 71,
+      "averageFlightDurationSeconds": 2035
+    },
+    {
+      "regionId": 72,
+      "averageFlightDurationSeconds": 1923
+    },
+    {
+      "regionId": 73,
+      "averageFlightDurationSeconds": 1876
+    },
+    {
+      "regionId": 74,
+      "averageFlightDurationSeconds": 1024
+    },
+    {
+      "regionId": 75,
+      "averageFlightDurationSeconds": 1057
+    },
+    {
+      "regionId": 76,
+      "averageFlightDurationSeconds": 2484
+    },
+    {
+      "regionId": 77,
+      "averageFlightDurationSeconds": 473
+    },
+    {
+      "regionId": 78,
+      "averageFlightDurationSeconds": 427
+    },
+    {
+      "regionId": 79,
+      "averageFlightDurationSeconds": 2389
+    },
+    {
+      "regionId": 80,
+      "averageFlightDurationSeconds": 1858
+    },
+    {
+      "regionId": 81,
+      "averageFlightDurationSeconds": 1034
+    },
+    {
+      "regionId": 82,
+      "averageFlightDurationSeconds": 1264
+    },
+    {
+      "regionId": 83,
+      "averageFlightDurationSeconds": 722
+    },
+    {
+      "regionId": 84,
+      "averageFlightDurationSeconds": 1393
+    },
+    {
+      "regionId": 85,
+      "averageFlightDurationSeconds": 2127
+    },
+    {
+      "regionId": 86,
+      "averageFlightDurationSeconds": 1542
+    },
+    {
+      "regionId": 87,
+      "averageFlightDurationSeconds": 815
+    },
+    {
+      "regionId": 88,
+      "averageFlightDurationSeconds": 1568
+    },
+    {
+      "regionId": 89,
+      "averageFlightDurationSeconds": 1203
+    }
+  ]
+}

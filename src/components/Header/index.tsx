@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { useMediaQuery } from "react-responsive";
 
 import classNames from "classnames";
@@ -18,8 +18,6 @@ export default function Header() {
         keycloak: { logout }
     } = useKeycloak();
 
-    const [position, setPosition] = useState(window.scrollY);
-    const [visible, setVisible] = useState(true);
     const [isSidebarOpen, , openSidebar, closeSidebar] = useToggle();
 
     const menuOptions = useMenuOptions(closeSidebar);
@@ -32,20 +30,6 @@ export default function Header() {
             logout();
         }
     }, [closeSidebar, logout]);
-
-    const handleScroll = useCallback(() => {
-        const moving = document.querySelector("#app")?.scrollTop || 0;
-
-        setVisible(position > moving);
-        setPosition(moving);
-    }, [position]);
-
-    useEffect(() => {
-        document.querySelector("#app")?.addEventListener("scroll", handleScroll);
-        return () => {
-            document.querySelector("#app")?.removeEventListener("scroll", handleScroll);
-        };
-    }, [handleScroll]);
 
     return (
         <>
@@ -62,14 +46,7 @@ export default function Header() {
                     </div>
                 </div>
             )}
-            <Menu
-                attached="top"
-                className={classNames(styles.header, {
-                    [styles.headerVisible]: visible,
-                    [styles.headerHidden]: !visible,
-                    [styles.headerScroll]: position > 30
-                })}
-            >
+            <Menu attached="top" className={classNames(styles.header, styles.headerScroll)}>
                 {isMobile ? <MobileMenu setSidebarOpen={openSidebar} /> : <DesktopMenu />}
             </Menu>
         </>

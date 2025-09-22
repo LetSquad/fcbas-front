@@ -1,0 +1,5792 @@
+{
+  "startDate": "2025-01-01",
+  "finishDate": "2025-12-31",
+  "resolution": "MONTH",
+  "regions": [
+    {
+      "regionId": 1,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.59,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -5.47,
+          "flightsCount": 945
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 4.44,
+          "flightsCount": 987
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.04,
+          "flightsCount": 1047
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 16.36,
+          "flightsCount": 1218
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 10.54,
+          "flightsCount": 1347
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.31,
+          "flightsCount": 1458
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -3.65,
+          "flightsCount": 1405
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -1.54,
+          "flightsCount": 1384
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.88,
+          "flightsCount": 1275
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.07,
+          "flightsCount": 1172
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.2,
+          "flightsCount": 1076
+        }
+      ]
+    },
+    {
+      "regionId": 2,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.36,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.85,
+          "flightsCount": 912
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.29,
+          "flightsCount": 914
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.39,
+          "flightsCount": 973
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 14.04,
+          "flightsCount": 1109
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.66,
+          "flightsCount": 1205
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.29,
+          "flightsCount": 1305
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.62,
+          "flightsCount": 1245
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.16,
+          "flightsCount": 1181
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.8,
+          "flightsCount": 1065
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.42,
+          "flightsCount": 975
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.17,
+          "flightsCount": 876
+        }
+      ]
+    },
+    {
+      "regionId": 3,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.73,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -6.98,
+          "flightsCount": 930
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.42,
+          "flightsCount": 943
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.14,
+          "flightsCount": 1001
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.51,
+          "flightsCount": 1117
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.39,
+          "flightsCount": 1199
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.24,
+          "flightsCount": 1286
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.69,
+          "flightsCount": 1226
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.13,
+          "flightsCount": 1163
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.65,
+          "flightsCount": 1051
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.35,
+          "flightsCount": 942
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.38,
+          "flightsCount": 863
+        }
+      ]
+    },
+    {
+      "regionId": 4,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.67,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.81,
+          "flightsCount": 922
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.01,
+          "flightsCount": 940
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.96,
+          "flightsCount": 996
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.76,
+          "flightsCount": 1114
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.97,
+          "flightsCount": 1214
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.32,
+          "flightsCount": 1315
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.06,
+          "flightsCount": 1235
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.28,
+          "flightsCount": 1194
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.43,
+          "flightsCount": 1094
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.24,
+          "flightsCount": 993
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.15,
+          "flightsCount": 902
+        }
+      ]
+    },
+    {
+      "regionId": 5,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.64,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.79,
+          "flightsCount": 922
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 3.06,
+          "flightsCount": 950
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.54,
+          "flightsCount": 1012
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 15.31,
+          "flightsCount": 1167
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.4,
+          "flightsCount": 1254
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.9,
+          "flightsCount": 1353
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.62,
+          "flightsCount": 1290
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.27,
+          "flightsCount": 1248
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.62,
+          "flightsCount": 1128
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.55,
+          "flightsCount": 1032
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.83,
+          "flightsCount": 941
+        }
+      ]
+    },
+    {
+      "regionId": 6,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.09,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -10.64,
+          "flightsCount": 894
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.53,
+          "flightsCount": 916
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.79,
+          "flightsCount": 960
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 10.58,
+          "flightsCount": 1062
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.06,
+          "flightsCount": 1126
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.58,
+          "flightsCount": 1200
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.27,
+          "flightsCount": 1149
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.08,
+          "flightsCount": 1090
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -11.06,
+          "flightsCount": 970
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.25,
+          "flightsCount": 851
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.32,
+          "flightsCount": 772
+        }
+      ]
+    },
+    {
+      "regionId": 7,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -6.14,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -5.66,
+          "flightsCount": 943
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 5.01,
+          "flightsCount": 991
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 9.12,
+          "flightsCount": 1081
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 16.47,
+          "flightsCount": 1259
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.77,
+          "flightsCount": 1369
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 11.07,
+          "flightsCount": 1521
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -2.13,
+          "flightsCount": 1489
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -1.42,
+          "flightsCount": 1468
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.22,
+          "flightsCount": 1362
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.74,
+          "flightsCount": 1243
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -6.55,
+          "flightsCount": 1161
+        }
+      ]
+    },
+    {
+      "regionId": 8,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.22,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.38,
+          "flightsCount": 916
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.59,
+          "flightsCount": 940
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 8.14,
+          "flightsCount": 1016
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.73,
+          "flightsCount": 1136
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.81,
+          "flightsCount": 1236
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.76,
+          "flightsCount": 1344
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -2.88,
+          "flightsCount": 1305
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.0,
+          "flightsCount": 1266
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.27,
+          "flightsCount": 1136
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.21,
+          "flightsCount": 1020
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -11.82,
+          "flightsCount": 900
+        }
+      ]
+    },
+    {
+      "regionId": 9,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -10.97,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -11.3,
+          "flightsCount": 887
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -0.02,
+          "flightsCount": 887
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.26,
+          "flightsCount": 942
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.17,
+          "flightsCount": 1066
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.31,
+          "flightsCount": 1134
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.86,
+          "flightsCount": 1212
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.02,
+          "flightsCount": 1151
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.37,
+          "flightsCount": 1077
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -12.23,
+          "flightsCount": 946
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.64,
+          "flightsCount": 826
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -11.39,
+          "flightsCount": 732
+        }
+      ]
+    },
+    {
+      "regionId": 10,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -6.84,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.96,
+          "flightsCount": 920
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.88,
+          "flightsCount": 928
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.97,
+          "flightsCount": 993
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.98,
+          "flightsCount": 1122
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.7,
+          "flightsCount": 1220
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.16,
+          "flightsCount": 1331
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.76,
+          "flightsCount": 1268
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -1.24,
+          "flightsCount": 1252
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.88,
+          "flightsCount": 1154
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.77,
+          "flightsCount": 1053
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -7.09,
+          "flightsCount": 978
+        }
+      ]
+    },
+    {
+      "regionId": 11,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.74,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.84,
+          "flightsCount": 902
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.72,
+          "flightsCount": 908
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.78,
+          "flightsCount": 970
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.49,
+          "flightsCount": 1091
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.38,
+          "flightsCount": 1171
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.36,
+          "flightsCount": 1234
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.32,
+          "flightsCount": 1168
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.98,
+          "flightsCount": 1110
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.33,
+          "flightsCount": 1018
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.87,
+          "flightsCount": 907
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.2,
+          "flightsCount": 815
+        }
+      ]
+    },
+    {
+      "regionId": 12,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.47,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.91,
+          "flightsCount": 901
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -1.12,
+          "flightsCount": 891
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.48,
+          "flightsCount": 931
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.93,
+          "flightsCount": 1060
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.3,
+          "flightsCount": 1138
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.26,
+          "flightsCount": 1198
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.76,
+          "flightsCount": 1117
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.7,
+          "flightsCount": 1064
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.11,
+          "flightsCount": 957
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.9,
+          "flightsCount": 871
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.95,
+          "flightsCount": 776
+        }
+      ]
+    },
+    {
+      "regionId": 13,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -5.87,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -4.87,
+          "flightsCount": 951
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 4.78,
+          "flightsCount": 997
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 9.9,
+          "flightsCount": 1095
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 16.44,
+          "flightsCount": 1276
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 10.56,
+          "flightsCount": 1410
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.69,
+          "flightsCount": 1519
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -0.79,
+          "flightsCount": 1507
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.02,
+          "flightsCount": 1461
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.61,
+          "flightsCount": 1350
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.42,
+          "flightsCount": 1236
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -7.19,
+          "flightsCount": 1147
+        }
+      ]
+    },
+    {
+      "regionId": 14,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -10.13,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.64,
+          "flightsCount": 904
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.44,
+          "flightsCount": 917
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 8.31,
+          "flightsCount": 993
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.98,
+          "flightsCount": 1132
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.0,
+          "flightsCount": 1222
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.48,
+          "flightsCount": 1314
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.4,
+          "flightsCount": 1243
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.59,
+          "flightsCount": 1210
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.4,
+          "flightsCount": 1109
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -11.21,
+          "flightsCount": 984
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.45,
+          "flightsCount": 901
+        }
+      ]
+    },
+    {
+      "regionId": 15,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -12.14,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.29,
+          "flightsCount": 917
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -0.58,
+          "flightsCount": 912
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.04,
+          "flightsCount": 958
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.28,
+          "flightsCount": 1075
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 5.49,
+          "flightsCount": 1134
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 4.92,
+          "flightsCount": 1190
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.01,
+          "flightsCount": 1119
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.42,
+          "flightsCount": 1047
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.06,
+          "flightsCount": 942
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -11.38,
+          "flightsCount": 834
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -14.11,
+          "flightsCount": 717
+        }
+      ]
+    },
+    {
+      "regionId": 16,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -10.27,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.13,
+          "flightsCount": 909
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.22,
+          "flightsCount": 920
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.24,
+          "flightsCount": 977
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.36,
+          "flightsCount": 1108
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.78,
+          "flightsCount": 1183
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.65,
+          "flightsCount": 1261
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.28,
+          "flightsCount": 1195
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.51,
+          "flightsCount": 1165
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.59,
+          "flightsCount": 1053
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.33,
+          "flightsCount": 944
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.21,
+          "flightsCount": 848
+        }
+      ]
+    },
+    {
+      "regionId": 17,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -8.72,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.19,
+          "flightsCount": 908
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -0.08,
+          "flightsCount": 907
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.49,
+          "flightsCount": 957
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.49,
+          "flightsCount": 1077
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 9.01,
+          "flightsCount": 1174
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.15,
+          "flightsCount": 1281
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.54,
+          "flightsCount": 1197
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.43,
+          "flightsCount": 1144
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.01,
+          "flightsCount": 1041
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.32,
+          "flightsCount": 955
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.55,
+          "flightsCount": 863
+        }
+      ]
+    },
+    {
+      "regionId": 18,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -8.66,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.6,
+          "flightsCount": 924
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.77,
+          "flightsCount": 940
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.9,
+          "flightsCount": 1005
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.1,
+          "flightsCount": 1127
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.42,
+          "flightsCount": 1222
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.51,
+          "flightsCount": 1289
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.96,
+          "flightsCount": 1225
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.07,
+          "flightsCount": 1188
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.54,
+          "flightsCount": 1062
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.27,
+          "flightsCount": 964
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.1,
+          "flightsCount": 847
+        }
+      ]
+    },
+    {
+      "regionId": 19,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -12.86,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.3,
+          "flightsCount": 907
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -1.13,
+          "flightsCount": 897
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.72,
+          "flightsCount": 948
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.83,
+          "flightsCount": 1070
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 4.41,
+          "flightsCount": 1117
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.96,
+          "flightsCount": 1183
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -7.86,
+          "flightsCount": 1090
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.53,
+          "flightsCount": 1019
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -12.23,
+          "flightsCount": 895
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -13.35,
+          "flightsCount": 775
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -14.12,
+          "flightsCount": 666
+        }
+      ]
+    },
+    {
+      "regionId": 20,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.44,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -10.36,
+          "flightsCount": 896
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -1.76,
+          "flightsCount": 881
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.33,
+          "flightsCount": 928
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.69,
+          "flightsCount": 1036
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 5.39,
+          "flightsCount": 1092
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.3,
+          "flightsCount": 1150
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -7.51,
+          "flightsCount": 1063
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.37,
+          "flightsCount": 996
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -11.31,
+          "flightsCount": 883
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.03,
+          "flightsCount": 777
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -13.92,
+          "flightsCount": 669
+        }
+      ]
+    },
+    {
+      "regionId": 21,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -10.31,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.74,
+          "flightsCount": 913
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.79,
+          "flightsCount": 920
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.11,
+          "flightsCount": 976
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.27,
+          "flightsCount": 1106
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.83,
+          "flightsCount": 1192
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.91,
+          "flightsCount": 1263
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -3.1,
+          "flightsCount": 1223
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.31,
+          "flightsCount": 1171
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.99,
+          "flightsCount": 1065
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.68,
+          "flightsCount": 973
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.21,
+          "flightsCount": 893
+        }
+      ]
+    },
+    {
+      "regionId": 22,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.19,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -10.15,
+          "flightsCount": 898
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.17,
+          "flightsCount": 909
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.77,
+          "flightsCount": 952
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.32,
+          "flightsCount": 1070
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.2,
+          "flightsCount": 1147
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.04,
+          "flightsCount": 1227
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -7.28,
+          "flightsCount": 1138
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -7.0,
+          "flightsCount": 1058
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -11.47,
+          "flightsCount": 937
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.52,
+          "flightsCount": 838
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.36,
+          "flightsCount": 752
+        }
+      ]
+    },
+    {
+      "regionId": 23,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.41,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -5.92,
+          "flightsCount": 941
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.28,
+          "flightsCount": 953
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.29,
+          "flightsCount": 994
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 15.14,
+          "flightsCount": 1144
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.68,
+          "flightsCount": 1232
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.44,
+          "flightsCount": 1336
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.07,
+          "flightsCount": 1268
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.87,
+          "flightsCount": 1219
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.61,
+          "flightsCount": 1090
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -7.76,
+          "flightsCount": 1005
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.96,
+          "flightsCount": 895
+        }
+      ]
+    },
+    {
+      "regionId": 24,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.59,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -6.66,
+          "flightsCount": 933
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 4.6,
+          "flightsCount": 976
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 9.46,
+          "flightsCount": 1069
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.46,
+          "flightsCount": 1213
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 9.75,
+          "flightsCount": 1331
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 10.81,
+          "flightsCount": 1475
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -1.96,
+          "flightsCount": 1446
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -0.97,
+          "flightsCount": 1432
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.63,
+          "flightsCount": 1322
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -6.13,
+          "flightsCount": 1241
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -7.49,
+          "flightsCount": 1148
+        }
+      ]
+    },
+    {
+      "regionId": 25,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -12.58,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -10.07,
+          "flightsCount": 899
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -1.03,
+          "flightsCount": 890
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.45,
+          "flightsCount": 939
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.36,
+          "flightsCount": 1045
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 5.73,
+          "flightsCount": 1105
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.35,
+          "flightsCount": 1186
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -7.53,
+          "flightsCount": 1097
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.89,
+          "flightsCount": 1032
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -12.14,
+          "flightsCount": 907
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.89,
+          "flightsCount": 790
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -11.32,
+          "flightsCount": 701
+        }
+      ]
+    },
+    {
+      "regionId": 26,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.87,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -10.91,
+          "flightsCount": 891
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -1.9,
+          "flightsCount": 874
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.04,
+          "flightsCount": 909
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 10.47,
+          "flightsCount": 1004
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.34,
+          "flightsCount": 1068
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 4.02,
+          "flightsCount": 1111
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.93,
+          "flightsCount": 1034
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.98,
+          "flightsCount": 972
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -13.03,
+          "flightsCount": 846
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -11.79,
+          "flightsCount": 746
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -13.4,
+          "flightsCount": 646
+        }
+      ]
+    },
+    {
+      "regionId": 27,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -10.17,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -10.32,
+          "flightsCount": 897
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.6,
+          "flightsCount": 902
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.01,
+          "flightsCount": 947
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 10.75,
+          "flightsCount": 1049
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 3.43,
+          "flightsCount": 1085
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.1,
+          "flightsCount": 1141
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.32,
+          "flightsCount": 1068
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.62,
+          "flightsCount": 1019
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -11.35,
+          "flightsCount": 903
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -14.17,
+          "flightsCount": 775
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -11.24,
+          "flightsCount": 688
+        }
+      ]
+    },
+    {
+      "regionId": 28,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.77,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.52,
+          "flightsCount": 925
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.48,
+          "flightsCount": 929
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 7.75,
+          "flightsCount": 1001
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.1,
+          "flightsCount": 1132
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.06,
+          "flightsCount": 1224
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.57,
+          "flightsCount": 1329
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.56,
+          "flightsCount": 1241
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.2,
+          "flightsCount": 1177
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.9,
+          "flightsCount": 1084
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.28,
+          "flightsCount": 983
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.43,
+          "flightsCount": 900
+        }
+      ]
+    },
+    {
+      "regionId": 29,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.84,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.24,
+          "flightsCount": 928
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 3.15,
+          "flightsCount": 957
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 7.09,
+          "flightsCount": 1025
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 15.36,
+          "flightsCount": 1182
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 9.76,
+          "flightsCount": 1297
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.4,
+          "flightsCount": 1419
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.94,
+          "flightsCount": 1349
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.45,
+          "flightsCount": 1303
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -6.95,
+          "flightsCount": 1212
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -7.41,
+          "flightsCount": 1122
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.36,
+          "flightsCount": 1006
+        }
+      ]
+    },
+    {
+      "regionId": 30,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -6.94,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -4.94,
+          "flightsCount": 951
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 4.79,
+          "flightsCount": 996
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 7.61,
+          "flightsCount": 1072
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 17.73,
+          "flightsCount": 1262
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 12.35,
+          "flightsCount": 1418
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.91,
+          "flightsCount": 1558
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -0.51,
+          "flightsCount": 1550
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": 0.06,
+          "flightsCount": 1551
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -6.51,
+          "flightsCount": 1450
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.6,
+          "flightsCount": 1326
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.7,
+          "flightsCount": 1210
+        }
+      ]
+    },
+    {
+      "regionId": 31,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.85,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -4.87,
+          "flightsCount": 951
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 4.15,
+          "flightsCount": 991
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.7,
+          "flightsCount": 1057
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.71,
+          "flightsCount": 1192
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 10.4,
+          "flightsCount": 1315
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.95,
+          "flightsCount": 1420
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -2.07,
+          "flightsCount": 1391
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.26,
+          "flightsCount": 1345
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -6.57,
+          "flightsCount": 1257
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.76,
+          "flightsCount": 1147
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -6.96,
+          "flightsCount": 1067
+        }
+      ]
+    },
+    {
+      "regionId": 32,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.6,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.35,
+          "flightsCount": 926
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.38,
+          "flightsCount": 930
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.55,
+          "flightsCount": 982
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.67,
+          "flightsCount": 1116
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 5.66,
+          "flightsCount": 1179
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.17,
+          "flightsCount": 1252
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.34,
+          "flightsCount": 1172
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.57,
+          "flightsCount": 1119
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.92,
+          "flightsCount": 997
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.84,
+          "flightsCount": 889
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.72,
+          "flightsCount": 811
+        }
+      ]
+    },
+    {
+      "regionId": 33,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -8.14,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -6.58,
+          "flightsCount": 934
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 5.44,
+          "flightsCount": 985
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.79,
+          "flightsCount": 1052
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.9,
+          "flightsCount": 1198
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 11.06,
+          "flightsCount": 1331
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.45,
+          "flightsCount": 1443
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -2.79,
+          "flightsCount": 1403
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -1.79,
+          "flightsCount": 1378
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -5.46,
+          "flightsCount": 1302
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.86,
+          "flightsCount": 1187
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -6.47,
+          "flightsCount": 1110
+        }
+      ]
+    },
+    {
+      "regionId": 34,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -6.85,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.74,
+          "flightsCount": 923
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.97,
+          "flightsCount": 950
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 7.05,
+          "flightsCount": 1017
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 14.72,
+          "flightsCount": 1167
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 11.82,
+          "flightsCount": 1305
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.87,
+          "flightsCount": 1407
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -3.4,
+          "flightsCount": 1359
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.06,
+          "flightsCount": 1318
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.9,
+          "flightsCount": 1214
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.08,
+          "flightsCount": 1116
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.27,
+          "flightsCount": 1012
+        }
+      ]
+    },
+    {
+      "regionId": 35,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -6.17,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -6.65,
+          "flightsCount": 934
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.14,
+          "flightsCount": 953
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.06,
+          "flightsCount": 1011
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 14.37,
+          "flightsCount": 1157
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 9.56,
+          "flightsCount": 1267
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.7,
+          "flightsCount": 1365
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.09,
+          "flightsCount": 1309
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.68,
+          "flightsCount": 1274
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.17,
+          "flightsCount": 1170
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -7.9,
+          "flightsCount": 1077
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.58,
+          "flightsCount": 974
+        }
+      ]
+    },
+    {
+      "regionId": 36,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -8.62,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -6.77,
+          "flightsCount": 932
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.14,
+          "flightsCount": 952
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.11,
+          "flightsCount": 991
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.5,
+          "flightsCount": 1115
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.24,
+          "flightsCount": 1185
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.39,
+          "flightsCount": 1261
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.39,
+          "flightsCount": 1205
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.44,
+          "flightsCount": 1140
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.15,
+          "flightsCount": 1035
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.88,
+          "flightsCount": 943
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -11.35,
+          "flightsCount": 836
+        }
+      ]
+    },
+    {
+      "regionId": 37,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -10.65,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.38,
+          "flightsCount": 906
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -2.35,
+          "flightsCount": 885
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 3.57,
+          "flightsCount": 916
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 10.38,
+          "flightsCount": 1012
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 4.87,
+          "flightsCount": 1061
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 3.72,
+          "flightsCount": 1100
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.29,
+          "flightsCount": 1031
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -7.65,
+          "flightsCount": 952
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -12.39,
+          "flightsCount": 834
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.71,
+          "flightsCount": 728
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.02,
+          "flightsCount": 641
+        }
+      ]
+    },
+    {
+      "regionId": 38,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -12.18,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -11.38,
+          "flightsCount": 886
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -0.42,
+          "flightsCount": 882
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.14,
+          "flightsCount": 919
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.26,
+          "flightsCount": 1022
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 4.62,
+          "flightsCount": 1070
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 3.48,
+          "flightsCount": 1107
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.79,
+          "flightsCount": 1054
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.44,
+          "flightsCount": 986
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -12.49,
+          "flightsCount": 863
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.37,
+          "flightsCount": 773
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -13.72,
+          "flightsCount": 667
+        }
+      ]
+    },
+    {
+      "regionId": 39,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.53,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -6.23,
+          "flightsCount": 938
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.75,
+          "flightsCount": 945
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 8.82,
+          "flightsCount": 1028
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 15.49,
+          "flightsCount": 1187
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 10.63,
+          "flightsCount": 1314
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.87,
+          "flightsCount": 1404
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.92,
+          "flightsCount": 1335
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.01,
+          "flightsCount": 1281
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.5,
+          "flightsCount": 1159
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.31,
+          "flightsCount": 1052
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.99,
+          "flightsCount": 936
+        }
+      ]
+    },
+    {
+      "regionId": 40,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.87,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.89,
+          "flightsCount": 901
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.15,
+          "flightsCount": 902
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.77,
+          "flightsCount": 964
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.53,
+          "flightsCount": 1075
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.23,
+          "flightsCount": 1163
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.81,
+          "flightsCount": 1242
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.23,
+          "flightsCount": 1165
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.79,
+          "flightsCount": 1132
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.67,
+          "flightsCount": 1034
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.24,
+          "flightsCount": 928
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.28,
+          "flightsCount": 833
+        }
+      ]
+    },
+    {
+      "regionId": 41,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.66,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -10.13,
+          "flightsCount": 899
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.43,
+          "flightsCount": 921
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.85,
+          "flightsCount": 965
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.42,
+          "flightsCount": 1075
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.3,
+          "flightsCount": 1154
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.71,
+          "flightsCount": 1254
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -3.49,
+          "flightsCount": 1211
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.7,
+          "flightsCount": 1166
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.33,
+          "flightsCount": 1080
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.8,
+          "flightsCount": 985
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.46,
+          "flightsCount": 882
+        }
+      ]
+    },
+    {
+      "regionId": 42,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.12,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.49,
+          "flightsCount": 925
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.81,
+          "flightsCount": 942
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.92,
+          "flightsCount": 988
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 14.03,
+          "flightsCount": 1127
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.72,
+          "flightsCount": 1214
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.9,
+          "flightsCount": 1285
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -7.17,
+          "flightsCount": 1193
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.34,
+          "flightsCount": 1141
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.25,
+          "flightsCount": 1036
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.55,
+          "flightsCount": 937
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.23,
+          "flightsCount": 822
+        }
+      ]
+    },
+    {
+      "regionId": 43,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.2,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -5.46,
+          "flightsCount": 945
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 4.9,
+          "flightsCount": 992
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 10.42,
+          "flightsCount": 1095
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 15.21,
+          "flightsCount": 1262
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 12.26,
+          "flightsCount": 1416
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 10.85,
+          "flightsCount": 1570
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -0.92,
+          "flightsCount": 1556
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.04,
+          "flightsCount": 1524
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -5.36,
+          "flightsCount": 1442
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.01,
+          "flightsCount": 1327
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.12,
+          "flightsCount": 1206
+        }
+      ]
+    },
+    {
+      "regionId": 44,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -8.09,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -5.2,
+          "flightsCount": 948
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 3.07,
+          "flightsCount": 977
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 8.95,
+          "flightsCount": 1065
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 16.25,
+          "flightsCount": 1238
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 11.19,
+          "flightsCount": 1376
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.75,
+          "flightsCount": 1510
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -0.86,
+          "flightsCount": 1497
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -1.63,
+          "flightsCount": 1473
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.21,
+          "flightsCount": 1367
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.95,
+          "flightsCount": 1231
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -6.76,
+          "flightsCount": 1147
+        }
+      ]
+    },
+    {
+      "regionId": 45,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -6.15,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -3.56,
+          "flightsCount": 964
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 5.39,
+          "flightsCount": 1016
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 9.46,
+          "flightsCount": 1113
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 16.41,
+          "flightsCount": 1295
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 11.75,
+          "flightsCount": 1447
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.38,
+          "flightsCount": 1583
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -2.27,
+          "flightsCount": 1547
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -0.13,
+          "flightsCount": 1545
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -6.65,
+          "flightsCount": 1442
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.08,
+          "flightsCount": 1326
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -6.79,
+          "flightsCount": 1236
+        }
+      ]
+    },
+    {
+      "regionId": 46,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -8.12,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.69,
+          "flightsCount": 903
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.92,
+          "flightsCount": 911
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.9,
+          "flightsCount": 956
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 14.7,
+          "flightsCount": 1097
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 9.2,
+          "flightsCount": 1197
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.62,
+          "flightsCount": 1301
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.07,
+          "flightsCount": 1248
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.95,
+          "flightsCount": 1186
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.71,
+          "flightsCount": 1059
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.86,
+          "flightsCount": 944
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.19,
+          "flightsCount": 857
+        }
+      ]
+    },
+    {
+      "regionId": 47,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.98,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -10.31,
+          "flightsCount": 897
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -0.79,
+          "flightsCount": 890
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 3.48,
+          "flightsCount": 921
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 10.1,
+          "flightsCount": 1014
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.09,
+          "flightsCount": 1086
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 3.3,
+          "flightsCount": 1121
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.62,
+          "flightsCount": 1047
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -7.49,
+          "flightsCount": 969
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.69,
+          "flightsCount": 865
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.21,
+          "flightsCount": 760
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -11.72,
+          "flightsCount": 671
+        }
+      ]
+    },
+    {
+      "regionId": 48,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.8,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.22,
+          "flightsCount": 928
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.01,
+          "flightsCount": 937
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.25,
+          "flightsCount": 977
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.71,
+          "flightsCount": 1091
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 5.1,
+          "flightsCount": 1147
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.68,
+          "flightsCount": 1212
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -7.38,
+          "flightsCount": 1123
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.69,
+          "flightsCount": 1048
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -11.58,
+          "flightsCount": 926
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.4,
+          "flightsCount": 830
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.3,
+          "flightsCount": 753
+        }
+      ]
+    },
+    {
+      "regionId": 49,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -5.74,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -3.43,
+          "flightsCount": 966
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 5.57,
+          "flightsCount": 1019
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 7.33,
+          "flightsCount": 1094
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 16.07,
+          "flightsCount": 1270
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 12.4,
+          "flightsCount": 1428
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.13,
+          "flightsCount": 1558
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -3.02,
+          "flightsCount": 1511
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.67,
+          "flightsCount": 1470
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.62,
+          "flightsCount": 1358
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -7.72,
+          "flightsCount": 1254
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.45,
+          "flightsCount": 1148
+        }
+      ]
+    },
+    {
+      "regionId": 50,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.59,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.93,
+          "flightsCount": 911
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.17,
+          "flightsCount": 912
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.78,
+          "flightsCount": 974
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 14.05,
+          "flightsCount": 1111
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 5.87,
+          "flightsCount": 1176
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.57,
+          "flightsCount": 1265
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.07,
+          "flightsCount": 1214
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.63,
+          "flightsCount": 1158
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.9,
+          "flightsCount": 1066
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.16,
+          "flightsCount": 958
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.53,
+          "flightsCount": 838
+        }
+      ]
+    },
+    {
+      "regionId": 51,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -13.19,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -10.46,
+          "flightsCount": 895
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -0.31,
+          "flightsCount": 893
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 2.89,
+          "flightsCount": 918
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 10.69,
+          "flightsCount": 1017
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 3.94,
+          "flightsCount": 1057
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.91,
+          "flightsCount": 1119
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.34,
+          "flightsCount": 1059
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.19,
+          "flightsCount": 994
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.56,
+          "flightsCount": 889
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -13.47,
+          "flightsCount": 769
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.62,
+          "flightsCount": 672
+        }
+      ]
+    },
+    {
+      "regionId": 52,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -6.2,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -6.95,
+          "flightsCount": 930
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.56,
+          "flightsCount": 954
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 8.57,
+          "flightsCount": 1036
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 14.88,
+          "flightsCount": 1190
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 10.41,
+          "flightsCount": 1314
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.63,
+          "flightsCount": 1441
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -1.61,
+          "flightsCount": 1418
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": 0.48,
+          "flightsCount": 1424
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.23,
+          "flightsCount": 1321
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -6.22,
+          "flightsCount": 1239
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -7.49,
+          "flightsCount": 1146
+        }
+      ]
+    },
+    {
+      "regionId": 53,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -8.73,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -6.16,
+          "flightsCount": 938
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.1,
+          "flightsCount": 958
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 8.27,
+          "flightsCount": 1037
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.83,
+          "flightsCount": 1181
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.75,
+          "flightsCount": 1284
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.67,
+          "flightsCount": 1383
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.13,
+          "flightsCount": 1312
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.93,
+          "flightsCount": 1260
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.81,
+          "flightsCount": 1162
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.87,
+          "flightsCount": 1047
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.58,
+          "flightsCount": 936
+        }
+      ]
+    },
+    {
+      "regionId": 54,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.86,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -11.9,
+          "flightsCount": 881
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -0.04,
+          "flightsCount": 881
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.97,
+          "flightsCount": 924
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 10.04,
+          "flightsCount": 1017
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.42,
+          "flightsCount": 1093
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.55,
+          "flightsCount": 1164
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.12,
+          "flightsCount": 1093
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.38,
+          "flightsCount": 1023
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.62,
+          "flightsCount": 915
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.91,
+          "flightsCount": 824
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -13.24,
+          "flightsCount": 715
+        }
+      ]
+    },
+    {
+      "regionId": 55,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -12.04,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.85,
+          "flightsCount": 902
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -1.79,
+          "flightsCount": 885
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 3.83,
+          "flightsCount": 919
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.17,
+          "flightsCount": 1031
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.01,
+          "flightsCount": 1103
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.96,
+          "flightsCount": 1169
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -7.06,
+          "flightsCount": 1087
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.38,
+          "flightsCount": 1028
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.44,
+          "flightsCount": 921
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -11.0,
+          "flightsCount": 820
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.14,
+          "flightsCount": 720
+        }
+      ]
+    },
+    {
+      "regionId": 56,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.83,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.81,
+          "flightsCount": 912
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.42,
+          "flightsCount": 925
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 3.63,
+          "flightsCount": 958
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.94,
+          "flightsCount": 1082
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.57,
+          "flightsCount": 1164
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.63,
+          "flightsCount": 1230
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.58,
+          "flightsCount": 1149
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.93,
+          "flightsCount": 1104
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -12.69,
+          "flightsCount": 964
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -11.19,
+          "flightsCount": 856
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -13.69,
+          "flightsCount": 739
+        }
+      ]
+    },
+    {
+      "regionId": 57,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.24,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.52,
+          "flightsCount": 925
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.76,
+          "flightsCount": 950
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.91,
+          "flightsCount": 1016
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 15.44,
+          "flightsCount": 1173
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.78,
+          "flightsCount": 1276
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.43,
+          "flightsCount": 1383
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.38,
+          "flightsCount": 1323
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.13,
+          "flightsCount": 1295
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -6.52,
+          "flightsCount": 1210
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -6.89,
+          "flightsCount": 1127
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.12,
+          "flightsCount": 1035
+        }
+      ]
+    },
+    {
+      "regionId": 58,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.59,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.34,
+          "flightsCount": 927
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.92,
+          "flightsCount": 935
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.39,
+          "flightsCount": 986
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.28,
+          "flightsCount": 1097
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 5.4,
+          "flightsCount": 1156
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 4.89,
+          "flightsCount": 1212
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -3.61,
+          "flightsCount": 1169
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.15,
+          "flightsCount": 1097
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.65,
+          "flightsCount": 991
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.54,
+          "flightsCount": 887
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -11.04,
+          "flightsCount": 789
+        }
+      ]
+    },
+    {
+      "regionId": 59,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.17,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -11.3,
+          "flightsCount": 887
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.89,
+          "flightsCount": 895
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 3.6,
+          "flightsCount": 927
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.81,
+          "flightsCount": 1037
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.88,
+          "flightsCount": 1108
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.12,
+          "flightsCount": 1176
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -8.46,
+          "flightsCount": 1076
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.17,
+          "flightsCount": 1021
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -12.99,
+          "flightsCount": 888
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.28,
+          "flightsCount": 797
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.67,
+          "flightsCount": 712
+        }
+      ]
+    },
+    {
+      "regionId": 60,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -12.43,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.57,
+          "flightsCount": 914
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -1.14,
+          "flightsCount": 904
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.44,
+          "flightsCount": 962
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.29,
+          "flightsCount": 1090
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 5.37,
+          "flightsCount": 1148
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.19,
+          "flightsCount": 1208
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -7.38,
+          "flightsCount": 1119
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.95,
+          "flightsCount": 1075
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.07,
+          "flightsCount": 967
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -11.69,
+          "flightsCount": 854
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.48,
+          "flightsCount": 764
+        }
+      ]
+    },
+    {
+      "regionId": 61,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.66,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -5.7,
+          "flightsCount": 943
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.22,
+          "flightsCount": 955
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.94,
+          "flightsCount": 1002
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.2,
+          "flightsCount": 1134
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.76,
+          "flightsCount": 1211
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.0,
+          "flightsCount": 1295
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -2.62,
+          "flightsCount": 1261
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -3.3,
+          "flightsCount": 1220
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.48,
+          "flightsCount": 1116
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -7.88,
+          "flightsCount": 1028
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.53,
+          "flightsCount": 920
+        }
+      ]
+    },
+    {
+      "regionId": 62,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.86,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.1,
+          "flightsCount": 909
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.85,
+          "flightsCount": 917
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 2.39,
+          "flightsCount": 939
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.14,
+          "flightsCount": 1043
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 4.23,
+          "flightsCount": 1087
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.56,
+          "flightsCount": 1159
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -8.13,
+          "flightsCount": 1064
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -7.32,
+          "flightsCount": 987
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -11.51,
+          "flightsCount": 873
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.35,
+          "flightsCount": 765
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.65,
+          "flightsCount": 684
+        }
+      ]
+    },
+    {
+      "regionId": 63,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -8.88,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.34,
+          "flightsCount": 907
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.44,
+          "flightsCount": 920
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.69,
+          "flightsCount": 972
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.04,
+          "flightsCount": 1099
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.67,
+          "flightsCount": 1172
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.12,
+          "flightsCount": 1255
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -7.19,
+          "flightsCount": 1165
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.65,
+          "flightsCount": 1099
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -11.18,
+          "flightsCount": 976
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.39,
+          "flightsCount": 885
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.65,
+          "flightsCount": 791
+        }
+      ]
+    },
+    {
+      "regionId": 64,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -12.32,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.99,
+          "flightsCount": 910
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.2,
+          "flightsCount": 912
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 3.49,
+          "flightsCount": 944
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 10.29,
+          "flightsCount": 1041
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.65,
+          "flightsCount": 1131
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.03,
+          "flightsCount": 1210
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.02,
+          "flightsCount": 1138
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.19,
+          "flightsCount": 1067
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.65,
+          "flightsCount": 953
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.2,
+          "flightsCount": 856
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.52,
+          "flightsCount": 749
+        }
+      ]
+    },
+    {
+      "regionId": 65,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -8.5,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -4.36,
+          "flightsCount": 956
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 3.29,
+          "flightsCount": 988
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 7.29,
+          "flightsCount": 1060
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.84,
+          "flightsCount": 1207
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 11.99,
+          "flightsCount": 1351
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.86,
+          "flightsCount": 1484
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -1.05,
+          "flightsCount": 1469
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -1.42,
+          "flightsCount": 1448
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.91,
+          "flightsCount": 1333
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -6.81,
+          "flightsCount": 1243
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.3,
+          "flightsCount": 1127
+        }
+      ]
+    },
+    {
+      "regionId": 66,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -6.92,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -5.88,
+          "flightsCount": 941
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 3.35,
+          "flightsCount": 973
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 8.52,
+          "flightsCount": 1056
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 15.73,
+          "flightsCount": 1222
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 12.0,
+          "flightsCount": 1368
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.72,
+          "flightsCount": 1501
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -0.68,
+          "flightsCount": 1491
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.74,
+          "flightsCount": 1450
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.07,
+          "flightsCount": 1348
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -6.7,
+          "flightsCount": 1257
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -7.95,
+          "flightsCount": 1157
+        }
+      ]
+    },
+    {
+      "regionId": 67,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -10.1,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -11.82,
+          "flightsCount": 882
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -0.35,
+          "flightsCount": 879
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 2.95,
+          "flightsCount": 905
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 10.67,
+          "flightsCount": 1001
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 3.91,
+          "flightsCount": 1040
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 4.16,
+          "flightsCount": 1084
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -7.3,
+          "flightsCount": 1004
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.97,
+          "flightsCount": 934
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -11.06,
+          "flightsCount": 831
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.89,
+          "flightsCount": 724
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.12,
+          "flightsCount": 636
+        }
+      ]
+    },
+    {
+      "regionId": 68,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -10.77,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.27,
+          "flightsCount": 917
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.71,
+          "flightsCount": 924
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.81,
+          "flightsCount": 987
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 14.75,
+          "flightsCount": 1132
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.48,
+          "flightsCount": 1206
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.85,
+          "flightsCount": 1312
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.21,
+          "flightsCount": 1244
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.14,
+          "flightsCount": 1217
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.04,
+          "flightsCount": 1095
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.1,
+          "flightsCount": 995
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.26,
+          "flightsCount": 873
+        }
+      ]
+    },
+    {
+      "regionId": 69,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -6.26,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -4.29,
+          "flightsCount": 957
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 4.05,
+          "flightsCount": 996
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 8.33,
+          "flightsCount": 1079
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.7,
+          "flightsCount": 1227
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 10.11,
+          "flightsCount": 1351
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 11.18,
+          "flightsCount": 1502
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -2.5,
+          "flightsCount": 1464
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -1.72,
+          "flightsCount": 1439
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -6.61,
+          "flightsCount": 1344
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.44,
+          "flightsCount": 1217
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.96,
+          "flightsCount": 1108
+        }
+      ]
+    },
+    {
+      "regionId": 70,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.52,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -10.52,
+          "flightsCount": 895
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.3,
+          "flightsCount": 897
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 7.02,
+          "flightsCount": 960
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.49,
+          "flightsCount": 1071
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 5.59,
+          "flightsCount": 1131
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.66,
+          "flightsCount": 1206
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.16,
+          "flightsCount": 1132
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.55,
+          "flightsCount": 1080
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.75,
+          "flightsCount": 997
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.49,
+          "flightsCount": 892
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.65,
+          "flightsCount": 797
+        }
+      ]
+    },
+    {
+      "regionId": 71,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.73,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.46,
+          "flightsCount": 915
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -1.98,
+          "flightsCount": 897
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.18,
+          "flightsCount": 944
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 9.85,
+          "flightsCount": 1037
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 4.72,
+          "flightsCount": 1086
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 4.99,
+          "flightsCount": 1140
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.16,
+          "flightsCount": 1070
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.87,
+          "flightsCount": 1018
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.21,
+          "flightsCount": 924
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.41,
+          "flightsCount": 809
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.77,
+          "flightsCount": 706
+        }
+      ]
+    },
+    {
+      "regionId": 72,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.73,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -6.84,
+          "flightsCount": 932
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 3.5,
+          "flightsCount": 964
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 7.4,
+          "flightsCount": 1036
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.7,
+          "flightsCount": 1177
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.87,
+          "flightsCount": 1270
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.45,
+          "flightsCount": 1365
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.75,
+          "flightsCount": 1300
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.33,
+          "flightsCount": 1270
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -6.97,
+          "flightsCount": 1181
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -7.77,
+          "flightsCount": 1089
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.06,
+          "flightsCount": 1002
+        }
+      ]
+    },
+    {
+      "regionId": 73,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.86,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.1,
+          "flightsCount": 929
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.49,
+          "flightsCount": 943
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.8,
+          "flightsCount": 998
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 14.55,
+          "flightsCount": 1143
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 9.17,
+          "flightsCount": 1247
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.04,
+          "flightsCount": 1348
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -3.39,
+          "flightsCount": 1302
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.31,
+          "flightsCount": 1246
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.11,
+          "flightsCount": 1145
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -11.54,
+          "flightsCount": 1013
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.75,
+          "flightsCount": 914
+        }
+      ]
+    },
+    {
+      "regionId": 74,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.93,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.41,
+          "flightsCount": 926
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.54,
+          "flightsCount": 940
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 8.96,
+          "flightsCount": 1024
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.68,
+          "flightsCount": 1165
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 9.67,
+          "flightsCount": 1277
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.89,
+          "flightsCount": 1403
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.36,
+          "flightsCount": 1342
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -1.85,
+          "flightsCount": 1317
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.38,
+          "flightsCount": 1207
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -6.01,
+          "flightsCount": 1134
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -7.68,
+          "flightsCount": 1047
+        }
+      ]
+    },
+    {
+      "regionId": 75,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.51,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -10.02,
+          "flightsCount": 900
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.36,
+          "flightsCount": 912
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.81,
+          "flightsCount": 974
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.4,
+          "flightsCount": 1105
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.96,
+          "flightsCount": 1182
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.46,
+          "flightsCount": 1282
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -3.28,
+          "flightsCount": 1239
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.61,
+          "flightsCount": 1170
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.64,
+          "flightsCount": 1045
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.39,
+          "flightsCount": 958
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.19,
+          "flightsCount": 870
+        }
+      ]
+    },
+    {
+      "regionId": 76,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.82,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.11,
+          "flightsCount": 919
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.23,
+          "flightsCount": 939
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.57,
+          "flightsCount": 982
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.15,
+          "flightsCount": 1111
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.39,
+          "flightsCount": 1205
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.83,
+          "flightsCount": 1299
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -3.32,
+          "flightsCount": 1256
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.46,
+          "flightsCount": 1225
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.82,
+          "flightsCount": 1117
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.43,
+          "flightsCount": 1012
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.41,
+          "flightsCount": 886
+        }
+      ]
+    },
+    {
+      "regionId": 77,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.59,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.78,
+          "flightsCount": 922
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 3.82,
+          "flightsCount": 957
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.91,
+          "flightsCount": 1014
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.76,
+          "flightsCount": 1154
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.71,
+          "flightsCount": 1254
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.56,
+          "flightsCount": 1349
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.23,
+          "flightsCount": 1292
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.42,
+          "flightsCount": 1235
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -6.24,
+          "flightsCount": 1158
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -7.29,
+          "flightsCount": 1073
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.89,
+          "flightsCount": 978
+        }
+      ]
+    },
+    {
+      "regionId": 78,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -11.51,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.98,
+          "flightsCount": 910
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -2.27,
+          "flightsCount": 890
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.21,
+          "flightsCount": 927
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 9.56,
+          "flightsCount": 1016
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.61,
+          "flightsCount": 1083
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 5.85,
+          "flightsCount": 1146
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.5,
+          "flightsCount": 1083
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.69,
+          "flightsCount": 1011
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.16,
+          "flightsCount": 918
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.73,
+          "flightsCount": 820
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.77,
+          "flightsCount": 731
+        }
+      ]
+    },
+    {
+      "regionId": 79,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.05,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -6.04,
+          "flightsCount": 940
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 0.53,
+          "flightsCount": 945
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.96,
+          "flightsCount": 1010
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 15.07,
+          "flightsCount": 1163
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 6.91,
+          "flightsCount": 1243
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.49,
+          "flightsCount": 1336
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.58,
+          "flightsCount": 1275
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.81,
+          "flightsCount": 1239
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.86,
+          "flightsCount": 1129
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -7.59,
+          "flightsCount": 1044
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.5,
+          "flightsCount": 944
+        }
+      ]
+    },
+    {
+      "regionId": 80,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -6.52,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -4.93,
+          "flightsCount": 951
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.14,
+          "flightsCount": 971
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 6.3,
+          "flightsCount": 1032
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 13.61,
+          "flightsCount": 1173
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.73,
+          "flightsCount": 1275
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.23,
+          "flightsCount": 1380
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.69,
+          "flightsCount": 1315
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -0.16,
+          "flightsCount": 1313
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -8.43,
+          "flightsCount": 1202
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.07,
+          "flightsCount": 1093
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -8.42,
+          "flightsCount": 1001
+        }
+      ]
+    },
+    {
+      "regionId": 81,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -10.09,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.97,
+          "flightsCount": 920
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -0.2,
+          "flightsCount": 918
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.02,
+          "flightsCount": 965
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 14.95,
+          "flightsCount": 1109
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.27,
+          "flightsCount": 1189
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.9,
+          "flightsCount": 1295
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.92,
+          "flightsCount": 1219
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.35,
+          "flightsCount": 1190
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.82,
+          "flightsCount": 1061
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -7.86,
+          "flightsCount": 978
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.61,
+          "flightsCount": 884
+        }
+      ]
+    },
+    {
+      "regionId": 82,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.18,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -9.1,
+          "flightsCount": 909
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 1.11,
+          "flightsCount": 919
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.06,
+          "flightsCount": 956
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 11.12,
+          "flightsCount": 1063
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.14,
+          "flightsCount": 1149
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.96,
+          "flightsCount": 1229
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -6.02,
+          "flightsCount": 1155
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.32,
+          "flightsCount": 1082
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -12.19,
+          "flightsCount": 950
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.44,
+          "flightsCount": 832
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.52,
+          "flightsCount": 745
+        }
+      ]
+    },
+    {
+      "regionId": 83,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -10.53,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.03,
+          "flightsCount": 920
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -0.77,
+          "flightsCount": 913
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 3.9,
+          "flightsCount": 948
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.05,
+          "flightsCount": 1062
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.19,
+          "flightsCount": 1149
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.37,
+          "flightsCount": 1234
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -7.46,
+          "flightsCount": 1142
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -5.57,
+          "flightsCount": 1079
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.38,
+          "flightsCount": 967
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.3,
+          "flightsCount": 867
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.65,
+          "flightsCount": 775
+        }
+      ]
+    },
+    {
+      "regionId": 84,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.4,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -7.37,
+          "flightsCount": 926
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 3.65,
+          "flightsCount": 960
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 8.83,
+          "flightsCount": 1045
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 14.44,
+          "flightsCount": 1196
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.71,
+          "flightsCount": 1288
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 8.73,
+          "flightsCount": 1400
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -2.99,
+          "flightsCount": 1359
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.28,
+          "flightsCount": 1328
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -6.74,
+          "flightsCount": 1238
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -8.17,
+          "flightsCount": 1137
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.0,
+          "flightsCount": 1023
+        }
+      ]
+    },
+    {
+      "regionId": 85,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -7.64,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -6.44,
+          "flightsCount": 936
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 3.18,
+          "flightsCount": 965
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 8.84,
+          "flightsCount": 1051
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 16.16,
+          "flightsCount": 1220
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 9.13,
+          "flightsCount": 1332
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.54,
+          "flightsCount": 1419
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.07,
+          "flightsCount": 1347
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.37,
+          "flightsCount": 1288
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.03,
+          "flightsCount": 1159
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -9.17,
+          "flightsCount": 1053
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -9.39,
+          "flightsCount": 954
+        }
+      ]
+    },
+    {
+      "regionId": 86,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -5.46,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -4.89,
+          "flightsCount": 951
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 3.23,
+          "flightsCount": 982
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 9.51,
+          "flightsCount": 1075
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 17.47,
+          "flightsCount": 1263
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 12.0,
+          "flightsCount": 1415
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 9.9,
+          "flightsCount": 1555
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -0.63,
+          "flightsCount": 1545
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": 0.38,
+          "flightsCount": 1551
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -7.32,
+          "flightsCount": 1437
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -7.16,
+          "flightsCount": 1334
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -7.11,
+          "flightsCount": 1239
+        }
+      ]
+    },
+    {
+      "regionId": 87,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -9.37,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.36,
+          "flightsCount": 916
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": -0.8,
+          "flightsCount": 909
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.2,
+          "flightsCount": 947
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 10.55,
+          "flightsCount": 1047
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 7.67,
+          "flightsCount": 1128
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 4.49,
+          "flightsCount": 1178
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.66,
+          "flightsCount": 1123
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -6.04,
+          "flightsCount": 1055
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -10.7,
+          "flightsCount": 942
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.69,
+          "flightsCount": 823
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -12.95,
+          "flightsCount": 716
+        }
+      ]
+    },
+    {
+      "regionId": 88,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -8.96,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.32,
+          "flightsCount": 917
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 3.75,
+          "flightsCount": 951
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 5.09,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 12.62,
+          "flightsCount": 1126
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 9.46,
+          "flightsCount": 1232
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 6.93,
+          "flightsCount": 1318
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -5.25,
+          "flightsCount": 1248
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -4.93,
+          "flightsCount": 1187
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -9.87,
+          "flightsCount": 1070
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -10.93,
+          "flightsCount": 953
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -11.53,
+          "flightsCount": 843
+        }
+      ]
+    },
+    {
+      "regionId": 89,
+      "periods": [
+        {
+          "date": "2025-01-01",
+          "percentageChange": -10.34,
+          "flightsCount": 1000
+        },
+        {
+          "date": "2025-02-01",
+          "percentageChange": -8.45,
+          "flightsCount": 916
+        },
+        {
+          "date": "2025-03-01",
+          "percentageChange": 2.61,
+          "flightsCount": 939
+        },
+        {
+          "date": "2025-04-01",
+          "percentageChange": 4.68,
+          "flightsCount": 983
+        },
+        {
+          "date": "2025-05-01",
+          "percentageChange": 10.6,
+          "flightsCount": 1088
+        },
+        {
+          "date": "2025-06-01",
+          "percentageChange": 8.74,
+          "flightsCount": 1183
+        },
+        {
+          "date": "2025-07-01",
+          "percentageChange": 7.78,
+          "flightsCount": 1275
+        },
+        {
+          "date": "2025-08-01",
+          "percentageChange": -4.64,
+          "flightsCount": 1216
+        },
+        {
+          "date": "2025-09-01",
+          "percentageChange": -2.89,
+          "flightsCount": 1180
+        },
+        {
+          "date": "2025-10-01",
+          "percentageChange": -11.63,
+          "flightsCount": 1043
+        },
+        {
+          "date": "2025-11-01",
+          "percentageChange": -12.55,
+          "flightsCount": 912
+        },
+        {
+          "date": "2025-12-01",
+          "percentageChange": -10.18,
+          "flightsCount": 819
+        }
+      ]
+    }
+  ]
+}

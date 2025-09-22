@@ -1,0 +1,362 @@
+{
+  "startDate": "2025-01-01",
+  "finishDate": "2025-12-31",
+  "regions": [
+    {
+      "regionId": 1,
+      "flightsCount": 3006
+    },
+    {
+      "regionId": 2,
+      "flightsCount": 2867
+    },
+    {
+      "regionId": 3,
+      "flightsCount": 3202
+    },
+    {
+      "regionId": 4,
+      "flightsCount": 4090
+    },
+    {
+      "regionId": 5,
+      "flightsCount": 2971
+    },
+    {
+      "regionId": 6,
+      "flightsCount": 2340
+    },
+    {
+      "regionId": 7,
+      "flightsCount": 3443
+    },
+    {
+      "regionId": 8,
+      "flightsCount": 2950
+    },
+    {
+      "regionId": 9,
+      "flightsCount": 4485
+    },
+    {
+      "regionId": 10,
+      "flightsCount": 3387
+    },
+    {
+      "regionId": 11,
+      "flightsCount": 3137
+    },
+    {
+      "regionId": 12,
+      "flightsCount": 4417
+    },
+    {
+      "regionId": 13,
+      "flightsCount": 4479
+    },
+    {
+      "regionId": 14,
+      "flightsCount": 4068
+    },
+    {
+      "regionId": 15,
+      "flightsCount": 4414
+    },
+    {
+      "regionId": 16,
+      "flightsCount": 4291
+    },
+    {
+      "regionId": 17,
+      "flightsCount": 4003
+    },
+    {
+      "regionId": 18,
+      "flightsCount": 3327
+    },
+    {
+      "regionId": 19,
+      "flightsCount": 2208
+    },
+    {
+      "regionId": 20,
+      "flightsCount": 2895
+    },
+    {
+      "regionId": 21,
+      "flightsCount": 3768
+    },
+    {
+      "regionId": 22,
+      "flightsCount": 3513
+    },
+    {
+      "regionId": 23,
+      "flightsCount": 3444
+    },
+    {
+      "regionId": 24,
+      "flightsCount": 2986
+    },
+    {
+      "regionId": 25,
+      "flightsCount": 3840
+    },
+    {
+      "regionId": 26,
+      "flightsCount": 3548
+    },
+    {
+      "regionId": 27,
+      "flightsCount": 4248
+    },
+    {
+      "regionId": 28,
+      "flightsCount": 2566
+    },
+    {
+      "regionId": 29,
+      "flightsCount": 2156
+    },
+    {
+      "regionId": 30,
+      "flightsCount": 2512
+    },
+    {
+      "regionId": 31,
+      "flightsCount": 3864
+    },
+    {
+      "regionId": 32,
+      "flightsCount": 3619
+    },
+    {
+      "regionId": 33,
+      "flightsCount": 3267
+    },
+    {
+      "regionId": 34,
+      "flightsCount": 2459
+    },
+    {
+      "regionId": 35,
+      "flightsCount": 2334
+    },
+    {
+      "regionId": 36,
+      "flightsCount": 3497
+    },
+    {
+      "regionId": 37,
+      "flightsCount": 3906
+    },
+    {
+      "regionId": 38,
+      "flightsCount": 3037
+    },
+    {
+      "regionId": 39,
+      "flightsCount": 4291
+    },
+    {
+      "regionId": 40,
+      "flightsCount": 2924
+    },
+    {
+      "regionId": 41,
+      "flightsCount": 2228
+    },
+    {
+      "regionId": 42,
+      "flightsCount": 2869
+    },
+    {
+      "regionId": 43,
+      "flightsCount": 2176
+    },
+    {
+      "regionId": 44,
+      "flightsCount": 2309
+    },
+    {
+      "regionId": 45,
+      "flightsCount": 4027
+    },
+    {
+      "regionId": 46,
+      "flightsCount": 4040
+    },
+    {
+      "regionId": 47,
+      "flightsCount": 3704
+    },
+    {
+      "regionId": 48,
+      "flightsCount": 3401
+    },
+    {
+      "regionId": 49,
+      "flightsCount": 2840
+    },
+    {
+      "regionId": 50,
+      "flightsCount": 3972
+    },
+    {
+      "regionId": 51,
+      "flightsCount": 2765
+    },
+    {
+      "regionId": 52,
+      "flightsCount": 4256
+    },
+    {
+      "regionId": 53,
+      "flightsCount": 2203
+    },
+    {
+      "regionId": 54,
+      "flightsCount": 3212
+    },
+    {
+      "regionId": 55,
+      "flightsCount": 2990
+    },
+    {
+      "regionId": 56,
+      "flightsCount": 3907
+    },
+    {
+      "regionId": 57,
+      "flightsCount": 2651
+    },
+    {
+      "regionId": 58,
+      "flightsCount": 3669
+    },
+    {
+      "regionId": 59,
+      "flightsCount": 2374
+    },
+    {
+      "regionId": 60,
+      "flightsCount": 2477
+    },
+    {
+      "regionId": 61,
+      "flightsCount": 3554
+    },
+    {
+      "regionId": 62,
+      "flightsCount": 3049
+    },
+    {
+      "regionId": 63,
+      "flightsCount": 3718
+    },
+    {
+      "regionId": 64,
+      "flightsCount": 3253
+    },
+    {
+      "regionId": 65,
+      "flightsCount": 2241
+    },
+    {
+      "regionId": 66,
+      "flightsCount": 4386
+    },
+    {
+      "regionId": 67,
+      "flightsCount": 2956
+    },
+    {
+      "regionId": 68,
+      "flightsCount": 2460
+    },
+    {
+      "regionId": 69,
+      "flightsCount": 1684
+    },
+    {
+      "regionId": 70,
+      "flightsCount": 2621
+    },
+    {
+      "regionId": 71,
+      "flightsCount": 2640
+    },
+    {
+      "regionId": 72,
+      "flightsCount": 2533
+    },
+    {
+      "regionId": 73,
+      "flightsCount": 2400
+    },
+    {
+      "regionId": 74,
+      "flightsCount": 4328
+    },
+    {
+      "regionId": 75,
+      "flightsCount": 2444
+    },
+    {
+      "regionId": 76,
+      "flightsCount": 4059
+    },
+    {
+      "regionId": 77,
+      "flightsCount": 3764
+    },
+    {
+      "regionId": 78,
+      "flightsCount": 4268
+    },
+    {
+      "regionId": 79,
+      "flightsCount": 3765
+    },
+    {
+      "regionId": 80,
+      "flightsCount": 3006
+    },
+    {
+      "regionId": 81,
+      "flightsCount": 4139
+    },
+    {
+      "regionId": 82,
+      "flightsCount": 2550
+    },
+    {
+      "regionId": 83,
+      "flightsCount": 3815
+    },
+    {
+      "regionId": 84,
+      "flightsCount": 3146
+    },
+    {
+      "regionId": 85,
+      "flightsCount": 3508
+    },
+    {
+      "regionId": 86,
+      "flightsCount": 3131
+    },
+    {
+      "regionId": 87,
+      "flightsCount": 4462
+    },
+    {
+      "regionId": 88,
+      "flightsCount": 4255
+    },
+    {
+      "regionId": 89,
+      "flightsCount": 2730
+    }
+  ]
+}

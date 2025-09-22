@@ -1,12 +1,14 @@
 import "@coreStyles/globals.scss";
 
 import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router";
 
 import App from "@components/App";
 import WithAuth from "@coreUtils/WithAuth";
 import WithErrorBoundaries from "@coreUtils/WithErrorBoundaries";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
+import { store } from "@store/index";
 
 if (process.env.KEYCLOAK_ENABLED === "true") {
     const keycloak = await import("@coreUtils/keycloak");
@@ -16,7 +18,9 @@ if (process.env.KEYCLOAK_ENABLED === "true") {
             <ReactKeycloakProvider authClient={keycloak.keycloak} initOptions={keycloak.initOptions}>
                 <BrowserRouter>
                     <WithAuth>
-                        <App />
+                        <Provider store={store}>
+                            <App />
+                        </Provider>
                     </WithAuth>
                 </BrowserRouter>
             </ReactKeycloakProvider>

@@ -1,0 +1,452 @@
+{
+  "startDate": "2025-01-01",
+  "finishDate": "2025-12-31",
+  "resolution": "MONTH",
+  "regions": [
+    {
+      "regionId": 1,
+      "averageFlightsCount": 227,
+      "medianFlightsCount": 231
+    },
+    {
+      "regionId": 2,
+      "averageFlightsCount": 273,
+      "medianFlightsCount": 253
+    },
+    {
+      "regionId": 3,
+      "averageFlightsCount": 217,
+      "medianFlightsCount": 205
+    },
+    {
+      "regionId": 4,
+      "averageFlightsCount": 249,
+      "medianFlightsCount": 248
+    },
+    {
+      "regionId": 5,
+      "averageFlightsCount": 213,
+      "medianFlightsCount": 211
+    },
+    {
+      "regionId": 6,
+      "averageFlightsCount": 297,
+      "medianFlightsCount": 255
+    },
+    {
+      "regionId": 7,
+      "averageFlightsCount": 238,
+      "medianFlightsCount": 247
+    },
+    {
+      "regionId": 8,
+      "averageFlightsCount": 318,
+      "medianFlightsCount": 303
+    },
+    {
+      "regionId": 9,
+      "averageFlightsCount": 267,
+      "medianFlightsCount": 228
+    },
+    {
+      "regionId": 10,
+      "averageFlightsCount": 217,
+      "medianFlightsCount": 190
+    },
+    {
+      "regionId": 11,
+      "averageFlightsCount": 240,
+      "medianFlightsCount": 205
+    },
+    {
+      "regionId": 12,
+      "averageFlightsCount": 218,
+      "medianFlightsCount": 214
+    },
+    {
+      "regionId": 13,
+      "averageFlightsCount": 205,
+      "medianFlightsCount": 206
+    },
+    {
+      "regionId": 14,
+      "averageFlightsCount": 224,
+      "medianFlightsCount": 212
+    },
+    {
+      "regionId": 15,
+      "averageFlightsCount": 206,
+      "medianFlightsCount": 213
+    },
+    {
+      "regionId": 16,
+      "averageFlightsCount": 254,
+      "medianFlightsCount": 221
+    },
+    {
+      "regionId": 17,
+      "averageFlightsCount": 325,
+      "medianFlightsCount": 294
+    },
+    {
+      "regionId": 18,
+      "averageFlightsCount": 198,
+      "medianFlightsCount": 176
+    },
+    {
+      "regionId": 19,
+      "averageFlightsCount": 249,
+      "medianFlightsCount": 259
+    },
+    {
+      "regionId": 20,
+      "averageFlightsCount": 329,
+      "medianFlightsCount": 296
+    },
+    {
+      "regionId": 21,
+      "averageFlightsCount": 197,
+      "medianFlightsCount": 204
+    },
+    {
+      "regionId": 22,
+      "averageFlightsCount": 171,
+      "medianFlightsCount": 168
+    },
+    {
+      "regionId": 23,
+      "averageFlightsCount": 195,
+      "medianFlightsCount": 192
+    },
+    {
+      "regionId": 24,
+      "averageFlightsCount": 322,
+      "medianFlightsCount": 322
+    },
+    {
+      "regionId": 25,
+      "averageFlightsCount": 212,
+      "medianFlightsCount": 199
+    },
+    {
+      "regionId": 26,
+      "averageFlightsCount": 245,
+      "medianFlightsCount": 220
+    },
+    {
+      "regionId": 27,
+      "averageFlightsCount": 301,
+      "medianFlightsCount": 301
+    },
+    {
+      "regionId": 28,
+      "averageFlightsCount": 263,
+      "medianFlightsCount": 248
+    },
+    {
+      "regionId": 29,
+      "averageFlightsCount": 295,
+      "medianFlightsCount": 308
+    },
+    {
+      "regionId": 30,
+      "averageFlightsCount": 261,
+      "medianFlightsCount": 226
+    },
+    {
+      "regionId": 31,
+      "averageFlightsCount": 306,
+      "medianFlightsCount": 298
+    },
+    {
+      "regionId": 32,
+      "averageFlightsCount": 217,
+      "medianFlightsCount": 207
+    },
+    {
+      "regionId": 33,
+      "averageFlightsCount": 243,
+      "medianFlightsCount": 236
+    },
+    {
+      "regionId": 34,
+      "averageFlightsCount": 293,
+      "medianFlightsCount": 303
+    },
+    {
+      "regionId": 35,
+      "averageFlightsCount": 243,
+      "medianFlightsCount": 209
+    },
+    {
+      "regionId": 36,
+      "averageFlightsCount": 269,
+      "medianFlightsCount": 242
+    },
+    {
+      "regionId": 37,
+      "averageFlightsCount": 310,
+      "medianFlightsCount": 295
+    },
+    {
+      "regionId": 38,
+      "averageFlightsCount": 184,
+      "medianFlightsCount": 156
+    },
+    {
+      "regionId": 39,
+      "averageFlightsCount": 183,
+      "medianFlightsCount": 184
+    },
+    {
+      "regionId": 40,
+      "averageFlightsCount": 279,
+      "medianFlightsCount": 273
+    },
+    {
+      "regionId": 41,
+      "averageFlightsCount": 326,
+      "medianFlightsCount": 329
+    },
+    {
+      "regionId": 42,
+      "averageFlightsCount": 242,
+      "medianFlightsCount": 242
+    },
+    {
+      "regionId": 43,
+      "averageFlightsCount": 303,
+      "medianFlightsCount": 280
+    },
+    {
+      "regionId": 44,
+      "averageFlightsCount": 265,
+      "medianFlightsCount": 263
+    },
+    {
+      "regionId": 45,
+      "averageFlightsCount": 268,
+      "medianFlightsCount": 266
+    },
+    {
+      "regionId": 46,
+      "averageFlightsCount": 180,
+      "medianFlightsCount": 185
+    },
+    {
+      "regionId": 47,
+      "averageFlightsCount": 262,
+      "medianFlightsCount": 249
+    },
+    {
+      "regionId": 48,
+      "averageFlightsCount": 209,
+      "medianFlightsCount": 195
+    },
+    {
+      "regionId": 49,
+      "averageFlightsCount": 251,
+      "medianFlightsCount": 252
+    },
+    {
+      "regionId": 50,
+      "averageFlightsCount": 182,
+      "medianFlightsCount": 158
+    },
+    {
+      "regionId": 51,
+      "averageFlightsCount": 242,
+      "medianFlightsCount": 227
+    },
+    {
+      "regionId": 52,
+      "averageFlightsCount": 223,
+      "medianFlightsCount": 193
+    },
+    {
+      "regionId": 53,
+      "averageFlightsCount": 219,
+      "medianFlightsCount": 205
+    },
+    {
+      "regionId": 54,
+      "averageFlightsCount": 326,
+      "medianFlightsCount": 298
+    },
+    {
+      "regionId": 55,
+      "averageFlightsCount": 234,
+      "medianFlightsCount": 210
+    },
+    {
+      "regionId": 56,
+      "averageFlightsCount": 273,
+      "medianFlightsCount": 241
+    },
+    {
+      "regionId": 57,
+      "averageFlightsCount": 208,
+      "medianFlightsCount": 205
+    },
+    {
+      "regionId": 58,
+      "averageFlightsCount": 217,
+      "medianFlightsCount": 189
+    },
+    {
+      "regionId": 59,
+      "averageFlightsCount": 306,
+      "medianFlightsCount": 265
+    },
+    {
+      "regionId": 60,
+      "averageFlightsCount": 316,
+      "medianFlightsCount": 287
+    },
+    {
+      "regionId": 61,
+      "averageFlightsCount": 221,
+      "medianFlightsCount": 211
+    },
+    {
+      "regionId": 62,
+      "averageFlightsCount": 330,
+      "medianFlightsCount": 288
+    },
+    {
+      "regionId": 63,
+      "averageFlightsCount": 269,
+      "medianFlightsCount": 275
+    },
+    {
+      "regionId": 64,
+      "averageFlightsCount": 248,
+      "medianFlightsCount": 233
+    },
+    {
+      "regionId": 65,
+      "averageFlightsCount": 320,
+      "medianFlightsCount": 313
+    },
+    {
+      "regionId": 66,
+      "averageFlightsCount": 202,
+      "medianFlightsCount": 196
+    },
+    {
+      "regionId": 67,
+      "averageFlightsCount": 219,
+      "medianFlightsCount": 196
+    },
+    {
+      "regionId": 68,
+      "averageFlightsCount": 247,
+      "medianFlightsCount": 252
+    },
+    {
+      "regionId": 69,
+      "averageFlightsCount": 207,
+      "medianFlightsCount": 212
+    },
+    {
+      "regionId": 70,
+      "averageFlightsCount": 254,
+      "medianFlightsCount": 236
+    },
+    {
+      "regionId": 71,
+      "averageFlightsCount": 268,
+      "medianFlightsCount": 278
+    },
+    {
+      "regionId": 72,
+      "averageFlightsCount": 266,
+      "medianFlightsCount": 270
+    },
+    {
+      "regionId": 73,
+      "averageFlightsCount": 224,
+      "medianFlightsCount": 233
+    },
+    {
+      "regionId": 74,
+      "averageFlightsCount": 240,
+      "medianFlightsCount": 239
+    },
+    {
+      "regionId": 75,
+      "averageFlightsCount": 232,
+      "medianFlightsCount": 207
+    },
+    {
+      "regionId": 76,
+      "averageFlightsCount": 301,
+      "medianFlightsCount": 269
+    },
+    {
+      "regionId": 77,
+      "averageFlightsCount": 222,
+      "medianFlightsCount": 195
+    },
+    {
+      "regionId": 78,
+      "averageFlightsCount": 205,
+      "medianFlightsCount": 179
+    },
+    {
+      "regionId": 79,
+      "averageFlightsCount": 300,
+      "medianFlightsCount": 274
+    },
+    {
+      "regionId": 80,
+      "averageFlightsCount": 181,
+      "medianFlightsCount": 174
+    },
+    {
+      "regionId": 81,
+      "averageFlightsCount": 250,
+      "medianFlightsCount": 232
+    },
+    {
+      "regionId": 82,
+      "averageFlightsCount": 201,
+      "medianFlightsCount": 180
+    },
+    {
+      "regionId": 83,
+      "averageFlightsCount": 231,
+      "medianFlightsCount": 236
+    },
+    {
+      "regionId": 84,
+      "averageFlightsCount": 201,
+      "medianFlightsCount": 201
+    },
+    {
+      "regionId": 85,
+      "averageFlightsCount": 235,
+      "medianFlightsCount": 228
+    },
+    {
+      "regionId": 86,
+      "averageFlightsCount": 314,
+      "medianFlightsCount": 315
+    },
+    {
+      "regionId": 87,
+      "averageFlightsCount": 213,
+      "medianFlightsCount": 200
+    },
+    {
+      "regionId": 88,
+      "averageFlightsCount": 311,
+      "medianFlightsCount": 303
+    },
+    {
+      "regionId": 89,
+      "averageFlightsCount": 269,
+      "medianFlightsCount": 237
+    }
+  ]
+}

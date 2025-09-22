@@ -1,0 +1,363 @@
+{
+  "startDate": "2025-01-01",
+  "finishDate": "2025-12-31",
+  "partAreaKm": 1000,
+  "regions": [
+    {
+      "regionId": 1,
+      "flightDensity": 32.73
+    },
+    {
+      "regionId": 2,
+      "flightDensity": 44.09
+    },
+    {
+      "regionId": 3,
+      "flightDensity": 14.46
+    },
+    {
+      "regionId": 4,
+      "flightDensity": 24.29
+    },
+    {
+      "regionId": 5,
+      "flightDensity": 18.49
+    },
+    {
+      "regionId": 6,
+      "flightDensity": 15.69
+    },
+    {
+      "regionId": 7,
+      "flightDensity": 12.13
+    },
+    {
+      "regionId": 8,
+      "flightDensity": 5.95
+    },
+    {
+      "regionId": 9,
+      "flightDensity": 65.22
+    },
+    {
+      "regionId": 10,
+      "flightDensity": 60.33
+    },
+    {
+      "regionId": 11,
+      "flightDensity": 44.27
+    },
+    {
+      "regionId": 12,
+      "flightDensity": 9.37
+    },
+    {
+      "regionId": 13,
+      "flightDensity": 21.4
+    },
+    {
+      "regionId": 14,
+      "flightDensity": 13.01
+    },
+    {
+      "regionId": 15,
+      "flightDensity": 27.97
+    },
+    {
+      "regionId": 16,
+      "flightDensity": 49.96
+    },
+    {
+      "regionId": 17,
+      "flightDensity": 46.98
+    },
+    {
+      "regionId": 18,
+      "flightDensity": 12.87
+    },
+    {
+      "regionId": 19,
+      "flightDensity": 17.34
+    },
+    {
+      "regionId": 20,
+      "flightDensity": 57.39
+    },
+    {
+      "regionId": 21,
+      "flightDensity": 31.58
+    },
+    {
+      "regionId": 22,
+      "flightDensity": 33.9
+    },
+    {
+      "regionId": 23,
+      "flightDensity": 43.75
+    },
+    {
+      "regionId": 24,
+      "flightDensity": 34.42
+    },
+    {
+      "regionId": 25,
+      "flightDensity": 26.94
+    },
+    {
+      "regionId": 26,
+      "flightDensity": 49.79
+    },
+    {
+      "regionId": 27,
+      "flightDensity": 13.61
+    },
+    {
+      "regionId": 28,
+      "flightDensity": 54.36
+    },
+    {
+      "regionId": 29,
+      "flightDensity": 14.35
+    },
+    {
+      "regionId": 30,
+      "flightDensity": 21.99
+    },
+    {
+      "regionId": 31,
+      "flightDensity": 48.37
+    },
+    {
+      "regionId": 32,
+      "flightDensity": 18.81
+    },
+    {
+      "regionId": 33,
+      "flightDensity": 33.84
+    },
+    {
+      "regionId": 34,
+      "flightDensity": 55.78
+    },
+    {
+      "regionId": 35,
+      "flightDensity": 11.63
+    },
+    {
+      "regionId": 36,
+      "flightDensity": 36.45
+    },
+    {
+      "regionId": 37,
+      "flightDensity": 45.05
+    },
+    {
+      "regionId": 38,
+      "flightDensity": 51.46
+    },
+    {
+      "regionId": 39,
+      "flightDensity": 11.37
+    },
+    {
+      "regionId": 40,
+      "flightDensity": 56.07
+    },
+    {
+      "regionId": 41,
+      "flightDensity": 48.42
+    },
+    {
+      "regionId": 42,
+      "flightDensity": 18.48
+    },
+    {
+      "regionId": 43,
+      "flightDensity": 26.75
+    },
+    {
+      "regionId": 44,
+      "flightDensity": 20.09
+    },
+    {
+      "regionId": 45,
+      "flightDensity": 19.31
+    },
+    {
+      "regionId": 46,
+      "flightDensity": 6.94
+    },
+    {
+      "regionId": 47,
+      "flightDensity": 65.17
+    },
+    {
+      "regionId": 48,
+      "flightDensity": 61.71
+    },
+    {
+      "regionId": 49,
+      "flightDensity": 8.48
+    },
+    {
+      "regionId": 50,
+      "flightDensity": 44.79
+    },
+    {
+      "regionId": 51,
+      "flightDensity": 15.81
+    },
+    {
+      "regionId": 52,
+      "flightDensity": 29.01
+    },
+    {
+      "regionId": 53,
+      "flightDensity": 39.17
+    },
+    {
+      "regionId": 54,
+      "flightDensity": 51.5
+    },
+    {
+      "regionId": 55,
+      "flightDensity": 24.71
+    },
+    {
+      "regionId": 56,
+      "flightDensity": 34.8
+    },
+    {
+      "regionId": 57,
+      "flightDensity": 32.22
+    },
+    {
+      "regionId": 58,
+      "flightDensity": 33.06
+    },
+    {
+      "regionId": 59,
+      "flightDensity": 21.33
+    },
+    {
+      "regionId": 60,
+      "flightDensity": 17.45
+    },
+    {
+      "regionId": 61,
+      "flightDensity": 29.14
+    },
+    {
+      "regionId": 62,
+      "flightDensity": 53.92
+    },
+    {
+      "regionId": 63,
+      "flightDensity": 46.69
+    },
+    {
+      "regionId": 64,
+      "flightDensity": 63.91
+    },
+    {
+      "regionId": 65,
+      "flightDensity": 21.92
+    },
+    {
+      "regionId": 66,
+      "flightDensity": 6.13
+    },
+    {
+      "regionId": 67,
+      "flightDensity": 56.19
+    },
+    {
+      "regionId": 68,
+      "flightDensity": 30.92
+    },
+    {
+      "regionId": 69,
+      "flightDensity": 34.83
+    },
+    {
+      "regionId": 70,
+      "flightDensity": 21.95
+    },
+    {
+      "regionId": 71,
+      "flightDensity": 19.67
+    },
+    {
+      "regionId": 72,
+      "flightDensity": 41.75
+    },
+    {
+      "regionId": 73,
+      "flightDensity": 6.97
+    },
+    {
+      "regionId": 74,
+      "flightDensity": 53.66
+    },
+    {
+      "regionId": 75,
+      "flightDensity": 47.47
+    },
+    {
+      "regionId": 76,
+      "flightDensity": 24.6
+    },
+    {
+      "regionId": 77,
+      "flightDensity": 44.09
+    },
+    {
+      "regionId": 78,
+      "flightDensity": 31.1
+    },
+    {
+      "regionId": 79,
+      "flightDensity": 7.54
+    },
+    {
+      "regionId": 80,
+      "flightDensity": 11.16
+    },
+    {
+      "regionId": 81,
+      "flightDensity": 49.37
+    },
+    {
+      "regionId": 82,
+      "flightDensity": 28.99
+    },
+    {
+      "regionId": 83,
+      "flightDensity": 27.44
+    },
+    {
+      "regionId": 84,
+      "flightDensity": 41.17
+    },
+    {
+      "regionId": 85,
+      "flightDensity": 48.09
+    },
+    {
+      "regionId": 86,
+      "flightDensity": 25.94
+    },
+    {
+      "regionId": 87,
+      "flightDensity": 33.84
+    },
+    {
+      "regionId": 88,
+      "flightDensity": 58.39
+    },
+    {
+      "regionId": 89,
+      "flightDensity": 48.66
+    }
+  ]
+}
