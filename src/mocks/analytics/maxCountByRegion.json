@@ -1,0 +1,452 @@
+{
+  "startDate": "2025-01-01",
+  "finishDate": "2025-12-31",
+  "resolution": "MONTH",
+  "regions": [
+    {
+      "regionId": 1,
+      "maxFlightsPeriodStart": "2025-05-23T00:00:00Z",
+      "maxFlightsCount": 191
+    },
+    {
+      "regionId": 2,
+      "maxFlightsPeriodStart": "2025-04-24T00:00:00Z",
+      "maxFlightsCount": 204
+    },
+    {
+      "regionId": 3,
+      "maxFlightsPeriodStart": "2025-09-15T00:00:00Z",
+      "maxFlightsCount": 159
+    },
+    {
+      "regionId": 4,
+      "maxFlightsPeriodStart": "2025-08-16T00:00:00Z",
+      "maxFlightsCount": 148
+    },
+    {
+      "regionId": 5,
+      "maxFlightsPeriodStart": "2025-12-02T00:00:00Z",
+      "maxFlightsCount": 203
+    },
+    {
+      "regionId": 6,
+      "maxFlightsPeriodStart": "2025-12-23T00:00:00Z",
+      "maxFlightsCount": 234
+    },
+    {
+      "regionId": 7,
+      "maxFlightsPeriodStart": "2025-11-12T00:00:00Z",
+      "maxFlightsCount": 188
+    },
+    {
+      "regionId": 8,
+      "maxFlightsPeriodStart": "2025-05-16T00:00:00Z",
+      "maxFlightsCount": 102
+    },
+    {
+      "regionId": 9,
+      "maxFlightsPeriodStart": "2025-08-19T00:00:00Z",
+      "maxFlightsCount": 189
+    },
+    {
+      "regionId": 10,
+      "maxFlightsPeriodStart": "2025-11-18T00:00:00Z",
+      "maxFlightsCount": 188
+    },
+    {
+      "regionId": 11,
+      "maxFlightsPeriodStart": "2025-04-20T00:00:00Z",
+      "maxFlightsCount": 229
+    },
+    {
+      "regionId": 12,
+      "maxFlightsPeriodStart": "2025-05-07T00:00:00Z",
+      "maxFlightsCount": 229
+    },
+    {
+      "regionId": 13,
+      "maxFlightsPeriodStart": "2025-11-16T00:00:00Z",
+      "maxFlightsCount": 112
+    },
+    {
+      "regionId": 14,
+      "maxFlightsPeriodStart": "2025-02-22T00:00:00Z",
+      "maxFlightsCount": 227
+    },
+    {
+      "regionId": 15,
+      "maxFlightsPeriodStart": "2025-12-23T00:00:00Z",
+      "maxFlightsCount": 178
+    },
+    {
+      "regionId": 16,
+      "maxFlightsPeriodStart": "2025-12-10T00:00:00Z",
+      "maxFlightsCount": 98
+    },
+    {
+      "regionId": 17,
+      "maxFlightsPeriodStart": "2025-11-14T00:00:00Z",
+      "maxFlightsCount": 114
+    },
+    {
+      "regionId": 18,
+      "maxFlightsPeriodStart": "2025-07-06T00:00:00Z",
+      "maxFlightsCount": 173
+    },
+    {
+      "regionId": 19,
+      "maxFlightsPeriodStart": "2025-06-13T00:00:00Z",
+      "maxFlightsCount": 137
+    },
+    {
+      "regionId": 20,
+      "maxFlightsPeriodStart": "2025-07-15T00:00:00Z",
+      "maxFlightsCount": 170
+    },
+    {
+      "regionId": 21,
+      "maxFlightsPeriodStart": "2025-10-04T00:00:00Z",
+      "maxFlightsCount": 76
+    },
+    {
+      "regionId": 22,
+      "maxFlightsPeriodStart": "2025-08-05T00:00:00Z",
+      "maxFlightsCount": 119
+    },
+    {
+      "regionId": 23,
+      "maxFlightsPeriodStart": "2025-10-14T00:00:00Z",
+      "maxFlightsCount": 211
+    },
+    {
+      "regionId": 24,
+      "maxFlightsPeriodStart": "2025-03-21T00:00:00Z",
+      "maxFlightsCount": 129
+    },
+    {
+      "regionId": 25,
+      "maxFlightsPeriodStart": "2025-01-18T00:00:00Z",
+      "maxFlightsCount": 180
+    },
+    {
+      "regionId": 26,
+      "maxFlightsPeriodStart": "2025-09-22T00:00:00Z",
+      "maxFlightsCount": 145
+    },
+    {
+      "regionId": 27,
+      "maxFlightsPeriodStart": "2025-03-22T00:00:00Z",
+      "maxFlightsCount": 211
+    },
+    {
+      "regionId": 28,
+      "maxFlightsPeriodStart": "2025-11-21T00:00:00Z",
+      "maxFlightsCount": 138
+    },
+    {
+      "regionId": 29,
+      "maxFlightsPeriodStart": "2025-09-06T00:00:00Z",
+      "maxFlightsCount": 121
+    },
+    {
+      "regionId": 30,
+      "maxFlightsPeriodStart": "2025-04-10T00:00:00Z",
+      "maxFlightsCount": 123
+    },
+    {
+      "regionId": 31,
+      "maxFlightsPeriodStart": "2025-11-23T00:00:00Z",
+      "maxFlightsCount": 211
+    },
+    {
+      "regionId": 32,
+      "maxFlightsPeriodStart": "2025-03-05T00:00:00Z",
+      "maxFlightsCount": 190
+    },
+    {
+      "regionId": 33,
+      "maxFlightsPeriodStart": "2025-12-19T00:00:00Z",
+      "maxFlightsCount": 188
+    },
+    {
+      "regionId": 34,
+      "maxFlightsPeriodStart": "2025-10-24T00:00:00Z",
+      "maxFlightsCount": 187
+    },
+    {
+      "regionId": 35,
+      "maxFlightsPeriodStart": "2025-09-11T00:00:00Z",
+      "maxFlightsCount": 177
+    },
+    {
+      "regionId": 36,
+      "maxFlightsPeriodStart": "2025-11-10T00:00:00Z",
+      "maxFlightsCount": 105
+    },
+    {
+      "regionId": 37,
+      "maxFlightsPeriodStart": "2025-11-13T00:00:00Z",
+      "maxFlightsCount": 118
+    },
+    {
+      "regionId": 38,
+      "maxFlightsPeriodStart": "2025-03-03T00:00:00Z",
+      "maxFlightsCount": 227
+    },
+    {
+      "regionId": 39,
+      "maxFlightsPeriodStart": "2025-01-08T00:00:00Z",
+      "maxFlightsCount": 222
+    },
+    {
+      "regionId": 40,
+      "maxFlightsPeriodStart": "2025-10-08T00:00:00Z",
+      "maxFlightsCount": 99
+    },
+    {
+      "regionId": 41,
+      "maxFlightsPeriodStart": "2025-01-25T00:00:00Z",
+      "maxFlightsCount": 110
+    },
+    {
+      "regionId": 42,
+      "maxFlightsPeriodStart": "2025-08-08T00:00:00Z",
+      "maxFlightsCount": 221
+    },
+    {
+      "regionId": 43,
+      "maxFlightsPeriodStart": "2025-09-13T00:00:00Z",
+      "maxFlightsCount": 192
+    },
+    {
+      "regionId": 44,
+      "maxFlightsPeriodStart": "2025-07-20T00:00:00Z",
+      "maxFlightsCount": 158
+    },
+    {
+      "regionId": 45,
+      "maxFlightsPeriodStart": "2025-05-24T00:00:00Z",
+      "maxFlightsCount": 146
+    },
+    {
+      "regionId": 46,
+      "maxFlightsPeriodStart": "2025-01-12T00:00:00Z",
+      "maxFlightsCount": 114
+    },
+    {
+      "regionId": 47,
+      "maxFlightsPeriodStart": "2025-06-24T00:00:00Z",
+      "maxFlightsCount": 252
+    },
+    {
+      "regionId": 48,
+      "maxFlightsPeriodStart": "2025-03-24T00:00:00Z",
+      "maxFlightsCount": 161
+    },
+    {
+      "regionId": 49,
+      "maxFlightsPeriodStart": "2025-08-17T00:00:00Z",
+      "maxFlightsCount": 232
+    },
+    {
+      "regionId": 50,
+      "maxFlightsPeriodStart": "2025-09-10T00:00:00Z",
+      "maxFlightsCount": 190
+    },
+    {
+      "regionId": 51,
+      "maxFlightsPeriodStart": "2025-09-19T00:00:00Z",
+      "maxFlightsCount": 127
+    },
+    {
+      "regionId": 52,
+      "maxFlightsPeriodStart": "2025-02-08T00:00:00Z",
+      "maxFlightsCount": 161
+    },
+    {
+      "regionId": 53,
+      "maxFlightsPeriodStart": "2025-08-06T00:00:00Z",
+      "maxFlightsCount": 189
+    },
+    {
+      "regionId": 54,
+      "maxFlightsPeriodStart": "2025-02-22T00:00:00Z",
+      "maxFlightsCount": 179
+    },
+    {
+      "regionId": 55,
+      "maxFlightsPeriodStart": "2025-10-06T00:00:00Z",
+      "maxFlightsCount": 156
+    },
+    {
+      "regionId": 56,
+      "maxFlightsPeriodStart": "2025-06-03T00:00:00Z",
+      "maxFlightsCount": 121
+    },
+    {
+      "regionId": 57,
+      "maxFlightsPeriodStart": "2025-10-18T00:00:00Z",
+      "maxFlightsCount": 208
+    },
+    {
+      "regionId": 58,
+      "maxFlightsPeriodStart": "2025-09-14T00:00:00Z",
+      "maxFlightsCount": 205
+    },
+    {
+      "regionId": 59,
+      "maxFlightsPeriodStart": "2025-01-21T00:00:00Z",
+      "maxFlightsCount": 171
+    },
+    {
+      "regionId": 60,
+      "maxFlightsPeriodStart": "2025-04-05T00:00:00Z",
+      "maxFlightsCount": 230
+    },
+    {
+      "regionId": 61,
+      "maxFlightsPeriodStart": "2025-04-19T00:00:00Z",
+      "maxFlightsCount": 243
+    },
+    {
+      "regionId": 62,
+      "maxFlightsPeriodStart": "2025-12-13T00:00:00Z",
+      "maxFlightsCount": 166
+    },
+    {
+      "regionId": 63,
+      "maxFlightsPeriodStart": "2025-05-06T00:00:00Z",
+      "maxFlightsCount": 189
+    },
+    {
+      "regionId": 64,
+      "maxFlightsPeriodStart": "2025-10-22T00:00:00Z",
+      "maxFlightsCount": 161
+    },
+    {
+      "regionId": 65,
+      "maxFlightsPeriodStart": "2025-10-03T00:00:00Z",
+      "maxFlightsCount": 143
+    },
+    {
+      "regionId": 66,
+      "maxFlightsPeriodStart": "2025-04-13T00:00:00Z",
+      "maxFlightsCount": 116
+    },
+    {
+      "regionId": 67,
+      "maxFlightsPeriodStart": "2025-03-23T00:00:00Z",
+      "maxFlightsCount": 188
+    },
+    {
+      "regionId": 68,
+      "maxFlightsPeriodStart": "2025-06-13T00:00:00Z",
+      "maxFlightsCount": 116
+    },
+    {
+      "regionId": 69,
+      "maxFlightsPeriodStart": "2025-03-05T00:00:00Z",
+      "maxFlightsCount": 177
+    },
+    {
+      "regionId": 70,
+      "maxFlightsPeriodStart": "2025-10-11T00:00:00Z",
+      "maxFlightsCount": 108
+    },
+    {
+      "regionId": 71,
+      "maxFlightsPeriodStart": "2025-01-15T00:00:00Z",
+      "maxFlightsCount": 227
+    },
+    {
+      "regionId": 72,
+      "maxFlightsPeriodStart": "2025-03-19T00:00:00Z",
+      "maxFlightsCount": 110
+    },
+    {
+      "regionId": 73,
+      "maxFlightsPeriodStart": "2025-03-06T00:00:00Z",
+      "maxFlightsCount": 104
+    },
+    {
+      "regionId": 74,
+      "maxFlightsPeriodStart": "2025-05-07T00:00:00Z",
+      "maxFlightsCount": 121
+    },
+    {
+      "regionId": 75,
+      "maxFlightsPeriodStart": "2025-10-12T00:00:00Z",
+      "maxFlightsCount": 235
+    },
+    {
+      "regionId": 76,
+      "maxFlightsPeriodStart": "2025-10-20T00:00:00Z",
+      "maxFlightsCount": 252
+    },
+    {
+      "regionId": 77,
+      "maxFlightsPeriodStart": "2025-06-13T00:00:00Z",
+      "maxFlightsCount": 159
+    },
+    {
+      "regionId": 78,
+      "maxFlightsPeriodStart": "2025-02-13T00:00:00Z",
+      "maxFlightsCount": 161
+    },
+    {
+      "regionId": 79,
+      "maxFlightsPeriodStart": "2025-09-11T00:00:00Z",
+      "maxFlightsCount": 164
+    },
+    {
+      "regionId": 80,
+      "maxFlightsPeriodStart": "2025-08-20T00:00:00Z",
+      "maxFlightsCount": 109
+    },
+    {
+      "regionId": 81,
+      "maxFlightsPeriodStart": "2025-01-17T00:00:00Z",
+      "maxFlightsCount": 179
+    },
+    {
+      "regionId": 82,
+      "maxFlightsPeriodStart": "2025-11-01T00:00:00Z",
+      "maxFlightsCount": 81
+    },
+    {
+      "regionId": 83,
+      "maxFlightsPeriodStart": "2025-07-17T00:00:00Z",
+      "maxFlightsCount": 198
+    },
+    {
+      "regionId": 84,
+      "maxFlightsPeriodStart": "2025-09-25T00:00:00Z",
+      "maxFlightsCount": 243
+    },
+    {
+      "regionId": 85,
+      "maxFlightsPeriodStart": "2025-01-03T00:00:00Z",
+      "maxFlightsCount": 134
+    },
+    {
+      "regionId": 86,
+      "maxFlightsPeriodStart": "2025-03-04T00:00:00Z",
+      "maxFlightsCount": 196
+    },
+    {
+      "regionId": 87,
+      "maxFlightsPeriodStart": "2025-10-02T00:00:00Z",
+      "maxFlightsCount": 136
+    },
+    {
+      "regionId": 88,
+      "maxFlightsPeriodStart": "2025-08-09T00:00:00Z",
+      "maxFlightsCount": 125
+    },
+    {
+      "regionId": 89,
+      "maxFlightsPeriodStart": "2025-03-16T00:00:00Z",
+      "maxFlightsCount": 144
+    }
+  ]
+}

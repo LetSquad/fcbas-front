@@ -1,4 +1,4 @@
-import React from "react";
+import { JSX } from "react";
 
 import Flex from "@commonComponents/Flex";
 
@@ -7,7 +7,7 @@ import styles from "./styles/LoadingErrorBlock.module.scss";
 interface LoadingErrorBlockProps {
     isLoadingErrorObjectText: string;
     reload?: () => void;
-    additionalContent?: React.JSX.Element;
+    additionalContent?: JSX.Element;
 }
 
 export default function LoadingErrorBlock({ isLoadingErrorObjectText, reload, additionalContent }: LoadingErrorBlockProps) {

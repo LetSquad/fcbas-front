@@ -29,8 +29,8 @@ export default function WithAuth(props: PropsWithChildren<object>) {
     if (
         authenticated &&
         initialized &&
-        !tokenParsed?.realm_access?.roles?.includes(Role.OPERATOR) &&
-        !tokenParsed?.realm_access?.roles?.includes(Role.EXECUTOR)
+        !tokenParsed?.realm_access?.roles?.includes(Role.ADMINISTRATOR) &&
+        !tokenParsed?.realm_access?.roles?.includes(Role.OPERATOR)
     ) {
         return <RoleError />;
     }

@@ -8,14 +8,17 @@
     },
     "compilerOptions": {
         "strict": true,
-        "target": "ES2021",
+        "target": "ES2023",
         "module": "esnext",
         "lib": [
             "ES5",
             "ES6",
             "ES2019",
             "ES2021",
-            "DOM"
+            "ES2022",
+            "ES2023",
+            "DOM",
+            "DOM.Iterable"
         ],
         "moduleResolution": "bundler",
         "resolveJsonModule": true,
@@ -31,7 +34,7 @@
         "baseUrl": "src",
         "incremental": true,
         "paths": {
-            "@static/*": ["static/*"],
+            "@assets/*": ["../assets/*"],
             "@coreUtils/*": ["utils/*"],
             "@hooks/*": ["utils/hooks/*"],
             "@coreStyles/*": ["styles/*"],

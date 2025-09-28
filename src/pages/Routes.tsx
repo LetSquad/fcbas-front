@@ -8,7 +8,7 @@ import { useKeycloak } from "@hooks/useKeycloak";
 import { Role } from "@models/auth/enums";
 import { PageSlugs } from "@models/pages/enums";
 import { Page } from "@models/pages/types";
-import { ExecutorPages } from "@pages/ExecutorPages";
+import { AdministratorPages } from "@pages/AdministratorPages";
 import { OperatorPages } from "@pages/OperatorPages";
 import { pagesToRoutes } from "@pages/utils";
 
@@ -21,23 +21,23 @@ export default function Routes() {
     const pages = useMemo(() => {
         let rolePages: Page = {};
 
-        if (roles?.includes(Role.OPERATOR)) {
-            rolePages = merge(rolePages, OperatorPages);
+        if (roles?.includes(Role.ADMINISTRATOR)) {
+            rolePages = merge(rolePages, AdministratorPages);
         }
 
-        if (roles?.includes(Role.EXECUTOR)) {
-            rolePages = merge(rolePages, ExecutorPages);
+        if (roles?.includes(Role.OPERATOR)) {
+            rolePages = merge(rolePages, OperatorPages);
         }
 
         return rolePages;
     }, [roles]);
 
     const defaultNavigate = useMemo(() => {
-        if (roles?.includes(Role.EXECUTOR)) {
+        if (roles?.includes(Role.OPERATOR)) {
             return <Navigate to={PageSlugs.DASHBOARD} replace />;
         }
 
-        if (roles?.includes(Role.OPERATOR)) {
+        if (roles?.includes(Role.ADMINISTRATOR)) {
             return <Navigate to={PageSlugs.REPORTS} replace />;
         }
 

@@ -1,0 +1,18 @@
+$tabs-height: 43px;
+
+.container {
+  height: 100%;
+  width: 100%;
+
+  > div:first-child {
+    height: $tabs-height;
+  }
+}
+
+.tab {
+  border: 0 !important;
+  border-radius: 0 !important;
+  height: calc(100% - $tabs-height);
+  margin: 0 !important;
+  padding: 0 !important;
+}

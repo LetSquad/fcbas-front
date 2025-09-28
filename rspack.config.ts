@@ -151,8 +151,14 @@ const rspack_ = (_: any, { mode }: any) => {
                     ]
                 },
                 {
+                    test: /\.svg$/i,
+                    resourceQuery: /raw/,
+                    type: "asset/source"
+                },
+                {
                     test: /\.(png|ico|jpg|ttf|otf|eot|svg|woff(2)?)$/,
                     type: "asset/resource",
+                    resourceQuery: { not: /raw/ },
                     generator: {
                         filename: "./assets/[name]-[contenthash][ext]"
                     }
@@ -162,7 +168,7 @@ const rspack_ = (_: any, { mode }: any) => {
         resolve: {
             extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".css", ".png"],
             alias: {
-                "@static": path.resolve(__dirname, "src/static"),
+                "@assets": path.resolve(__dirname, "./assets"),
                 "@coreUtils": path.resolve(__dirname, "src/utils"),
                 "@hooks": path.resolve(__dirname, "src/utils/hooks"),
                 "@coreStyles": path.resolve(__dirname, "src/styles"),

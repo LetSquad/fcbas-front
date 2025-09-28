@@ -1,0 +1,362 @@
+{
+  "startDate": "2025-01-01",
+  "finishDate": "2025-12-31",
+  "regions": [
+    {
+      "regionId": 1,
+      "emptyDaysCount": 35
+    },
+    {
+      "regionId": 2,
+      "emptyDaysCount": 60
+    },
+    {
+      "regionId": 3,
+      "emptyDaysCount": 47
+    },
+    {
+      "regionId": 4,
+      "emptyDaysCount": 34
+    },
+    {
+      "regionId": 5,
+      "emptyDaysCount": 61
+    },
+    {
+      "regionId": 6,
+      "emptyDaysCount": 34
+    },
+    {
+      "regionId": 7,
+      "emptyDaysCount": 16
+    },
+    {
+      "regionId": 8,
+      "emptyDaysCount": 37
+    },
+    {
+      "regionId": 9,
+      "emptyDaysCount": 30
+    },
+    {
+      "regionId": 10,
+      "emptyDaysCount": 51
+    },
+    {
+      "regionId": 11,
+      "emptyDaysCount": 7
+    },
+    {
+      "regionId": 12,
+      "emptyDaysCount": 50
+    },
+    {
+      "regionId": 13,
+      "emptyDaysCount": 50
+    },
+    {
+      "regionId": 14,
+      "emptyDaysCount": 61
+    },
+    {
+      "regionId": 15,
+      "emptyDaysCount": 40
+    },
+    {
+      "regionId": 16,
+      "emptyDaysCount": 20
+    },
+    {
+      "regionId": 17,
+      "emptyDaysCount": 57
+    },
+    {
+      "regionId": 18,
+      "emptyDaysCount": 26
+    },
+    {
+      "regionId": 19,
+      "emptyDaysCount": 19
+    },
+    {
+      "regionId": 20,
+      "emptyDaysCount": 15
+    },
+    {
+      "regionId": 21,
+      "emptyDaysCount": 11
+    },
+    {
+      "regionId": 22,
+      "emptyDaysCount": 30
+    },
+    {
+      "regionId": 23,
+      "emptyDaysCount": 34
+    },
+    {
+      "regionId": 24,
+      "emptyDaysCount": 24
+    },
+    {
+      "regionId": 25,
+      "emptyDaysCount": 10
+    },
+    {
+      "regionId": 26,
+      "emptyDaysCount": 4
+    },
+    {
+      "regionId": 27,
+      "emptyDaysCount": 3
+    },
+    {
+      "regionId": 28,
+      "emptyDaysCount": 51
+    },
+    {
+      "regionId": 29,
+      "emptyDaysCount": 59
+    },
+    {
+      "regionId": 30,
+      "emptyDaysCount": 60
+    },
+    {
+      "regionId": 31,
+      "emptyDaysCount": 58
+    },
+    {
+      "regionId": 32,
+      "emptyDaysCount": 52
+    },
+    {
+      "regionId": 33,
+      "emptyDaysCount": 46
+    },
+    {
+      "regionId": 34,
+      "emptyDaysCount": 56
+    },
+    {
+      "regionId": 35,
+      "emptyDaysCount": 21
+    },
+    {
+      "regionId": 36,
+      "emptyDaysCount": 11
+    },
+    {
+      "regionId": 37,
+      "emptyDaysCount": 40
+    },
+    {
+      "regionId": 38,
+      "emptyDaysCount": 20
+    },
+    {
+      "regionId": 39,
+      "emptyDaysCount": 18
+    },
+    {
+      "regionId": 40,
+      "emptyDaysCount": 9
+    },
+    {
+      "regionId": 41,
+      "emptyDaysCount": 43
+    },
+    {
+      "regionId": 42,
+      "emptyDaysCount": 38
+    },
+    {
+      "regionId": 43,
+      "emptyDaysCount": 29
+    },
+    {
+      "regionId": 44,
+      "emptyDaysCount": 44
+    },
+    {
+      "regionId": 45,
+      "emptyDaysCount": 37
+    },
+    {
+      "regionId": 46,
+      "emptyDaysCount": 42
+    },
+    {
+      "regionId": 47,
+      "emptyDaysCount": 31
+    },
+    {
+      "regionId": 48,
+      "emptyDaysCount": 38
+    },
+    {
+      "regionId": 49,
+      "emptyDaysCount": 60
+    },
+    {
+      "regionId": 50,
+      "emptyDaysCount": 35
+    },
+    {
+      "regionId": 51,
+      "emptyDaysCount": 35
+    },
+    {
+      "regionId": 52,
+      "emptyDaysCount": 38
+    },
+    {
+      "regionId": 53,
+      "emptyDaysCount": 13
+    },
+    {
+      "regionId": 54,
+      "emptyDaysCount": 60
+    },
+    {
+      "regionId": 55,
+      "emptyDaysCount": 52
+    },
+    {
+      "regionId": 56,
+      "emptyDaysCount": 36
+    },
+    {
+      "regionId": 57,
+      "emptyDaysCount": 5
+    },
+    {
+      "regionId": 58,
+      "emptyDaysCount": 63
+    },
+    {
+      "regionId": 59,
+      "emptyDaysCount": 63
+    },
+    {
+      "regionId": 60,
+      "emptyDaysCount": 47
+    },
+    {
+      "regionId": 61,
+      "emptyDaysCount": 54
+    },
+    {
+      "regionId": 62,
+      "emptyDaysCount": 37
+    },
+    {
+      "regionId": 63,
+      "emptyDaysCount": 22
+    },
+    {
+      "regionId": 64,
+      "emptyDaysCount": 51
+    },
+    {
+      "regionId": 65,
+      "emptyDaysCount": 34
+    },
+    {
+      "regionId": 66,
+      "emptyDaysCount": 46
+    },
+    {
+      "regionId": 67,
+      "emptyDaysCount": 56
+    },
+    {
+      "regionId": 68,
+      "emptyDaysCount": 15
+    },
+    {
+      "regionId": 69,
+      "emptyDaysCount": 13
+    },
+    {
+      "regionId": 70,
+      "emptyDaysCount": 64
+    },
+    {
+      "regionId": 71,
+      "emptyDaysCount": 54
+    },
+    {
+      "regionId": 72,
+      "emptyDaysCount": 33
+    },
+    {
+      "regionId": 73,
+      "emptyDaysCount": 41
+    },
+    {
+      "regionId": 74,
+      "emptyDaysCount": 7
+    },
+    {
+      "regionId": 75,
+      "emptyDaysCount": 4
+    },
+    {
+      "regionId": 76,
+      "emptyDaysCount": 13
+    },
+    {
+      "regionId": 77,
+      "emptyDaysCount": 35
+    },
+    {
+      "regionId": 78,
+      "emptyDaysCount": 64
+    },
+    {
+      "regionId": 79,
+      "emptyDaysCount": 19
+    },
+    {
+      "regionId": 80,
+      "emptyDaysCount": 61
+    },
+    {
+      "regionId": 81,
+      "emptyDaysCount": 26
+    },
+    {
+      "regionId": 82,
+      "emptyDaysCount": 62
+    },
+    {
+      "regionId": 83,
+      "emptyDaysCount": 41
+    },
+    {
+      "regionId": 84,
+      "emptyDaysCount": 46
+    },
+    {
+      "regionId": 85,
+      "emptyDaysCount": 29
+    },
+    {
+      "regionId": 86,
+      "emptyDaysCount": 8
+    },
+    {
+      "regionId": 87,
+      "emptyDaysCount": 18
+    },
+    {
+      "regionId": 88,
+      "emptyDaysCount": 3
+    },
+    {
+      "regionId": 89,
+      "emptyDaysCount": 55
+    }
+  ]
+}

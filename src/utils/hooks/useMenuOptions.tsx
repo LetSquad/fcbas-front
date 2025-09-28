@@ -40,11 +40,11 @@ export function useMenuOptions(onClose?: () => void) {
 
     const options = [];
 
-    if (roles?.includes(Role.EXECUTOR)) {
+    if (roles?.includes(Role.OPERATOR)) {
         options.push(getOptions(ExecutorItems));
     }
 
-    if (roles?.includes(Role.OPERATOR)) {
+    if (roles?.includes(Role.ADMINISTRATOR)) {
         options.push(getOptions(OperatorItems));
     }
 

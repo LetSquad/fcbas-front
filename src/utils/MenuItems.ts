@@ -1,20 +1,20 @@
-import { ExecutorPagesData } from "@pages/ExecutorPages/ExecutorPagesData";
+import { AdministratorPagesData } from "@pages/AdministratorPages/AdministratorPagesData";
 import { OperatorPagesData } from "@pages/OperatorPages/OperatorPagesData";
 
 export const ExecutorItems: { name: string; url: string }[] = [
     {
-        name: ExecutorPagesData.DASHBOARD.name,
-        url: ExecutorPagesData.DASHBOARD.slug
+        name: OperatorPagesData.DASHBOARD.name,
+        url: OperatorPagesData.DASHBOARD.slug
     }
 ];
 
 export const OperatorItems: { name: string; url: string }[] = [
     {
-        name: OperatorPagesData.UPLOADER.name,
-        url: OperatorPagesData.UPLOADER.slug
+        name: AdministratorPagesData.UPLOADER.name,
+        url: AdministratorPagesData.UPLOADER.slug
     },
     {
-        name: OperatorPagesData.REPORTS.name,
-        url: OperatorPagesData.REPORTS.slug
+        name: AdministratorPagesData.REPORTS.name,
+        url: AdministratorPagesData.REPORTS.slug
     }
 ];

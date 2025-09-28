@@ -1,0 +1,67 @@
+{
+  "startDate": "2025-01-01",
+  "finishDate": "2025-12-31",
+  "resolution": "MONTH",
+  "periods": [
+    {
+      "date": "2025-01-01",
+      "percentageChange": -9.16,
+      "flightsCount": 1000
+    },
+    {
+      "date": "2025-02-01",
+      "percentageChange": -7.85,
+      "flightsCount": 922
+    },
+    {
+      "date": "2025-03-01",
+      "percentageChange": 1.65,
+      "flightsCount": 937
+    },
+    {
+      "date": "2025-04-01",
+      "percentageChange": 6.34,
+      "flightsCount": 996
+    },
+    {
+      "date": "2025-05-01",
+      "percentageChange": 13.42,
+      "flightsCount": 1130
+    },
+    {
+      "date": "2025-06-01",
+      "percentageChange": 8.06,
+      "flightsCount": 1221
+    },
+    {
+      "date": "2025-07-01",
+      "percentageChange": 7.35,
+      "flightsCount": 1311
+    },
+    {
+      "date": "2025-08-01",
+      "percentageChange": -4.48,
+      "flightsCount": 1252
+    },
+    {
+      "date": "2025-09-01",
+      "percentageChange": -3.47,
+      "flightsCount": 1208
+    },
+    {
+      "date": "2025-10-01",
+      "percentageChange": -8.82,
+      "flightsCount": 1102
+    },
+    {
+      "date": "2025-11-01",
+      "percentageChange": -9.69,
+      "flightsCount": 995
+    },
+    {
+      "date": "2025-12-01",
+      "percentageChange": -9.97,
+      "flightsCount": 896
+    }
+  ]
+}
