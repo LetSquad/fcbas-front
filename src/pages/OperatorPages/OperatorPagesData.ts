@@ -2,12 +2,8 @@ import { PageSlugs } from "@models/pages/enums";
 import { PageData } from "@models/pages/types";
 
 export const OperatorPagesData: PageData = {
-    UPLOADER: {
-        name: "Загрузка данный",
-        slug: PageSlugs.UPLOADER
-    },
-    REPORTS: {
-        name: "Скачивание отчетов",
-        slug: PageSlugs.REPORTS
+    DASHBOARD: {
+        name: "Дашборд",
+        slug: PageSlugs.DASHBOARD
     }
 };

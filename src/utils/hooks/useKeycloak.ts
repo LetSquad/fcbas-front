@@ -22,7 +22,7 @@ export function useKeycloak(): ReturnType {
                 authenticated: true,
                 tokenParsed: {
                     realm_access: {
-                        roles: [Role.OPERATOR, Role.EXECUTOR]
+                        roles: [Role.ADMINISTRATOR, Role.OPERATOR]
                     }
                 }
             }

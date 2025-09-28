@@ -1,6 +1,7 @@
 import Flex from "@commonComponents/Flex";
 import { secToHM } from "@components/FlightsMap/utils";
 import { HeatmapMode } from "@models/analytics/enums";
+import { HeatDomains } from "@models/analytics/types";
 
 import styles from "./styles/GradientBar.module.scss";
 
@@ -8,19 +9,16 @@ interface GradientBarProps {
     heatLowColor: string;
     heatHighColor: string;
     heatmapMode: HeatmapMode;
-    heatCountDomain: { min: number; max: number };
-    heatDurationDomain: { min: number; max: number };
+    heatDomains: HeatDomains;
 }
 
-export default function GradientBar({ heatmapMode, heatHighColor, heatLowColor, heatDurationDomain, heatCountDomain }: GradientBarProps) {
+export default function GradientBar({ heatmapMode, heatHighColor, heatLowColor, heatDomains }: GradientBarProps) {
+    const data = heatDomains[heatmapMode];
+
     return (
         <Flex alignItemsCenter columnGap="5px">
             <div className={styles.dataContainer}>
-                {heatmapMode === HeatmapMode.AVERAGE_DURATION ? (
-                    <span>{secToHM(heatDurationDomain.min)}</span>
-                ) : (
-                    <span>{heatCountDomain.min}</span>
-                )}
+                {heatmapMode === HeatmapMode.AVERAGE_DURATION ? <span>{secToHM(data.min)}</span> : <span>{data.min}</span>}
             </div>
             <div
                 style={{
@@ -29,11 +27,7 @@ export default function GradientBar({ heatmapMode, heatHighColor, heatLowColor, 
                 className={styles.gradientBar}
             />
             <div className={styles.dataContainer}>
-                {heatmapMode === HeatmapMode.AVERAGE_DURATION ? (
-                    <span>{secToHM(heatDurationDomain.max)}</span>
-                ) : (
-                    <span>{heatCountDomain.max}</span>
-                )}
+                {heatmapMode === HeatmapMode.AVERAGE_DURATION ? <span>{secToHM(data.max)}</span> : <span>{data.max}</span>}
             </div>
         </Flex>
     );

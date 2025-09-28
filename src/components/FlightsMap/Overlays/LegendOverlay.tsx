@@ -4,6 +4,7 @@ import { $enum } from "ts-enum-util";
 import Flex from "@commonComponents/Flex";
 import { getHeatMapLabelFromHeatmapModeEnum } from "@components/FlightsMap/utils";
 import { HeatmapMode } from "@models/analytics/enums";
+import { HeatDomains } from "@models/analytics/types";
 
 import GradientBar from "./GradientBar";
 import styles from "./styles/LegendOverlay.module.scss";
@@ -11,8 +12,7 @@ import styles from "./styles/LegendOverlay.module.scss";
 interface LegendOverlayProps {
     heatmapMode: HeatmapMode;
     onChangeHeatmapMode: (mode: HeatmapMode) => void;
-    heatCountDomain: { min: number; max: number };
-    heatDurationDomain: { min: number; max: number };
+    heatDomains: HeatDomains;
 
     // для мини-градиента
     heatLowColor: string;
@@ -32,8 +32,7 @@ const HEATMAP_OPTIONS = $enum(HeatmapMode).map((value) => ({
 export default function LegendOverlay({
     heatmapMode,
     onChangeHeatmapMode,
-    heatCountDomain,
-    heatDurationDomain,
+    heatDomains,
     heatLowColor,
     heatHighColor,
     showFlows,
@@ -52,13 +51,7 @@ export default function LegendOverlay({
                 onChange={(_, { value }) => onChangeHeatmapMode(value as HeatmapMode)}
             />
 
-            <GradientBar
-                heatCountDomain={heatCountDomain}
-                heatDurationDomain={heatDurationDomain}
-                heatLowColor={heatLowColor}
-                heatHighColor={heatHighColor}
-                heatmapMode={heatmapMode}
-            />
+            <GradientBar heatDomains={heatDomains} heatLowColor={heatLowColor} heatHighColor={heatHighColor} heatmapMode={heatmapMode} />
 
             {/* Переключатель линий */}
             <Flex alignItemsCenter gap="8px" className={styles.checkboxContainer}>

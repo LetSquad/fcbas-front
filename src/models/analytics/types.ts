@@ -1,4 +1,4 @@
-import { TimeResolution } from "@models/analytics/enums";
+import { HeatmapMode, TimeResolution } from "@models/analytics/enums";
 
 export interface AnalyticsBaseQueryParams {
     startDate?: string;
@@ -249,10 +249,38 @@ export interface HeatMapInfo {
     averageFlightCount: number;
     medianFlightCount: number;
     emptyDays: number;
+    density: number;
 }
 
 export interface HeatMapBin {
     from: number; // включительно
     to: number; // верхняя граница; для последней корзины включительно
     color: string;
+}
+
+export interface HeatDomains {
+    [HeatmapMode.COUNT]: {
+        min: number;
+        max: number;
+    };
+    [HeatmapMode.AVERAGE_DURATION]: {
+        min: number;
+        max: number;
+    };
+    [HeatmapMode.AVERAGE_COUNT]: {
+        min: number;
+        max: number;
+    };
+    [HeatmapMode.MEDIAN_COUNT]: {
+        min: number;
+        max: number;
+    };
+    [HeatmapMode.EMPTY_DAYS_COUNT]: {
+        min: number;
+        max: number;
+    };
+    [HeatmapMode.DENSITY]: {
+        min: number;
+        max: number;
+    };
 }

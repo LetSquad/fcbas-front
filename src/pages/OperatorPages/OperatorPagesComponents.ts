@@ -2,14 +2,10 @@ import { lazy } from "react";
 
 import { PageComponents } from "@models/pages/types";
 
-const Uploader = lazy(/* webpackChunkName: "Uploader" */ () => import("@components/Uploader"));
-const Reports = lazy(/* webpackChunkName: "Reports" */ () => import("@components/Reports"));
+const Dashboard = lazy(/* webpackChunkName: "Dashboard" */ () => import("@components/Dashboard"));
 
 export const OperatorPagesComponents: PageComponents = {
-    UPLOADER: {
-        component: Uploader
-    },
-    REPORTS: {
-        component: Reports
+    DASHBOARD: {
+        component: Dashboard
     }
 };

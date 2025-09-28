@@ -9,5 +9,6 @@ export enum HeatmapMode {
     AVERAGE_DURATION = "averageDuration",
     AVERAGE_COUNT = "averageCount",
     MEDIAN_COUNT = "medianCount",
-    EMPTY_DAYS_COUNT = "emptyDaysCount"
+    EMPTY_DAYS_COUNT = "emptyDaysCount",
+    DENSITY = "density"
 }

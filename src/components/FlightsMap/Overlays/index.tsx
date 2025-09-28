@@ -2,6 +2,7 @@ import Flex from "@commonComponents/Flex";
 import LegendOverlay from "@components/FlightsMap/Overlays/LegendOverlay";
 import RegionOverlay from "@components/FlightsMap/Overlays/RegionOverlay";
 import { HeatmapMode } from "@models/analytics/enums";
+import { HeatDomains } from "@models/analytics/types";
 
 import styles from "./styles/Overlays.module.scss";
 
@@ -13,8 +14,7 @@ interface OverlaysProps {
 
     heatmapMode: HeatmapMode;
     onChangeHeatmapMode: (mode: HeatmapMode) => void;
-    heatCountDomain: { min: number; max: number };
-    heatDurationDomain: { min: number; max: number };
+    heatDomains: HeatDomains;
     heatLowColor: string;
     heatHighColor: string;
 
@@ -30,8 +30,7 @@ export default function Overlays({
     selectedIntraAvgDurationSec,
     heatmapMode,
     onChangeHeatmapMode,
-    heatCountDomain,
-    heatDurationDomain,
+    heatDomains,
     heatLowColor,
     heatHighColor,
     showFlows,
@@ -43,8 +42,7 @@ export default function Overlays({
             <LegendOverlay
                 heatmapMode={heatmapMode}
                 onChangeHeatmapMode={onChangeHeatmapMode}
-                heatCountDomain={heatCountDomain}
-                heatDurationDomain={heatDurationDomain}
+                heatDomains={heatDomains}
                 heatLowColor={heatLowColor}
                 heatHighColor={heatHighColor}
                 showFlows={showFlows}

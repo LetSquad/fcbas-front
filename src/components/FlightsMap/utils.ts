@@ -288,6 +288,9 @@ export function getHeatMapLabelFromHeatmapModeEnum(value: HeatmapMode) {
         case HeatmapMode.EMPTY_DAYS_COUNT: {
             return "Количество дней без полетов";
         }
+        case HeatmapMode.DENSITY: {
+            return "Плотность полетов";
+        }
         // skip default
     }
 }
