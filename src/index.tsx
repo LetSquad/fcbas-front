@@ -30,7 +30,9 @@ if (process.env.KEYCLOAK_ENABLED === "true") {
     createRoot(document.querySelector("#root") as Element).render(
         <WithErrorBoundaries>
             <BrowserRouter>
-                <App />
+                <Provider store={store}>
+                    <App />
+                </Provider>
             </BrowserRouter>
         </WithErrorBoundaries>
     );
