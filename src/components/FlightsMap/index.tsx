@@ -38,18 +38,18 @@ export interface FlightsMapProps {
 
 const STYLE = {
     // Линии межрегиональные
-    gradientStart: "#f97316",
-    gradientEnd: "#c2410c",
+    gradientStart: "#FFE0B3",
+    gradientEnd: "#FF6F00",
 
     // Подсветка связей выбранного региона
     selectedBoost: {
-        thicknessMult: 1.15,
+        thicknessMult: 0.9,
         opacityAdd: 0.08
     },
 
     // Цвета теплокарты (от «холодного» к «горячему»)
-    heatLow: "#ccd2e1",
-    heatHigh: "#1e3a8a"
+    heatLow: "#B3D9FF",
+    heatHigh: "#254b6e"
 } as const;
 
 export default function FlightsMap({ viewBox, regions, width, height, onRegionClick }: FlightsMapProps) {
@@ -335,7 +335,8 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                 return base;
             }
 
-            return lerpColor(base, "#3b82f6", 0.12);
+            return "#b54a4a";
+            // return "#c0e0fd";
         },
         [getHeatValue]
     );
@@ -424,8 +425,8 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             }
 
             const lineWidthWorld = thicknessScreenPxValue / pixelsPerWorldX;
-            const haloWideWorld = (thicknessScreenPxValue * 2) / pixelsPerWorldX;
-            const haloNarrowWorld = (thicknessScreenPxValue * 1.35) / pixelsPerWorldX;
+            const haloWideWorld = (thicknessScreenPxValue * 1.5) / pixelsPerWorldX;
+            const haloNarrowWorld = (thicknessScreenPxValue * 1.1) / pixelsPerWorldX;
 
             const gradientStroke = context.createLinearGradient(curve.p1[0], curve.p1[1], curve.p2[0], curve.p2[1]);
             gradientStroke.addColorStop(0, STYLE.gradientStart);
@@ -604,8 +605,9 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                     role="button"
                     tabIndex={0}
                     id={`region-${region.id}`}
-                    stroke={isSelected ? "#131317" : "#a1a9b5"}
-                    strokeWidth={isSelected ? 1.5 : 0.8}
+                    stroke={isSelected ? "#ffc96b" : "#ffffff"}
+                    // stroke={isSelected ? "#FFE0B3" : "#ff8800"}
+                    strokeWidth={isSelected ? 1.3 : 0.3}
                     aria-pressed={isSelected}
                     aria-label={region.name}
                     className={styles.path}
