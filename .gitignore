@@ -5,7 +5,7 @@ tmp/
 *.zip
 *.iml
 .idea/
-.env
 .env.local
 .env.production
+.env
 .env.development

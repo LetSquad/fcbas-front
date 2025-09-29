@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 import classNames from "classnames";
 
-import { ExecutorItems, OperatorItems } from "@coreUtils/MenuItems";
+import { AdministratorItems, OperatorItems } from "@coreUtils/MenuItems";
 import { useKeycloak } from "@hooks/useKeycloak";
 import { useLocationActive } from "@hooks/useLocationActive";
 import { Role } from "@models/auth/enums";
@@ -41,11 +41,11 @@ export function useMenuOptions(onClose?: () => void) {
     const options = [];
 
     if (roles?.includes(Role.OPERATOR)) {
-        options.push(getOptions(ExecutorItems));
+        options.push(getOptions(OperatorItems));
     }
 
     if (roles?.includes(Role.ADMINISTRATOR)) {
-        options.push(getOptions(OperatorItems));
+        options.push(getOptions(AdministratorItems));
     }
 
     return options;

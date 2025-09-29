@@ -1,8 +1,7 @@
 export enum PageSlugs {
     BASE = "/",
     DASHBOARD = "/dashboard",
-    UPLOADER = "/uploader",
-    REPORTS = "/reports"
+    ADMIN_PANEL = "/admin"
 }
 
 export enum ExecutorPageSlugs {
@@ -10,6 +9,5 @@ export enum ExecutorPageSlugs {
 }
 
 export enum OperatorPageSlugs {
-    REPORTS = PageSlugs.REPORTS,
-    UPLOADER = PageSlugs.UPLOADER
+    ADMIN_PANEL = PageSlugs.ADMIN_PANEL
 }

@@ -8,7 +8,7 @@ import rspack, { CopyRspackPlugin, SwcLoaderOptions } from "@rspack/core";
 import ReactRefreshPlugin from "@rspack/plugin-react-refresh";
 
 const env = dotenv.config({
-    path: process.env.WITH_MOCK_TG === "true" ? path.resolve(__dirname, ".env.local") : path.resolve(__dirname, ".env")
+    path: process.env.WITH_MOCK === "true" ? path.resolve(__dirname, ".env.local") : path.resolve(__dirname, ".env")
 });
 
 const formattedEnv = env.parsed

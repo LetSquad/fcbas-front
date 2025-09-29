@@ -38,7 +38,7 @@ export default function Routes() {
         }
 
         if (roles?.includes(Role.ADMINISTRATOR)) {
-            return <Navigate to={PageSlugs.REPORTS} replace />;
+            return <Navigate to={PageSlugs.ADMIN_PANEL} replace />;
         }
 
         return null;
