@@ -1,4 +1,5 @@
-import { HeatmapMode } from "@models/analytics/enums";
+import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
+import { HeatmapMode, TimeResolution } from "@models/analytics/enums";
 import { HeatMapBin } from "@models/analytics/types";
 import { MinMaxPoint, Point, ViewBox } from "@models/map/types";
 import { RegionShape } from "@models/regions/types";
@@ -271,7 +272,7 @@ export function colorForValue(bins: HeatMapBin[], value: number | null, fallback
     return (bins.at(-1) as HeatMapBin).color;
 }
 
-export function getHeatMapLabelFromHeatmapModeEnum(value: HeatmapMode) {
+export function getHeatMapLabelFromHeatmapModeEnum(value: HeatmapMode, timeResolution: TimeResolution) {
     switch (value) {
         case HeatmapMode.COUNT: {
             return "Количество полетов";
@@ -280,16 +281,16 @@ export function getHeatMapLabelFromHeatmapModeEnum(value: HeatmapMode) {
             return "Продолжительность полетов";
         }
         case HeatmapMode.AVERAGE_COUNT: {
-            return "Среднее количество полетов";
+            return `Среднее количество полетов ${getTimeResolutionDescriptionFromEnum(timeResolution)}`;
         }
         case HeatmapMode.MEDIAN_COUNT: {
-            return "Медианное количество полетов";
+            return `Медианное количество полетов ${getTimeResolutionDescriptionFromEnum(timeResolution)}`;
         }
         case HeatmapMode.EMPTY_DAYS_COUNT: {
             return "Количество дней без полетов";
         }
         case HeatmapMode.DENSITY: {
-            return "Плотность полетов";
+            return `Плотность полетов ${getTimeResolutionDescriptionFromEnum(timeResolution)}`;
         }
         // skip default
     }

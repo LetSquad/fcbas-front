@@ -5,18 +5,22 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 import { Props } from "recharts/types/component/Label";
 
 import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoading";
+import { useFilterFormContext } from "@components/Dashboard/context";
 import { useGetAverageDurationByRegionQuery } from "@store/analytics/api";
 import { useGetRegionsQuery } from "@store/regions/api";
 
 import chartStyles from "./styles/Chart.module.scss";
 
 export default function TopAverageDurationFlightsDiagram() {
+    const formData = useFilterFormContext();
+
     const {
         data: averageDurationByRegions,
         isLoading: isAverageDurationByRegionsLoading,
+        isFetching: isAverageDurationByRegionsFetching,
         isError: isAverageDurationByRegionsError,
         refetch: refetchAverageDurationByRegions
-    } = useGetAverageDurationByRegionQuery(undefined);
+    } = useGetAverageDurationByRegionQuery({ startDate: formData.startDate, endDate: formData.endDate });
 
     const { data: regions } = useGetRegionsQuery();
 
@@ -57,7 +61,7 @@ export default function TopAverageDurationFlightsDiagram() {
     return (
         <ChartWithLoading
             title="Топ 10 регионов по средней длительности полета"
-            isLoading={isAverageDurationByRegionsLoading}
+            isLoading={isAverageDurationByRegionsLoading || isAverageDurationByRegionsFetching}
             isError={isAverageDurationByRegionsError}
             refetch={refetchAverageDurationByRegions}
         >
@@ -66,12 +70,12 @@ export default function TopAverageDurationFlightsDiagram() {
                     <CartesianGrid strokeDasharray="2 5" />
                     <XAxis
                         type="number"
-                        padding={{ right: 30 }}
+                        padding={{ right: 35 }}
                         tickFormatter={(value) => Duration.fromObject({ seconds: value }).toFormat("hh:mm:ss")}
                     />
                     <YAxis dataKey="name" type="category" width={180} />
-                    <Tooltip />
-                    <Bar dataKey="value" name="Полетов" fill="#3373bc" label={renderCustomizedLabel} />
+                    <Tooltip formatter={(value) => Duration.fromObject({ seconds: value as number }).toFormat("hh:mm:ss")} />
+                    <Bar dataKey="value" name="Средняя длительность" fill="#3373bc" label={renderCustomizedLabel} />
                 </BarChart>
             </ResponsiveContainer>
         </ChartWithLoading>

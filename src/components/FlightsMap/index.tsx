@@ -3,6 +3,7 @@ import { KeyboardEvent, MouseEvent, useCallback, useEffect, useMemo, useRef, use
 import { Dimmer, Loader } from "semantic-ui-react";
 
 import LoadingErrorBlock from "@commonComponents/LoadingErrorBlock/LoadingErrorBlock";
+import { useFilterFormContext } from "@components/Dashboard/context";
 import Overlays from "@components/FlightsMap/Overlays";
 import {
     bundledControlPoint,
@@ -53,47 +54,54 @@ const STYLE = {
 } as const;
 
 export default function FlightsMap({ viewBox, regions, width, height, onRegionClick }: FlightsMapProps) {
+    const formData = useFilterFormContext();
+
     const {
         data: countByRegions,
         isLoading: isCountByRegionsLoading,
+        isFetching: isCountByRegionsFetching,
         isError: isCountByRegionsError,
         refetch: refetchCountByRegions
-    } = useGetCountByRegionQuery(undefined);
+    } = useGetCountByRegionQuery({ startDate: formData.startDate, endDate: formData.endDate });
 
     const {
         data: averageDurationByRegions,
         isLoading: isAverageDurationByRegionsLoading,
+        isFetching: isAverageDurationByRegionsFetching,
         isError: isAverageDurationByRegionsError,
         refetch: refetchAverageDurationByRegions
-    } = useGetAverageDurationByRegionQuery(undefined);
+    } = useGetAverageDurationByRegionQuery({ startDate: formData.startDate, endDate: formData.endDate });
 
     const {
         data: averageCountByRegions,
         isLoading: isAverageCountByRegionsLoading,
+        isFetching: isAverageCountByRegionsFetching,
         isError: isAverageCountByRegionsError,
         refetch: refetchAverageCountByRegions
-    } = useGetAverageCountByRegionQuery(undefined);
+    } = useGetAverageCountByRegionQuery(formData);
 
     const {
         data: emptyDaysByRegions,
         isLoading: isEmptyDaysByRegionsLoading,
+        isFetching: isEmptyDaysByRegionsFetching,
         isError: isEmptyDaysByRegionsError,
         refetch: refetchEmptyDaysByRegions
-    } = useGetEmptyDaysByRegionQuery(undefined);
+    } = useGetEmptyDaysByRegionQuery({ startDate: formData.startDate, endDate: formData.endDate });
 
     const {
         data: densityByRegions,
         isLoading: isDensityByRegionsLoading,
+        isFetching: isDensityByRegionsFetching,
         isError: isDensityByRegionsError,
         refetch: refetchDensityByRegions
-    } = useGetDensityByRegionQuery(undefined);
+    } = useGetDensityByRegionQuery(formData);
 
     const {
         data: flightsBetweenRegion,
         isLoading: isFlightsBetweenRegionLoading,
         isError: isFlightsBetweenRegionError,
         refetch: refetchFlightsBetweenRegion
-    } = useGetFlightsBetweenRegionQuery(undefined);
+    } = useGetFlightsBetweenRegionQuery();
 
     const topFly = flightsBetweenRegion?.topFly;
     const regionFlights = flightsBetweenRegion?.regionFlights;
@@ -213,7 +221,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             }
 
             if (regionHetMapInfo.density > maxDensity) {
-                maxDensity = regionHetMapInfo.density;
+                maxDensity = Math.round(regionHetMapInfo.density * 100) / 100;
             }
         }
 
@@ -709,11 +717,16 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             onContextMenu={(event) => event.preventDefault()}
         >
             {(isAverageDurationByRegionsLoading ||
+                isAverageDurationByRegionsFetching ||
                 isCountByRegionsLoading ||
+                isCountByRegionsFetching ||
                 isFlightsBetweenRegionLoading ||
                 isAverageCountByRegionsLoading ||
+                isAverageCountByRegionsFetching ||
                 isEmptyDaysByRegionsLoading ||
-                isDensityByRegionsLoading) && (
+                isEmptyDaysByRegionsFetching ||
+                isDensityByRegionsLoading ||
+                isDensityByRegionsFetching) && (
                 <Dimmer active>
                     <Loader />
                 </Dimmer>
@@ -755,25 +768,30 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                 </div>
             )}
 
-            {!isAverageDurationByRegionsLoading && !isCountByRegionsLoading && !isFlightsBetweenRegionLoading && (
-                <Overlays
-                    // Легенда всегда показывается
-                    selectionActive={selectedRegionId !== null}
-                    selectedRegionName={selectedRegionName}
-                    selectedIntraCount={selectedRegionIntra?.flightCount || 0}
-                    selectedIntraAvgDurationSec={selectedRegionIntra?.averageFlightDurationSeconds || 0}
-                    heatmapMode={heatmapMode}
-                    onChangeHeatmapMode={setHeatmapMode}
-                    heatDomains={heatDomains}
-                    // цвета для мини-градиента
-                    heatLowColor={STYLE.heatLow}
-                    heatHighColor={STYLE.heatHigh}
-                    // переключатель линий
-                    showFlows={showFlows}
-                    topFlightsCount={topFlightsCount}
-                    onToggleShowFlows={setShowFlows}
-                />
-            )}
+            {!isAverageDurationByRegionsLoading &&
+                !isCountByRegionsLoading &&
+                !isFlightsBetweenRegionLoading &&
+                !isAverageCountByRegionsLoading &&
+                !isEmptyDaysByRegionsLoading &&
+                !isDensityByRegionsLoading && (
+                    <Overlays
+                        // Легенда всегда показывается
+                        selectionActive={selectedRegionId !== null}
+                        selectedRegionName={selectedRegionName}
+                        selectedIntraCount={selectedRegionIntra?.flightCount || 0}
+                        selectedIntraAvgDurationSec={selectedRegionIntra?.averageFlightDurationSeconds || 0}
+                        heatmapMode={heatmapMode}
+                        onChangeHeatmapMode={setHeatmapMode}
+                        heatDomains={heatDomains}
+                        // цвета для мини-градиента
+                        heatLowColor={STYLE.heatLow}
+                        heatHighColor={STYLE.heatHigh}
+                        // переключатель линий
+                        showFlows={showFlows}
+                        topFlightsCount={topFlightsCount}
+                        onToggleShowFlows={setShowFlows}
+                    />
+                )}
         </div>
     );
 }

@@ -2,8 +2,9 @@ import { Checkbox, Dropdown } from "semantic-ui-react";
 import { $enum } from "ts-enum-util";
 
 import Flex from "@commonComponents/Flex";
+import { useFilterFormContext } from "@components/Dashboard/context";
 import { getHeatMapLabelFromHeatmapModeEnum } from "@components/FlightsMap/utils";
-import { HeatmapMode } from "@models/analytics/enums";
+import { HeatmapMode, TimeResolution } from "@models/analytics/enums";
 import { HeatDomains } from "@models/analytics/types";
 
 import GradientBar from "./GradientBar";
@@ -24,10 +25,11 @@ interface LegendOverlayProps {
     onToggleShowFlows: (value: boolean) => void;
 }
 
-const HEATMAP_OPTIONS = $enum(HeatmapMode).map((value) => ({
-    text: getHeatMapLabelFromHeatmapModeEnum(value),
-    value
-}));
+const HEATMAP_OPTIONS = (timeResolution: TimeResolution) =>
+    $enum(HeatmapMode).map((value) => ({
+        text: getHeatMapLabelFromHeatmapModeEnum(value, timeResolution),
+        value
+    }));
 
 export default function LegendOverlay({
     heatmapMode,
@@ -39,6 +41,8 @@ export default function LegendOverlay({
     topFlightsCount,
     onToggleShowFlows
 }: LegendOverlayProps) {
+    const formData = useFilterFormContext();
+
     return (
         <Flex column rowGap="8px" className={styles.container}>
             <div className={styles.title}>Тепловая карта</div>
@@ -46,7 +50,7 @@ export default function LegendOverlay({
             <Dropdown
                 className={styles.dropdown}
                 selection
-                options={HEATMAP_OPTIONS}
+                options={HEATMAP_OPTIONS(formData.resolution)}
                 value={heatmapMode}
                 onChange={(_, { value }) => onChangeHeatmapMode(value as HeatmapMode)}
             />

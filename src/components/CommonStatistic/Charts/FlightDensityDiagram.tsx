@@ -4,18 +4,23 @@ import { ResponsiveContainer, Tooltip, Treemap } from "recharts";
 
 import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoading";
 import chartStyles from "@components/CommonStatistic/Charts/styles/Chart.module.scss";
+import { useFilterFormContext } from "@components/Dashboard/context";
+import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
 import { useGetDensityByRegionQuery } from "@store/analytics/api";
 import { useGetRegionsQuery } from "@store/regions/api";
 
 import styles from "./styles/FlightDensityDiagram.module.scss";
 
 export default function FlightDensityDiagram() {
+    const formData = useFilterFormContext();
+
     const {
         data: densityByRegions,
         isLoading: isDensityByRegionsLoading,
+        isFetching: isDensityByRegionsFetching,
         isError: isDensityByRegionsError,
         refetch: refetchDensityByRegions
-    } = useGetDensityByRegionQuery(undefined);
+    } = useGetDensityByRegionQuery(formData);
 
     const { data: regions } = useGetRegionsQuery();
 
@@ -30,14 +35,14 @@ export default function FlightDensityDiagram() {
 
         return topRegionsArray.map(([regionId, flightsCount]) => ({
             name: regions?.[Number(regionId)]?.name || regionId,
-            size: flightsCount
+            size: Math.round(flightsCount * 100) / 100
         }));
     }, [densityByRegions, regions]);
 
     return (
         <ChartWithLoading
-            title={`Топ 10 регионов по интенсивности полетов ${densityByRegions?.partAreaKm ? ` (на ${densityByRegions.partAreaKm} км²)` : ""}`}
-            isLoading={isDensityByRegionsLoading}
+            title={`Топ 10 регионов по интенсивности полетов ${getTimeResolutionDescriptionFromEnum(formData.resolution)}${densityByRegions?.partAreaKm ? ` (на ${densityByRegions.partAreaKm} км²)` : ""}`}
+            isLoading={isDensityByRegionsLoading || isDensityByRegionsFetching}
             isError={isDensityByRegionsError}
             refetch={refetchDensityByRegions}
         >

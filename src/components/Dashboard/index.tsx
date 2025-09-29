@@ -1,11 +1,17 @@
-import { ReactNode, useCallback, useMemo } from "react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
 
+import { FormikProvider, useFormik } from "formik";
+import { DateTime } from "luxon";
 import { Loader, Tab, TabPane } from "semantic-ui-react";
 
 import Flex from "@commonComponents/Flex";
 import LoadingErrorBlock from "@commonComponents/LoadingErrorBlock/LoadingErrorBlock";
 import CommonStatistic from "@components/CommonStatistic";
+import { FilterFormContext } from "@components/Dashboard/context";
+import Filters from "@components/Dashboard/Filters";
 import FlightsMapWrapper from "@components/FlightsMap/FlightsMapWrapper";
+import { TimeResolution } from "@models/analytics/enums";
+import { FormData } from "@models/filters/types";
 import { Region } from "@models/regions/types";
 import { useGetRegionsQuery } from "@store/regions/api";
 
@@ -13,6 +19,17 @@ import styles from "./styles/Dashboard.module.scss";
 
 export default function Dashboard() {
     const { data: regions, isLoading: isRegionsLoading, isError: isRegionsError, refetch: refetchRegions } = useGetRegionsQuery();
+
+    const [formData, setFormData] = useState<FormData>({
+        startDate: DateTime.now().startOf("year").toISODate(),
+        endDate: DateTime.now().toISODate(),
+        resolution: TimeResolution.MONTH
+    });
+
+    const formik = useFormik<FormData>({
+        onSubmit: setFormData,
+        initialValues: formData
+    });
 
     const withRegionsLoader = useCallback(
         (child: ReactNode) => {
@@ -56,5 +73,14 @@ export default function Dashboard() {
         [regions, withRegionsLoader]
     );
 
-    return <Tab className={styles.container} panes={panes} />;
+    return (
+        <FilterFormContext.Provider value={formData}>
+            <Flex column width100 height100>
+                <FormikProvider value={formik}>
+                    <Filters />
+                </FormikProvider>
+                <Tab className={styles.container} panes={panes} />
+            </Flex>
+        </FilterFormContext.Provider>
+    );
 }
