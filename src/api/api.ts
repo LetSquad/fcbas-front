@@ -2,6 +2,7 @@ import { BaseQueryFn } from "@reduxjs/toolkit/query/react";
 import axiosObj, { AxiosError, AxiosRequestConfig } from "axios";
 import MockAdapter from "axios-mock-adapter";
 
+import { keycloak } from "@coreUtils/keycloak";
 import { ErrorResponse } from "@models/api/types";
 
 const normalAxios = axiosObj.create();
@@ -36,7 +37,10 @@ export const axiosBaseQuery =
                 method,
                 data,
                 params,
-                headers
+                headers: {
+                    ...headers,
+                    Authorization: `Bearer ${keycloak.token}`
+                }
             });
 
             return { data: result.data };
