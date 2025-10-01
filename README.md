@@ -30,6 +30,18 @@
 
 [![Свежий релиз](https://img.shields.io/github/v/release/IvanSavoskin/lets-journey-web-app?label=%D1%81%D0%B2%D0%B5%D0%B6%D0%B8%D0%B9%20%D1%80%D0%B5%D0%BB%D0%B8%D0%B7&logo=github&style=for-the-badge)][1]
 
+## Учетные записи для тестирования
+
+### Администратор
+Email: admin
+
+Password: pass
+
+### Оператор
+Email: operator
+
+Password: pass
+
 ## Предустановки
 1. Скачай [свежий релиз][1] либо весь репозиторий
 2. Установите Node.js (требуемая версия в [package.json](./package.json))

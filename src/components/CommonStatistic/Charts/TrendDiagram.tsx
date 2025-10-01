@@ -5,12 +5,22 @@ import { Bar, BarChart, CartesianGrid, LabelList, ResponsiveContainer, Tooltip, 
 import { Props } from "recharts/types/component/Label";
 
 import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoading";
+import { useFilterFormContext } from "@components/Dashboard/context";
+import { TimeResolution } from "@models/analytics/enums";
 import { useGetTrendQuery } from "@store/analytics/api";
 
 import chartStyles from "./styles/Chart.module.scss";
 
 export default function TrendDiagram() {
-    const { data: trend, isLoading: isTrendLoading, isError: isTrendError, refetch: refetchTrend } = useGetTrendQuery(undefined);
+    const formData = useFilterFormContext();
+
+    const {
+        data: trend,
+        isLoading: isTrendLoading,
+        isFetching: isTrendFetching,
+        isError: isTrendError,
+        refetch: refetchTrend
+    } = useGetTrendQuery({ startDate: formData.startDate, endDate: formData.endDate });
 
     const trendDataset = useMemo(
         () =>
@@ -42,8 +52,17 @@ export default function TrendDiagram() {
         );
     }, []);
 
+    if (formData.resolution !== TimeResolution.MONTH) {
+        return null;
+    }
+
     return (
-        <ChartWithLoading title="Динамика полетов по месяцам" isLoading={isTrendLoading} isError={isTrendError} refetch={refetchTrend}>
+        <ChartWithLoading
+            title="Динамика полетов (по месяцам)"
+            isLoading={isTrendLoading || isTrendFetching}
+            isError={isTrendError}
+            refetch={refetchTrend}
+        >
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={trendDataset} className={chartStyles.chart}>
                     <CartesianGrid strokeDasharray="2 5" />

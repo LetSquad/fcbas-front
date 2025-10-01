@@ -30,6 +30,17 @@
     background-color: variables.$background-color !important;
     transition: top 0.4s ease-out, background-color 0.4s ease-out;
   }
+
+  &-visible {
+    box-shadow: variables.$primary-box-shadow !important;
+    top: 0 !important;
+    transition: top 0.4s ease-out, background-color 0.4s ease-out;
+  }
+
+  &-hidden {
+    top: -130px !important;
+    transition: top 0.4s ease-out, background-color 0.4s ease-out;
+  }
 }
 
 .sidebar,

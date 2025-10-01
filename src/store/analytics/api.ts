@@ -48,10 +48,10 @@ export const analyticsApi = createApi({
     baseQuery: axiosBaseQuery(),
     endpoints: (build) => ({
         getTrend: build.query<Trend, AnalyticsBaseQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.trend(), queryParams })
+            query: (queryParams) => ({ url: apiUrls.trend(), params: queryParams })
         }),
         getTrendByRegion: build.query<TrendByRegionMap, AnalyticsRegionsQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.trendByRegion(), queryParams }),
+            query: (queryParams) => ({ url: apiUrls.trendByRegion(), params: queryParams }),
             transformResponse: (response: TrendByRegion) => {
                 const map = new Map<number, TrendPeriod[]>();
 
@@ -68,10 +68,10 @@ export const analyticsApi = createApi({
             }
         }),
         getTimeDistribution: build.query<TimeDistribution, AnalyticsBaseQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.timeDistribution(), queryParams })
+            query: (queryParams) => ({ url: apiUrls.timeDistribution(), params: queryParams })
         }),
         getTimeDistributionByRegion: build.query<TimeDistributionByRegionMap, AnalyticsRegionsQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.timeDistributionByRegion(), queryParams }),
+            query: (queryParams) => ({ url: apiUrls.timeDistributionByRegion(), params: queryParams }),
             transformResponse: (response: TimeDistributionByRegion) => {
                 const map = new Map<number, TimeDistributionInfo>();
 
@@ -87,10 +87,10 @@ export const analyticsApi = createApi({
             }
         }),
         getMaxCount: build.query<MaxCount, AnalyticsResolutionQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.maxCount(), queryParams })
+            query: (queryParams) => ({ url: apiUrls.maxCount(), params: queryParams })
         }),
         getMaxCountByRegion: build.query<MaxCountByRegionMap, AnalyticsRegionsResolutionQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.maxCountByRegion(), queryParams }),
+            query: (queryParams) => ({ url: apiUrls.maxCountByRegion(), params: queryParams }),
             transformResponse: (response: MaxCountByRegion) => {
                 const map = new Map<number, MaxCountInfo>();
 
@@ -107,7 +107,7 @@ export const analyticsApi = createApi({
             }
         }),
         getEmptyDaysByRegion: build.query<EmptyDaysByRegionMap, AnalyticsRegionsQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.emptyDaysByRegion(), queryParams }),
+            query: (queryParams) => ({ url: apiUrls.emptyDaysByRegion(), params: queryParams }),
             transformResponse: (response: EmptyDaysByRegion) => {
                 const map = new Map<number, number>();
 
@@ -123,7 +123,7 @@ export const analyticsApi = createApi({
             }
         }),
         getDensityByRegion: build.query<DensityByRegionMap, AnalyticsDensityResolutionQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.densityByRegion(), queryParams }),
+            query: (queryParams) => ({ url: apiUrls.densityByRegion(), params: queryParams }),
             transformResponse: (response: DensityByRegion) => {
                 const map = new Map<number, number>();
 
@@ -140,10 +140,10 @@ export const analyticsApi = createApi({
             }
         }),
         getCount: build.query<Count, AnalyticsBaseQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.count(), queryParams })
+            query: (queryParams) => ({ url: apiUrls.count(), params: queryParams })
         }),
         getCountByRegion: build.query<CountByRegionMap, AnalyticsRegionsQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.countByRegion(), queryParams }),
+            query: (queryParams) => ({ url: apiUrls.countByRegion(), params: queryParams }),
             transformResponse: (response: CountByRegion) => {
                 const map = new Map<number, number>();
 
@@ -159,10 +159,10 @@ export const analyticsApi = createApi({
             }
         }),
         getAverageDuration: build.query<AverageDuration, AnalyticsBaseQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.averageDuration(), queryParams })
+            query: (queryParams) => ({ url: apiUrls.averageDuration(), params: queryParams })
         }),
         getAverageDurationByRegion: build.query<AverageDurationByRegionMap, AnalyticsRegionsQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.averageDurationByRegion(), queryParams }),
+            query: (queryParams) => ({ url: apiUrls.averageDurationByRegion(), params: queryParams }),
             transformResponse: (response: AverageDurationByRegion) => {
                 const map = new Map<number, number>();
 
@@ -178,10 +178,10 @@ export const analyticsApi = createApi({
             }
         }),
         getAverageCount: build.query<AverageCount, AnalyticsResolutionQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.averageCount(), queryParams })
+            query: (queryParams) => ({ url: apiUrls.averageCount(), params: queryParams })
         }),
         getAverageCountByRegion: build.query<AverageCountByRegionMap, AnalyticsRegionsResolutionQueryParams | undefined>({
-            query: (queryParams) => ({ url: apiUrls.averageCountByRegion(), queryParams }),
+            query: (queryParams) => ({ url: apiUrls.averageCountByRegion(), params: queryParams }),
             transformResponse: (response: AverageCountByRegion) => {
                 const map = new Map<number, AverageCountInfo>();
 
