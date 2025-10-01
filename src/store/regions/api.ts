@@ -23,8 +23,21 @@ export const regionsApi = createApi({
 
                 return regions;
             }
+        }),
+        uploadRegionsShape: build.query<void, File>({
+            query: (file) => {
+                const formData = new FormData();
+                formData.append("zip", file);
+
+                return {
+                    url: apiUrls.regionShape(),
+                    method: "POST",
+                    data: formData,
+                    headers: { "Content-Disposition": file.name, "Content-Type": "multipart/form-data" }
+                };
+            }
         })
     })
 });
 
-export const { useGetRegionsQuery } = regionsApi;
+export const { useGetRegionsQuery, useLazyUploadRegionsShapeQuery } = regionsApi;

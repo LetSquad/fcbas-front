@@ -10,5 +10,6 @@ export enum HeatmapMode {
     AVERAGE_COUNT = "averageCount",
     MEDIAN_COUNT = "medianCount",
     EMPTY_DAYS_COUNT = "emptyDaysCount",
-    DENSITY = "density"
+    DENSITY = "density",
+    MAX_COUNT = "maxCount"
 }

@@ -1,9 +1,9 @@
 .block {
   border: #0f0f10 solid 2px;
-  height: 80px;
-  min-width: 335px;
+  height: 100px;
+  min-width: 220px;
   padding: 10px;
-  width: calc(25% - 10px);
+  width: calc(20% - 8px);
 }
 
 .title {
@@ -14,4 +14,5 @@
 .value {
   font-size: 38px;
   font-weight: 700;
+  white-space: pre-line;
 }

@@ -1,10 +1,15 @@
 const externalUrl = process.env.EXTERNAL_URL || "https://localhost:8443";
 const baseUrl = `${externalUrl}/api`;
 const regionsUrl = `${baseUrl}/region`;
+const flightUrl = `${baseUrl}/flight`;
+const reportUrl = `${baseUrl}/report`;
 const flightAnalyticsUrl = `${baseUrl}/analytics/flight`;
 
 const apiUrls = {
     regions: () => regionsUrl,
+    regionShape: () => `${regionsUrl}/shape`,
+    flightData: () => `${flightUrl}/data`,
+    reportFlights: () => `${reportUrl}/flights`,
     trend: () => `${flightAnalyticsUrl}/trend`,
     trendByRegion: () => `${flightAnalyticsUrl}/trend/by-region`,
     timeDistribution: () => `${flightAnalyticsUrl}/time-distribution`,

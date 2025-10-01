@@ -13,7 +13,7 @@ export default function AverageDurationBlock() {
         isFetching: isAverageDurationFetching,
         isError: isAverageDurationError,
         refetch: refetchAverageDuration
-    } = useGetAverageDurationQuery({ startDate: formData.startDate, endDate: formData.endDate });
+    } = useGetAverageDurationQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
     return (
         <BlockWithLoading

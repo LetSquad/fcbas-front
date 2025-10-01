@@ -21,6 +21,8 @@ import {
     useGetCountQuery,
     useGetDensityByRegionQuery,
     useGetEmptyDaysByRegionQuery,
+    useGetMaxCountByRegionQuery,
+    useGetMaxCountQuery,
     useGetTimeDistributionQuery,
     useGetTrendQuery
 } from "@store/analytics/api";
@@ -41,34 +43,39 @@ export default function Filters() {
 
     const { isLoading: isCountByRegionsLoading, isFetching: isCountByRegionsFetching } = useGetCountByRegionQuery({
         startDate: formData.startDate,
-        endDate: formData.endDate
+        finishDate: formData.finishDate
     });
     const { isLoading: isAverageDurationByRegionsLoading, isFetching: isAverageDurationByRegionsFetching } =
-        useGetAverageDurationByRegionQuery({ startDate: formData.startDate, endDate: formData.endDate });
+        useGetAverageDurationByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
     const { isLoading: isAverageCountByRegionsLoading, isFetching: isAverageCountByRegionsFetching } =
         useGetAverageCountByRegionQuery(formData);
     const { isLoading: isEmptyDaysByRegionsLoading, isFetching: isEmptyDaysByRegionsFetching } = useGetEmptyDaysByRegionQuery({
         startDate: formData.startDate,
-        endDate: formData.endDate
+        finishDate: formData.finishDate
     });
-    const { isLoading: isDensityByRegionsLoading, isFetching: isDensityByRegionsFethcing } = useGetDensityByRegionQuery(formData);
+    const { isLoading: isDensityByRegionsLoading, isFetching: isDensityByRegionsFetching } = useGetDensityByRegionQuery({
+        startDate: formData.startDate,
+        finishDate: formData.finishDate
+    });
     const { isLoading: isAverageCountLoading, isFetching: isAverageCountFetching } = useGetAverageCountQuery(formData);
     const { isLoading: isAverageDurationLoading, isFetching: isAverageDurationFetching } = useGetAverageDurationQuery({
         startDate: formData.startDate,
-        endDate: formData.endDate
+        finishDate: formData.finishDate
     });
     const { isLoading: isCountLoading, isFetching: isCountFetching } = useGetCountQuery({
         startDate: formData.startDate,
-        endDate: formData.endDate
+        finishDate: formData.finishDate
     });
     const { isLoading: isTimeDistributionsLoading, isFetching: isTimeDistributionsFetching } = useGetTimeDistributionQuery({
         startDate: formData.startDate,
-        endDate: formData.endDate
+        finishDate: formData.finishDate
     });
     const { isLoading: isTrendLoading, isFetching: isTrendFetching } = useGetTrendQuery({
         startDate: formData.startDate,
-        endDate: formData.endDate
+        finishDate: formData.finishDate
     });
+    const { isLoading: isMaxCountLoading, isFetching: isMaxCountFetching } = useGetMaxCountQuery(formData);
+    const { isLoading: isMaxCountByRegionsLoading, isFetching: isMaxCountByRegionsFetching } = useGetMaxCountByRegionQuery(formData);
 
     const isLoading =
         isCountByRegionsLoading ||
@@ -80,7 +87,7 @@ export default function Filters() {
         isEmptyDaysByRegionsLoading ||
         isEmptyDaysByRegionsFetching ||
         isDensityByRegionsLoading ||
-        isDensityByRegionsFethcing ||
+        isDensityByRegionsFetching ||
         isAverageCountLoading ||
         isAverageCountFetching ||
         isAverageDurationLoading ||
@@ -90,15 +97,18 @@ export default function Filters() {
         isTimeDistributionsLoading ||
         isTimeDistributionsFetching ||
         isTrendLoading ||
-        isTrendFetching;
+        isTrendFetching ||
+        isMaxCountLoading ||
+        isMaxCountFetching ||
+        isMaxCountByRegionsLoading ||
+        isMaxCountByRegionsFetching;
 
     const interval = useMemo(
-        () => Interval.fromDateTimes(DateTime.fromISO(formik.values.startDate), DateTime.fromISO(formik.values.endDate)),
-        [formik.values.endDate, formik.values.startDate]
+        () => Interval.fromDateTimes(DateTime.fromISO(formik.values.startDate), DateTime.fromISO(formik.values.finishDate)),
+        [formik.values.finishDate, formik.values.startDate]
     );
 
     useEffect(() => {
-        console.log(interval);
         if ((interval.toDuration("days").toObject().days as number) < 2) {
             formik.setFieldValue("resolution", TimeResolution.HOUR);
             return;
@@ -113,8 +123,19 @@ export default function Filters() {
     return (
         <Form>
             <Flex columnGap="10px" alignItemsEnd className={styles.container}>
-                <FormField name="startDate" label="Начало периода" type={FormFieldType.DATEPICKER} />
-                <FormField name="endDate" label="Конец периода" maxDate={new Date()} type={FormFieldType.DATEPICKER} />
+                <FormField
+                    name="startDate"
+                    label="Начало периода"
+                    type={FormFieldType.DATEPICKER}
+                    maxDate={formik.values.finishDate ? DateTime.fromISO(formik.values.finishDate).toJSDate() : undefined}
+                />
+                <FormField
+                    name="finishDate"
+                    label="Конец периода"
+                    minDate={formik.values.startDate ? DateTime.fromISO(formik.values.startDate).toJSDate() : undefined}
+                    maxDate={new Date()}
+                    type={FormFieldType.DATEPICKER}
+                />
                 <FormField
                     name="resolution"
                     label="Промежуток измерения"

@@ -1,9 +1,12 @@
-import { KeyboardEvent, MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { KeyboardEvent, MouseEvent, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { Duration } from "luxon";
 import { Dimmer, Loader } from "semantic-ui-react";
 
+import Flex from "@commonComponents/Flex";
 import LoadingErrorBlock from "@commonComponents/LoadingErrorBlock/LoadingErrorBlock";
 import { useFilterFormContext } from "@components/Dashboard/context";
+import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
 import Overlays from "@components/FlightsMap/Overlays";
 import {
     bundledControlPoint,
@@ -24,7 +27,8 @@ import {
     useGetCountByRegionQuery,
     useGetDensityByRegionQuery,
     useGetEmptyDaysByRegionQuery,
-    useGetFlightsBetweenRegionQuery
+    useGetFlightsBetweenRegionQuery,
+    useGetMaxCountByRegionQuery
 } from "@store/analytics/api";
 
 import styles from "./styles/FlightsMap.module.scss";
@@ -62,7 +66,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         isFetching: isCountByRegionsFetching,
         isError: isCountByRegionsError,
         refetch: refetchCountByRegions
-    } = useGetCountByRegionQuery({ startDate: formData.startDate, endDate: formData.endDate });
+    } = useGetCountByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
     const {
         data: averageDurationByRegions,
@@ -70,7 +74,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         isFetching: isAverageDurationByRegionsFetching,
         isError: isAverageDurationByRegionsError,
         refetch: refetchAverageDurationByRegions
-    } = useGetAverageDurationByRegionQuery({ startDate: formData.startDate, endDate: formData.endDate });
+    } = useGetAverageDurationByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
     const {
         data: averageCountByRegions,
@@ -86,7 +90,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         isFetching: isEmptyDaysByRegionsFetching,
         isError: isEmptyDaysByRegionsError,
         refetch: refetchEmptyDaysByRegions
-    } = useGetEmptyDaysByRegionQuery({ startDate: formData.startDate, endDate: formData.endDate });
+    } = useGetEmptyDaysByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
     const {
         data: densityByRegions,
@@ -94,7 +98,15 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         isFetching: isDensityByRegionsFetching,
         isError: isDensityByRegionsError,
         refetch: refetchDensityByRegions
-    } = useGetDensityByRegionQuery(formData);
+    } = useGetDensityByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
+
+    const {
+        data: maxCountByRegions,
+        isLoading: isMaxCountByRegionsLoading,
+        isFetching: isMaxCountByRegionsFetching,
+        isError: isMaxCountByRegionsError,
+        refetch: refetchMaxCountByRegions
+    } = useGetMaxCountByRegionQuery(formData);
 
     const {
         data: flightsBetweenRegion,
@@ -113,11 +125,11 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
     const [selectedRegionId, setSelectedRegionId] = useState<number | null>(null);
     const [heatmapMode, setHeatmapMode] = useState<HeatmapMode>(HeatmapMode.COUNT);
     const [showFlows, setShowFlows] = useState<boolean>(true);
-    const [tooltip, setTooltip] = useState<{ x: number; y: number; visible: boolean; text: string }>({
+    const [tooltip, setTooltip] = useState<{ x: number; y: number; visible: boolean; text: ReactNode }>({
         x: 0,
         y: 0,
         visible: false,
-        text: ""
+        text: null
     });
 
     const animationFrameRef = useRef<number | null>(null);
@@ -137,7 +149,14 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
     const intraByRegion = useMemo(() => {
         const map = new Map<number, HeatMapInfo>();
 
-        if (!countByRegions || !averageDurationByRegions || !averageCountByRegions || !emptyDaysByRegions || !densityByRegions) {
+        if (
+            !countByRegions ||
+            !averageDurationByRegions ||
+            !averageCountByRegions ||
+            !emptyDaysByRegions ||
+            !densityByRegions ||
+            !maxCountByRegions
+        ) {
             return map;
         }
 
@@ -148,12 +167,13 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                 averageFlightCount: averageCountByRegions.regionsMap[region.id].averageFlightsCount || 0,
                 medianFlightCount: averageCountByRegions.regionsMap[region.id].medianFlightsCount || 0,
                 emptyDays: emptyDaysByRegions.regionsMap[region.id] || 0,
-                density: densityByRegions.regionsMap[region.id] || 0
+                density: densityByRegions.regionsMap[region.id] || 0,
+                maxCount: maxCountByRegions.regionsMap[region.id].maxFlightsCount || 0
             });
         }
 
         return map;
-    }, [averageCountByRegions, averageDurationByRegions, countByRegions, densityByRegions, emptyDaysByRegions, regions]);
+    }, [averageCountByRegions, averageDurationByRegions, countByRegions, densityByRegions, emptyDaysByRegions, maxCountByRegions, regions]);
 
     const heatDomains = useMemo(() => {
         let minCount = Number.POSITIVE_INFINITY;
@@ -168,60 +188,70 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         let maxEmptyDaysCount = 0;
         let minDensity = Number.POSITIVE_INFINITY;
         let maxDensity = 0;
+        let minMaxCount = Number.POSITIVE_INFINITY;
+        let maxMaxCount = 0;
 
         for (const [, region] of Object.entries(regions)) {
-            const regionHetMapInfo = intraByRegion.get(region.id);
+            const regionHeatMapInfo = intraByRegion.get(region.id);
 
-            if (!regionHetMapInfo) {
+            if (!regionHeatMapInfo) {
                 continue;
             }
 
-            if (regionHetMapInfo.flightCount < minCount) {
-                minCount = regionHetMapInfo.flightCount;
+            if (regionHeatMapInfo.flightCount < minCount) {
+                minCount = regionHeatMapInfo.flightCount;
             }
 
-            if (regionHetMapInfo.flightCount > maxCount) {
-                maxCount = regionHetMapInfo.flightCount;
+            if (regionHeatMapInfo.flightCount > maxCount) {
+                maxCount = regionHeatMapInfo.flightCount;
             }
 
-            if (regionHetMapInfo.averageFlightDurationSeconds < minAverageDuration) {
-                minAverageDuration = regionHetMapInfo.averageFlightDurationSeconds;
+            if (regionHeatMapInfo.averageFlightDurationSeconds < minAverageDuration) {
+                minAverageDuration = regionHeatMapInfo.averageFlightDurationSeconds;
             }
 
-            if (regionHetMapInfo.averageFlightDurationSeconds > maxAverageDuration) {
-                maxAverageDuration = regionHetMapInfo.averageFlightDurationSeconds;
+            if (regionHeatMapInfo.averageFlightDurationSeconds > maxAverageDuration) {
+                maxAverageDuration = regionHeatMapInfo.averageFlightDurationSeconds;
             }
 
-            if (regionHetMapInfo.averageFlightCount < minAverageCount) {
-                minAverageCount = regionHetMapInfo.averageFlightCount;
+            if (regionHeatMapInfo.averageFlightCount < minAverageCount) {
+                minAverageCount = regionHeatMapInfo.averageFlightCount;
             }
 
-            if (regionHetMapInfo.averageFlightCount > maxAverageCount) {
-                maxAverageCount = regionHetMapInfo.averageFlightCount;
+            if (regionHeatMapInfo.averageFlightCount > maxAverageCount) {
+                maxAverageCount = regionHeatMapInfo.averageFlightCount;
             }
 
-            if (regionHetMapInfo.medianFlightCount < minMedianCount) {
-                minMedianCount = regionHetMapInfo.medianFlightCount;
+            if (regionHeatMapInfo.medianFlightCount < minMedianCount) {
+                minMedianCount = regionHeatMapInfo.medianFlightCount;
             }
 
-            if (regionHetMapInfo.medianFlightCount > maxMedianCount) {
-                maxMedianCount = regionHetMapInfo.medianFlightCount;
+            if (regionHeatMapInfo.medianFlightCount > maxMedianCount) {
+                maxMedianCount = regionHeatMapInfo.medianFlightCount;
             }
 
-            if (regionHetMapInfo.emptyDays < minEmptyDaysCount) {
-                minEmptyDaysCount = regionHetMapInfo.emptyDays;
+            if (regionHeatMapInfo.emptyDays < minEmptyDaysCount) {
+                minEmptyDaysCount = regionHeatMapInfo.emptyDays;
             }
 
-            if (regionHetMapInfo.emptyDays > maxEmptyDaysCount) {
-                maxEmptyDaysCount = regionHetMapInfo.emptyDays;
+            if (regionHeatMapInfo.emptyDays > maxEmptyDaysCount) {
+                maxEmptyDaysCount = regionHeatMapInfo.emptyDays;
             }
 
-            if (regionHetMapInfo.density < minDensity) {
-                minDensity = regionHetMapInfo.density;
+            if (regionHeatMapInfo.density < minDensity) {
+                minDensity = regionHeatMapInfo.density;
             }
 
-            if (regionHetMapInfo.density > maxDensity) {
-                maxDensity = Math.round(regionHetMapInfo.density * 100) / 100;
+            if (regionHeatMapInfo.density > maxDensity) {
+                maxDensity = Math.round(regionHeatMapInfo.density * 100) / 100;
+            }
+
+            if (regionHeatMapInfo.maxCount < minMaxCount) {
+                minMaxCount = regionHeatMapInfo.maxCount;
+            }
+
+            if (regionHeatMapInfo.maxCount > maxMaxCount) {
+                maxMaxCount = Math.round(regionHeatMapInfo.maxCount * 100) / 100;
             }
         }
 
@@ -249,13 +279,18 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             minDensity = 0;
         }
 
+        if (minMaxCount === Number.POSITIVE_INFINITY) {
+            minMaxCount = 0;
+        }
+
         return {
             [HeatmapMode.COUNT]: { min: minCount, max: maxCount },
             [HeatmapMode.AVERAGE_DURATION]: { min: minAverageDuration, max: maxAverageDuration },
             [HeatmapMode.AVERAGE_COUNT]: { min: minAverageCount, max: maxAverageCount },
             [HeatmapMode.MEDIAN_COUNT]: { min: minMedianCount, max: maxMedianCount },
             [HeatmapMode.EMPTY_DAYS_COUNT]: { min: minEmptyDaysCount, max: maxEmptyDaysCount },
-            [HeatmapMode.DENSITY]: { min: minDensity, max: maxDensity }
+            [HeatmapMode.DENSITY]: { min: minDensity, max: maxDensity },
+            [HeatmapMode.MAX_COUNT]: { min: minMaxCount, max: maxMaxCount }
         };
     }, [regions, intraByRegion]);
 
@@ -321,6 +356,15 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
 
                     return (heatMapInfo.density - min) / (max - min);
                 }
+                case HeatmapMode.MAX_COUNT: {
+                    const { min, max } = heatDomains[HeatmapMode.MAX_COUNT];
+
+                    if (max <= min) {
+                        return 0;
+                    }
+
+                    return (heatMapInfo.maxCount - min) / (max - min);
+                }
                 default: {
                     return 0;
                 }
@@ -344,7 +388,6 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             }
 
             return "#b54a4a";
-            // return "#c0e0fd";
         },
         [getHeatValue]
     );
@@ -566,6 +609,61 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
     const selectedRegionIntra =
         selectedRegionId === null ? undefined : intraByRegion.get(selectedRegionId) || { flightCount: 0, averageFlightDurationSeconds: 0 };
 
+    const getTooltipContent = useCallback(
+        (regionId: number) => {
+            const name = regions[regionId]?.name || `Регион ${regionId}`;
+
+            const heatMapInfo = intraByRegion.get(regionId);
+            if (!heatMapInfo) {
+                return name;
+            }
+
+            let content;
+
+            switch (heatmapMode) {
+                case HeatmapMode.COUNT: {
+                    content = `Количество полетов: ${heatMapInfo.flightCount}`;
+                    break;
+                }
+                case HeatmapMode.AVERAGE_DURATION: {
+                    content = `Средняя длительность полета: ${Duration.fromObject({ seconds: heatMapInfo.averageFlightDurationSeconds }).toFormat("hh:mm:ss")}`;
+                    break;
+                }
+                case HeatmapMode.AVERAGE_COUNT: {
+                    content = `Среднее количество полетов (${getTimeResolutionDescriptionFromEnum(formData.resolution)}): ${heatMapInfo.averageFlightCount}`;
+                    break;
+                }
+                case HeatmapMode.MEDIAN_COUNT: {
+                    content = `Медианное количество полетов (${getTimeResolutionDescriptionFromEnum(formData.resolution)}): ${heatMapInfo.medianFlightCount}`;
+                    break;
+                }
+                case HeatmapMode.EMPTY_DAYS_COUNT: {
+                    content = `Количество дней без полетов: ${heatMapInfo.emptyDays}`;
+                    break;
+                }
+                case HeatmapMode.DENSITY: {
+                    content = `Плотность полетов: ${(heatMapInfo.density * 100) / 100}`;
+                    break;
+                }
+                case HeatmapMode.MAX_COUNT: {
+                    content = `Максимальное количество полетов: ${(heatMapInfo.density * 100) / 100}`;
+                    break;
+                }
+                default: {
+                    return name;
+                }
+            }
+
+            return (
+                <Flex column rowGap="5px">
+                    <span>{name}</span>
+                    {content && <span>{content}</span>}
+                </Flex>
+            );
+        },
+        [formData.resolution, heatmapMode, intraByRegion, regions]
+    );
+
     const handleSvgMouseMove = useCallback(
         (event: MouseEvent<SVGSVGElement>) => {
             const target = event.target as SVGElement | null;
@@ -573,7 +671,6 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
 
             if (regionIdAttr) {
                 const id = Number(regionIdAttr);
-                const name = regions[id]?.name || `Регион ${id}`;
                 // позиционирование относительно контейнера
                 const containerRect = (event.currentTarget.parentElement as HTMLDivElement).getBoundingClientRect();
 
@@ -581,13 +678,13 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                     x: event.clientX - containerRect.left + 12,
                     y: event.clientY - containerRect.top + 12,
                     visible: true,
-                    text: name
+                    text: getTooltipContent(id)
                 });
             } else {
                 setTooltip((_tooltip) => ({ ..._tooltip, visible: false }));
             }
         },
-        [regions]
+        [getTooltipContent]
     );
 
     const handleSvgMouseLeave = useCallback(() => {
@@ -614,7 +711,6 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                     tabIndex={0}
                     id={`region-${region.id}`}
                     stroke={isSelected ? "#ffc96b" : "#ffffff"}
-                    // stroke={isSelected ? "#FFE0B3" : "#ff8800"}
                     strokeWidth={isSelected ? 1.3 : 0.3}
                     aria-pressed={isSelected}
                     aria-label={region.name}
@@ -679,7 +775,8 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         isFlightsBetweenRegionError ||
         isAverageCountByRegionsError ||
         isEmptyDaysByRegionsError ||
-        isDensityByRegionsError
+        isDensityByRegionsError ||
+        isMaxCountByRegionsError
     ) {
         return (
             <LoadingErrorBlock
@@ -697,6 +794,8 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                         refetchEmptyDaysByRegions();
                     } else if (isDensityByRegionsError) {
                         refetchDensityByRegions();
+                    } else if (isMaxCountByRegionsError) {
+                        refetchMaxCountByRegions();
                     }
                 }}
             />
@@ -726,7 +825,9 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                 isEmptyDaysByRegionsLoading ||
                 isEmptyDaysByRegionsFetching ||
                 isDensityByRegionsLoading ||
-                isDensityByRegionsFetching) && (
+                isDensityByRegionsFetching ||
+                isMaxCountByRegionsLoading ||
+                isMaxCountByRegionsFetching) && (
                 <Dimmer active>
                     <Loader />
                 </Dimmer>
@@ -773,7 +874,8 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                 !isFlightsBetweenRegionLoading &&
                 !isAverageCountByRegionsLoading &&
                 !isEmptyDaysByRegionsLoading &&
-                !isDensityByRegionsLoading && (
+                !isDensityByRegionsLoading &&
+                !isMaxCountByRegionsLoading && (
                     <Overlays
                         // Легенда всегда показывается
                         selectionActive={selectedRegionId !== null}

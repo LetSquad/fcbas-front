@@ -1,0 +1,24 @@
+@use '@coreStyles/variables.module' as variables;
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.button {
+  height: 40px;
+  width: 40%;
+}
+
+.sub-title {
+  color: variables.$secondary-text-color;
+}
+
+.error {
+  color: variables.$negative-text-color;
+}

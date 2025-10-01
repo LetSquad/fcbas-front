@@ -5,14 +5,6 @@ $tabs-height: 43px;
 .container {
   height: 100%;
   width: 100%;
-
-  > div:first-child {
-    background: variables.$background-color !important;
-    height: $tabs-height;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
 }
 
 .tab {

@@ -18,7 +18,7 @@ export default function TopFlightsDiagram() {
         isFetching: isCountByRegionsFetching,
         isError: isCountByRegionsError,
         refetch: refetchCountByRegions
-    } = useGetCountByRegionQuery({ startDate: formData.startDate, endDate: formData.endDate });
+    } = useGetCountByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
     const { data: regions } = useGetRegionsQuery();
 

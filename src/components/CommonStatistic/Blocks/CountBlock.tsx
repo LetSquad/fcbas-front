@@ -11,7 +11,7 @@ export default function CountBlock() {
         isFetching: isCountFetching,
         refetch: refetchCount,
         isError: isCountError
-    } = useGetCountQuery({ startDate: formData.startDate, endDate: formData.endDate });
+    } = useGetCountQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
     return (
         <BlockWithLoading

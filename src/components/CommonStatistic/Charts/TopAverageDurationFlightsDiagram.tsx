@@ -20,7 +20,7 @@ export default function TopAverageDurationFlightsDiagram() {
         isFetching: isAverageDurationByRegionsFetching,
         isError: isAverageDurationByRegionsError,
         refetch: refetchAverageDurationByRegions
-    } = useGetAverageDurationByRegionQuery({ startDate: formData.startDate, endDate: formData.endDate });
+    } = useGetAverageDurationByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
     const { data: regions } = useGetRegionsQuery();
 

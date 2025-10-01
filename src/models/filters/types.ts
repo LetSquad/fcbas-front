@@ -2,6 +2,6 @@ import { TimeResolution } from "@models/analytics/enums";
 
 export interface FormData {
     startDate: string;
-    endDate: string;
+    finishDate: string;
     resolution: TimeResolution;
 }

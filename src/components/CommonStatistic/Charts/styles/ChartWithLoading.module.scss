@@ -1,10 +1,15 @@
 .block {
   height: 350px;
   width: calc(50% - 6px);
+
+  &-wide {
+    width: 100%;
+  }
 }
 
 .chart {
   height: 330px;
+  position: relative;
 }
 
 .title {
