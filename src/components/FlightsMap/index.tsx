@@ -609,7 +609,17 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
 
     const selectedRegionName = selectedRegionId === null ? undefined : regions[selectedRegionId]?.name || `Регион ${selectedRegionId}`;
     const selectedRegionIntra =
-        selectedRegionId === null ? undefined : intraByRegion.get(selectedRegionId) || { flightCount: 0, averageFlightDurationSeconds: 0 };
+        selectedRegionId === null
+            ? undefined
+            : intraByRegion.get(selectedRegionId) || {
+                  flightCount: 0,
+                  averageFlightDurationSeconds: 0,
+                  averageFlightCount: 0,
+                  medianFlightCount: 0,
+                  emptyDays: 0,
+                  density: 0,
+                  maxCount: 0
+              };
 
     const getTooltipContent = useCallback(
         (regionId: number) => {
@@ -882,8 +892,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                         // Легенда всегда показывается
                         selectionActive={selectedRegionId !== null}
                         selectedRegionName={selectedRegionName}
-                        selectedIntraCount={selectedRegionIntra?.flightCount || 0}
-                        selectedIntraAvgDurationSec={selectedRegionIntra?.averageFlightDurationSeconds || 0}
+                        selectedRegionStat={selectedRegionIntra}
                         heatmapMode={heatmapMode}
                         onChangeHeatmapMode={setHeatmapMode}
                         heatDomains={heatDomains}

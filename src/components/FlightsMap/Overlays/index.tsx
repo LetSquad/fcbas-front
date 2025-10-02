@@ -2,15 +2,14 @@ import Flex from "@commonComponents/Flex";
 import LegendOverlay from "@components/FlightsMap/Overlays/LegendOverlay";
 import RegionOverlay from "@components/FlightsMap/Overlays/RegionOverlay";
 import { HeatmapMode } from "@models/analytics/enums";
-import { HeatDomains } from "@models/analytics/types";
+import { HeatDomains, HeatMapInfo } from "@models/analytics/types";
 
 import styles from "./styles/Overlays.module.scss";
 
 interface OverlaysProps {
     selectionActive: boolean;
     selectedRegionName?: string;
-    selectedIntraCount?: number;
-    selectedIntraAvgDurationSec?: number;
+    selectedRegionStat?: HeatMapInfo;
 
     heatmapMode: HeatmapMode;
     onChangeHeatmapMode: (mode: HeatmapMode) => void;
@@ -26,8 +25,7 @@ interface OverlaysProps {
 export default function Overlays({
     selectionActive,
     selectedRegionName,
-    selectedIntraCount,
-    selectedIntraAvgDurationSec,
+    selectedRegionStat,
     heatmapMode,
     onChangeHeatmapMode,
     heatDomains,
@@ -53,8 +51,7 @@ export default function Overlays({
             <RegionOverlay
                 selectionActive={selectionActive}
                 selectedRegionName={selectedRegionName}
-                selectedIntraCount={selectedIntraCount}
-                selectedIntraAvgDurationSec={selectedIntraAvgDurationSec}
+                selectedRegionStat={selectedRegionStat}
             />
         </Flex>
     );

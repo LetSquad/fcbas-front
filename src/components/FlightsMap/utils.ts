@@ -120,19 +120,6 @@ export function lerpColor(fromHex: string, toHex: string, tRaw: number) {
     return `#${toHex2(r)}${toHex2(g)}${toHex2(b)}`;
 }
 
-export function secToHM(seconds: number) {
-    const s = Math.max(0, Math.floor(seconds || 0));
-
-    const h = Math.floor(s / 3600);
-    const m = Math.floor((s % 3600) / 60);
-
-    if (h > 0) {
-        return `${h}ч ${m}м`;
-    }
-
-    return `${m}м`;
-}
-
 export function parsePreparedSvgFromText(svgText: string) {
     const container = document.createElement("div");
     container.style.position = "absolute";

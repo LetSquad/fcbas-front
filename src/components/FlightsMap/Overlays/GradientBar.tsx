@@ -1,5 +1,6 @@
+import { Duration } from "luxon";
+
 import Flex from "@commonComponents/Flex";
-import { secToHM } from "@components/FlightsMap/utils";
 import { HeatmapMode } from "@models/analytics/enums";
 import { HeatDomains } from "@models/analytics/types";
 
@@ -18,7 +19,11 @@ export default function GradientBar({ heatmapMode, heatHighColor, heatLowColor, 
     return (
         <Flex alignItemsCenter columnGap="5px">
             <div className={styles.dataContainer}>
-                {heatmapMode === HeatmapMode.AVERAGE_DURATION ? <span>{secToHM(data.min)}</span> : <span>{data.min}</span>}
+                {heatmapMode === HeatmapMode.AVERAGE_DURATION ? (
+                    <span>{Duration.fromObject({ seconds: data.min }).toFormat("hh:mm:ss")}</span>
+                ) : (
+                    <span>{data.min}</span>
+                )}
             </div>
             <div
                 style={{
@@ -27,7 +32,11 @@ export default function GradientBar({ heatmapMode, heatHighColor, heatLowColor, 
                 className={styles.gradientBar}
             />
             <div className={styles.dataContainer}>
-                {heatmapMode === HeatmapMode.AVERAGE_DURATION ? <span>{secToHM(data.max)}</span> : <span>{data.max}</span>}
+                {heatmapMode === HeatmapMode.AVERAGE_DURATION ? (
+                    <span>{Duration.fromObject({ seconds: data.max }).toFormat("hh:mm:ss")}</span>
+                ) : (
+                    <span>{data.max}</span>
+                )}
             </div>
         </Flex>
     );
