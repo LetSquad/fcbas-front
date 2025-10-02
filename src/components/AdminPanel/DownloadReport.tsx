@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 
 import { FormikProvider, useFormik } from "formik";
 import { DateTime } from "luxon";
-import { Button, Dimmer, Form, Loader } from "semantic-ui-react";
+import { Button, Form } from "semantic-ui-react";
 
 import axios from "@api/api";
 import apiUrls from "@api/apiUrls";
@@ -68,11 +68,6 @@ export default function DownloadReport() {
 
     return (
         <Flex column rowGap="10px" className={styles.container}>
-            {isLoading && (
-                <Dimmer active>
-                    <Loader />
-                </Dimmer>
-            )}
             <Flex column rowGap="5px">
                 <span className={styles.title}>Скачивание отчета</span>
                 <span className={styles.subTitle}>Скачайте отчет о проведенных полетах</span>
@@ -93,7 +88,7 @@ export default function DownloadReport() {
                             maxDate={new Date()}
                             type={FormFieldType.DATEPICKER}
                         />
-                        <Button primary onClick={formik.submitForm} className={styles.button}>
+                        <Button primary onClick={formik.submitForm} className={styles.button} loading={isLoading}>
                             Скачать отчет
                         </Button>
                     </Flex>

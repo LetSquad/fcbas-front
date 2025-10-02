@@ -55,14 +55,7 @@ export default function Dashboard() {
             {
                 menuItem: "Карта",
                 render: () => (
-                    <TabPane className={styles.tab}>
-                        {withRegionsLoader(
-                            <FlightsMapWrapper
-                                regions={regions as Region[]}
-                                onRegionClick={(regionId) => console.log("region", regionId)}
-                            />
-                        )}
-                    </TabPane>
+                    <TabPane className={styles.tab}>{withRegionsLoader(<FlightsMapWrapper regions={regions as Region[]} />)}</TabPane>
                 )
             },
             {

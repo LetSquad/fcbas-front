@@ -21,17 +21,17 @@ export default function RegionOverlay({ selectionActive, selectedRegionName, sel
             <Flex column rowGap="6px">
                 <div>{`Полётов внутри региона: ${selectedRegionStat?.averageFlightCount || 0}`}</div>
 
-                <div>{`Среднее количество полетов: ${selectedRegionStat?.averageFlightCount || 0}`}</div>
+                <div>{`Среднее количество: ${selectedRegionStat?.averageFlightCount || 0}`}</div>
 
-                <div>{`Медианное количество полетов: ${selectedRegionStat?.medianFlightCount || 0}`}</div>
+                <div>{`Медианное количество: ${selectedRegionStat?.medianFlightCount || 0}`}</div>
 
-                <div>{`Максимально полетов: ${selectedRegionStat?.maxCount || 0}`}</div>
+                <div>{`Максимальное количество: ${selectedRegionStat?.maxCount || 0}`}</div>
 
                 <div>{`Средняя длительность: ${Duration.fromObject({ seconds: selectedRegionStat?.averageFlightDurationSeconds || 0 }).toFormat("hh:mm:ss")}`}</div>
 
                 <div>{`Дней без полетов: ${selectedRegionStat?.emptyDays || 0}`}</div>
 
-                <div>{`Интенсивность полетов: ${selectedRegionStat?.density || 0}`}</div>
+                <div>{`Интенсивность: ${selectedRegionStat?.density ? Math.round(selectedRegionStat.density * 100) / 100 : 0}`}</div>
             </Flex>
         </Flex>
     ) : null;

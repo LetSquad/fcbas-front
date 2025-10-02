@@ -241,7 +241,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             }
 
             if (regionHeatMapInfo.density < minDensity) {
-                minDensity = regionHeatMapInfo.density;
+                minDensity = Math.round(regionHeatMapInfo.density * 100) / 100;
             }
 
             if (regionHeatMapInfo.density > maxDensity) {
@@ -253,7 +253,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             }
 
             if (regionHeatMapInfo.maxCount > maxMaxCount) {
-                maxMaxCount = Math.round(regionHeatMapInfo.maxCount * 100) / 100;
+                maxMaxCount = regionHeatMapInfo.maxCount;
             }
         }
 
@@ -411,12 +411,6 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         }
     }, []);
 
-    const handleClearSelection = useCallback(() => {
-        if (selectedRegionId !== null) {
-            setSelectedRegionId(null);
-        }
-    }, [selectedRegionId]);
-
     const handleRegionClick = useCallback(
         (svgMouseEvent: MouseEvent<SVGSVGElement>) => {
             if (consumeDragFlag()) {
@@ -443,7 +437,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
     );
 
     const handleContainerKeyDown = useCallback(
-        (event: KeyboardEvent<HTMLDivElement>) => {
+        (event: KeyboardEvent) => {
             if (event.key === "Escape" && selectedRegionId !== null) {
                 event.preventDefault();
                 setSelectedRegionId(null);
@@ -781,6 +775,14 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         };
     }, [drawFrame, drawInterRegionFlow]);
 
+    useEffect(() => {
+        // @ts-ignore
+        globalThis.addEventListener("keydown", handleContainerKeyDown);
+
+        // @ts-ignore
+        return () => globalThis.removeEventListener("keydown", handleContainerKeyDown);
+    }, [handleContainerKeyDown]);
+
     if (
         isAverageDurationByRegionsError ||
         isCountByRegionsError ||
@@ -819,7 +821,6 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             className={styles.container}
             role="presentation"
             aria-label="Карта полётов: колесом мыши — масштабирование, перетаскиванием — панорамирование, клик — выбор линии"
-            onKeyDown={handleContainerKeyDown}
             ref={containerRef}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
@@ -856,12 +857,6 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                 onClick={handleRegionClick}
                 onMouseMove={handleSvgMouseMove}
                 onMouseLeave={handleSvgMouseLeave}
-                onKeyDown={(event) => {
-                    if (event.key === "Escape") {
-                        event.preventDefault();
-                        handleClearSelection();
-                    }
-                }}
             >
                 {svgPaths}
             </svg>
