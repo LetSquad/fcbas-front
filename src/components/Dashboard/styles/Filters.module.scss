@@ -5,6 +5,10 @@
   margin-top: 10px;
 }
 
+.form {
+  height: variables.$filters-height;
+}
+
 .button {
   height: 38px;
   margin-bottom: 1em !important;

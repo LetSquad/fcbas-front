@@ -119,8 +119,10 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
     const regionFlights = flightsBetweenRegion?.regionFlights;
     const topFlightsCount = flightsBetweenRegion?.count;
 
-    const { zoom, pan, onWheel, onPointerDown, onPointerMove, onPointerUp, onPointerLeave, consumeDragFlag } = usePanZoom();
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
+
+    const { zoom, pan, onPointerDown, onPointerMove, onPointerUp, onPointerLeave, consumeDragFlag } = usePanZoom({ containerRef });
 
     const [selectedRegionId, setSelectedRegionId] = useState<number | null>(null);
     const [heatmapMode, setHeatmapMode] = useState<HeatmapMode>(HeatmapMode.COUNT);
@@ -808,7 +810,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             role="presentation"
             aria-label="Карта полётов: колесом мыши — масштабирование, перетаскиванием — панорамирование, клик — выбор линии"
             onKeyDown={handleContainerKeyDown}
-            onWheel={onWheel}
+            ref={containerRef}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}

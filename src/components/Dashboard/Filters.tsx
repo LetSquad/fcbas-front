@@ -121,7 +121,7 @@ export default function Filters() {
     }, [interval]);
 
     return (
-        <Form>
+        <Form className={styles.form}>
             <Flex columnGap="10px" alignItemsEnd className={styles.container}>
                 <FormField
                     name="startDate"

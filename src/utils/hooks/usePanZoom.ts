@@ -1,4 +1,12 @@
-import { PointerEvent, useCallback, useEffect, useRef, useState, WheelEvent } from "react";
+import { PointerEvent, RefObject, useCallback, useEffect, useRef, useState } from "react";
+
+interface UsePanZoomProps {
+    minZoom?: number;
+    maxZoom?: number;
+    zoomStep?: number;
+    moveThresholdPx?: number;
+    containerRef?: RefObject<HTMLDivElement | null>;
+}
 
 interface DragInternal {
     startClientX: number;
@@ -22,7 +30,7 @@ interface DragState {
  *    и следующий click будет проигнорирован потребителем (через consumeDragFlag()).
  *  - Грациозно завершаем перетаскивание при pointerup/pointercancel/leave/blur.
  */
-export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThresholdPx = 1 } = {}) {
+export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThresholdPx = 1, containerRef }: UsePanZoomProps = {}) {
     const [zoom, setZoom] = useState(1);
     const [pan, setPan] = useState({ x: 0, y: 0 });
 
@@ -36,15 +44,6 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
         dragStateRef.current.moved = false;
         // ВАЖНО: justDraggedRef не трогаем — чтобы следующий click мог его «съесть»
     }, []);
-
-    const onWheel = useCallback(
-        (event: WheelEvent) => {
-            const direction = event.deltaY > 0 ? 1 : -1;
-            const factor = direction > 0 ? 1 / zoomStep : zoomStep;
-            setZoom((z) => Math.min(maxZoom, Math.max(minZoom, z * factor)));
-        },
-        [maxZoom, minZoom, zoomStep]
-    );
 
     const onPointerDown = useCallback(
         (event: PointerEvent) => {
@@ -95,6 +94,26 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
             stopDragging();
         }
     }, [stopDragging]);
+
+    const onWheel = useCallback(
+        (event: globalThis.WheelEvent) => {
+            event.preventDefault();
+            const direction = event.deltaY > 0 ? 1 : -1;
+            const factor = direction > 0 ? 1 / zoomStep : zoomStep;
+            setZoom((z) => Math.min(maxZoom, Math.max(minZoom, z * factor)));
+        },
+        [maxZoom, minZoom, zoomStep]
+    );
+
+    // Прикрепляем нативный wheel к containerRef или к элементу по умолчанию (window)
+    useEffect(() => {
+        const el = containerRef?.current ?? globalThis;
+        // Types: cast, потому что TS ожидает EventListener
+        el.addEventListener("wheel", onWheel as EventListener, { passive: false });
+        return () => {
+            el.removeEventListener("wheel", onWheel as EventListener);
+        };
+    }, [containerRef, onWheel]);
 
     // Если окно потеряло фокус во время драга — безопасно завершаем
     useEffect(() => {
