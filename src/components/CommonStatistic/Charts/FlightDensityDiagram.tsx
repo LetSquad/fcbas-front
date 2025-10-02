@@ -5,7 +5,6 @@ import { ResponsiveContainer, Tooltip, Treemap } from "recharts";
 import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoading";
 import chartStyles from "@components/CommonStatistic/Charts/styles/Chart.module.scss";
 import { useFilterFormContext } from "@components/Dashboard/context";
-import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
 import { useGetDensityByRegionQuery } from "@store/analytics/api";
 import { useGetRegionsQuery } from "@store/regions/api";
 
@@ -41,7 +40,7 @@ export default function FlightDensityDiagram() {
 
     return (
         <ChartWithLoading
-            title={`Топ 10 регионов по интенсивности полетов ${getTimeResolutionDescriptionFromEnum(formData.resolution)}${densityByRegions?.partAreaKm ? ` (на ${densityByRegions.partAreaKm} км²)` : ""}`}
+            title={`Топ 10 регионов по интенсивности полетов${densityByRegions?.partAreaKm ? ` (на ${densityByRegions.partAreaKm} км²)` : ""}`}
             isLoading={isDensityByRegionsLoading || isDensityByRegionsFetching}
             isError={isDensityByRegionsError}
             refetch={refetchDensityByRegions}

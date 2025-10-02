@@ -21,6 +21,10 @@
   color: variables.$negative-text-color;
 }
 
+.success {
+  color: variables.$positive-button-main-color;
+}
+
 .dropzone,
 %dropzone {
   align-items: center;

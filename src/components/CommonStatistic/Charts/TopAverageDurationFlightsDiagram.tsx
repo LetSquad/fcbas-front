@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import { Duration } from "luxon";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -6,6 +6,7 @@ import { Props } from "recharts/types/component/Label";
 
 import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoading";
 import { useFilterFormContext } from "@components/Dashboard/context";
+import { SortType } from "@models/analytics/enums";
 import { useGetAverageDurationByRegionQuery } from "@store/analytics/api";
 import { useGetRegionsQuery } from "@store/regions/api";
 
@@ -13,6 +14,7 @@ import chartStyles from "./styles/Chart.module.scss";
 
 export default function TopAverageDurationFlightsDiagram() {
     const formData = useFilterFormContext();
+    const [sort, setSort] = useState<SortType>(SortType.DESC);
 
     const {
         data: averageDurationByRegions,
@@ -34,9 +36,9 @@ export default function TopAverageDurationFlightsDiagram() {
                 name: regions?.[Number(regionId)]?.name || regionId,
                 value: averageFlightDurationSeconds
             }))
-            .toSorted((a, b) => b.value - a.value)
+            .toSorted((a, b) => (sort === SortType.DESC ? b.value - a.value : a.value - b.value))
             .slice(0, 10);
-    }, [averageDurationByRegions, regions]);
+    }, [averageDurationByRegions, regions, sort]);
 
     const renderCustomizedLabel = useCallback((props: Props) => {
         const { x, y, width, value } = props;
@@ -58,12 +60,18 @@ export default function TopAverageDurationFlightsDiagram() {
         );
     }, []);
 
+    const onSortChanged = () => {
+        setSort((prevSort) => (prevSort === SortType.DESC ? SortType.ASC : SortType.DESC));
+    };
+
     return (
         <ChartWithLoading
             title="Топ 10 регионов по средней длительности полета"
             isLoading={isAverageDurationByRegionsLoading || isAverageDurationByRegionsFetching}
             isError={isAverageDurationByRegionsError}
             refetch={refetchAverageDurationByRegions}
+            sort={sort}
+            onSortChanged={onSortChanged}
         >
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={topFlightsDataset} className={chartStyles.chart} layout="vertical">

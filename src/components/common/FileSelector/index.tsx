@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Accept, useDropzone } from "react-dropzone";
 
 import classNames from "classnames";
@@ -18,6 +18,7 @@ interface FileSelectorProps {
     typesPlaceholderText: string;
     isLoading?: boolean;
     isError?: boolean;
+    isSuccess?: boolean;
 }
 
 export default function FileSelector({
@@ -29,7 +30,8 @@ export default function FileSelector({
     rejectionTypesText,
     typesPlaceholderText,
     isLoading,
-    isError
+    isError,
+    isSuccess
 }: FileSelectorProps) {
     const [currentFile, setCurrentFile] = useState<File>();
     const [errorFile, setErrorFile] = useState<File>();
@@ -83,7 +85,7 @@ export default function FileSelector({
             <>
                 <Icon className={styles.iconUpload} name="cloud upload" />
                 <div className={styles.dropzoneTitleContainerDefault}>
-                    <div>{`Переместите файл ${typesPlaceholderText} изображения в область или`}</div>
+                    <div>{`Переместите файл ${typesPlaceholderText} в область или`}</div>
                     <Button onClick={open} className={styles.dropzoneTitleLink} type="button">
                         выберите его
                     </Button>
@@ -91,6 +93,13 @@ export default function FileSelector({
             </>
         );
     }, [fileRejections, currentFile, typesPlaceholderText, open, rejectionTypesText]);
+
+    useEffect(() => {
+        if (isSuccess) {
+            setCurrentFile(undefined);
+            setErrorFile(undefined);
+        }
+    }, [isSuccess]);
 
     return (
         <Flex column rowGap="12px" className={styles.container}>
@@ -109,6 +118,7 @@ export default function FileSelector({
                 </Button>
             </Flex>
             {isError && <span className={styles.error}>Произошла ошибка при загрузки файла, попробуйте еще раз</span>}
+            {isSuccess && <span className={styles.success}>Файл успешно загружен</span>}
             <div {...getRootProps({ className: styles.dropzoneContainer })}>
                 <input {...getInputProps()} />
                 <div

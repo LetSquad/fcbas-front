@@ -13,3 +13,8 @@ export enum HeatmapMode {
     DENSITY = "density",
     MAX_COUNT = "maxCount"
 }
+
+export enum SortType {
+    ASC = "ASC",
+    DESC = "DESC"
+}

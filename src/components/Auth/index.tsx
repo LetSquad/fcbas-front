@@ -9,6 +9,7 @@ export default function Auth() {
     const {
         keycloak: { login }
     } = useKeycloak();
+
     return (
         <Modal open closeOnDimmerClick={false} closeOnEscape={false} closeIcon={false} className={styles.modal} size="mini">
             <Flex className={styles.container} column rowGap="15px" alignItemsCenter justifyCenter height100 width100>

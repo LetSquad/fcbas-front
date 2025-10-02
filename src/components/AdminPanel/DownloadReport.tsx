@@ -4,40 +4,56 @@ import { FormikProvider, useFormik } from "formik";
 import { DateTime } from "luxon";
 import { Button, Dimmer, Form, Loader } from "semantic-ui-react";
 
+import axios from "@api/api";
+import apiUrls from "@api/apiUrls";
 import Flex from "@commonComponents/Flex";
 import FormField from "@commonComponents/FormField";
+import { useKeycloak } from "@hooks/useKeycloak";
 import { FormFieldType } from "@models/forms/enums";
 import { ReportQueryParams } from "@models/reports/types";
-import { useLazyDownloadReportQuery } from "@store/report/api";
 
 import styles from "./styles/DownloadReport.module.scss";
 
 export default function DownloadReport() {
-    const [trigger, result] = useLazyDownloadReportQuery();
-    const [error, setError] = useState(false);
+    const { keycloak } = useKeycloak();
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const onDownload = useCallback(
         async (values: ReportQueryParams) => {
-            setError(false);
-            const response = await trigger(values, false);
+            setIsError(false);
+            setIsLoading(true);
 
-            if (!response.data) {
-                setError(true);
-                return;
+            try {
+                const response = await axios.get<Blob>(apiUrls.reportFlights(), {
+                    params: values,
+                    responseType: "blob",
+                    headers: {
+                        Authorization: `Bearer ${keycloak.token}`
+                    }
+                });
+
+                if (!response.data) {
+                    setIsError(true);
+                    return;
+                }
+
+                const href = URL.createObjectURL(response.data);
+
+                const link = document.createElement("a");
+                link.href = href;
+                link.setAttribute("download", `report-${DateTime.now().toFormat("dd.MM.yyyy")}.json`); // or any other extension
+                document.body.append(link);
+                link.click();
+
+                link.remove();
+                URL.revokeObjectURL(href);
+            } catch {
+                setIsError(true);
             }
-
-            const href = URL.createObjectURL(response.data);
-
-            const link = document.createElement("a");
-            link.href = href;
-            link.setAttribute("download", `report-${DateTime.now().toFormat("dd.MM.yyyy")}.json`); // or any other extension
-            document.body.append(link);
-            link.click();
-
-            link.remove();
-            URL.revokeObjectURL(href);
         },
-        [trigger]
+        [keycloak.token]
     );
 
     const formik = useFormik<ReportQueryParams>({
@@ -50,7 +66,7 @@ export default function DownloadReport() {
 
     return (
         <Flex column rowGap="10px" className={styles.container}>
-            {(result.isLoading || result.isFetching) && (
+            {isLoading && (
                 <Dimmer active>
                     <Loader />
                 </Dimmer>
@@ -81,7 +97,7 @@ export default function DownloadReport() {
                     </Flex>
                 </Form>
             </FormikProvider>
-            {(result.isError || error) && <span className={styles.error}>Произошла ошибка при скачивании отчета. Попробуйте еще раз</span>}
+            {isError && <span className={styles.error}>Произошла ошибка при скачивании отчета. Попробуйте еще раз</span>}
         </Flex>
     );
 }

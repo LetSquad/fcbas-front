@@ -642,11 +642,11 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                     break;
                 }
                 case HeatmapMode.DENSITY: {
-                    content = `Плотность полетов: ${(heatMapInfo.density * 100) / 100}`;
+                    content = `Плотность полетов: ${Math.round((heatMapInfo.density * 100) / 100)}`;
                     break;
                 }
                 case HeatmapMode.MAX_COUNT: {
-                    content = `Максимальное количество полетов: ${(heatMapInfo.density * 100) / 100}`;
+                    content = `Максимальное количество полетов: ${heatMapInfo.maxCount}`;
                     break;
                 }
                 default: {

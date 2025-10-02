@@ -1,19 +1,86 @@
+import { useCallback, useState } from "react";
+
+import axios from "@api/api";
+import apiUrls from "@api/apiUrls";
 import FileSelector from "@commonComponents/FileSelector";
 import Flex from "@commonComponents/Flex";
 import DownloadReport from "@components/AdminPanel/DownloadReport";
-import { useLazyUploadFlightsDataQuery } from "@store/flights/api";
-import { useLazyUploadRegionsShapeQuery } from "@store/regions/api";
+import { useKeycloak } from "@hooks/useKeycloak";
 
 import styles from "./styles/AdminPanel.module.scss";
 
 export default function AdminPanel() {
-    const [triggerRegionsShapeUploads, regionsShapeUploadsResult] = useLazyUploadRegionsShapeQuery();
-    const [triggerFlightsDataUploads, flightsDataUploadsResult] = useLazyUploadFlightsDataQuery();
+    const { keycloak } = useKeycloak();
+
+    const [isRegionsShapeUploading, setIsRegionsShapeUploading] = useState(false);
+    const [isFlightsDataUploading, setIsFlightsDataUploading] = useState(false);
+
+    const [isRegionsShapeUploadError, setIsRegionsShapeUploadError] = useState(false);
+    const [isFlightsDataUploadError, setIsFlightsDataUploadError] = useState(false);
+
+    const [isRegionsShapeUploadSuccess, setIsRegionsShapeUploadSuccess] = useState(false);
+    const [isFlightsDataUploadSuccess, setIsFlightsDataUploadSuccess] = useState(false);
+
+    const onRegionsShapeUpload = useCallback(
+        async (file: File) => {
+            setIsRegionsShapeUploading(true);
+            setIsRegionsShapeUploadError(false);
+            setIsRegionsShapeUploadSuccess(false);
+
+            try {
+                const formData = new FormData();
+                formData.append("zip", file);
+
+                await axios.post(apiUrls.regionShape(), formData, {
+                    headers: {
+                        "Content-Disposition": file.name,
+                        "Content-Type": "multipart/form-data",
+                        Authorization: `Bearer ${keycloak.token}`
+                    }
+                });
+
+                setIsRegionsShapeUploadSuccess(true);
+            } catch {
+                setIsRegionsShapeUploadError(true);
+            } finally {
+                setIsRegionsShapeUploading(false);
+            }
+        },
+        [keycloak.token]
+    );
+
+    const onFlightsDataUpload = useCallback(
+        async (file: File) => {
+            setIsFlightsDataUploading(true);
+            setIsFlightsDataUploadError(false);
+            setIsFlightsDataUploadSuccess(false);
+
+            try {
+                const formData = new FormData();
+                formData.append("data", file);
+
+                await axios.post(apiUrls.flightData(), formData, {
+                    headers: {
+                        "Content-Disposition": file.name,
+                        "Content-Type": "multipart/form-data",
+                        Authorization: `Bearer ${keycloak.token}`
+                    }
+                });
+
+                setIsFlightsDataUploadSuccess(true);
+            } catch {
+                setIsFlightsDataUploadError(true);
+            } finally {
+                setIsFlightsDataUploading(false);
+            }
+        },
+        [keycloak.token]
+    );
 
     return (
         <Flex column rowGap="18px" alignItemsCenter className={styles.container}>
             <FileSelector
-                onSave={(file) => triggerRegionsShapeUploads(file, false)}
+                onSave={onRegionsShapeUpload}
                 saveButtonText="Загрузить регионы"
                 title="Загрузка регионов"
                 subtitle="Выберите архив с shp-файлами"
@@ -22,11 +89,12 @@ export default function AdminPanel() {
                 }}
                 rejectionTypesText=".zip"
                 typesPlaceholderText=".zip"
-                isLoading={regionsShapeUploadsResult.isLoading || flightsDataUploadsResult.isFetching}
-                isError={regionsShapeUploadsResult.isError}
+                isLoading={isRegionsShapeUploading}
+                isError={isRegionsShapeUploadError}
+                isSuccess={isRegionsShapeUploadSuccess}
             />
             <FileSelector
-                onSave={(file) => triggerFlightsDataUploads(file, false)}
+                onSave={onFlightsDataUpload}
                 saveButtonText="Загрузить данные полетов"
                 title="Загрузка данных с полетами БПЛА"
                 subtitle="Выберите файл таблицы с данными полетов"
@@ -35,8 +103,9 @@ export default function AdminPanel() {
                 }}
                 rejectionTypesText=".xlsx"
                 typesPlaceholderText=".xlsx"
-                isLoading={flightsDataUploadsResult.isLoading || flightsDataUploadsResult.isFetching}
-                isError={flightsDataUploadsResult.isError}
+                isLoading={isFlightsDataUploading}
+                isError={isFlightsDataUploadError}
+                isSuccess={isFlightsDataUploadSuccess}
             />
             <DownloadReport />
         </Flex>

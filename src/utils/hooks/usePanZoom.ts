@@ -39,7 +39,6 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
 
     const onWheel = useCallback(
         (event: WheelEvent) => {
-            event.preventDefault();
             const direction = event.deltaY > 0 ? 1 : -1;
             const factor = direction > 0 ? 1 / zoomStep : zoomStep;
             setZoom((z) => Math.min(maxZoom, Math.max(minZoom, z * factor)));
