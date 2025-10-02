@@ -51,6 +51,8 @@ export default function DownloadReport() {
                 URL.revokeObjectURL(href);
             } catch {
                 setIsError(true);
+            } finally {
+                setIsLoading(false);
             }
         },
         [keycloak.token]

@@ -20,6 +20,7 @@ interface ChartWithLoadingProps {
     refetch: () => void;
     sort?: SortType;
     onSortChanged?: () => void;
+    isDownloadDisabled?: boolean;
 }
 
 export default function ChartWithLoading({
@@ -30,6 +31,7 @@ export default function ChartWithLoading({
     isWide = false,
     sort,
     onSortChanged,
+    isDownloadDisabled,
     children
 }: PropsWithChildren<ChartWithLoadingProps>) {
     const [getDivPng, { ref, isLoading: isLoadingPng }] = useGenerateImage({
@@ -65,12 +67,14 @@ export default function ChartWithLoading({
             <Flex height100 width100 column rowGap="8px">
                 <Flex rowGap="15px" justifySpaceBetween alignItemsCenter>
                     <span className={styles.title}>{title}</span>
-                    <Flex rowGap="5px" alignItemsCenter>
-                        <Icon link onClick={handleDivDownload} name="download" loading={isLoadingPng} />
-                        {sort && onSortChanged && (
-                            <Icon link onClick={onSortChanged} name={sort === SortType.DESC ? "sort amount down" : "sort amount up"} />
-                        )}
-                    </Flex>
+                    {(!isDownloadDisabled || (sort && onSortChanged)) && (
+                        <Flex rowGap="5px" alignItemsCenter>
+                            {!isDownloadDisabled && <Icon link onClick={handleDivDownload} name="download" loading={isLoadingPng} />}
+                            {sort && onSortChanged && (
+                                <Icon link onClick={onSortChanged} name={sort === SortType.DESC ? "sort amount down" : "sort amount up"} />
+                            )}
+                        </Flex>
+                    )}
                 </Flex>
 
                 {content}

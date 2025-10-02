@@ -95,21 +95,60 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
         }
     }, [stopDragging]);
 
+    // Вспомогательная функция: вычислить координаты курсора относ. контейнера
+    const clientToLocal = useCallback(
+        (clientX: number, clientY: number) => {
+            const el = containerRef?.current;
+
+            if (!el) {
+                return { x: clientX, y: clientY };
+            } // fallback: window cords
+
+            const rect = el.getBoundingClientRect();
+
+            return { x: clientX - rect.left, y: clientY - rect.top };
+        },
+        [containerRef]
+    );
+
+    const zoomByFactorAtClient = useCallback(
+        (factor: number, clientX: number, clientY: number) => {
+            const localPoint = clientToLocal(clientX, clientY);
+
+            setZoom((oldZoom) => {
+                const newZoom = Math.min(maxZoom, Math.max(minZoom, oldZoom * factor));
+                const s = newZoom / oldZoom;
+
+                setPan((oldPan) => {
+                    const newPanX = oldPan.x + (1 - s) * (localPoint.x - oldPan.x);
+                    const newPanY = oldPan.y + (1 - s) * (localPoint.y - oldPan.y);
+
+                    return { x: newPanX, y: newPanY };
+                });
+
+                return newZoom;
+            });
+        },
+        [clientToLocal, minZoom, maxZoom]
+    );
+
     const onWheel = useCallback(
-        (event: globalThis.WheelEvent) => {
+        (event: WheelEvent) => {
             event.preventDefault();
             const direction = event.deltaY > 0 ? 1 : -1;
             const factor = direction > 0 ? 1 / zoomStep : zoomStep;
-            setZoom((z) => Math.min(maxZoom, Math.max(minZoom, z * factor)));
+
+            // используем корректную функцию, которая изменит zoom и pan одновременно
+            zoomByFactorAtClient(factor, event.clientX, event.clientY);
         },
-        [maxZoom, minZoom, zoomStep]
+        [zoomStep, zoomByFactorAtClient]
     );
 
     // Прикрепляем нативный wheel к containerRef или к элементу по умолчанию (window)
     useEffect(() => {
         const el = containerRef?.current ?? globalThis;
-        // Types: cast, потому что TS ожидает EventListener
         el.addEventListener("wheel", onWheel as EventListener, { passive: false });
+
         return () => {
             el.removeEventListener("wheel", onWheel as EventListener);
         };
@@ -119,6 +158,7 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
     useEffect(() => {
         const onBlur = () => stopDragging();
         window.addEventListener("blur", onBlur);
+
         return () => window.removeEventListener("blur", onBlur);
     }, [stopDragging]);
 
@@ -128,6 +168,7 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
     const consumeDragFlag = useCallback(() => {
         const was = justDraggedRef.current;
         justDraggedRef.current = false;
+
         return was;
     }, []);
 

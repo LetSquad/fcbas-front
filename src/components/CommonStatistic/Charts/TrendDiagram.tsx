@@ -38,6 +38,10 @@ export default function TrendDiagram() {
         const radius = 10;
         const percentage = Math.round(Number(value));
 
+        if (percentage === 0) {
+            return null;
+        }
+
         return (
             <g>
                 <text
@@ -47,7 +51,7 @@ export default function TrendDiagram() {
                     textAnchor="middle"
                     dominantBaseline="middle"
                 >
-                    {`${Math.abs(percentage)}%`}
+                    {`${percentage > 0 ? "▲" : "▼"}${Math.abs(percentage)}%`}
                 </text>
             </g>
         );
@@ -61,6 +65,7 @@ export default function TrendDiagram() {
             isLoading={isTrendLoading || isTrendFetching}
             isError={isTrendError}
             refetch={refetchTrend}
+            isDownloadDisabled={!isMonth}
         >
             {!isMonth && (
                 <span className={styles.placeholder}>
