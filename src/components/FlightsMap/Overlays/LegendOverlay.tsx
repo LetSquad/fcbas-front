@@ -53,6 +53,7 @@ export default function LegendOverlay({
                 options={HEATMAP_OPTIONS(formData.resolution)}
                 value={heatmapMode}
                 onChange={(_, { value }) => onChangeHeatmapMode(value as HeatmapMode)}
+                onWheel={(event: WheelEvent) => event.stopPropagation()}
             />
 
             <GradientBar heatDomains={heatDomains} heatLowColor={heatLowColor} heatHighColor={heatHighColor} heatmapMode={heatmapMode} />

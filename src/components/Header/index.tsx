@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router";
 
 import classNames from "classnames";
 import { Icon, Menu } from "semantic-ui-react";
@@ -10,10 +11,13 @@ import { TABLET_MAX_WIDTH } from "@coreUtils/constants";
 import { useKeycloak } from "@hooks/useKeycloak";
 import { useMenuOptions } from "@hooks/useMenuOptions";
 import { useToggle } from "@hooks/useToggle";
+import { PageSlugs } from "@models/pages/enums";
 
 import styles from "./styles/Header.module.scss";
 
 export default function Header() {
+    const navigate = useNavigate();
+
     const {
         keycloak: { logout }
     } = useKeycloak();
@@ -29,9 +33,10 @@ export default function Header() {
     const onLogoutClick = useCallback(() => {
         closeSidebar();
         if (logout) {
+            navigate(PageSlugs.BASE);
             logout();
         }
-    }, [closeSidebar, logout]);
+    }, [closeSidebar, logout, navigate]);
 
     const handleScroll = useCallback(() => {
         const moving = document.querySelector("#app")?.scrollTop || 0;

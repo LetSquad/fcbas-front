@@ -29,13 +29,15 @@ export default function BlockWithLoading({ title, data, isLoading, isError, refe
             return <LoadingErrorBlock isLoadingErrorObjectText="информации" reload={refetch} />;
         }
 
-        return (
-            <Flex height100 width100 column rowGap="7px">
-                <span className={styles.title}>{title}</span>
-                <span className={styles.value}>{data}</span>
-            </Flex>
-        );
-    }, [data, isError, isLoading, refetch, title]);
+        return <span className={styles.value}>{data}</span>;
+    }, [data, isError, isLoading, refetch]);
 
-    return <div className={styles.block}>{content}</div>;
+    return (
+        <div className={styles.block}>
+            <Flex height100 width100 column justifySpaceBetween rowGap="7px">
+                <span className={styles.title}>{title}</span>
+                {content}
+            </Flex>
+        </div>
+    );
 }

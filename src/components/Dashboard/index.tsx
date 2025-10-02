@@ -22,7 +22,7 @@ export default function Dashboard() {
 
     const [formData, setFormData] = useState<FormData>({
         startDate: DateTime.now().startOf("year").toISODate(),
-        endDate: DateTime.now().toISODate(),
+        finishDate: DateTime.now().toISODate(),
         resolution: TimeResolution.MONTH
     });
 
@@ -55,14 +55,7 @@ export default function Dashboard() {
             {
                 menuItem: "Карта",
                 render: () => (
-                    <TabPane className={styles.tab}>
-                        {withRegionsLoader(
-                            <FlightsMapWrapper
-                                regions={regions as Region[]}
-                                onRegionClick={(regionId) => console.log("region", regionId)}
-                            />
-                        )}
-                    </TabPane>
+                    <TabPane className={styles.tab}>{withRegionsLoader(<FlightsMapWrapper regions={regions as Region[]} />)}</TabPane>
                 )
             },
             {

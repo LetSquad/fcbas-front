@@ -26,11 +26,12 @@ export const axiosBaseQuery =
             data?: AxiosRequestConfig["data"];
             params?: AxiosRequestConfig["params"];
             headers?: AxiosRequestConfig["headers"];
+            responseType?: AxiosRequestConfig["responseType"];
         },
         unknown,
         ErrorResponse
     > =>
-    async ({ url, method = "get", data, params, headers }) => {
+    async ({ url, method = "get", data, params, headers, responseType }) => {
         try {
             const result = await axios({
                 url: baseUrl + url,
@@ -40,7 +41,8 @@ export const axiosBaseQuery =
                 headers: {
                     ...headers,
                     Authorization: `Bearer ${keycloak.token}`
-                }
+                },
+                responseType
             });
 
             return { data: result.data };

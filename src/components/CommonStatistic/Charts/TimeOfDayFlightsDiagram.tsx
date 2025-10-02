@@ -19,7 +19,7 @@ export default function TimeOfDayFlightsDiagram() {
         isFetching: isTimeDistributionsFetching,
         isError: isTimeDistributionsError,
         refetch: refetchTimeDistributions
-    } = useGetTimeDistributionQuery({ startDate: formData.startDate, endDate: formData.endDate });
+    } = useGetTimeDistributionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
     const timeOfDayFlightsDataset = useMemo(
         () => [
@@ -52,7 +52,7 @@ export default function TimeOfDayFlightsDiagram() {
                         {timeOfDayFlightsDataset.map((entry, index) => (
                             <Cell key={`cell-${entry.name}`} fill={COLORS[index % COLORS.length]} />
                         ))}
-                        <Legend />
+                        <Legend itemSorter="dataKey" />
                     </Pie>
                 </PieChart>
             </ResponsiveContainer>

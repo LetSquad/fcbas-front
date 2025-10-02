@@ -1,0 +1,106 @@
+@use '@coreStyles/mq' as *;
+@use '@coreStyles/variables.module' as variables;
+@use '@coreStyles/parts.module' as *;
+@use 'sass:color';
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sub-title {
+  color: variables.$secondary-text-color;
+}
+
+.error {
+  color: variables.$negative-text-color;
+}
+
+.success {
+  color: variables.$positive-button-main-color;
+}
+
+.dropzone,
+%dropzone {
+  align-items: center;
+  background-color: color.adjust(variables.$background-color, $lightness: 10%);
+  border-radius: 2px;
+  border-style: dashed;
+  border-width: 2px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  outline: none;
+  padding: 20px;
+  transition: border 0.24s ease-in-out;
+
+  &-container {
+    height: 100%;
+    width: 100%;
+  }
+
+  &-title {
+    &-container {
+      text-align: center;
+
+      &-error {
+        @extend %dropzone-title-container;
+        color: #1d2228;
+        font-size: 18px;
+      }
+
+      &-default {
+        @extend %dropzone-title-container;
+        color: variables.$primary-text-color;
+        display: flex;
+        flex-direction: column;
+        font-size: 18px;
+      }
+    }
+
+    &-link {
+      @extend %inline-button;
+      font-size: 18px !important;
+      padding: 0 0 0 5px !important;
+    }
+
+    &-selected {
+      &-content {
+        font-size: 20px;
+        font-weight: 700;
+      }
+    }
+  }
+
+  &-default {
+    @extend %dropzone;
+    border-color: rgb(200, 200, 200);
+  }
+
+  &-accept {
+    @extend %dropzone;
+    border-color: #05ba05;
+  }
+
+  &-reject {
+    @extend %dropzone;
+    border-color: #ac0606;
+  }
+}
+
+.icon,
+%file-selector-icon {
+  &-upload {
+    @extend %file-selector-icon;
+    color: variables.$primary-text-color !important;
+    font-size: 36px !important;
+    margin-bottom: 10px !important;
+  }
+}

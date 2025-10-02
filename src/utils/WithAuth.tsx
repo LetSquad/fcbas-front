@@ -8,7 +8,7 @@ import RoleError from "@components/RoleError";
 import { useKeycloak } from "@hooks/useKeycloak";
 import { Role } from "@models/auth/enums";
 
-export default function WithAuth(props: PropsWithChildren<object>) {
+export default function WithAuth({ children }: PropsWithChildren<object>) {
     const {
         keycloak: { authenticated, tokenParsed },
         initialized
@@ -35,5 +35,5 @@ export default function WithAuth(props: PropsWithChildren<object>) {
         return <RoleError />;
     }
 
-    return props.children;
+    return children;
 }

@@ -1,6 +1,12 @@
+@use '@coreStyles/variables.module' as variables;
+
 .container {
   margin-left: 15px;
   margin-top: 10px;
+}
+
+.form {
+  height: variables.$filters-height;
 }
 
 .button {

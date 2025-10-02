@@ -1,4 +1,12 @@
-import { PointerEvent, useCallback, useEffect, useRef, useState, WheelEvent } from "react";
+import { PointerEvent, RefObject, useCallback, useEffect, useRef, useState } from "react";
+
+interface UsePanZoomProps {
+    minZoom?: number;
+    maxZoom?: number;
+    zoomStep?: number;
+    moveThresholdPx?: number;
+    containerRef?: RefObject<HTMLDivElement | null>;
+}
 
 interface DragInternal {
     startClientX: number;
@@ -22,7 +30,7 @@ interface DragState {
  *    и следующий click будет проигнорирован потребителем (через consumeDragFlag()).
  *  - Грациозно завершаем перетаскивание при pointerup/pointercancel/leave/blur.
  */
-export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThresholdPx = 1 } = {}) {
+export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThresholdPx = 1, containerRef }: UsePanZoomProps = {}) {
     const [zoom, setZoom] = useState(1);
     const [pan, setPan] = useState({ x: 0, y: 0 });
 
@@ -36,16 +44,6 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
         dragStateRef.current.moved = false;
         // ВАЖНО: justDraggedRef не трогаем — чтобы следующий click мог его «съесть»
     }, []);
-
-    const onWheel = useCallback(
-        (event: WheelEvent) => {
-            event.preventDefault();
-            const direction = event.deltaY > 0 ? 1 : -1;
-            const factor = direction > 0 ? 1 / zoomStep : zoomStep;
-            setZoom((z) => Math.min(maxZoom, Math.max(minZoom, z * factor)));
-        },
-        [maxZoom, minZoom, zoomStep]
-    );
 
     const onPointerDown = useCallback(
         (event: PointerEvent) => {
@@ -97,10 +95,70 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
         }
     }, [stopDragging]);
 
+    // Вспомогательная функция: вычислить координаты курсора относ. контейнера
+    const clientToLocal = useCallback(
+        (clientX: number, clientY: number) => {
+            const el = containerRef?.current;
+
+            if (!el) {
+                return { x: clientX, y: clientY };
+            } // fallback: window cords
+
+            const rect = el.getBoundingClientRect();
+
+            return { x: clientX - rect.left, y: clientY - rect.top };
+        },
+        [containerRef]
+    );
+
+    const zoomByFactorAtClient = useCallback(
+        (factor: number, clientX: number, clientY: number) => {
+            const localPoint = clientToLocal(clientX, clientY);
+
+            setZoom((oldZoom) => {
+                const newZoom = Math.min(maxZoom, Math.max(minZoom, oldZoom * factor));
+                const s = newZoom / oldZoom;
+
+                setPan((oldPan) => {
+                    const newPanX = oldPan.x + (1 - s) * (localPoint.x - oldPan.x);
+                    const newPanY = oldPan.y + (1 - s) * (localPoint.y - oldPan.y);
+
+                    return { x: newPanX, y: newPanY };
+                });
+
+                return newZoom;
+            });
+        },
+        [clientToLocal, minZoom, maxZoom]
+    );
+
+    const onWheel = useCallback(
+        (event: WheelEvent) => {
+            event.preventDefault();
+            const direction = event.deltaY > 0 ? 1 : -1;
+            const factor = direction > 0 ? 1 / zoomStep : zoomStep;
+
+            // используем корректную функцию, которая изменит zoom и pan одновременно
+            zoomByFactorAtClient(factor, event.clientX, event.clientY);
+        },
+        [zoomStep, zoomByFactorAtClient]
+    );
+
+    // Прикрепляем нативный wheel к containerRef или к элементу по умолчанию (window)
+    useEffect(() => {
+        const el = containerRef?.current ?? globalThis;
+        el.addEventListener("wheel", onWheel as EventListener, { passive: false });
+
+        return () => {
+            el.removeEventListener("wheel", onWheel as EventListener);
+        };
+    }, [containerRef, onWheel]);
+
     // Если окно потеряло фокус во время драга — безопасно завершаем
     useEffect(() => {
         const onBlur = () => stopDragging();
         window.addEventListener("blur", onBlur);
+
         return () => window.removeEventListener("blur", onBlur);
     }, [stopDragging]);
 
@@ -110,6 +168,7 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
     const consumeDragFlag = useCallback(() => {
         const was = justDraggedRef.current;
         justDraggedRef.current = false;
+
         return was;
     }, []);
 

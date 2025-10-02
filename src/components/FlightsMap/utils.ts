@@ -1,6 +1,5 @@
 import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
 import { HeatmapMode, TimeResolution } from "@models/analytics/enums";
-import { HeatMapBin } from "@models/analytics/types";
 import { MinMaxPoint, Point, ViewBox } from "@models/map/types";
 import { RegionShape } from "@models/regions/types";
 
@@ -121,19 +120,6 @@ export function lerpColor(fromHex: string, toHex: string, tRaw: number) {
     return `#${toHex2(r)}${toHex2(g)}${toHex2(b)}`;
 }
 
-export function secToHM(seconds: number) {
-    const s = Math.max(0, Math.floor(seconds || 0));
-
-    const h = Math.floor(s / 3600);
-    const m = Math.floor((s % 3600) / 60);
-
-    if (h > 0) {
-        return `${h}ч ${m}м`;
-    }
-
-    return `${m}м`;
-}
-
 export function parsePreparedSvgFromText(svgText: string) {
     const container = document.createElement("div");
     container.style.position = "absolute";
@@ -222,56 +208,6 @@ export function parsePreparedSvgFromText(svgText: string) {
     }
 }
 
-// Сборка корзин по равным интервалам между min..max.
-// Цвет каждой корзины — ступень между heatLow..heatHigh.
-export function buildHeatMapBins(domain: { min: number; max: number }, heatMapColors: string[]): HeatMapBin[] {
-    const bins: HeatMapBin[] = [];
-    let { min, max } = domain;
-
-    if (!Number.isFinite(min)) {
-        min = 0;
-    }
-
-    if (!Number.isFinite(max)) {
-        max = 0;
-    }
-
-    // Деградация: все значения одинаковые
-    if (max <= min) {
-        return [{ from: min, to: max, color: heatMapColors[0] }];
-    }
-
-    const steps = heatMapColors.length;
-    const rawStep = (max - min) / steps;
-
-    for (let i = 0; i < steps; i++) {
-        const from = min + i * rawStep;
-        const to = i === steps - 1 ? max : min + (i + 1) * rawStep;
-        const color = heatMapColors[i] ?? heatMapColors[steps - 1];
-
-        bins.push({ from, to, color });
-    }
-
-    return bins;
-}
-
-// Подбор цвета по значению и корзинам
-export function colorForValue(bins: HeatMapBin[], value: number | null, fallbackColor: string): string {
-    if (value === null || bins.length === 0) {
-        return fallbackColor;
-    }
-
-    for (let i = 0; i < bins.length; i++) {
-        const b = bins[i];
-        const upperInclusive = i === bins.length - 1; // последняя корзина включает верхнюю границу
-
-        if (value >= b.from && (upperInclusive ? value <= b.to : value < b.to)) {
-            return b.color;
-        }
-    }
-    return (bins.at(-1) as HeatMapBin).color;
-}
-
 export function getHeatMapLabelFromHeatmapModeEnum(value: HeatmapMode, timeResolution: TimeResolution) {
     switch (value) {
         case HeatmapMode.COUNT: {
@@ -290,7 +226,10 @@ export function getHeatMapLabelFromHeatmapModeEnum(value: HeatmapMode, timeResol
             return "Количество дней без полетов";
         }
         case HeatmapMode.DENSITY: {
-            return `Плотность полетов ${getTimeResolutionDescriptionFromEnum(timeResolution)}`;
+            return `Плотность полетов`;
+        }
+        case HeatmapMode.MAX_COUNT: {
+            return `Максимальное количество полетов ${getTimeResolutionDescriptionFromEnum(timeResolution)}`;
         }
         // skip default
     }

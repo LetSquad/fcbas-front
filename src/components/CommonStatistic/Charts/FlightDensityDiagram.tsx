@@ -5,7 +5,6 @@ import { ResponsiveContainer, Tooltip, Treemap } from "recharts";
 import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoading";
 import chartStyles from "@components/CommonStatistic/Charts/styles/Chart.module.scss";
 import { useFilterFormContext } from "@components/Dashboard/context";
-import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
 import { useGetDensityByRegionQuery } from "@store/analytics/api";
 import { useGetRegionsQuery } from "@store/regions/api";
 
@@ -20,7 +19,7 @@ export default function FlightDensityDiagram() {
         isFetching: isDensityByRegionsFetching,
         isError: isDensityByRegionsError,
         refetch: refetchDensityByRegions
-    } = useGetDensityByRegionQuery(formData);
+    } = useGetDensityByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
     const { data: regions } = useGetRegionsQuery();
 
@@ -41,10 +40,11 @@ export default function FlightDensityDiagram() {
 
     return (
         <ChartWithLoading
-            title={`Топ 10 регионов по интенсивности полетов ${getTimeResolutionDescriptionFromEnum(formData.resolution)}${densityByRegions?.partAreaKm ? ` (на ${densityByRegions.partAreaKm} км²)` : ""}`}
+            title={`Топ 10 регионов по интенсивности полетов${densityByRegions?.partAreaKm ? ` (на ${densityByRegions.partAreaKm} км²)` : ""}`}
             isLoading={isDensityByRegionsLoading || isDensityByRegionsFetching}
             isError={isDensityByRegionsError}
             refetch={refetchDensityByRegions}
+            isWide
         >
             <ResponsiveContainer width="100%" height="100%" className={styles.container}>
                 <Treemap data={flightDensityDataset} className={chartStyles.chart} dataKey="size" aspectRatio={4 / 3}>

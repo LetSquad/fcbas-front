@@ -2,7 +2,7 @@ import { HeatmapMode, TimeResolution } from "@models/analytics/enums";
 
 export interface AnalyticsBaseQueryParams {
     startDate?: string;
-    endDate?: string;
+    finishDate?: string;
 }
 
 export interface AnalyticsRegionsQueryParams extends AnalyticsBaseQueryParams {
@@ -250,12 +250,7 @@ export interface HeatMapInfo {
     medianFlightCount: number;
     emptyDays: number;
     density: number;
-}
-
-export interface HeatMapBin {
-    from: number; // включительно
-    to: number; // верхняя граница; для последней корзины включительно
-    color: string;
+    maxCount: number;
 }
 
 export interface HeatDomains {
@@ -280,6 +275,10 @@ export interface HeatDomains {
         max: number;
     };
     [HeatmapMode.DENSITY]: {
+        min: number;
+        max: number;
+    };
+    [HeatmapMode.MAX_COUNT]: {
         min: number;
         max: number;
     };

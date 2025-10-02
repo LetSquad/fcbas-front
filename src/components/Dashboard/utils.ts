@@ -20,13 +20,13 @@ export function getTimeResolutionLabelFromEnum(value: TimeResolution) {
 export function getTimeResolutionDescriptionFromEnum(value: TimeResolution) {
     switch (value) {
         case TimeResolution.HOUR: {
-            return "(по часам)";
+            return "(в час)";
         }
         case TimeResolution.DAY: {
-            return "(по дням)";
+            return "(в день)";
         }
         case TimeResolution.MONTH: {
-            return "(по месяцам)";
+            return "(в месяц)";
         }
         // skip default
     }

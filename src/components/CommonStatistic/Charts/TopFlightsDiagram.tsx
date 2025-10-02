@@ -1,9 +1,10 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoading";
 import { useFilterFormContext } from "@components/Dashboard/context";
+import { SortType } from "@models/analytics/enums";
 import { useGetCountByRegionQuery } from "@store/analytics/api";
 import { useGetRegionsQuery } from "@store/regions/api";
 
@@ -11,6 +12,7 @@ import chartStyles from "./styles/Chart.module.scss";
 
 export default function TopFlightsDiagram() {
     const formData = useFilterFormContext();
+    const [sort, setSort] = useState<SortType>(SortType.DESC);
 
     const {
         data: countByRegions,
@@ -18,7 +20,7 @@ export default function TopFlightsDiagram() {
         isFetching: isCountByRegionsFetching,
         isError: isCountByRegionsError,
         refetch: refetchCountByRegions
-    } = useGetCountByRegionQuery({ startDate: formData.startDate, endDate: formData.endDate });
+    } = useGetCountByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
     const { data: regions } = useGetRegionsQuery();
 
@@ -32,9 +34,13 @@ export default function TopFlightsDiagram() {
                 name: regions?.[Number(regionId)]?.name || regionId,
                 value: flightsCount
             }))
-            .toSorted((a, b) => b.value - a.value)
+            .toSorted((a, b) => (sort === SortType.DESC ? b.value - a.value : a.value - b.value))
             .slice(0, 10);
-    }, [countByRegions, regions]);
+    }, [countByRegions, regions, sort]);
+
+    const onSortChanged = () => {
+        setSort((prevSort) => (prevSort === SortType.DESC ? SortType.ASC : SortType.DESC));
+    };
 
     return (
         <ChartWithLoading
@@ -42,6 +48,8 @@ export default function TopFlightsDiagram() {
             isLoading={isCountByRegionsLoading || isCountByRegionsFetching}
             isError={isCountByRegionsError}
             refetch={refetchCountByRegions}
+            sort={sort}
+            onSortChanged={onSortChanged}
         >
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={topFlightsDataset} className={chartStyles.chart} layout="vertical">
