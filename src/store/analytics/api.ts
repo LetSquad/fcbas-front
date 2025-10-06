@@ -227,7 +227,6 @@ export const analyticsApi = createApi({
 
 export const {
     useGetTrendQuery,
-    useGetTrendByRegionQuery,
     useGetTimeDistributionQuery,
     useGetTimeDistributionByRegionQuery,
     useGetMaxCountQuery,

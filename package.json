@@ -47,6 +47,7 @@
     "keycloak-js": "26.2.0",
     "lodash.merge": "4.6.2",
     "luxon": "3.7.2",
+    "primereact": "10.9.7",
     "react-is": "19.1.1",
     "react": "19.1.1",
     "react-calendar": "6.0.0",

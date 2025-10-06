@@ -119,8 +119,8 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
     const regionFlights = flightsBetweenRegion?.regionFlights;
     const topFlightsCount = flightsBetweenRegion?.count;
 
-    const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const containerRef = useRef<HTMLDivElement | null>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const { zoom, pan, onPointerDown, onPointerMove, onPointerUp, onPointerLeave, consumeDragFlag } = usePanZoom({ containerRef });
 
@@ -134,7 +134,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         text: null
     });
 
-    const animationFrameRef = useRef<number | null>(null);
+    const animationFrameRef = useRef<number>(null);
     const latestRef = useRef({
         width,
         height,

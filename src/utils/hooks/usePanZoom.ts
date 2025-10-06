@@ -146,11 +146,16 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
 
     // Прикрепляем нативный wheel к containerRef или к элементу по умолчанию (window)
     useEffect(() => {
-        const el = containerRef?.current ?? globalThis;
-        el.addEventListener("wheel", onWheel as EventListener, { passive: false });
+        const element = containerRef?.current ?? globalThis;
+
+        if (!element) {
+            return;
+        }
+
+        element.addEventListener("wheel", onWheel as EventListener, { passive: false });
 
         return () => {
-            el.removeEventListener("wheel", onWheel as EventListener);
+            element.removeEventListener("wheel", onWheel as EventListener);
         };
     }, [containerRef, onWheel]);
 

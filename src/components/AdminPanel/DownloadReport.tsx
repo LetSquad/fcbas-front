@@ -74,12 +74,13 @@ export default function DownloadReport() {
             </Flex>
             <FormikProvider value={formik}>
                 <Form>
-                    <Flex columnGap="15px" alignItemsCenter>
+                    <Flex columnGap="15px" alignItemsEnd>
                         <FormField
                             name="startDate"
                             label="Начало периода"
                             type={FormFieldType.DATEPICKER}
                             maxDate={formik.values.finishDate ? DateTime.fromISO(formik.values.finishDate).toJSDate() : undefined}
+                            className={styles.field}
                         />
                         <FormField
                             name="finishDate"
@@ -87,6 +88,7 @@ export default function DownloadReport() {
                             minDate={formik.values.startDate ? DateTime.fromISO(formik.values.startDate).toJSDate() : undefined}
                             maxDate={new Date()}
                             type={FormFieldType.DATEPICKER}
+                            className={styles.field}
                         />
                         <Button primary onClick={formik.submitForm} className={styles.button} loading={isLoading}>
                             Скачать отчет

@@ -22,7 +22,7 @@ export interface FlightsMapWrapperProps {
 
 export default function FlightsMapWrapper({ regions, onRegionClick, strictMatch = true }: FlightsMapWrapperProps) {
     // Контейнер для авторазмера
-    const holderRef = useRef<HTMLDivElement | null>(null);
+    const holderRef = useRef<HTMLDivElement>(null);
 
     // Состояния карты и размеров
     const [size, setSize] = useState<{ width: number; height: number } | null>(null);

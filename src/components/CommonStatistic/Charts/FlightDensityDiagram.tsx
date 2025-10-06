@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
 
 import { ResponsiveContainer, Tooltip, Treemap } from "recharts";
 
@@ -6,7 +7,7 @@ import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoadin
 import chartStyles from "@components/CommonStatistic/Charts/styles/Chart.module.scss";
 import { useFilterFormContext } from "@components/Dashboard/context";
 import { useGetDensityByRegionQuery } from "@store/analytics/api";
-import { useGetRegionsQuery } from "@store/regions/api";
+import { regionsApi } from "@store/regions/api";
 
 import styles from "./styles/FlightDensityDiagram.module.scss";
 
@@ -21,7 +22,7 @@ export default function FlightDensityDiagram() {
         refetch: refetchDensityByRegions
     } = useGetDensityByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
-    const { data: regions } = useGetRegionsQuery();
+    const { data: regions } = useSelector(regionsApi.endpoints.getRegions.select());
 
     const flightDensityDataset = useMemo(() => {
         if (!densityByRegions) {

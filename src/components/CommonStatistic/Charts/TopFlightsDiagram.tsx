@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
@@ -6,7 +7,7 @@ import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoadin
 import { useFilterFormContext } from "@components/Dashboard/context";
 import { SortType } from "@models/analytics/enums";
 import { useGetCountByRegionQuery } from "@store/analytics/api";
-import { useGetRegionsQuery } from "@store/regions/api";
+import { regionsApi } from "@store/regions/api";
 
 import chartStyles from "./styles/Chart.module.scss";
 
@@ -22,7 +23,7 @@ export default function TopFlightsDiagram() {
         refetch: refetchCountByRegions
     } = useGetCountByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
-    const { data: regions } = useGetRegionsQuery();
+    const { data: regions } = useSelector(regionsApi.endpoints.getRegions.select());
 
     const topFlightsDataset = useMemo(() => {
         if (!countByRegions) {

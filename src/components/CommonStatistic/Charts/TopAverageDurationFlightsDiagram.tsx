@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { Duration } from "luxon";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -8,7 +9,7 @@ import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoadin
 import { useFilterFormContext } from "@components/Dashboard/context";
 import { SortType } from "@models/analytics/enums";
 import { useGetAverageDurationByRegionQuery } from "@store/analytics/api";
-import { useGetRegionsQuery } from "@store/regions/api";
+import { regionsApi } from "@store/regions/api";
 
 import chartStyles from "./styles/Chart.module.scss";
 
@@ -24,7 +25,7 @@ export default function TopAverageDurationFlightsDiagram() {
         refetch: refetchAverageDurationByRegions
     } = useGetAverageDurationByRegionQuery({ startDate: formData.startDate, finishDate: formData.finishDate });
 
-    const { data: regions } = useGetRegionsQuery();
+    const { data: regions } = useSelector(regionsApi.endpoints.getRegions.select());
 
     const topFlightsDataset = useMemo(() => {
         if (!averageDurationByRegions) {
