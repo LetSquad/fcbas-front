@@ -22,13 +22,15 @@ interface DragState {
     moved: boolean;
 }
 
+const PAN_SPEED = 1.2;
+
 /**
  * Пан/зум для карты.
  * ВАЖНО:
  *  - Пэн разрешён ЛЮБОЙ кнопкой мыши (левая/средняя/правая) и тач/перо.
  *  - Любое заметное движение во время зажатия (по умолчанию > 1px) помечает жест как drag,
  *    и следующий click будет проигнорирован потребителем (через consumeDragFlag()).
- *  - Грациозно завершаем перетаскивание при pointerup/pointercancel/leave/blur.
+ *  - Завершаем перетаскивание при pointerup/pointercancel/leave/blur.
  */
 export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThresholdPx = 1, containerRef }: UsePanZoomProps = {}) {
     const [zoom, setZoom] = useState(1);
@@ -80,7 +82,8 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
                 dragStateRef.current.moved = true;
                 justDraggedRef.current = true;
             }
-            setPan({ x: dragRef.current.startPanX + dx, y: dragRef.current.startPanY + dy });
+
+            setPan({ x: dragRef.current.startPanX + dx * PAN_SPEED, y: dragRef.current.startPanY + dy * PAN_SPEED });
         },
         [moveThresholdPx]
     );

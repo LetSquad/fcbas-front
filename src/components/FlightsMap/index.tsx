@@ -11,11 +11,13 @@ import Overlays from "@components/FlightsMap/Overlays";
 import {
     bundledControlPoint,
     getCurrentViewBoxForPanZoom,
+    getMeetFromCurrentViewBox,
     haloOpacity,
     lerpColor,
     opacity,
     thicknessScreenPx
 } from "@components/FlightsMap/utils";
+import { useElementSize } from "@hooks/useElementSize";
 import { usePanZoom } from "@hooks/usePanZoom";
 import { HeatmapMode } from "@models/analytics/enums";
 import { FlightBetweenRegions, HeatMapInfo } from "@models/analytics/types";
@@ -55,7 +57,7 @@ const STYLE = {
     // Цвета теплокарты (от «холодного» к «горячему»)
     heatLow: "#B3D9FF",
     heatHigh: "#254b6e"
-} as const;
+};
 
 export default function FlightsMap({ viewBox, regions, width, height, onRegionClick }: FlightsMapProps) {
     const formData = useFilterFormContext();
@@ -121,8 +123,16 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const svgRef = useRef<SVGSVGElement>(null);
+    const didAutoFitRef = useRef(false);
 
-    const { zoom, pan, onPointerDown, onPointerMove, onPointerUp, onPointerLeave, consumeDragFlag } = usePanZoom({ containerRef });
+    const measured = useElementSize<HTMLDivElement>(containerRef);
+    const cssW = measured.width || width; // fallback на пропcы, если 0 в первый рендер
+    const cssH = measured.height || height;
+
+    const { zoom, pan, setZoom, setPan, onPointerDown, onPointerMove, onPointerUp, onPointerLeave, consumeDragFlag } = usePanZoom({
+        containerRef
+    });
 
     const [selectedRegionId, setSelectedRegionId] = useState<number | null>(null);
     const [heatmapMode, setHeatmapMode] = useState<HeatmapMode>(HeatmapMode.COUNT);
@@ -134,19 +144,20 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         text: null
     });
 
+    const currentViewBox = getCurrentViewBoxForPanZoom(viewBox, pan.x, pan.y, zoom, cssW, cssH);
+
     const animationFrameRef = useRef<number>(null);
     const latestRef = useRef({
-        width,
-        height,
+        width: cssW,
+        height: cssH,
         pan,
         zoom,
         viewBox,
+        currentViewBox,
         visibleBetweenRegionFlows: [] as FlightBetweenRegions[],
         selectedRegionId,
         showFlows
     });
-
-    const currentViewBox = getCurrentViewBoxForPanZoom(viewBox, pan.x, pan.y, zoom, width, height);
 
     const intraByRegion = useMemo(() => {
         const map = new Map<number, HeatMapInfo>();
@@ -556,17 +567,21 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             const {
                 width: curWidth,
                 height: curHeight,
-                pan: curPan,
-                zoom: curZoom,
-                viewBox: baseViewBox,
+                currentViewBox: curViewBox,
                 visibleBetweenRegionFlows: curVisibleFlows,
                 showFlows: curShowFlows
             } = latestRef.current;
 
             const dpr = window.devicePixelRatio || 1;
-            const desiredWidth = Math.floor(curWidth * dpr);
-            const desiredHeight = Math.floor(curHeight * dpr);
 
+            const { minX, minY, scaleScreenPerWorld, offsetXpx, offsetYpx, desiredWidth, desiredHeight } = getMeetFromCurrentViewBox(
+                curViewBox,
+                curWidth,
+                curHeight,
+                dpr
+            );
+
+            // гарантируем корректный размер внутреннего буфера под DPR
             if (canvasElement.width !== desiredWidth || canvasElement.height !== desiredHeight) {
                 canvasElement.width = desiredWidth;
                 canvasElement.height = desiredHeight;
@@ -574,25 +589,20 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
 
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.clearRect(0, 0, canvasElement.width, canvasElement.height);
-            context.globalAlpha = 1;
 
-            const currentWidthInWorld = baseViewBox.width / curZoom;
-            const currentHeightInWorld = baseViewBox.height / curZoom;
-
-            const unitsPerPixelX = currentWidthInWorld / curWidth;
-            const unitsPerPixelY = currentHeightInWorld / curHeight;
-
-            const currentMinX = baseViewBox.minX - curPan.x * unitsPerPixelX;
-            const currentMinY = baseViewBox.minY - curPan.y * unitsPerPixelY;
-
-            const pixelsPerWorldX = (curWidth / currentWidthInWorld) * dpr;
-            const pixelsPerWorldY = (curHeight / currentHeightInWorld) * dpr;
-
-            context.setTransform(pixelsPerWorldX, 0, 0, pixelsPerWorldY, -currentMinX * pixelsPerWorldX, -currentMinY * pixelsPerWorldY);
+            // ЕДИНЫЙ масштаб + правильные offsets, всё в device px
+            context.setTransform(
+                scaleScreenPerWorld,
+                0,
+                0,
+                scaleScreenPerWorld,
+                -minX * scaleScreenPerWorld + offsetXpx,
+                -minY * scaleScreenPerWorld + offsetYpx
+            );
 
             if (curShowFlows) {
                 for (const flow of curVisibleFlows) {
-                    drawInterRegionFlow(flow, context, now, pixelsPerWorldX);
+                    drawInterRegionFlow(flow, context, now, scaleScreenPerWorld);
                 }
             }
 
@@ -738,16 +748,17 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
 
     useEffect(() => {
         latestRef.current = {
-            width,
-            height,
+            width: cssW,
+            height: cssH,
             pan,
             zoom,
             viewBox,
+            currentViewBox,
             visibleBetweenRegionFlows,
             selectedRegionId,
             showFlows
         };
-    }, [width, height, pan, zoom, viewBox, visibleBetweenRegionFlows, selectedRegionId, showFlows]);
+    }, [width, height, pan, zoom, viewBox, visibleBetweenRegionFlows, selectedRegionId, showFlows, currentViewBox, cssW, cssH]);
 
     useEffect(() => {
         const canvasElement = canvasRef.current;
@@ -782,6 +793,64 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         // @ts-ignore
         return () => globalThis.removeEventListener("keydown", handleContainerKeyDown);
     }, [handleContainerKeyDown]);
+
+    useEffect(() => {
+        if (didAutoFitRef.current) {
+            return;
+        }
+        if (!svgRef.current) {
+            return;
+        }
+        if (!cssW || !cssH) {
+            return;
+        }
+        // Не вмешиваемся, если пользователь уже подвигал/приблизил
+        if (!(zoom === 1 && pan.x === 0 && pan.y === 0)) {
+            return;
+        }
+
+        // Берём базовый слой без «пузырей»; если его нет — берём весь svg
+        const layer = (svgRef.current.querySelector('g[data-layer="base"]') as SVGSVGElement | undefined) ?? svgRef.current;
+        const bbox = layer.getBBox();
+        if (!bbox.width || !bbox.height) {
+            return;
+        }
+
+        const paddingY = bbox.height * 0.05; // 5% сверху и снизу
+        const paddedBBox = {
+            x: bbox.x,
+            y: bbox.y - paddingY,
+            width: bbox.width,
+            height: bbox.height + paddingY * 2
+        };
+        const zoomToFitH = viewBox.height / paddedBBox.height;
+
+        // Какой world-вьюпорт получится при таком зуме
+        const worldW = viewBox.width / zoomToFitH;
+        const worldH = viewBox.height / zoomToFitH;
+
+        // Соотношение world-единиц к CSS-px
+        const unitsPerPxX = worldW / cssW;
+        const unitsPerPxY = worldH / cssH;
+
+        // Центрируем bbox по X в этом world-вьюпорте
+        const bboxCenterX = bbox.x + bbox.width / 2;
+
+        // смещение центра по X в долях видимого world-вьюпорта
+        // >0 — сдвиг карты влево (визуально центр уедет правее), <0 — вправо
+        const centerBias = -0.13;
+        const biasWorld = worldW * centerBias;
+
+        // Хотим, чтобы наш currentViewBox по центру совпал с bboxCenter
+        // (текущий viewBox «начинается» в (minX, minY), значит pan = смещение этой точки)
+        setZoom(zoomToFitH);
+        setPan({
+            x: (bboxCenterX - worldW / 2 - viewBox.minX + biasWorld) / unitsPerPxX,
+            y: (bbox.y - viewBox.minY) / unitsPerPxY
+        });
+
+        didAutoFitRef.current = true;
+    }, [cssW, cssH, zoom, pan.x, pan.y, viewBox, setZoom, setPan]);
 
     if (
         isAverageDurationByRegionsError ||
@@ -846,10 +915,11 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                 </Dimmer>
             )}
             <svg
-                width={width}
-                height={height}
+                ref={svgRef}
+                width={cssW}
+                height={cssH}
                 viewBox={`${currentViewBox.minX} ${currentViewBox.minY} ${currentViewBox.width} ${currentViewBox.height}`}
-                preserveAspectRatio="none"
+                preserveAspectRatio="xMidYMid meet"
                 className={styles.svg}
                 role="img"
                 aria-label="Карта регионов России"
@@ -861,7 +931,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                 {svgPaths}
             </svg>
 
-            <canvas ref={canvasRef} width={width} height={height} className={styles.canvas} />
+            <canvas ref={canvasRef} className={styles.canvas} />
 
             {/* Tooltip подсказка по региону */}
             {tooltip.visible && (

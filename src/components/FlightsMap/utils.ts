@@ -208,6 +208,36 @@ export function parsePreparedSvgFromText(svgText: string) {
     }
 }
 
+export function getMeetFromCurrentViewBox(
+    current: ViewBox,
+    cssWidth: number, // ширина контейнера/элемента в CSS px (как prop width)
+    cssHeight: number, // высота контейнера в CSS px (как prop height)
+    dpr: number
+) {
+    const desiredWidth = Math.floor(cssWidth * dpr); // внутренний буфер canvas
+    const desiredHeight = Math.floor(cssHeight * dpr);
+
+    // масштаб в CSS-пикселях
+    const scaleCss = Math.min(cssWidth / current.width, cssHeight / current.height);
+
+    // масштаб в device-пикселях (то, что идёт в context.setTransform)
+    const scale = scaleCss * dpr;
+
+    // «письма» в device-пикселях: просто остаток буфера canvas
+    const offsetX = (desiredWidth - current.width * scale) / 2;
+    const offsetY = (desiredHeight - current.height * scale) / 2;
+
+    return {
+        minX: current.minX,
+        minY: current.minY,
+        scaleScreenPerWorld: scale,
+        offsetXpx: offsetX,
+        offsetYpx: offsetY,
+        desiredWidth,
+        desiredHeight
+    };
+}
+
 export function getHeatMapLabelFromHeatmapModeEnum(value: HeatmapMode, timeResolution: TimeResolution) {
     switch (value) {
         case HeatmapMode.COUNT: {

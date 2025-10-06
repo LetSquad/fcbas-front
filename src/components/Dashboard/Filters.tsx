@@ -130,12 +130,14 @@ export default function Filters() {
         <Form className={styles.form}>
             <Flex columnGap="10px" alignItemsEnd className={styles.container}>
                 <FormField
+                    className={styles.field}
                     name="startDate"
                     label="Начало периода"
                     type={FormFieldType.DATEPICKER}
                     maxDate={formik.values.finishDate ? DateTime.fromISO(formik.values.finishDate).toJSDate() : undefined}
                 />
                 <FormField
+                    className={styles.field}
                     name="finishDate"
                     label="Конец периода"
                     minDate={formik.values.startDate ? DateTime.fromISO(formik.values.startDate).toJSDate() : undefined}
@@ -143,6 +145,7 @@ export default function Filters() {
                     type={FormFieldType.DATEPICKER}
                 />
                 <FormField
+                    className={styles.field}
                     name="resolution"
                     label="Промежуток измерения"
                     type={FormFieldType.DROPDOWN}
