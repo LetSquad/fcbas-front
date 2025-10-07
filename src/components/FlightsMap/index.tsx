@@ -9,11 +9,12 @@ import { useFilterFormContext } from "@components/Dashboard/context";
 import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
 import Overlays from "@components/FlightsMap/Overlays";
 import {
-    bundledControlPoint,
+    computeVisualCenter,
     getCurrentViewBoxForPanZoom,
     getMeetFromCurrentViewBox,
     haloOpacity,
     lerpColor,
+    makeCurve,
     opacity,
     thicknessScreenPx
 } from "@components/FlightsMap/utils";
@@ -125,6 +126,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
     const containerRef = useRef<HTMLDivElement>(null);
     const svgRef = useRef<SVGSVGElement>(null);
     const didAutoFitRef = useRef(false);
+    const anchorsRef = useRef<Map<number, [number, number]>>(new Map());
 
     const measured = useElementSize<HTMLDivElement>(containerRef);
     const cssW = measured.width || width; // fallback на пропcы, если 0 в первый рендер
@@ -457,17 +459,39 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
         [selectedRegionId]
     );
 
+    const getRegionAnchor = useCallback((regionId: number, svgRoot: SVGSVGElement) => {
+        const cached = anchorsRef.current.get(regionId);
+        if (cached) {
+            return cached;
+        }
+
+        const path: SVGPathElement | null = svgRoot.querySelector(`path[data-region-id="${regionId}"]`);
+        if (!path) {
+            return null;
+        }
+
+        const anchor = computeVisualCenter(path);
+        anchorsRef.current.set(regionId, anchor);
+        return anchor;
+    }, []);
+
     // Рисуем межрегиональную линию без анимации и без подписи + маркеры направления
     const drawInterRegionFlow = useCallback(
         (flow: FlightBetweenRegions, context: CanvasRenderingContext2D, _nowMs: number, pixelsPerWorldX: number) => {
             const departureRegion = regions[flow.departureRegionId];
             const destinationRegion = regions[flow.destinationRegionId];
-
-            if (!departureRegion || !destinationRegion) {
+            if (!departureRegion || !destinationRegion || !svgRef.current) {
                 return;
             }
 
-            const curve = bundledControlPoint(departureRegion, destinationRegion, 12, 0.35);
+            const a1 = getRegionAnchor(flow.departureRegionId, svgRef.current);
+            const a2 = getRegionAnchor(flow.destinationRegionId, svgRef.current);
+            if (!a1 || !a2) {
+                return;
+            }
+
+            // делаем кривую по новым якорям
+            const curve = makeCurve(a1, a2, 12, 0.35);
             const normalizedWeight = 1;
 
             const isEdgeOfSelected =
@@ -555,7 +579,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             context.fill();
             context.restore();
         },
-        [regions, selectedRegionId]
+        [getRegionAnchor, regions, selectedRegionId]
     );
 
     const drawFrame = useCallback(
@@ -838,7 +862,7 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
 
         // смещение центра по X в долях видимого world-вьюпорта
         // >0 — сдвиг карты влево (визуально центр уедет правее), <0 — вправо
-        const centerBias = -0.13;
+        const centerBias = -0.15;
         const biasWorld = worldW * centerBias;
 
         // Хотим, чтобы наш currentViewBox по центру совпал с bboxCenter
@@ -851,6 +875,21 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
 
         didAutoFitRef.current = true;
     }, [cssW, cssH, zoom, pan.x, pan.y, viewBox, setZoom, setPan]);
+
+    useEffect(() => {
+        if (!svgRef.current) {
+            return;
+        }
+        for (const id of Object.keys(regions)) {
+            const regionId = Number(id);
+            if (!anchorsRef.current.has(regionId)) {
+                const a = getRegionAnchor(regionId, svgRef.current);
+                if (a) {
+                    anchorsRef.current.set(regionId, a);
+                }
+            }
+        }
+    }, [getRegionAnchor, regions, svgPaths]);
 
     if (
         isAverageDurationByRegionsError ||

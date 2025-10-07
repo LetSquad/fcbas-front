@@ -264,3 +264,253 @@ export function getHeatMapLabelFromHeatmapModeEnum(value: HeatmapMode, timeResol
         // skip default
     }
 }
+
+// Извлекаем бинарную маску (0/1) из canvas ImageData -> distance map (float)
+// Chamfer DT (3-4) в два прохода, 8-соседей: быстро и достаточно точно.
+function distanceTransform(canvas: HTMLCanvasElement): Float32Array {
+    const w = canvas.width;
+    const h = canvas.height;
+    const ctx = canvas.getContext("2d")!;
+    const { data } = ctx.getImageData(0, 0, w, h);
+
+    // маска: 1 — внутри региона, 0 — фон
+    const inside = new Uint8Array(w * h);
+    for (let i = 0, p = 0; i < data.length; i += 4, p++) {
+        // заполняли чёрным -> внутри: R==0 && A>0
+        inside[p] = data[i + 3] > 0 && data[i] === 0 ? 1 : 0;
+    }
+
+    const inf = 1e9;
+    const dist = new Float32Array(w * h);
+    for (let i = 0; i < dist.length; i++) {
+        dist[i] = inside[i] ? inf : 0;
+    }
+
+    // forward pass
+    for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+            const i = y * w + x;
+            if (!inside[i]) {
+                continue;
+            }
+            let d = dist[i];
+            // лево/верх и диагонали
+            if (x > 0) {
+                d = Math.min(d, dist[i - 1] + 3);
+            }
+            if (y > 0) {
+                d = Math.min(d, dist[i - w] + 3);
+                if (x > 0) {
+                    d = Math.min(d, dist[i - w - 1] + 4);
+                }
+                if (x + 1 < w) {
+                    d = Math.min(d, dist[i - w + 1] + 4);
+                }
+            }
+            dist[i] = d;
+        }
+    }
+    // backward pass
+    for (let y = h - 1; y >= 0; y--) {
+        for (let x = w - 1; x >= 0; x--) {
+            const i = y * w + x;
+            if (!inside[i]) {
+                continue;
+            }
+            let d = dist[i];
+            if (x + 1 < w) {
+                d = Math.min(d, dist[i + 1] + 3);
+            }
+            if (y + 1 < h) {
+                d = Math.min(d, dist[i + w] + 3);
+                if (x + 1 < w) {
+                    d = Math.min(d, dist[i + w + 1] + 4);
+                }
+                if (x > 0) {
+                    d = Math.min(d, dist[i + w - 1] + 4);
+                }
+            }
+            dist[i] = d;
+        }
+    }
+
+    // нормализация в «пиксели»
+    for (let i = 0; i < dist.length; i++) {
+        dist[i] = dist[i] === inf ? 0 : dist[i] / 3; // 3 == стоимость по прямым
+    }
+    return dist;
+}
+
+// Простейшая эрозия маски внутрь на px (защита от прилипания к границе).
+function erodeMask(canvas: HTMLCanvasElement, px: number) {
+    const w = canvas.width;
+    const h = canvas.height;
+    const ctx = canvas.getContext("2d")!;
+    const img = ctx.getImageData(0, 0, w, h);
+    const src = new Uint8ClampedArray(img.data);
+    const dst = img.data;
+    for (let p = 0; p < px; p++) {
+        for (let y = 1; y < h - 1; y++) {
+            for (let x = 1; x < w - 1; x++) {
+                const i = (y * w + x) * 4;
+                // если любой сосед фон — делаем фон
+                let keep = true;
+                for (let dy = -1; dy <= 1; dy++) {
+                    for (let dx = -1; dx <= 1; dx++) {
+                        if (!dx && !dy) {
+                            continue;
+                        }
+                        const j = ((y + dy) * w + (x + dx)) * 4;
+                        if (src[j + 3] === 0) {
+                            keep = false;
+                        }
+                    }
+                }
+
+                if (keep) {
+                    dst[i] = 0;
+                    dst[i + 1] = 0;
+                    dst[i + 2] = 0;
+                    dst[i + 3] = 255;
+                } else {
+                    dst[i] = 255;
+                    dst[i + 1] = 255;
+                    dst[i + 2] = 255;
+                    dst[i + 3] = 0;
+                }
+            }
+        }
+        src.set(dst);
+    }
+    ctx.putImageData(img, 0, 0);
+}
+
+// Box blur радиуса r по месту для Float32Array
+function boxBlur(buf: Float32Array, w: number, h: number, r: number) {
+    if (r <= 0) {
+        return;
+    }
+    const tmp = new Float32Array(buf.length);
+    // по X
+    for (let y = 0; y < h; y++) {
+        let acc = 0;
+        const row = y * w;
+        for (let x = -r; x <= r; x++) {
+            acc += buf[row + Math.max(0, Math.min(w - 1, x))];
+        }
+        tmp[row] = acc / (2 * r + 1);
+        for (let x = 1; x < w; x++) {
+            const add = buf[row + Math.min(w - 1, x + r)];
+            const rem = buf[row + Math.max(0, x - r - 1)];
+            acc += add - rem;
+            tmp[row + x] = acc / (2 * r + 1);
+        }
+    }
+    // по Y
+    for (let x = 0; x < w; x++) {
+        let acc = 0;
+        for (let y = -r; y <= r; y++) {
+            acc += tmp[Math.max(0, Math.min(h - 1, y)) * w + x];
+        }
+        buf[x] = acc / (2 * r + 1);
+        for (let y = 1; y < h; y++) {
+            const add = tmp[Math.min(h - 1, y + r) * w + x];
+            const rem = tmp[Math.max(0, y - r - 1) * w + x];
+            acc += add - rem;
+            buf[y * w + x] = acc / (2 * r + 1);
+        }
+    }
+}
+
+// Быстрый "визуальный центр" через растровую маску + distance transform.
+// Работает надёжнее на полумесяцах, узких перешейках и сложных составных контурах.
+export function computeVisualCenter(
+    path: SVGPathElement,
+    opts?: {
+        maxTexture?: number; // макс. размер offscreen-канвы по большей стороне
+        blurFrac?: number; // сглаживание расстояний (стабилизирует пик)
+        safetyShrink?: number; // "усадка" маски внутрь, чтобы не прилипало к краям
+    }
+): [number, number] {
+    const { maxTexture = 640, blurFrac = 0.02, safetyShrink = 0.75 } = opts ?? {};
+    const d = path.getAttribute("d");
+    if (!d) {
+        const b = path.getBBox();
+        return [b.x + b.width / 2, b.y + b.height / 2];
+    }
+
+    // 1) Ббокс и масштаб растра
+    const bbox = path.getBBox();
+    const w = Math.max(2, Math.ceil(bbox.width));
+    const h = Math.max(2, Math.ceil(bbox.height));
+    const scale = Math.min(1, maxTexture / Math.max(w, h));
+    const rw = Math.max(2, Math.ceil(w * scale));
+    const rh = Math.max(2, Math.ceil(h * scale));
+
+    // 2) Рисуем маску региона
+    const off = document.createElement("canvas");
+    off.width = rw;
+    off.height = rh;
+    const ctx = off.getContext("2d")!;
+    ctx.translate(-bbox.x * scale, -bbox.y * scale);
+    ctx.scale(scale, scale);
+
+    const p2d = new Path2D(d);
+    ctx.fill(p2d, "evenodd"); // корректно обрабатываем дыры
+    ctx.fillStyle = "#000";
+    ctx.fill(p2d);
+
+    // опционально "усаживаем" маску внутрь (в пикселях растра),
+    // чтобы якорь гарантированно не лип к границе в узких местах
+    if (safetyShrink > 0) {
+        const px = Math.max(0, Math.round(Math.min(rw, rh) * (safetyShrink / 100)));
+        if (px > 0) {
+            erodeMask(off, px);
+        }
+    }
+
+    // 3) Строим карту расстояний (8-соседей, chamfer 3-4)
+    const dist = distanceTransform(off);
+
+    // 4) Небольшое размытие — боремся с «островными пиками» на перешейках
+    const blurPx = Math.max(0, Math.round(Math.min(rw, rh) * blurFrac));
+    if (blurPx > 0) {
+        boxBlur(dist, rw, rh, blurPx);
+    }
+
+    // 5) Ищем максимум расстояния (центр «самой толстой» части суши)
+    let bestVal = -1;
+    let bestX = 0;
+    let bestY = 0;
+    for (let y = 0; y < rh; y++) {
+        for (let x = 0; x < rw; x++) {
+            const v = dist[y * rw + x];
+            if (v > bestVal) {
+                bestVal = v;
+                bestX = x;
+                bestY = y;
+            }
+        }
+    }
+
+    // 6) Возвращаем в координаты исходного SVG
+    const sx = bestX / scale + bbox.x;
+    const sy = bestY / scale + bbox.y;
+    return [sx, sy];
+}
+
+// Контрольная точка кривой (аналог вашей bundled-логики)
+export function makeCurve(p1: [number, number], p2: [number, number], bend = 12, strength = 0.35) {
+    const [x1, y1] = p1;
+    const [x2, y2] = p2;
+    const mx = (x1 + x2) / 2;
+    const my = (y1 + y2) / 2;
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const len = Math.hypot(dx, dy) || 1;
+    // перпендикуляр в сторону «северо-востока», чтобы дуги выглядели как у вас
+    const nx = -dy / len;
+    const ny = dx / len;
+    const c: [number, number] = [mx + nx * bend * strength, my + ny * bend * strength];
+    return { p1, p2, c };
+}
