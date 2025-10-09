@@ -16,7 +16,7 @@ import { Row } from "primereact/row";
 import { Button } from "semantic-ui-react";
 
 import LoadingErrorBlock from "@commonComponents/LoadingErrorBlock/LoadingErrorBlock";
-import { useFilterFormContext } from "@components/Dashboard/context";
+import { useFilterForm } from "@components/Dashboard/context";
 import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
 import {
     AverageCountByRegionMap,
@@ -107,7 +107,7 @@ function formatTableData(
 }
 
 export default function StatisticTable() {
-    const formData = useFilterFormContext();
+    const formData = useFilterForm();
 
     const { data: regions } = useSelector(regionsApi.endpoints.getRegions.select());
 

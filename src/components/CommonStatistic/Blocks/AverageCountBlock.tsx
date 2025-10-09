@@ -1,10 +1,10 @@
 import BlockWithLoading from "@components/CommonStatistic/Blocks/BlockWithLoading";
-import { useFilterFormContext } from "@components/Dashboard/context";
+import { useFilterForm } from "@components/Dashboard/context";
 import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
 import { useGetAverageCountQuery } from "@store/analytics/api";
 
 export default function AverageCountBlock() {
-    const formData = useFilterFormContext();
+    const formData = useFilterForm();
 
     const {
         data: averageCount,

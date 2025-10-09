@@ -5,7 +5,7 @@ import { Dimmer, Loader } from "semantic-ui-react";
 
 import Flex from "@commonComponents/Flex";
 import LoadingErrorBlock from "@commonComponents/LoadingErrorBlock/LoadingErrorBlock";
-import { useFilterFormContext } from "@components/Dashboard/context";
+import { useFilterForm } from "@components/Dashboard/context";
 import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
 import Overlays from "@components/FlightsMap/Overlays";
 import {
@@ -61,7 +61,7 @@ const STYLE = {
 };
 
 export default function FlightsMap({ viewBox, regions, width, height, onRegionClick }: FlightsMapProps) {
-    const formData = useFilterFormContext();
+    const formData = useFilterForm();
 
     const {
         data: countByRegions,

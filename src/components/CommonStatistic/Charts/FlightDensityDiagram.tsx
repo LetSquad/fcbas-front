@@ -5,14 +5,14 @@ import { ResponsiveContainer, Tooltip, Treemap } from "recharts";
 
 import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoading";
 import chartStyles from "@components/CommonStatistic/Charts/styles/Chart.module.scss";
-import { useFilterFormContext } from "@components/Dashboard/context";
+import { useFilterForm } from "@components/Dashboard/context";
 import { useGetDensityByRegionQuery } from "@store/analytics/api";
 import { regionsApi } from "@store/regions/api";
 
 import styles from "./styles/FlightDensityDiagram.module.scss";
 
 export default function FlightDensityDiagram() {
-    const formData = useFilterFormContext();
+    const formData = useFilterForm();
 
     const {
         data: densityByRegions,

@@ -7,7 +7,7 @@ import { Button, Form } from "semantic-ui-react";
 
 import Flex from "@commonComponents/Flex";
 import FormField from "@commonComponents/FormField";
-import { useFilterFormContext } from "@components/Dashboard/context";
+import { useFilterForm } from "@components/Dashboard/context";
 import { getTimeResolutionLabelFromEnum, isDisabledByTimeResolutionEnum } from "@components/Dashboard/utils";
 import { TimeResolution } from "@models/analytics/enums";
 import { FormData } from "@models/filters/types";
@@ -33,7 +33,7 @@ export const INITIAL_FORM_DATA: () => FormData = () => ({
 export default function Filters() {
     const formik = useFormikContext<FormData>();
 
-    const formData = useFilterFormContext();
+    const formData = useFilterForm();
 
     const countByRegionsInfo = useSelector(
         analyticsApi.endpoints.getCountByRegion.select({

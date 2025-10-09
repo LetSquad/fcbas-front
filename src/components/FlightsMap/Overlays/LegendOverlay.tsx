@@ -2,7 +2,7 @@ import { Checkbox, Dropdown } from "semantic-ui-react";
 import { $enum } from "ts-enum-util";
 
 import Flex from "@commonComponents/Flex";
-import { useFilterFormContext } from "@components/Dashboard/context";
+import { useFilterForm } from "@components/Dashboard/context";
 import { getHeatMapLabelFromHeatmapModeEnum } from "@components/FlightsMap/utils";
 import { HeatmapMode, TimeResolution } from "@models/analytics/enums";
 import { HeatDomains } from "@models/analytics/types";
@@ -41,7 +41,7 @@ export default function LegendOverlay({
     topFlightsCount,
     onToggleShowFlows
 }: LegendOverlayProps) {
-    const formData = useFilterFormContext();
+    const formData = useFilterForm();
 
     return (
         <Flex column rowGap="8px" className={styles.container}>

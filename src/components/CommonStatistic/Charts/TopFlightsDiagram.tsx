@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoading";
-import { useFilterFormContext } from "@components/Dashboard/context";
+import { useFilterForm } from "@components/Dashboard/context";
 import { SortType } from "@models/analytics/enums";
 import { useGetCountByRegionQuery } from "@store/analytics/api";
 import { regionsApi } from "@store/regions/api";
@@ -12,7 +12,7 @@ import { regionsApi } from "@store/regions/api";
 import chartStyles from "./styles/Chart.module.scss";
 
 export default function TopFlightsDiagram() {
-    const formData = useFilterFormContext();
+    const formData = useFilterForm();
     const [sort, setSort] = useState<SortType>(SortType.DESC);
 
     const {
