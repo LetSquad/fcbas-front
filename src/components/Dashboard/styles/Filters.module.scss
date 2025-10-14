@@ -1,8 +1,7 @@
 @use '@coreStyles/variables.module' as variables;
 
 .container {
-  margin-left: 15px;
-  margin-top: 10px;
+  margin: 10px 15px 0;
 }
 
 .form {
@@ -11,6 +10,12 @@
 
 .field {
   margin-bottom: 0 !important;
+  min-width: 105px;
+
+  &-dropdown {
+    margin-bottom: 0 !important;
+    min-width: 14em;
+  }
 }
 
 .button {

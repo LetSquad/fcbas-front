@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import { useFormikContext } from "formik";
 import { DateTime, Interval } from "luxon";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Dropdown, DropdownItem, DropdownMenu, Form } from "semantic-ui-react";
 
 import Flex from "@commonComponents/Flex";
 import FormField from "@commonComponents/FormField";
@@ -17,6 +17,85 @@ import { analyticsApi } from "@store/analytics/api";
 import { RootState } from "@store/index";
 
 import styles from "./styles/Filters.module.scss";
+
+interface QuickFilterPreset {
+    id: string;
+    label: string;
+    getValues: () => FormData;
+}
+
+const QUICK_FILTER_PRESETS: QuickFilterPreset[] = [
+    {
+        id: "lastDay",
+        label: "Последние 24 часа",
+        getValues: () => {
+            const finishDate = DateTime.now();
+            const startDate = finishDate.minus({ days: 1 });
+
+            return {
+                startDate: startDate.toISODate(),
+                finishDate: finishDate.toISODate(),
+                resolution: TimeResolution.HOUR
+            };
+        }
+    },
+    {
+        id: "lastWeek",
+        label: "Последние 7 дней",
+        getValues: () => {
+            const finishDate = DateTime.now();
+            const startDate = finishDate.minus({ days: 6 });
+
+            return {
+                startDate: startDate.toISODate(),
+                finishDate: finishDate.toISODate(),
+                resolution: TimeResolution.DAY
+            };
+        }
+    },
+    {
+        id: "lastMonth",
+        label: "Последние 30 дней",
+        getValues: () => {
+            const finishDate = DateTime.now();
+            const startDate = finishDate.minus({ days: 29 });
+
+            return {
+                startDate: startDate.toISODate(),
+                finishDate: finishDate.toISODate(),
+                resolution: TimeResolution.DAY
+            };
+        }
+    },
+    {
+        id: "year",
+        label: "Год",
+        getValues: () => {
+            const finishDate = DateTime.now();
+            const startDate = finishDate.minus({ year: 1 }).plus({ days: 1 });
+
+            return {
+                startDate: startDate.toISODate(),
+                finishDate: finishDate.toISODate(),
+                resolution: TimeResolution.MONTH
+            };
+        }
+    },
+    {
+        id: "currentYear",
+        label: "Текущий год",
+        getValues: () => {
+            const finishDate = DateTime.now();
+            const startDate = finishDate.startOf("year");
+
+            return {
+                startDate: startDate.toISODate(),
+                finishDate: finishDate.toISODate(),
+                resolution: TimeResolution.MONTH
+            };
+        }
+    }
+];
 
 const TIME_RESOLUTION_OPTIONS: (interval: Interval) => DropdownOption[] = (interval) =>
     Object.values(TimeResolution).map((timeResolution) => ({
@@ -78,7 +157,23 @@ export default function Filters() {
             dateRangeSelectors.some((select) => select(state).isLoading) || resolutionSelectors.some((select) => select(state).isLoading)
     );
     const isApplyDisabled = useMemo(() => areFiltersEqual(formik.values, formData), [formData, formik.values]);
-    const isResetDisabled = useMemo(() => areFiltersEqual(formik.values, initialFormDataRef.current), [formik.values]);
+
+    const handlePresetSelect = useCallback(
+        (preset: QuickFilterPreset) => {
+            const presetValues = preset.getValues();
+            const shouldSubmit = !areFiltersEqual(formData, presetValues);
+
+            formik.setValues(presetValues, false);
+            formik.setTouched({}, false);
+
+            if (shouldSubmit) {
+                setTimeout(() => {
+                    formik.submitForm().catch(() => undefined);
+                }, 0);
+            }
+        },
+        [formData, formik]
+    );
 
     useEffect(() => {
         initialFormDataRef.current = formik.initialValues;
@@ -120,7 +215,7 @@ export default function Filters() {
                     type={FormFieldType.DATEPICKER}
                 />
                 <FormField
-                    className={styles.field}
+                    className={styles.fieldDropdown}
                     name="resolution"
                     label="Промежуток измерения"
                     type={FormFieldType.DROPDOWN}
@@ -129,7 +224,7 @@ export default function Filters() {
                 />
                 <Button
                     type="submit"
-                    disabled={isApplyDisabled}
+                    disabled={isApplyDisabled || isLoading}
                     onClick={formik.submitForm}
                     primary
                     className={styles.button}
@@ -137,9 +232,16 @@ export default function Filters() {
                 >
                     Применить
                 </Button>
-                <Button type="button" disabled={isResetDisabled} onClick={() => formik.resetForm()} basic className={styles.button}>
-                    Сбросить
-                </Button>
+
+                <Dropdown text="Пресеты" button className={styles.button} loading={isLoading} disabled={isLoading}>
+                    <DropdownMenu>
+                        {QUICK_FILTER_PRESETS.map((preset) => (
+                            <DropdownItem key={preset.id} onClick={() => handlePresetSelect(preset)}>
+                                {preset.label}
+                            </DropdownItem>
+                        ))}
+                    </DropdownMenu>
+                </Dropdown>
             </Flex>
         </Form>
     );
