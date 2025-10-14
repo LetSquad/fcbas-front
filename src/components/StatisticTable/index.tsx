@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { DateTime } from "luxon";
-import { FilterMatchMode } from "primereact/api";
 import {
     Column,
     ColumnFilterApplyTemplateOptions,
@@ -9,7 +8,7 @@ import {
     ColumnFilterElementTemplateOptions
 } from "primereact/column";
 import { ColumnGroup } from "primereact/columngroup";
-import { DataTable, DataTableFilterMeta } from "primereact/datatable";
+import { DataTable, DataTableColReorderEvent, DataTableFilterMeta } from "primereact/datatable";
 import { MultiSelect } from "primereact/multiselect";
 import { Row } from "primereact/row";
 import { Button } from "semantic-ui-react";
@@ -24,57 +23,36 @@ import type { TableColumnKey, TableData } from "@models/analytics/types";
 import styles from "./styles/StatisticTable.module.scss";
 import Toolbar from "./Toolbar";
 import { useRegionAnalytics } from "./utils/hooks/useRegionAnalytics";
-
-const DEFAULT_VISIBLE_COLUMNS: TableColumnKey[] = [
-    "count",
-    "averageCount",
-    "medianCount",
-    "maxCount.count",
-    "averageDuration",
-    "density",
-    "emptyDays",
-    "timeDistribution.morningCount",
-    "timeDistribution.dayCount",
-    "timeDistribution.eveningCount"
-];
-
-const COLUMN_SELECTION_OPTIONS = [
-    { value: "count", text: "Количество полетов" },
-    { value: "averageCount", text: "Среднее количество полетов" },
-    { value: "medianCount", text: "Медианное количество полетов" },
-    { value: "maxCount.count", text: "Максимальное количество полетов" },
-    { value: "averageDuration", text: "Средняя длительность полета" },
-    { value: "density", text: "Интенсивность полетов" },
-    { value: "emptyDays", text: "Количество дней без полетов" },
-    { value: "timeDistribution.morningCount", text: "Утренние полеты" },
-    { value: "timeDistribution.dayCount", text: "Дневные полеты" },
-    { value: "timeDistribution.eveningCount", text: "Вечерние полеты" }
-] satisfies { value: TableColumnKey; text: string }[];
-
-const TOP_LEVEL_COLUMN_KEYS: TableColumnKey[] = [
-    "count",
-    "averageCount",
-    "medianCount",
-    "maxCount.count",
-    "averageDuration",
-    "density",
-    "emptyDays"
-];
-
-const TIME_DISTRIBUTION_COLUMN_KEYS: TableColumnKey[] = [
-    "timeDistribution.morningCount",
-    "timeDistribution.dayCount",
-    "timeDistribution.eveningCount"
-];
+import {
+    createRegionFilterMeta,
+    DEFAULT_COLUMN_ORDER,
+    DEFAULT_VISIBLE_COLUMNS,
+    getColumnOptionsForOrder,
+    getRegionFilterValue,
+    loadPreferences,
+    sanitizeColumnOrder,
+    sanitizeVisibleColumns,
+    savePreferences,
+    TIME_DISTRIBUTION_COLUMN_KEYS,
+    TOP_LEVEL_COLUMN_KEYS
+} from "./utils/preferences";
 
 export default function StatisticTable() {
     const formData = useFilterForm();
 
     const { regions, densityPartAreaKm, formattedTableData, statusSummary, refetchErroredQueries } = useRegionAnalytics();
 
+    const initialPreferences = useMemo(() => loadPreferences(), []);
+
     const [tableData, setTableData] = useState<TableData[]>();
-    const [filter, setFilter] = useState<DataTableFilterMeta>({ region: { value: null, matchMode: FilterMatchMode.IN } });
-    const [visibleColumns, setVisibleColumns] = useState<TableColumnKey[]>(DEFAULT_VISIBLE_COLUMNS);
+    const [columnOrder, setColumnOrder] = useState<TableColumnKey[]>(() => initialPreferences?.columnOrder ?? [...DEFAULT_COLUMN_ORDER]);
+    const [visibleColumns, setVisibleColumns] = useState<TableColumnKey[]>(
+        () =>
+            initialPreferences?.visibleColumns ??
+            sanitizeVisibleColumns(DEFAULT_VISIBLE_COLUMNS, initialPreferences?.columnOrder ?? DEFAULT_COLUMN_ORDER)
+    );
+    const [selectedRegions, setSelectedRegions] = useState<string[] | null>(() => initialPreferences?.regionFilter ?? null);
+    const filters = useMemo<DataTableFilterMeta>(() => createRegionFilterMeta(selectedRegions), [selectedRegions]);
 
     const dataTableRef = useRef<DataTable<TableData[]> | null>(null);
 
@@ -95,7 +73,7 @@ export default function StatisticTable() {
 
     const filterApplyTemplate = useCallback(
         (options: ColumnFilterApplyTemplateOptions) => (
-            <Button type="button" onClick={() => options.filterApplyCallback()} severity="primary">
+            <Button type="button" primary onClick={() => options.filterApplyCallback()}>
                 Применить
             </Button>
         ),
@@ -128,10 +106,19 @@ export default function StatisticTable() {
 
     const visibleColumnsSet = useMemo(() => new Set(visibleColumns), [visibleColumns]);
 
-    const timeDistributionVisibleCount = useMemo(
-        () => TIME_DISTRIBUTION_COLUMN_KEYS.filter((key) => visibleColumnsSet.has(key)).length,
-        [visibleColumnsSet]
+    const visibleTopLevelColumns = useMemo(
+        () => columnOrder.filter((key) => TOP_LEVEL_COLUMN_KEYS.includes(key) && visibleColumnsSet.has(key)),
+        [columnOrder, visibleColumnsSet]
     );
+
+    const visibleTimeColumns = useMemo(
+        () => columnOrder.filter((key) => TIME_DISTRIBUTION_COLUMN_KEYS.includes(key) && visibleColumnsSet.has(key)),
+        [columnOrder, visibleColumnsSet]
+    );
+
+    const shouldRenderTimeGroup = visibleTimeColumns.length > 1;
+
+    const columnOptions = useMemo(() => getColumnOptionsForOrder(columnOrder), [columnOrder]);
 
     const resolutionDescription = useMemo(() => getTimeResolutionDescriptionFromEnum(formData.resolution), [formData.resolution]);
 
@@ -176,11 +163,15 @@ export default function StatisticTable() {
         [densityPartAreaKm, resolutionDescription]
     );
 
-    const headerGroup = useMemo(
-        () => (
+    const headerGroup = useMemo(() => {
+        const topRowColumns: TableColumnKey[] = shouldRenderTimeGroup
+            ? visibleTopLevelColumns
+            : [...visibleTopLevelColumns, ...visibleTimeColumns];
+
+        return (
             <ColumnGroup>
                 <Row>
-                    <Column rowSpan={2} frozen />
+                    <Column rowSpan={shouldRenderTimeGroup ? 2 : 1} frozen className={styles.reorderColumn} />
                     <Column
                         filter
                         showFilterMatchModes={false}
@@ -189,32 +180,78 @@ export default function StatisticTable() {
                         filterClear={filterClearTemplate}
                         field="region"
                         header="Регион"
-                        rowSpan={2}
+                        rowSpan={shouldRenderTimeGroup ? 2 : 1}
                         frozen
                         sortable
                     />
-                    {TOP_LEVEL_COLUMN_KEYS.map((columnKey) =>
-                        visibleColumnsSet.has(columnKey) ? (
-                            <Column key={columnKey} field={columnKey} sortable header={getColumnHeader(columnKey)} rowSpan={2} />
-                        ) : null
-                    )}
-                    {timeDistributionVisibleCount > 0 && (
-                        <Column header="Дневное распределение полетов" colSpan={timeDistributionVisibleCount} alignHeader="center" />
+                    {topRowColumns.map((columnKey) => (
+                        <Column
+                            key={`top-${columnKey}`}
+                            field={columnKey}
+                            columnKey={columnKey}
+                            sortable
+                            header={getColumnHeader(columnKey)}
+                            rowSpan={shouldRenderTimeGroup ? 2 : 1}
+                        />
+                    ))}
+                    {shouldRenderTimeGroup && (
+                        <Column header="Дневное распределение полетов" colSpan={visibleTimeColumns.length} alignHeader="center" />
                     )}
                 </Row>
-                {timeDistributionVisibleCount > 0 && (
+                {shouldRenderTimeGroup && (
                     <Row>
-                        {TIME_DISTRIBUTION_COLUMN_KEYS.map((columnKey) =>
-                            visibleColumnsSet.has(columnKey) ? (
-                                <Column key={columnKey} header={getColumnHeader(columnKey)} sortable field={columnKey} />
-                            ) : null
-                        )}
+                        {visibleTimeColumns.map((columnKey) => (
+                            <Column
+                                key={`time-${columnKey}`}
+                                header={getColumnHeader(columnKey)}
+                                sortable
+                                field={columnKey}
+                                columnKey={columnKey}
+                            />
+                        ))}
                     </Row>
                 )}
             </ColumnGroup>
-        ),
-        [filterApplyTemplate, filterClearTemplate, getColumnHeader, regionFilterElement, timeDistributionVisibleCount, visibleColumnsSet]
+        );
+    }, [
+        filterApplyTemplate,
+        filterClearTemplate,
+        getColumnHeader,
+        regionFilterElement,
+        shouldRenderTimeGroup,
+        visibleTimeColumns,
+        visibleTopLevelColumns
+    ]);
+
+    const handleColumnReorder = useCallback(
+        (event: DataTableColReorderEvent) => {
+            const reorderedVisibleColumns = event.columns
+                .map((column) => (column.props.columnKey ?? column.props.field) as TableColumnKey | undefined)
+                .filter((key): key is TableColumnKey => key !== undefined);
+
+            const hiddenColumns = columnOrder.filter((key) => !reorderedVisibleColumns.includes(key));
+            const nextOrder = sanitizeColumnOrder([...reorderedVisibleColumns, ...hiddenColumns]);
+
+            setColumnOrder(nextOrder);
+            setVisibleColumns((previousVisible) => sanitizeVisibleColumns(previousVisible, nextOrder, previousVisible));
+        },
+        [columnOrder]
     );
+
+    const handleVisibleColumnsChange = useCallback(
+        (columns: TableColumnKey[]) => {
+            setVisibleColumns(sanitizeVisibleColumns(columns, columnOrder));
+        },
+        [columnOrder]
+    );
+
+    useEffect(() => {
+        savePreferences({
+            columnOrder,
+            visibleColumns,
+            regionFilter: selectedRegions
+        });
+    }, [columnOrder, selectedRegions, visibleColumns]);
 
     const handleExportCSV = useCallback(() => {
         dataTableRef.current?.exportCSV();
@@ -245,9 +282,9 @@ export default function StatisticTable() {
                 isDisabled={exportDisabled}
                 onExportCSV={handleExportCSV}
                 onExportXLSX={handleExportXLSX}
-                columnOptions={COLUMN_SELECTION_OPTIONS}
+                columnOptions={columnOptions}
                 visibleColumns={visibleColumns}
-                onVisibleColumnsChange={setVisibleColumns}
+                onVisibleColumnsChange={handleVisibleColumnsChange}
             />
 
             {statusSummary.hasError && <LoadingErrorBlock isLoadingErrorObjectText="данных статистики" reload={refetchErroredQueries} />}
@@ -258,31 +295,24 @@ export default function StatisticTable() {
                 scrollHeight="flex"
                 value={tableData || []}
                 reorderableRows
+                reorderableColumns
                 removableSort
                 showGridlines
                 emptyMessage="Данные не найдены."
-                filters={filter}
-                onFilter={(event) => setFilter(event.filters)}
+                filters={filters}
+                onFilter={(event) => setSelectedRegions(getRegionFilterValue(event.filters))}
                 onRowReorder={(event) => setTableData(event.value)}
+                onColReorder={handleColumnReorder}
                 loading={statusSummary.isLoading || tableData === undefined}
                 headerColumnGroup={headerGroup}
             >
-                <Column rowReorder frozen />
+                <Column rowReorder frozen className={styles.reorderColumn} />
                 <Column field="region" frozen />
-                {TOP_LEVEL_COLUMN_KEYS.map((columnKey) =>
+                {columnOrder.map((columnKey) =>
                     visibleColumnsSet.has(columnKey) ? (
                         <Column
                             key={columnKey}
-                            field={columnKey}
-                            body={(rowData: TableData) => getColumnBodyValue(columnKey, rowData)}
-                            sortable
-                        />
-                    ) : null
-                )}
-                {TIME_DISTRIBUTION_COLUMN_KEYS.map((columnKey) =>
-                    visibleColumnsSet.has(columnKey) ? (
-                        <Column
-                            key={columnKey}
+                            columnKey={columnKey}
                             field={columnKey}
                             body={(rowData: TableData) => getColumnBodyValue(columnKey, rowData)}
                             sortable

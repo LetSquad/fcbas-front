@@ -1,4 +1,4 @@
-import { SyntheticEvent, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import classNames from "classnames";
 import { Button, Checkbox, Dropdown } from "semantic-ui-react";

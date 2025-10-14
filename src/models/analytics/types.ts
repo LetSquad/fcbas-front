@@ -333,3 +333,9 @@ export type TableColumnKey =
     | "timeDistribution.morningCount"
     | "timeDistribution.dayCount"
     | "timeDistribution.eveningCount";
+
+export interface StatisticTablePreferences {
+    columnOrder: TableColumnKey[];
+    visibleColumns: TableColumnKey[];
+    regionFilter: string[] | null;
+}
