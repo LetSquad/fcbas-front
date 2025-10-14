@@ -13,6 +13,7 @@ import MapTooltip from "@components/FlightsMap/MapTooltip";
 import Overlays from "@components/FlightsMap/Overlays";
 import { useAutoFitOnce } from "@components/FlightsMap/utils/hooks/useAutoFitOnce";
 import { useEscapeToResetSelection } from "@components/FlightsMap/utils/hooks/useEscapeToResetSelection";
+import { usePanZoom } from "@components/FlightsMap/utils/hooks/usePanZoom";
 import {
     computeVisualCenter,
     getCurrentViewBoxForPanZoom,
@@ -23,7 +24,6 @@ import {
     thicknessScreenPx
 } from "@components/FlightsMap/utils/utils";
 import { useElementSize } from "@hooks/useElementSize";
-import { usePanZoom } from "@hooks/usePanZoom";
 import { HeatmapMode } from "@models/analytics/enums";
 import { FlightBetweenRegions } from "@models/analytics/types";
 import { ViewBox } from "@models/map/types";
@@ -81,6 +81,16 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
     const containerRef = useRef<HTMLDivElement>(null);
     const svgRef = useRef<SVGSVGElement>(null);
     const anchorsRef = useRef<Map<number, [number, number]>>(new Map());
+    const curveCacheRef = useRef<
+        Map<
+            string,
+            {
+                curve: ReturnType<typeof makeCurve>;
+                departure: [number, number];
+                destination: [number, number];
+            }
+        >
+    >(new Map());
 
     const measured = useElementSize<HTMLDivElement>(containerRef);
     const cssW = measured.width || width; // fallback на пропcы, если 0 в первый рендер
@@ -287,8 +297,28 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                 return;
             }
 
-            // делаем кривую по новым якорям
-            const curve = makeCurve(a1, a2, 12, 0.35);
+            const cacheKey = `${flow.departureRegionId}-${flow.destinationRegionId}`;
+            const cachedCurve = curveCacheRef.current.get(cacheKey);
+            const departureAnchor: [number, number] = [a1[0], a1[1]];
+            const destinationAnchor: [number, number] = [a2[0], a2[1]];
+
+            let curve = cachedCurve?.curve;
+
+            if (
+                !curve ||
+                cachedCurve?.departure[0] !== departureAnchor[0] ||
+                cachedCurve?.departure[1] !== departureAnchor[1] ||
+                cachedCurve?.destination[0] !== destinationAnchor[0] ||
+                cachedCurve?.destination[1] !== destinationAnchor[1]
+            ) {
+                curve = makeCurve(departureAnchor, destinationAnchor, 12, 0.35);
+                curveCacheRef.current.set(cacheKey, {
+                    curve,
+                    departure: departureAnchor,
+                    destination: destinationAnchor
+                });
+            }
+
             const normalizedWeight = 1;
 
             const isEdgeOfSelected =
@@ -502,6 +532,10 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
             }
         }
     }, [getRegionAnchor, regions]);
+
+    useEffect(() => {
+        curveCacheRef.current.clear();
+    }, [regions]);
 
     const hasHeatmapError = Boolean(heatmapErrorRefetch);
 

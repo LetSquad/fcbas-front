@@ -80,6 +80,7 @@
     "@typescript-eslint/eslint-plugin": "8.44.0",
     "@typescript-eslint/parser": "8.44.0",
     "clean-webpack-plugin": "4.0.0",
+    "compression-webpack-plugin": "11.1.0",
     "cross-env": "10.0.0",
     "css-loader": "7.1.2",
     "dotenv": "17.2.2",

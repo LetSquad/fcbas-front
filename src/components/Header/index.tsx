@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router";
 
@@ -22,9 +22,12 @@ export default function Header() {
         keycloak: { logout }
     } = useKeycloak();
 
-    const [position, setPosition] = useState(window.scrollY);
+    const [position, setPosition] = useState(0);
     const [visible, setVisible] = useState(true);
     const [isSidebarOpen, , openSidebar, closeSidebar] = useToggle();
+
+    const scrollContainerRef = useRef<HTMLElement | null>(null);
+    const lastScrollTopRef = useRef(0);
 
     const menuOptions = useMenuOptions(closeSidebar);
 
@@ -39,16 +42,39 @@ export default function Header() {
     }, [closeSidebar, logout, navigate]);
 
     const handleScroll = useCallback(() => {
-        const moving = document.querySelector("#app")?.scrollTop || 0;
+        const container = scrollContainerRef.current;
 
-        setVisible(position > moving);
-        setPosition(moving);
-    }, [position]);
+        if (!container) {
+            return;
+        }
+
+        const currentTop = container.scrollTop ?? 0;
+        const previousTop = lastScrollTopRef.current;
+        const isScrollingUp = currentTop < previousTop;
+
+        setVisible(isScrollingUp || currentTop <= 0);
+        lastScrollTopRef.current = currentTop;
+        setPosition(currentTop);
+    }, []);
 
     useEffect(() => {
-        document.querySelector("#app")?.addEventListener("scroll", handleScroll);
+        if (typeof document === "undefined") {
+            return;
+        }
+
+        const container = document.querySelector<HTMLElement>("#app");
+
+        if (!container) {
+            return;
+        }
+
+        scrollContainerRef.current = container;
+
+        container.addEventListener("scroll", handleScroll);
+        handleScroll();
+
         return () => {
-            document.querySelector("#app")?.removeEventListener("scroll", handleScroll);
+            container.removeEventListener("scroll", handleScroll);
         };
     }, [handleScroll]);
 

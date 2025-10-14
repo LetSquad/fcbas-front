@@ -1,10 +1,8 @@
 import { useCallback, useMemo } from "react";
-import { useSelector } from "react-redux";
 
 import { useFilterForm } from "@components/Dashboard/context";
 import { formatTableData } from "@components/StatisticTable/utils/utils";
 import type { AnalyticsStatusSummary, RegionAnalyticsResult } from "@models/analytics/types";
-import type { RegionRecords } from "@models/regions/types";
 import {
     useGetAverageCountByRegionQuery,
     useGetAverageDurationByRegionQuery,
@@ -14,7 +12,7 @@ import {
     useGetMaxCountByRegionQuery,
     useGetTimeDistributionByRegionQuery
 } from "@store/analytics/api";
-import { regionsApi } from "@store/regions/api";
+import { useGetRegionsQuery } from "@store/regions/api";
 
 interface QueryState {
     key: string;
@@ -26,132 +24,68 @@ interface QueryState {
 
 export function useRegionAnalytics(): RegionAnalyticsResult {
     const formData = useFilterForm();
-    const { data: regions } = useSelector(regionsApi.endpoints.getRegions.select()) as { data?: RegionRecords };
 
-    const countByRegion = useGetCountByRegionQuery({
-        startDate: formData.startDate,
-        finishDate: formData.finishDate
-    });
+    const { data: regions } = useGetRegionsQuery();
 
-    const averageDurationByRegion = useGetAverageDurationByRegionQuery({
-        startDate: formData.startDate,
-        finishDate: formData.finishDate
-    });
-
-    const averageCountByRegion = useGetAverageCountByRegionQuery(formData);
-
-    const emptyDaysByRegion = useGetEmptyDaysByRegionQuery({
-        startDate: formData.startDate,
-        finishDate: formData.finishDate
-    });
-
-    const densityByRegions = useGetDensityByRegionQuery({
-        startDate: formData.startDate,
-        finishDate: formData.finishDate
-    });
-
-    const timeDistributionsByRegion = useGetTimeDistributionByRegionQuery({
-        startDate: formData.startDate,
-        finishDate: formData.finishDate
-    });
-
-    const maxCountByRegion = useGetMaxCountByRegionQuery(formData);
-
-    const queryStates: QueryState[] = useMemo(
-        () => [
-            {
-                key: "countByRegion",
-                isLoading: countByRegion.isLoading || countByRegion.isFetching,
-                isError: countByRegion.isError,
-                isSuccess: countByRegion.isSuccess,
-                refetch: countByRegion.refetch
-            },
-            {
-                key: "averageDurationByRegion",
-                isLoading: averageDurationByRegion.isLoading || averageDurationByRegion.isFetching,
-                isError: averageDurationByRegion.isError,
-                isSuccess: averageDurationByRegion.isSuccess,
-                refetch: averageDurationByRegion.refetch
-            },
-            {
-                key: "averageCountByRegion",
-                isLoading: averageCountByRegion.isLoading || averageCountByRegion.isFetching,
-                isError: averageCountByRegion.isError,
-                isSuccess: averageCountByRegion.isSuccess,
-                refetch: averageCountByRegion.refetch
-            },
-            {
-                key: "emptyDaysByRegion",
-                isLoading: emptyDaysByRegion.isLoading || emptyDaysByRegion.isFetching,
-                isError: emptyDaysByRegion.isError,
-                isSuccess: emptyDaysByRegion.isSuccess,
-                refetch: emptyDaysByRegion.refetch
-            },
-            {
-                key: "densityByRegion",
-                isLoading: densityByRegions.isLoading || densityByRegions.isFetching,
-                isError: densityByRegions.isError,
-                isSuccess: densityByRegions.isSuccess,
-                refetch: densityByRegions.refetch
-            },
-            {
-                key: "timeDistributionByRegion",
-                isLoading: timeDistributionsByRegion.isLoading || timeDistributionsByRegion.isFetching,
-                isError: timeDistributionsByRegion.isError,
-                isSuccess: timeDistributionsByRegion.isSuccess,
-                refetch: timeDistributionsByRegion.refetch
-            },
-            {
-                key: "maxCountByRegion",
-                isLoading: maxCountByRegion.isLoading || maxCountByRegion.isFetching,
-                isError: maxCountByRegion.isError,
-                isSuccess: maxCountByRegion.isSuccess,
-                refetch: maxCountByRegion.refetch
-            }
-        ],
-        [
-            averageCountByRegion.isError,
-            averageCountByRegion.isFetching,
-            averageCountByRegion.isLoading,
-            averageCountByRegion.isSuccess,
-            averageCountByRegion.refetch,
-            averageDurationByRegion.isError,
-            averageDurationByRegion.isFetching,
-            averageDurationByRegion.isLoading,
-            averageDurationByRegion.isSuccess,
-            averageDurationByRegion.refetch,
-            countByRegion.isError,
-            countByRegion.isFetching,
-            countByRegion.isLoading,
-            countByRegion.isSuccess,
-            countByRegion.refetch,
-            densityByRegions.isError,
-            densityByRegions.isFetching,
-            densityByRegions.isLoading,
-            densityByRegions.isSuccess,
-            densityByRegions.refetch,
-            emptyDaysByRegion.isError,
-            emptyDaysByRegion.isFetching,
-            emptyDaysByRegion.isLoading,
-            emptyDaysByRegion.isSuccess,
-            emptyDaysByRegion.refetch,
-            maxCountByRegion.isError,
-            maxCountByRegion.isFetching,
-            maxCountByRegion.isLoading,
-            maxCountByRegion.isSuccess,
-            maxCountByRegion.refetch,
-            timeDistributionsByRegion.isError,
-            timeDistributionsByRegion.isFetching,
-            timeDistributionsByRegion.isLoading,
-            timeDistributionsByRegion.isSuccess,
-            timeDistributionsByRegion.refetch
-        ]
+    const dateRangeArgs = useMemo(
+        () => ({ startDate: formData.startDate, finishDate: formData.finishDate }),
+        [formData.finishDate, formData.startDate]
     );
 
+    const countByRegion = useGetCountByRegionQuery(dateRangeArgs);
+    const averageDurationByRegion = useGetAverageDurationByRegionQuery(dateRangeArgs);
+    const averageCountByRegion = useGetAverageCountByRegionQuery(formData);
+    const emptyDaysByRegion = useGetEmptyDaysByRegionQuery(dateRangeArgs);
+    const densityByRegion = useGetDensityByRegionQuery(dateRangeArgs);
+    const timeDistributionByRegion = useGetTimeDistributionByRegionQuery(dateRangeArgs);
+    const maxCountByRegion = useGetMaxCountByRegionQuery(formData);
+
+    const queryStates: QueryState[] = useMemo(() => {
+        const analyticsQueries = [
+            { key: "countByRegion", result: countByRegion },
+            { key: "averageDurationByRegion", result: averageDurationByRegion },
+            { key: "averageCountByRegion", result: averageCountByRegion },
+            { key: "emptyDaysByRegion", result: emptyDaysByRegion },
+            { key: "densityByRegion", result: densityByRegion },
+            { key: "timeDistributionByRegion", result: timeDistributionByRegion },
+            { key: "maxCountByRegion", result: maxCountByRegion }
+        ];
+
+        return analyticsQueries.map(({ key, result }) => ({
+            key,
+            isLoading: result.isLoading || result.isFetching,
+            isError: result.isError,
+            isSuccess: result.isSuccess,
+            refetch: result.refetch
+        }));
+    }, [
+        averageCountByRegion,
+        averageDurationByRegion,
+        countByRegion,
+        densityByRegion,
+        emptyDaysByRegion,
+        maxCountByRegion,
+        timeDistributionByRegion
+    ]);
+
     const statusSummary = useMemo<AnalyticsStatusSummary>(() => {
-        const loadingCount = queryStates.filter((query) => query.isLoading).length;
-        const errorCount = queryStates.filter((query) => query.isError).length;
-        const successCount = queryStates.filter((query) => query.isSuccess).length;
+        let loadingCount = 0;
+        let errorCount = 0;
+        let successCount = 0;
+
+        for (const query of queryStates) {
+            if (query.isLoading) {
+                loadingCount += 1;
+            }
+
+            if (query.isError) {
+                errorCount += 1;
+            }
+
+            if (query.isSuccess) {
+                successCount += 1;
+            }
+        }
 
         return {
             total: queryStates.length,
@@ -172,19 +106,19 @@ export function useRegionAnalytics(): RegionAnalyticsResult {
                 averageDurationByRegion.data,
                 averageCountByRegion.data,
                 emptyDaysByRegion.data,
-                densityByRegions.data,
-                timeDistributionsByRegion.data,
+                densityByRegion.data,
+                timeDistributionByRegion.data,
                 maxCountByRegion.data
             ),
         [
             averageCountByRegion.data,
             averageDurationByRegion.data,
             countByRegion.data,
-            densityByRegions.data,
+            densityByRegion.data,
             emptyDaysByRegion.data,
             maxCountByRegion.data,
             regions,
-            timeDistributionsByRegion.data
+            timeDistributionByRegion.data
         ]
     );
 
@@ -198,7 +132,7 @@ export function useRegionAnalytics(): RegionAnalyticsResult {
 
     return {
         regions,
-        densityPartAreaKm: densityByRegions.data?.partAreaKm,
+        densityPartAreaKm: densityByRegion.data?.partAreaKm,
         formattedTableData,
         statusSummary,
         refetchErroredQueries

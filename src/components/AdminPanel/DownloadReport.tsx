@@ -26,12 +26,14 @@ export default function DownloadReport() {
             setIsLoading(true);
 
             try {
+                if (!keycloak.token) {
+                    setIsError(true);
+                    return;
+                }
+
                 const response = await axios.get<Blob>(apiUrls.reportFlights(), {
                     params: values,
-                    responseType: "blob",
-                    headers: {
-                        Authorization: `Bearer ${keycloak.token}`
-                    }
+                    responseType: "blob"
                 });
 
                 if (!response.data) {

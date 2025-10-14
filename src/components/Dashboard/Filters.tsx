@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo } from "react";
+import { flushSync } from "react-dom";
 import { useSelector } from "react-redux";
 
 import { useFormikContext } from "formik";
@@ -118,8 +119,6 @@ export default function Filters() {
 
     const formData = useFilterForm();
 
-    const initialFormDataRef = useRef(formik.initialValues);
-
     const dateRangeArgs = useMemo(
         () => ({ startDate: formData.startDate, finishDate: formData.finishDate }),
         [formData.finishDate, formData.startDate]
@@ -163,21 +162,17 @@ export default function Filters() {
             const presetValues = preset.getValues();
             const shouldSubmit = !areFiltersEqual(formData, presetValues);
 
-            formik.setValues(presetValues, false);
-            formik.setTouched({}, false);
+            flushSync(() => {
+                formik.setValues(presetValues, false);
+                formik.setTouched({}, false);
+            });
 
             if (shouldSubmit) {
-                setTimeout(() => {
-                    formik.submitForm().catch(() => undefined);
-                }, 0);
+                formik.submitForm().catch(() => undefined);
             }
         },
         [formData, formik]
     );
-
-    useEffect(() => {
-        initialFormDataRef.current = formik.initialValues;
-    }, [formik.initialValues]);
 
     const interval = useMemo(
         () => Interval.fromDateTimes(DateTime.fromISO(formik.values.startDate), DateTime.fromISO(formik.values.finishDate)),
@@ -185,16 +180,22 @@ export default function Filters() {
     );
 
     useEffect(() => {
-        if ((interval.toDuration("days").toObject().days as number) < 2) {
-            formik.setFieldValue("resolution", TimeResolution.HOUR);
+        const { resolution } = formik.values;
+        const days = interval.toDuration("days").days ?? 0;
+
+        if (days < 2) {
+            if (resolution !== TimeResolution.HOUR) {
+                formik.setFieldValue("resolution", TimeResolution.HOUR);
+            }
             return;
         }
 
-        if ((interval.toDuration("months").toObject().months as number) < 2) {
+        const months = interval.toDuration("months").months ?? 0;
+
+        if (months < 2 && resolution === TimeResolution.MONTH) {
             formik.setFieldValue("resolution", TimeResolution.DAY);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [interval]);
+    }, [formik, interval]);
 
     return (
         <Form className={styles.form}>
@@ -233,7 +234,7 @@ export default function Filters() {
                     Применить
                 </Button>
 
-                <Dropdown text="Пресеты" button className={styles.button} loading={isLoading} disabled={isLoading}>
+                <Dropdown text="Быстрые фильтры" button className={styles.button} loading={isLoading} disabled={isLoading}>
                     <DropdownMenu>
                         {QUICK_FILTER_PRESETS.map((preset) => (
                             <DropdownItem key={preset.id} onClick={() => handlePresetSelect(preset)}>

@@ -93,7 +93,7 @@ export function usePanZoom({ minZoom = 0.7, maxZoom = 8, zoomStep = 1.1, moveThr
             };
 
             const target = event.currentTarget as Element;
-            if (target?.setPointerCapture) {
+            if (event.pointerType !== "mouse" && target?.setPointerCapture) {
                 target.setPointerCapture(event.pointerId);
             }
 

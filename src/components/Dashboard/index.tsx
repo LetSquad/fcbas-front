@@ -11,7 +11,6 @@ import Filters, { INITIAL_FORM_DATA } from "@components/Dashboard/Filters";
 import FlightsMapWrapper from "@components/FlightsMap/FlightsMapWrapper";
 import StatisticTable from "@components/StatisticTable";
 import { FormData } from "@models/filters/types";
-import { Region } from "@models/regions/types";
 import { useGetRegionsQuery } from "@store/regions/api";
 
 import styles from "./styles/Dashboard.module.scss";
@@ -49,9 +48,7 @@ export default function Dashboard() {
         () => [
             {
                 menuItem: "Карта",
-                render: () => (
-                    <TabPane className={styles.tab}>{withRegionsLoader(<FlightsMapWrapper regions={regions as Region[]} />)}</TabPane>
-                )
+                render: () => <TabPane className={styles.tab}>{withRegionsLoader(<FlightsMapWrapper regions={regions ?? {}} />)}</TabPane>
             },
             {
                 menuItem: "Дашборд",
