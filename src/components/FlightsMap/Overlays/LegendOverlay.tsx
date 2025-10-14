@@ -3,7 +3,7 @@ import { $enum } from "ts-enum-util";
 
 import Flex from "@commonComponents/Flex";
 import { useFilterForm } from "@components/Dashboard/context";
-import { getHeatMapLabelFromHeatmapModeEnum } from "@components/FlightsMap/utils";
+import { getHeatMapLabelFromHeatmapModeEnum } from "@components/FlightsMap/utils/utils";
 import { HeatmapMode, TimeResolution } from "@models/analytics/enums";
 import { HeatDomains } from "@models/analytics/types";
 

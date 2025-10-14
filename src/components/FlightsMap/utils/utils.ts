@@ -1,49 +1,7 @@
 import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
 import { HeatmapMode, TimeResolution } from "@models/analytics/enums";
-import { MinMaxPoint, Point, ViewBox } from "@models/map/types";
+import { HeatmapDomain, MinMaxPoint, Point, ViewBox } from "@models/map/types";
 import { RegionShape } from "@models/regions/types";
-
-export function bezierForCentroids(a: RegionShape, b: RegionShape, tension = 0.18) {
-    const [x1, y1] = a.centroid;
-    const [x2, y2] = b.centroid;
-
-    const mx = (x1 + x2) / 2;
-    const my = (y1 + y2) / 2;
-    const dx = x2 - x1;
-    const dy = y2 - y1;
-    const len = Math.hypot(dx, dy) || 1;
-    const nx = -dy / len;
-    const ny = dx / len;
-    const arc = len * tension;
-    const cx = mx + nx * arc;
-    const cy = my + ny * arc;
-
-    return { p1: [x1, y1] as const, c: [cx, cy] as const, p2: [x2, y2] as const };
-}
-
-/**
- * Lightweight direction-based bundling: quantize angles into sectors and pull
- * control points a bit towards the sector's mean normal. Tuned by strength.
- */
-export function bundledControlPoint(a: RegionShape, b: RegionShape, sectors = 12, strength = 0.4) {
-    const { p1, p2 } = bezierForCentroids(a, b);
-    const dx = p2[0] - p1[0];
-    const dy = p2[1] - p1[1];
-    const angle = Math.atan2(dy, dx);
-    const sector = Math.round((angle / (2 * Math.PI)) * sectors);
-    const snapped = (sector / sectors) * 2 * Math.PI;
-
-    // Unit normal from snapped direction
-    const nx = -Math.sin(snapped);
-    const ny = Math.cos(snapped);
-    const len = Math.hypot(dx, dy) || 1;
-    const arc = len * 0.18;
-
-    const cx = (p1[0] + p2[0]) / 2 + nx * arc * (0.5 + strength);
-    const cy = (p1[1] + p2[1]) / 2 + ny * arc * (0.5 + strength);
-
-    return { p1, c: [cx, cy] as const, p2 };
-}
 
 export function getCurrentViewBoxForPanZoom(
     base: ViewBox,
@@ -56,11 +14,14 @@ export function getCurrentViewBoxForPanZoom(
     const currentWidth = base.width / zoomValue;
     const currentHeight = base.height / zoomValue;
 
-    const unitsPerPixelX = currentWidth / pixelWidth;
-    const unitsPerPixelY = currentHeight / pixelHeight;
+    // SVG использует режим preserveAspectRatio="xMidYMid meet", поэтому обе оси масштабируются одинаково.
+    // Это означает, что фактическая ширина/высота карты внутри контейнера может быть меньше, чем pixelWidth/pixelHeight из-за «letterbox».
+    // Чтобы курсор и карта перемещались синхронно, нужно учитывать фактический масштаб, а не размер контейнера.
+    const scale = Math.min(pixelWidth / currentWidth, pixelHeight / currentHeight) || 1;
+    const worldUnitsPerPixel = 1 / scale;
 
-    const currentMinX = base.minX - panX * unitsPerPixelX;
-    const currentMinY = base.minY - panY * unitsPerPixelY;
+    const currentMinX = base.minX - panX * worldUnitsPerPixel;
+    const currentMinY = base.minY - panY * worldUnitsPerPixel;
 
     return {
         minX: currentMinX,
@@ -513,4 +474,12 @@ export function makeCurve(p1: [number, number], p2: [number, number], bend = 12,
     const ny = dx / len;
     const c: [number, number] = [mx + nx * bend * strength, my + ny * bend * strength];
     return { p1, p2, c };
+}
+
+export function normalizeDomain(domain: HeatmapDomain): HeatmapDomain {
+    if (domain.min === Number.POSITIVE_INFINITY) {
+        return { min: 0, max: 0 };
+    }
+
+    return domain;
 }

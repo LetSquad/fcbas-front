@@ -5,7 +5,7 @@ import { Loader } from "semantic-ui-react";
 import mapSvgText from "@assets/images/map.svg?raw";
 import Flex from "@commonComponents/Flex";
 import FlightsMap from "@components/FlightsMap/index";
-import { parsePreparedSvgFromText } from "@components/FlightsMap/utils";
+import { parsePreparedSvgFromText } from "@components/FlightsMap/utils/utils";
 import { ViewBox } from "@models/map/types";
 import { Region, RegionShape } from "@models/regions/types";
 
