@@ -234,7 +234,7 @@ export default function Filters() {
                     Применить
                 </Button>
 
-                <Dropdown text="Быстрые фильтры" button className={styles.button} loading={isLoading} disabled={isLoading}>
+                <Dropdown text="Периоды" button className={styles.button} loading={isLoading} disabled={isLoading}>
                     <DropdownMenu>
                         {QUICK_FILTER_PRESETS.map((preset) => (
                             <DropdownItem key={preset.id} onClick={() => handlePresetSelect(preset)}>

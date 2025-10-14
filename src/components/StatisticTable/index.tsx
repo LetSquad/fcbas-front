@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
 
 import { DateTime } from "luxon";
 import {
@@ -259,6 +260,8 @@ export default function StatisticTable() {
 
     const handleExportXLSX = useCallback(async () => {
         try {
+            toast.dismiss("export-xlsx-error");
+
             if (!tableData?.length) {
                 return;
             }
@@ -271,6 +274,11 @@ export default function StatisticTable() {
             xlsx.writeFile(workbook, `region-statistics_${timestamp}.xlsx`);
         } catch (error) {
             console.error("Не удалось экспортировать таблицу в XLSX", error);
+
+            toast.error("Не удалось экспортировать таблицу в XLSX. Попробуйте позже.", {
+                id: "export-xlsx-error",
+                duration: 10_000
+            });
         }
     }, [tableData]);
 

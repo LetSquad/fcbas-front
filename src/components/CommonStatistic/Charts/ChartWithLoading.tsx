@@ -1,10 +1,11 @@
-import { PropsWithChildren, useCallback, useMemo, useState } from "react";
+import { PropsWithChildren, useCallback, useMemo } from "react";
+import { toast } from "react-hot-toast";
 
 import classNames from "classnames";
 import { saveAs } from "file-saver";
 import { DateTime } from "luxon";
 import { useGenerateImage } from "recharts-to-png";
-import { Icon, Loader, Message } from "semantic-ui-react";
+import { Icon, Loader } from "semantic-ui-react";
 
 import Flex from "@commonComponents/Flex";
 import LoadingErrorBlock from "@commonComponents/LoadingErrorBlock/LoadingErrorBlock";
@@ -34,7 +35,6 @@ export default function ChartWithLoading({
     isDownloadDisabled,
     children
 }: PropsWithChildren<ChartWithLoadingProps>) {
-    const [downloadError, setDownloadError] = useState<string>();
     const [getDivPng, { ref, isLoading: isLoadingPng }] = useGenerateImage({
         quality: 1,
         type: "image/png"
@@ -62,18 +62,27 @@ export default function ChartWithLoading({
         }
 
         try {
-            setDownloadError(undefined);
+            toast.dismiss("download-png-error");
+
             const png = await getDivPng();
 
             if (!png) {
-                setDownloadError("Не удалось подготовить изображение. Пожалуйста, попробуйте ещё раз позже.");
+                toast.error("Не удалось подготовить изображение. Пожалуйста, попробуйте ещё раз позже.", {
+                    id: "download-png-error",
+                    duration: 10_000
+                });
+
                 return;
             }
 
             saveAs(png, `report-${DateTime.now().toFormat("dd.MM.yyyy")}.png`);
         } catch (error) {
             console.error("Не удалось скачать график", error);
-            setDownloadError("При скачивании произошла ошибка. Попробуйте обновить страницу или повторить попытку позже.");
+
+            toast.error("При скачивании произошла ошибка. Попробуйте обновить страницу или повторить попытку позже.", {
+                id: "download-png-error",
+                duration: 10_000
+            });
         }
     }, [getDivPng, isLoadingPng]);
 
@@ -101,7 +110,6 @@ export default function ChartWithLoading({
                     )}
                 </Flex>
 
-                {downloadError && <Message negative size="tiny" content={downloadError} />}
                 {content}
             </Flex>
         </div>
