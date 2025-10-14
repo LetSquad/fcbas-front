@@ -189,78 +189,94 @@ export default function StatisticTable() {
     const [tableData, setTableData] = useState<TableData[]>();
     const [filter, setFilter] = useState<DataTableFilterMeta>({ region: { value: null, matchMode: FilterMatchMode.IN } });
 
-    const isLoading =
-        isCountByRegionsLoading ||
-        isCountByRegionsFetching ||
-        isAverageDurationByRegionsLoading ||
-        isAverageDurationByRegionsFetching ||
-        isAverageCountByRegionsLoading ||
-        isAverageCountByRegionsFetching ||
-        isEmptyDaysByRegionsLoading ||
-        isEmptyDaysByRegionsFetching ||
-        isDensityByRegionsLoading ||
-        isDensityByRegionsFetching ||
-        isTimeDistributionsByRegionLoading ||
-        isTimeDistributionsByRegionFetching ||
-        isMaxCountByRegionsLoading ||
-        isMaxCountByRegionsFetching;
+    const analyticsQueries = useMemo(
+        () => [
+            {
+                isLoading: isCountByRegionsLoading || isCountByRegionsFetching,
+                isError: isCountByRegionsError,
+                isSuccess: isCountByRegionsSuccess,
+                refetch: refetchCountByRegion
+            },
+            {
+                isLoading: isAverageDurationByRegionsLoading || isAverageDurationByRegionsFetching,
+                isError: isAverageDurationByRegionsError,
+                isSuccess: isAverageDurationByRegionsSuccess,
+                refetch: refetchAverageDurationByRegions
+            },
+            {
+                isLoading: isAverageCountByRegionsLoading || isAverageCountByRegionsFetching,
+                isError: isAverageCountByRegionsError,
+                isSuccess: isAverageCountByRegionsSuccess,
+                refetch: refetchAverageCountByRegions
+            },
+            {
+                isLoading: isEmptyDaysByRegionsLoading || isEmptyDaysByRegionsFetching,
+                isError: isEmptyDaysByRegionsError,
+                isSuccess: isEmptyDaysByRegionsSuccess,
+                refetch: refetchEmptyDaysByRegions
+            },
+            {
+                isLoading: isDensityByRegionsLoading || isDensityByRegionsFetching,
+                isError: isDensityByRegionsError,
+                isSuccess: isDensityByRegionsSuccess,
+                refetch: refetchDensityByRegions
+            },
+            {
+                isLoading: isTimeDistributionsByRegionLoading || isTimeDistributionsByRegionFetching,
+                isError: isTimeDistributionsByRegionError,
+                isSuccess: isTimeDistributionsByRegionSuccess,
+                refetch: refetchTimeDistributionsByRegion
+            },
+            {
+                isLoading: isMaxCountByRegionsLoading || isMaxCountByRegionsFetching,
+                isError: isMaxCountByRegionsError,
+                isSuccess: isMaxCountByRegionsSuccess,
+                refetch: refetchMaxCountByRegions
+            }
+        ],
+        [
+            isAverageCountByRegionsError,
+            isAverageCountByRegionsFetching,
+            isAverageCountByRegionsLoading,
+            isAverageCountByRegionsSuccess,
+            isAverageDurationByRegionsError,
+            isAverageDurationByRegionsFetching,
+            isAverageDurationByRegionsLoading,
+            isAverageDurationByRegionsSuccess,
+            isCountByRegionsError,
+            isCountByRegionsFetching,
+            isCountByRegionsLoading,
+            isCountByRegionsSuccess,
+            isDensityByRegionsError,
+            isDensityByRegionsFetching,
+            isDensityByRegionsLoading,
+            isDensityByRegionsSuccess,
+            isEmptyDaysByRegionsError,
+            isEmptyDaysByRegionsFetching,
+            isEmptyDaysByRegionsLoading,
+            isEmptyDaysByRegionsSuccess,
+            isMaxCountByRegionsError,
+            isMaxCountByRegionsFetching,
+            isMaxCountByRegionsLoading,
+            isMaxCountByRegionsSuccess,
+            isTimeDistributionsByRegionError,
+            isTimeDistributionsByRegionFetching,
+            isTimeDistributionsByRegionLoading,
+            isTimeDistributionsByRegionSuccess,
+            refetchAverageCountByRegions,
+            refetchAverageDurationByRegions,
+            refetchCountByRegion,
+            refetchDensityByRegions,
+            refetchEmptyDaysByRegions,
+            refetchMaxCountByRegions,
+            refetchTimeDistributionsByRegion
+        ]
+    );
 
-    const isError =
-        isCountByRegionsError ||
-        isAverageDurationByRegionsError ||
-        isAverageCountByRegionsError ||
-        isEmptyDaysByRegionsError ||
-        isDensityByRegionsError ||
-        isTimeDistributionsByRegionError ||
-        isMaxCountByRegionsError;
-
-    const isSuccess =
-        isCountByRegionsSuccess ||
-        isAverageDurationByRegionsSuccess ||
-        isAverageCountByRegionsSuccess ||
-        isEmptyDaysByRegionsSuccess ||
-        isDensityByRegionsSuccess ||
-        isTimeDistributionsByRegionSuccess ||
-        isMaxCountByRegionsSuccess;
-
-    const refetchFunction = useMemo(() => {
-        if (isCountByRegionsError) {
-            return refetchCountByRegion;
-        }
-        if (isAverageDurationByRegionsError) {
-            return refetchAverageDurationByRegions;
-        }
-        if (isAverageCountByRegionsError) {
-            return refetchAverageCountByRegions;
-        }
-        if (isEmptyDaysByRegionsError) {
-            return refetchEmptyDaysByRegions;
-        }
-        if (isDensityByRegionsError) {
-            return refetchDensityByRegions;
-        }
-        if (isTimeDistributionsByRegionError) {
-            return refetchTimeDistributionsByRegion;
-        }
-        if (isMaxCountByRegionsError) {
-            return refetchMaxCountByRegions;
-        }
-    }, [
-        isAverageCountByRegionsError,
-        isAverageDurationByRegionsError,
-        isCountByRegionsError,
-        isDensityByRegionsError,
-        isEmptyDaysByRegionsError,
-        isMaxCountByRegionsError,
-        isTimeDistributionsByRegionError,
-        refetchAverageCountByRegions,
-        refetchAverageDurationByRegions,
-        refetchCountByRegion,
-        refetchDensityByRegions,
-        refetchEmptyDaysByRegions,
-        refetchMaxCountByRegions,
-        refetchTimeDistributionsByRegion
-    ]);
+    const isLoading = useMemo(() => analyticsQueries.some((query) => query.isLoading), [analyticsQueries]);
+    const isError = useMemo(() => analyticsQueries.some((query) => query.isError), [analyticsQueries]);
+    const isSuccess = useMemo(() => analyticsQueries.some((query) => query.isSuccess), [analyticsQueries]);
+    const refetchFunction = useMemo(() => analyticsQueries.find((query) => query.isError)?.refetch, [analyticsQueries]);
 
     const filterClearTemplate = useCallback(
         (options: ColumnFilterClearTemplateOptions) => (
@@ -280,24 +296,28 @@ export default function StatisticTable() {
         []
     );
 
+    const regionOptions = useMemo(() => {
+        if (!regions) {
+            return [];
+        }
+
+        return Object.values(regions).map((region) => ({
+            value: region.name,
+            label: region.name
+        }));
+    }, [regions]);
+
     const regionFilterElement = useCallback(
         (options: ColumnFilterElementTemplateOptions) => (
             <MultiSelect
                 value={options.value}
-                options={
-                    regions
-                        ? Object.values(regions).map((region) => ({
-                              value: region.name,
-                              label: region.name
-                          }))
-                        : []
-                }
+                options={regionOptions}
                 onChange={(event) => options.filterCallback(event.value)}
                 placeholder="Любой"
                 className={styles.regionFilter}
             />
         ),
-        [regions]
+        [regionOptions]
     );
 
     const headerGroup = useMemo(
@@ -356,33 +376,35 @@ export default function StatisticTable() {
         [densityByRegions, filterApplyTemplate, filterClearTemplate, formData.resolution, regionFilterElement]
     );
 
+    const formattedTableData = useMemo(
+        () =>
+            formatTableData(
+                regions,
+                countByRegion,
+                averageDurationByRegion,
+                averageCountByRegion,
+                emptyDaysByRegion,
+                densityByRegions,
+                timeDistributionsByRegion,
+                maxCountByRegion
+            ),
+        [
+            averageCountByRegion,
+            averageDurationByRegion,
+            countByRegion,
+            densityByRegions,
+            emptyDaysByRegion,
+            maxCountByRegion,
+            regions,
+            timeDistributionsByRegion
+        ]
+    );
+
     useEffect(() => {
         if (!isLoading && isSuccess) {
-            setTableData(
-                formatTableData(
-                    regions,
-                    countByRegion,
-                    averageDurationByRegion,
-                    averageCountByRegion,
-                    emptyDaysByRegion,
-                    densityByRegions,
-                    timeDistributionsByRegion,
-                    maxCountByRegion
-                )
-            );
+            setTableData(formattedTableData);
         }
-    }, [
-        averageCountByRegion,
-        averageDurationByRegion,
-        countByRegion,
-        densityByRegions,
-        emptyDaysByRegion,
-        isLoading,
-        isSuccess,
-        maxCountByRegion,
-        regions,
-        timeDistributionsByRegion
-    ]);
+    }, [formattedTableData, isLoading, isSuccess]);
 
     return (
         <div className={styles.container}>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import { useFormikContext } from "formik";
@@ -14,6 +14,7 @@ import { FormData } from "@models/filters/types";
 import { FormFieldType } from "@models/forms/enums";
 import { DropdownOption } from "@models/forms/types";
 import { analyticsApi } from "@store/analytics/api";
+import { RootState } from "@store/index";
 
 import styles from "./styles/Filters.module.scss";
 
@@ -30,84 +31,58 @@ export const INITIAL_FORM_DATA: () => FormData = () => ({
     resolution: TimeResolution.MONTH
 });
 
+const areFiltersEqual = (left: FormData, right: FormData) =>
+    left.startDate === right.startDate && left.finishDate === right.finishDate && left.resolution === right.resolution;
+
 export default function Filters() {
     const formik = useFormikContext<FormData>();
 
     const formData = useFilterForm();
 
-    const countByRegionsInfo = useSelector(
-        analyticsApi.endpoints.getCountByRegion.select({
-            startDate: formData.startDate,
-            finishDate: formData.finishDate
-        })
-    );
-    const countInfo = useSelector(
-        analyticsApi.endpoints.getCount.select({
-            startDate: formData.startDate,
-            finishDate: formData.finishDate
-        })
-    );
-    const averageDurationByRegionsInfo = useSelector(
-        analyticsApi.endpoints.getAverageDurationByRegion.select({
-            startDate: formData.startDate,
-            finishDate: formData.finishDate
-        })
-    );
-    const averageDurationInfo = useSelector(
-        analyticsApi.endpoints.getAverageDuration.select({
-            startDate: formData.startDate,
-            finishDate: formData.finishDate
-        })
-    );
-    const averageCountByRegionsInfo = useSelector(analyticsApi.endpoints.getAverageCountByRegion.select(formData));
-    const averageCountInfo = useSelector(analyticsApi.endpoints.getAverageCount.select(formData));
-    const maxCountByRegionsInfo = useSelector(analyticsApi.endpoints.getMaxCountByRegion.select(formData));
-    const maxCountInfo = useSelector(analyticsApi.endpoints.getMaxCount.select(formData));
-    const emptyDaysByRegionsInfo = useSelector(
-        analyticsApi.endpoints.getEmptyDaysByRegion.select({
-            startDate: formData.startDate,
-            finishDate: formData.finishDate
-        })
-    );
-    const densityByRegionsInfo = useSelector(
-        analyticsApi.endpoints.getDensityByRegion.select({
-            startDate: formData.startDate,
-            finishDate: formData.finishDate
-        })
-    );
-    const timeDistributionsByRegionsInfo = useSelector(
-        analyticsApi.endpoints.getTimeDistributionByRegion.select({
-            startDate: formData.startDate,
-            finishDate: formData.finishDate
-        })
-    );
-    const timeDistributionsInfo = useSelector(
-        analyticsApi.endpoints.getTimeDistribution.select({
-            startDate: formData.startDate,
-            finishDate: formData.finishDate
-        })
-    );
-    const trendInfo = useSelector(
-        analyticsApi.endpoints.getTrend.select({
-            startDate: formData.startDate,
-            finishDate: formData.finishDate
-        })
+    const initialFormDataRef = useRef(formik.initialValues);
+
+    const dateRangeArgs = useMemo(
+        () => ({ startDate: formData.startDate, finishDate: formData.finishDate }),
+        [formData.finishDate, formData.startDate]
     );
 
-    const isLoading =
-        countByRegionsInfo.isLoading ||
-        countInfo.isLoading ||
-        averageDurationByRegionsInfo.isLoading ||
-        averageDurationInfo.isLoading ||
-        averageCountByRegionsInfo.isLoading ||
-        averageCountInfo.isLoading ||
-        maxCountByRegionsInfo.isLoading ||
-        maxCountInfo.isLoading ||
-        emptyDaysByRegionsInfo.isLoading ||
-        densityByRegionsInfo.isLoading ||
-        trendInfo.isLoading ||
-        timeDistributionsByRegionsInfo.isLoading ||
-        timeDistributionsInfo.isLoading;
+    const resolutionArgs = useMemo(() => ({ ...dateRangeArgs, resolution: formData.resolution }), [dateRangeArgs, formData.resolution]);
+
+    const dateRangeSelectors = useMemo(
+        () => [
+            analyticsApi.endpoints.getCountByRegion.select(dateRangeArgs),
+            analyticsApi.endpoints.getCount.select(dateRangeArgs),
+            analyticsApi.endpoints.getAverageDurationByRegion.select(dateRangeArgs),
+            analyticsApi.endpoints.getAverageDuration.select(dateRangeArgs),
+            analyticsApi.endpoints.getEmptyDaysByRegion.select(dateRangeArgs),
+            analyticsApi.endpoints.getDensityByRegion.select(dateRangeArgs),
+            analyticsApi.endpoints.getTimeDistributionByRegion.select(dateRangeArgs),
+            analyticsApi.endpoints.getTimeDistribution.select(dateRangeArgs),
+            analyticsApi.endpoints.getTrend.select(dateRangeArgs)
+        ],
+        [dateRangeArgs]
+    );
+
+    const resolutionSelectors = useMemo(
+        () => [
+            analyticsApi.endpoints.getAverageCountByRegion.select(resolutionArgs),
+            analyticsApi.endpoints.getAverageCount.select(resolutionArgs),
+            analyticsApi.endpoints.getMaxCountByRegion.select(resolutionArgs),
+            analyticsApi.endpoints.getMaxCount.select(resolutionArgs)
+        ],
+        [resolutionArgs]
+    );
+
+    const isLoading = useSelector(
+        (state: RootState) =>
+            dateRangeSelectors.some((select) => select(state).isLoading) || resolutionSelectors.some((select) => select(state).isLoading)
+    );
+    const isApplyDisabled = useMemo(() => areFiltersEqual(formik.values, formData), [formData, formik.values]);
+    const isResetDisabled = useMemo(() => areFiltersEqual(formik.values, initialFormDataRef.current), [formik.values]);
+
+    useEffect(() => {
+        initialFormDataRef.current = formik.initialValues;
+    }, [formik.initialValues]);
 
     const interval = useMemo(
         () => Interval.fromDateTimes(DateTime.fromISO(formik.values.startDate), DateTime.fromISO(formik.values.finishDate)),
@@ -154,7 +129,7 @@ export default function Filters() {
                 />
                 <Button
                     type="submit"
-                    disabled={JSON.stringify(formik.values) === JSON.stringify(formData)}
+                    disabled={isApplyDisabled}
                     onClick={formik.submitForm}
                     primary
                     className={styles.button}
@@ -162,13 +137,7 @@ export default function Filters() {
                 >
                     Применить
                 </Button>
-                <Button
-                    type="button"
-                    disabled={JSON.stringify(formik.values) === JSON.stringify(INITIAL_FORM_DATA())}
-                    onClick={() => formik.resetForm()}
-                    basic
-                    className={styles.button}
-                >
+                <Button type="button" disabled={isResetDisabled} onClick={() => formik.resetForm()} basic className={styles.button}>
                     Сбросить
                 </Button>
             </Flex>

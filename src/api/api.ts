@@ -33,6 +33,8 @@ export const axiosBaseQuery =
     > =>
     async ({ url, method = "get", data, params, headers, responseType }) => {
         try {
+            const authHeader = keycloak.token ? { Authorization: `Bearer ${keycloak.token}` } : {};
+
             const result = await axios({
                 url: baseUrl + url,
                 method,
@@ -40,7 +42,7 @@ export const axiosBaseQuery =
                 params,
                 headers: {
                     ...headers,
-                    Authorization: `Bearer ${keycloak.token}`
+                    ...authHeader
                 },
                 responseType
             });
