@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { Loader } from "semantic-ui-react";
+import { Button, Loader } from "semantic-ui-react";
 
 import mapSvgText from "@assets/images/map.svg?raw";
 import Flex from "@commonComponents/Flex";
@@ -16,11 +16,11 @@ const geometryCache = new Map<string, { viewBox: ViewBox; regions: RegionShape[]
 
 export interface FlightsMapWrapperProps {
     regions: Record<number, Region>;
-    onRegionClick?: (regionId: number) => void;
-    strictMatch?: boolean; // показывать только регионы из бэка (по умолчанию true)
+    isFullscreen?: boolean;
+    onToggleFullscreen?: () => void;
 }
 
-export default function FlightsMapWrapper({ regions, onRegionClick, strictMatch = true }: FlightsMapWrapperProps) {
+export default function FlightsMapWrapper({ regions, isFullscreen, onToggleFullscreen }: FlightsMapWrapperProps) {
     // Контейнер для авторазмера
     const holderRef = useRef<HTMLDivElement>(null);
 
@@ -79,8 +79,6 @@ export default function FlightsMapWrapper({ regions, onRegionClick, strictMatch 
 
             if (meta) {
                 joined[region.id] = { ...region, name: meta.name || region.name };
-            } else if (!strictMatch) {
-                joined[region.id] = region;
             }
         }
 
@@ -99,7 +97,7 @@ export default function FlightsMapWrapper({ regions, onRegionClick, strictMatch 
         }
 
         setMergedRegions(joined);
-    }, [regionShapes, regions, strictMatch]);
+    }, [regionShapes, regions]);
 
     // 3) Авторазмер контейнера с сохранением аспекта viewBox
     useLayoutEffect(() => {
@@ -156,12 +154,18 @@ export default function FlightsMapWrapper({ regions, onRegionClick, strictMatch 
             )}
 
             {size && viewBox && mergedRegions && (
-                <FlightsMap
-                    viewBox={viewBox}
-                    regions={mergedRegions}
-                    width={size.width}
-                    height={size.height}
-                    onRegionClick={onRegionClick}
+                <FlightsMap viewBox={viewBox} regions={mergedRegions} width={size.width} height={size.height} />
+            )}
+
+            {onToggleFullscreen && (
+                <Button
+                    circular
+                    icon={isFullscreen ? "compress" : "expand"}
+                    type="button"
+                    title={isFullscreen ? "Свернуть карту" : "Развернуть карту"}
+                    aria-label={isFullscreen ? "Свернуть карту" : "Развернуть карту"}
+                    className={styles.fullscreenButton}
+                    onClick={onToggleFullscreen}
                 />
             )}
         </div>

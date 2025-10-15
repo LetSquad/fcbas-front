@@ -38,7 +38,6 @@ export interface FlightsMapProps {
     regions: Record<number, RegionShape>;
     width: number;
     height: number;
-    onRegionClick?: (regionId: number) => void;
 }
 
 const STYLE = {
@@ -57,7 +56,7 @@ const STYLE = {
     heatHigh: "#254b6e"
 };
 
-export default function FlightsMap({ viewBox, regions, width, height, onRegionClick }: FlightsMapProps) {
+export default function FlightsMap({ viewBox, regions, width, height }: FlightsMapProps) {
     const formData = useFilterForm();
 
     // Собираем все данные для тепловой карты
@@ -258,12 +257,9 @@ export default function FlightsMap({ viewBox, regions, width, height, onRegionCl
                 bringToFront(pathElement);
 
                 setSelectedRegionId((cur) => (cur === id ? null : id));
-                if (onRegionClick) {
-                    onRegionClick(id);
-                }
             }
         },
-        [consumeDragFlag, onRegionClick, bringToFront]
+        [consumeDragFlag, bringToFront]
     );
 
     const getRegionAnchor = useCallback((regionId: number, svgRoot: SVGSVGElement) => {
