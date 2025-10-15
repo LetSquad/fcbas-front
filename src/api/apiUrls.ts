@@ -10,6 +10,7 @@ const apiUrls = {
     regionShape: () => `${regionsUrl}/shape`,
     flightData: () => `${flightUrl}/data`,
     reportFlights: () => `${reportUrl}/flights`,
+    reportFlightsErp: () => `${reportUrl}/flights/erp`,
     trend: () => `${flightAnalyticsUrl}/trend`,
     trendByRegion: () => `${flightAnalyticsUrl}/trend/by-region`,
     timeDistribution: () => `${flightAnalyticsUrl}/time-distribution`,

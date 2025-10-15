@@ -282,6 +282,62 @@ export default function StatisticTable() {
         }
     }, [tableData]);
 
+    const handleExportPDF = useCallback(async () => {
+        try {
+            toast.dismiss("export-pdf-error");
+
+            if (!tableData?.length) {
+                return;
+            }
+
+            const [{ jsPDF: JsPDF }, autoTableModule, notoSansFontModule] = await Promise.all([
+                import("jspdf"),
+                import("jspdf-autotable"),
+                import("@coreUtils/fonts/notoSansRegularBase64")
+            ]);
+
+            const fontBase64 = notoSansFontModule.NOTO_SANS_REGULAR_BASE64;
+
+            const exportRows = buildExportRows(tableData);
+
+            if (exportRows.length === 0) {
+                return;
+            }
+
+            const headers = Object.keys(exportRows[0]);
+            const body = exportRows.map((row) => headers.map((header) => row[header as keyof typeof row]));
+
+            const doc = new JsPDF();
+            doc.addFileToVFS(notoSansFontModule.NOTO_SANS_REGULAR_FILE_NAME, fontBase64);
+            doc.addFont(notoSansFontModule.NOTO_SANS_REGULAR_FILE_NAME, notoSansFontModule.NOTO_SANS_REGULAR_FONT_FAMILY, "normal");
+            doc.setFont(notoSansFontModule.NOTO_SANS_REGULAR_FONT_FAMILY);
+
+            const autoTable = autoTableModule.default;
+            autoTable(doc, {
+                head: [headers],
+                body,
+                styles: {
+                    font: notoSansFontModule.NOTO_SANS_REGULAR_FONT_FAMILY,
+                    fontStyle: "normal"
+                },
+                headStyles: {
+                    font: notoSansFontModule.NOTO_SANS_REGULAR_FONT_FAMILY,
+                    fontStyle: "normal"
+                }
+            });
+
+            const timestamp = DateTime.now().toFormat("yyyyLLdd_HHmm");
+            doc.save(`region-statistics_${timestamp}.pdf`);
+        } catch (error) {
+            console.error("Не удалось экспортировать таблицу в PDF", error);
+
+            toast.error("Не удалось экспортировать таблицу в PDF. Попробуйте позже.", {
+                id: "export-pdf-error",
+                duration: 10_000
+            });
+        }
+    }, [tableData]);
+
     const exportDisabled = !tableData?.length || statusSummary.isLoading;
 
     return (
@@ -290,6 +346,7 @@ export default function StatisticTable() {
                 isDisabled={exportDisabled}
                 onExportCSV={handleExportCSV}
                 onExportXLSX={handleExportXLSX}
+                onExportPDF={handleExportPDF}
                 columnOptions={columnOptions}
                 visibleColumns={visibleColumns}
                 onVisibleColumnsChange={handleVisibleColumnsChange}

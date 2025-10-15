@@ -13,6 +13,7 @@ export function useKeycloak(): ReturnType {
         return {
             initialized: true,
             keycloak: {
+                token: "test123",
                 logout: undefined,
                 authenticated: true,
                 tokenParsed: {
