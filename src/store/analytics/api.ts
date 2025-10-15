@@ -2,6 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { axiosBaseQuery } from "@api/api";
 import apiUrls from "@api/apiUrls";
+import { toNumberRecord } from "@coreUtils/utils";
 import {
     AnalyticsBaseQueryParams,
     AnalyticsDensityResolutionQueryParams,
@@ -11,7 +12,6 @@ import {
     AverageCount,
     AverageCountByRegion,
     AverageCountByRegionMap,
-    AverageCountInfo,
     AverageDuration,
     AverageDurationByRegion,
     AverageDurationByRegionMap,
@@ -22,21 +22,17 @@ import {
     DensityByRegionMap,
     EmptyDaysByRegion,
     EmptyDaysByRegionMap,
-    FlightBetweenRegions,
     FlightsBetweenRegions,
     FlightsBetweenRegionsFormatted,
     MaxCount,
     MaxCountByRegion,
     MaxCountByRegionMap,
-    MaxCountInfo,
     TimeDistribution,
     TimeDistributionByRegion,
     TimeDistributionByRegionMap,
-    TimeDistributionInfo,
     Trend,
     TrendByRegion,
-    TrendByRegionMap,
-    TrendPeriod
+    TrendByRegionMap
 } from "@models/analytics/types";
 
 if (process.env.WITH_MOCK) {
@@ -52,182 +48,125 @@ export const analyticsApi = createApi({
         }),
         getTrendByRegion: build.query<TrendByRegionMap, AnalyticsRegionsQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.trendByRegion(), params: queryParams }),
-            transformResponse: (response: TrendByRegion) => {
-                const map = new Map<number, TrendPeriod[]>();
-
-                for (const { regionId, periods } of response.regions) {
-                    map.set(regionId, periods);
-                }
-
-                return {
-                    startDate: response.startDate,
-                    finishDate: response.finishDate,
-                    resolution: response.resolution,
-                    regionsMap: Object.fromEntries(map)
-                };
-            }
+            transformResponse: (response: TrendByRegion) => ({
+                startDate: response.startDate,
+                finishDate: response.finishDate,
+                resolution: response.resolution,
+                regionsMap: toNumberRecord(response.regions.map(({ regionId, periods }) => [regionId, periods] as const))
+            })
         }),
         getTimeDistribution: build.query<TimeDistribution, AnalyticsBaseQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.timeDistribution(), params: queryParams })
         }),
         getTimeDistributionByRegion: build.query<TimeDistributionByRegionMap, AnalyticsRegionsQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.timeDistributionByRegion(), params: queryParams }),
-            transformResponse: (response: TimeDistributionByRegion) => {
-                const map = new Map<number, TimeDistributionInfo>();
-
-                for (const { regionId, ...timeDistributionInfo } of response.regions) {
-                    map.set(regionId, { ...timeDistributionInfo });
-                }
-
-                return {
-                    startDate: response.startDate,
-                    finishDate: response.finishDate,
-                    regionsMap: Object.fromEntries(map)
-                };
-            }
+            transformResponse: (response: TimeDistributionByRegion) => ({
+                startDate: response.startDate,
+                finishDate: response.finishDate,
+                regionsMap: toNumberRecord(
+                    response.regions.map(({ regionId, ...timeDistributionInfo }) => [regionId, { ...timeDistributionInfo }] as const)
+                )
+            })
         }),
         getMaxCount: build.query<MaxCount, AnalyticsResolutionQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.maxCount(), params: queryParams })
         }),
         getMaxCountByRegion: build.query<MaxCountByRegionMap, AnalyticsRegionsResolutionQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.maxCountByRegion(), params: queryParams }),
-            transformResponse: (response: MaxCountByRegion) => {
-                const map = new Map<number, MaxCountInfo>();
-
-                for (const { regionId, ...maxCountInfo } of response.regions) {
-                    map.set(regionId, { ...maxCountInfo });
-                }
-
-                return {
-                    startDate: response.startDate,
-                    finishDate: response.finishDate,
-                    resolution: response.resolution,
-                    regionsMap: Object.fromEntries(map)
-                };
-            }
+            transformResponse: (response: MaxCountByRegion) => ({
+                startDate: response.startDate,
+                finishDate: response.finishDate,
+                resolution: response.resolution,
+                regionsMap: toNumberRecord(
+                    response.regions.map(({ regionId, ...maxCountInfo }) => [regionId, { ...maxCountInfo }] as const)
+                )
+            })
         }),
         getEmptyDaysByRegion: build.query<EmptyDaysByRegionMap, AnalyticsRegionsQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.emptyDaysByRegion(), params: queryParams }),
-            transformResponse: (response: EmptyDaysByRegion) => {
-                const map = new Map<number, number>();
-
-                for (const { regionId, emptyDaysCount } of response.regions) {
-                    map.set(regionId, emptyDaysCount);
-                }
-
-                return {
-                    startDate: response.startDate,
-                    finishDate: response.finishDate,
-                    regionsMap: Object.fromEntries(map)
-                };
-            }
+            transformResponse: (response: EmptyDaysByRegion) => ({
+                startDate: response.startDate,
+                finishDate: response.finishDate,
+                regionsMap: toNumberRecord(response.regions.map(({ regionId, emptyDaysCount }) => [regionId, emptyDaysCount] as const))
+            })
         }),
         getDensityByRegion: build.query<DensityByRegionMap, AnalyticsDensityResolutionQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.densityByRegion(), params: queryParams }),
-            transformResponse: (response: DensityByRegion) => {
-                const map = new Map<number, number>();
-
-                for (const { regionId, flightDensity } of response.regions) {
-                    map.set(regionId, flightDensity);
-                }
-
-                return {
-                    startDate: response.startDate,
-                    finishDate: response.finishDate,
-                    partAreaKm: response.partAreaKm,
-                    regionsMap: Object.fromEntries(map)
-                };
-            }
+            transformResponse: (response: DensityByRegion) => ({
+                startDate: response.startDate,
+                finishDate: response.finishDate,
+                partAreaKm: response.partAreaKm,
+                regionsMap: toNumberRecord(response.regions.map(({ regionId, flightDensity }) => [regionId, flightDensity] as const))
+            })
         }),
         getCount: build.query<Count, AnalyticsBaseQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.count(), params: queryParams })
         }),
         getCountByRegion: build.query<CountByRegionMap, AnalyticsRegionsQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.countByRegion(), params: queryParams }),
-            transformResponse: (response: CountByRegion) => {
-                const map = new Map<number, number>();
-
-                for (const { regionId, flightsCount } of response.regions) {
-                    map.set(regionId, flightsCount);
-                }
-
-                return {
-                    startDate: response.startDate,
-                    finishDate: response.finishDate,
-                    regionsMap: Object.fromEntries(map)
-                };
-            }
+            transformResponse: (response: CountByRegion) => ({
+                startDate: response.startDate,
+                finishDate: response.finishDate,
+                regionsMap: toNumberRecord(response.regions.map(({ regionId, flightsCount }) => [regionId, flightsCount] as const))
+            })
         }),
         getAverageDuration: build.query<AverageDuration, AnalyticsBaseQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.averageDuration(), params: queryParams })
         }),
         getAverageDurationByRegion: build.query<AverageDurationByRegionMap, AnalyticsRegionsQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.averageDurationByRegion(), params: queryParams }),
-            transformResponse: (response: AverageDurationByRegion) => {
-                const map = new Map<number, number>();
-
-                for (const { regionId, averageFlightDurationSeconds } of response.regions) {
-                    map.set(regionId, averageFlightDurationSeconds);
-                }
-
-                return {
-                    startDate: response.startDate,
-                    finishDate: response.finishDate,
-                    regionsMap: Object.fromEntries(map)
-                };
-            }
+            transformResponse: (response: AverageDurationByRegion) => ({
+                startDate: response.startDate,
+                finishDate: response.finishDate,
+                regionsMap: toNumberRecord(
+                    response.regions.map(({ regionId, averageFlightDurationSeconds }) => [regionId, averageFlightDurationSeconds] as const)
+                )
+            })
         }),
         getAverageCount: build.query<AverageCount, AnalyticsResolutionQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.averageCount(), params: queryParams })
         }),
         getAverageCountByRegion: build.query<AverageCountByRegionMap, AnalyticsRegionsResolutionQueryParams | undefined>({
             query: (queryParams) => ({ url: apiUrls.averageCountByRegion(), params: queryParams }),
-            transformResponse: (response: AverageCountByRegion) => {
-                const map = new Map<number, AverageCountInfo>();
-
-                for (const { regionId, ...averageCountInfo } of response.regions) {
-                    map.set(regionId, { ...averageCountInfo });
-                }
-
-                return {
-                    startDate: response.startDate,
-                    finishDate: response.finishDate,
-                    resolution: response.resolution,
-                    regionsMap: Object.fromEntries(map)
-                };
-            }
+            transformResponse: (response: AverageCountByRegion) => ({
+                startDate: response.startDate,
+                finishDate: response.finishDate,
+                resolution: response.resolution,
+                regionsMap: toNumberRecord(
+                    response.regions.map(({ regionId, ...averageCountInfo }) => [regionId, { ...averageCountInfo }] as const)
+                )
+            })
         }),
         getFlightsBetweenRegion: build.query<FlightsBetweenRegionsFormatted, void>({
             query: () => ({ url: apiUrls.flightsBetweenRegion() }),
-            transformResponse: (response: FlightsBetweenRegions) => {
-                const map = new Map<number, FlightBetweenRegions[]>();
-
-                for (const region of response.regions) {
-                    map.set(region.regionId, [
-                        ...region.topDepartureRegions.map((departureRegion) => ({
-                            departureRegionId: departureRegion,
-                            destinationRegionId: region.regionId
-                        })),
-                        ...region.topDestinationRegions.map((destinationRegion) => ({
-                            departureRegionId: region.regionId,
-                            destinationRegionId: destinationRegion
-                        }))
-                    ]);
-                }
-
-                return {
-                    count: response.count,
-                    topFly: response.topFly,
-                    regionFlights: Object.fromEntries(map)
-                };
-            }
+            transformResponse: (response: FlightsBetweenRegions) => ({
+                count: response.count,
+                topFly: response.topFly,
+                regionFlights: toNumberRecord(
+                    response.regions.map(
+                        (region) =>
+                            [
+                                region.regionId,
+                                [
+                                    ...region.topDepartureRegions.map((departureRegion) => ({
+                                        departureRegionId: departureRegion,
+                                        destinationRegionId: region.regionId
+                                    })),
+                                    ...region.topDestinationRegions.map((destinationRegion) => ({
+                                        departureRegionId: region.regionId,
+                                        destinationRegionId: destinationRegion
+                                    }))
+                                ]
+                            ] as const
+                    )
+                )
+            })
         })
     })
 });
 
 export const {
     useGetTrendQuery,
-    useGetTrendByRegionQuery,
     useGetTimeDistributionQuery,
     useGetTimeDistributionByRegionQuery,
     useGetMaxCountQuery,

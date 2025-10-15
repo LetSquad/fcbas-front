@@ -1,4 +1,5 @@
 import { PropsWithChildren, useCallback, useMemo } from "react";
+import { toast } from "react-hot-toast";
 
 import classNames from "classnames";
 import { saveAs } from "file-saver";
@@ -56,11 +57,34 @@ export default function ChartWithLoading({
     }, [children, isError, isLoading, refetch]);
 
     const handleDivDownload = useCallback(async () => {
-        const png = await getDivPng();
-        if (png) {
-            saveAs(png, `report-${DateTime.now().toFormat("dd.MM.yyyy")}.png`);
+        if (isLoadingPng) {
+            return;
         }
-    }, [getDivPng]);
+
+        try {
+            toast.dismiss("download-png-error");
+
+            const png = await getDivPng();
+
+            if (!png) {
+                toast.error("Не удалось подготовить изображение. Пожалуйста, попробуйте ещё раз позже.", {
+                    id: "download-png-error",
+                    duration: 10_000
+                });
+
+                return;
+            }
+
+            saveAs(png, `report-${DateTime.now().toFormat("dd.MM.yyyy")}.png`);
+        } catch (error) {
+            console.error("Не удалось скачать график", error);
+
+            toast.error("При скачивании произошла ошибка. Попробуйте обновить страницу или повторить попытку позже.", {
+                id: "download-png-error",
+                duration: 10_000
+            });
+        }
+    }, [getDivPng, isLoadingPng]);
 
     return (
         <div className={classNames({ [styles.block]: !isWide, [styles.blockWide]: isWide })} ref={ref}>
@@ -69,7 +93,16 @@ export default function ChartWithLoading({
                     <span className={styles.title}>{title}</span>
                     {(!isDownloadDisabled || (sort && onSortChanged)) && (
                         <Flex rowGap="5px" alignItemsCenter>
-                            {!isDownloadDisabled && <Icon link onClick={handleDivDownload} name="download" loading={isLoadingPng} />}
+                            {!isDownloadDisabled && (
+                                <Icon
+                                    link={!isLoadingPng}
+                                    onClick={handleDivDownload}
+                                    name="download"
+                                    loading={isLoadingPng}
+                                    aria-disabled={isLoadingPng}
+                                    disabled={isLoadingPng}
+                                />
+                            )}
                             {sort && onSortChanged && (
                                 <Icon link onClick={onSortChanged} name={sort === SortType.DESC ? "sort amount down" : "sort amount up"} />
                             )}

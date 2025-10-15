@@ -1,11 +1,11 @@
 import { Duration } from "luxon";
 
 import BlockWithLoading from "@components/CommonStatistic/Blocks/BlockWithLoading";
-import { useFilterFormContext } from "@components/Dashboard/context";
+import { useFilterForm } from "@components/Dashboard/context";
 import { useGetAverageDurationQuery } from "@store/analytics/api";
 
 export default function AverageDurationBlock() {
-    const formData = useFilterFormContext();
+    const formData = useFilterForm();
 
     const {
         data: averageDuration,

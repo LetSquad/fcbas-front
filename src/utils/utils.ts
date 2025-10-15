@@ -13,3 +13,7 @@ export function capitalizeFirstLetter(word: string): string {
 export function isSameDate(firstDay: DateTime, secondDay: DateTime) {
     return firstDay.day === secondDay.day && firstDay.month === secondDay.month && firstDay.year === secondDay.year;
 }
+
+export function toNumberRecord<TValue>(entries: [number, TValue][]) {
+    return Object.fromEntries(entries) as Record<number, TValue>;
+}

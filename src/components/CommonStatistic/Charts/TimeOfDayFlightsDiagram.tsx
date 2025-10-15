@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
 
 import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoading";
-import { useFilterFormContext } from "@components/Dashboard/context";
+import { useFilterForm } from "@components/Dashboard/context";
 import { useGetTimeDistributionQuery } from "@store/analytics/api";
 
 import chartStyles from "./styles/Chart.module.scss";
@@ -11,7 +11,7 @@ import chartStyles from "./styles/Chart.module.scss";
 const COLORS = ["#FFBB28", "#00C49F", "#0088FE"];
 
 export default function TimeOfDayFlightsDiagram() {
-    const formData = useFilterFormContext();
+    const formData = useFilterForm();
 
     const {
         data: timeDistributions,

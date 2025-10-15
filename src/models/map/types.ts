@@ -7,3 +7,8 @@ export interface ViewBox {
     width: number;
     height: number;
 }
+
+export interface HeatmapDomain {
+    min: number;
+    max: number;
+}

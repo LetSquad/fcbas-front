@@ -1,4 +1,5 @@
 import { HeatmapMode, TimeResolution } from "@models/analytics/enums";
+import type { RegionRecords } from "@models/regions/types";
 
 export interface AnalyticsBaseQueryParams {
     startDate?: string;
@@ -282,4 +283,59 @@ export interface HeatDomains {
         min: number;
         max: number;
     };
+}
+
+export interface TableData {
+    region: string;
+    count: number;
+    averageCount: number;
+    medianCount: number;
+    maxCount: {
+        count: number;
+        periodStart: string | undefined;
+    };
+    averageDuration: number;
+    density: number;
+    emptyDays: number;
+    timeDistribution: {
+        morningCount: number;
+        dayCount: number;
+        eveningCount: number;
+    };
+}
+
+export interface AnalyticsStatusSummary {
+    total: number;
+    loadingCount: number;
+    errorCount: number;
+    successCount: number;
+    isLoading: boolean;
+    hasError: boolean;
+    hasSuccess: boolean;
+}
+
+export interface RegionAnalyticsResult {
+    regions?: RegionRecords;
+    densityPartAreaKm?: number;
+    formattedTableData: TableData[];
+    statusSummary: AnalyticsStatusSummary;
+    refetchErroredQueries: () => void;
+}
+
+export type TableColumnKey =
+    | "count"
+    | "averageCount"
+    | "medianCount"
+    | "maxCount.count"
+    | "averageDuration"
+    | "density"
+    | "emptyDays"
+    | "timeDistribution.morningCount"
+    | "timeDistribution.dayCount"
+    | "timeDistribution.eveningCount";
+
+export interface StatisticTablePreferences {
+    columnOrder: TableColumnKey[];
+    visibleColumns: TableColumnKey[];
+    regionFilter: string[] | null;
 }

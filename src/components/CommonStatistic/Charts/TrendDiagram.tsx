@@ -5,7 +5,7 @@ import { Bar, BarChart, CartesianGrid, LabelList, ResponsiveContainer, Tooltip, 
 import { Props } from "recharts/types/component/Label";
 
 import ChartWithLoading from "@components/CommonStatistic/Charts/ChartWithLoading";
-import { useFilterFormContext } from "@components/Dashboard/context";
+import { useFilterForm } from "@components/Dashboard/context";
 import { TimeResolution } from "@models/analytics/enums";
 import { useGetTrendQuery } from "@store/analytics/api";
 
@@ -13,7 +13,7 @@ import chartStyles from "./styles/Chart.module.scss";
 import styles from "./styles/TrendDiagram.module.scss";
 
 export default function TrendDiagram() {
-    const formData = useFilterFormContext();
+    const formData = useFilterForm();
 
     const {
         data: trend,

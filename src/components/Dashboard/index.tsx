@@ -1,18 +1,16 @@
 import { ReactNode, useCallback, useMemo, useState } from "react";
 
 import { FormikProvider, useFormik } from "formik";
-import { DateTime } from "luxon";
 import { Loader, Tab, TabPane } from "semantic-ui-react";
 
 import Flex from "@commonComponents/Flex";
 import LoadingErrorBlock from "@commonComponents/LoadingErrorBlock/LoadingErrorBlock";
 import CommonStatistic from "@components/CommonStatistic";
 import { FilterFormContext } from "@components/Dashboard/context";
-import Filters from "@components/Dashboard/Filters";
+import Filters, { INITIAL_FORM_DATA } from "@components/Dashboard/Filters";
 import FlightsMapWrapper from "@components/FlightsMap/FlightsMapWrapper";
-import { TimeResolution } from "@models/analytics/enums";
+import StatisticTable from "@components/StatisticTable";
 import { FormData } from "@models/filters/types";
-import { Region } from "@models/regions/types";
 import { useGetRegionsQuery } from "@store/regions/api";
 
 import styles from "./styles/Dashboard.module.scss";
@@ -20,11 +18,7 @@ import styles from "./styles/Dashboard.module.scss";
 export default function Dashboard() {
     const { data: regions, isLoading: isRegionsLoading, isError: isRegionsError, refetch: refetchRegions } = useGetRegionsQuery();
 
-    const [formData, setFormData] = useState<FormData>({
-        startDate: DateTime.now().startOf("year").toISODate(),
-        finishDate: DateTime.now().toISODate(),
-        resolution: TimeResolution.MONTH
-    });
+    const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA());
 
     const formik = useFormik<FormData>({
         onSubmit: setFormData,
@@ -54,13 +48,15 @@ export default function Dashboard() {
         () => [
             {
                 menuItem: "Карта",
-                render: () => (
-                    <TabPane className={styles.tab}>{withRegionsLoader(<FlightsMapWrapper regions={regions as Region[]} />)}</TabPane>
-                )
+                render: () => <TabPane className={styles.tab}>{withRegionsLoader(<FlightsMapWrapper regions={regions ?? {}} />)}</TabPane>
             },
             {
-                menuItem: "Общая статистика",
+                menuItem: "Дашборд",
                 render: () => <TabPane className={styles.tab}>{withRegionsLoader(<CommonStatistic />)}</TabPane>
+            },
+            {
+                menuItem: "Таблица",
+                render: () => <TabPane className={styles.tab}>{withRegionsLoader(<StatisticTable />)}</TabPane>
             }
         ],
         [regions, withRegionsLoader]

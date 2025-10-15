@@ -1,5 +1,5 @@
 import { BaseQueryFn } from "@reduxjs/toolkit/query/react";
-import axiosObj, { AxiosError, AxiosRequestConfig } from "axios";
+import axiosObj, { AxiosError, AxiosHeaders, AxiosInstance, AxiosRequestConfig } from "axios";
 import MockAdapter from "axios-mock-adapter";
 
 import { keycloak } from "@coreUtils/keycloak";
@@ -9,7 +9,29 @@ const normalAxios = axiosObj.create();
 export const mockAxios = axiosObj.create();
 
 const axios = process.env.WITH_MOCK ? mockAxios : normalAxios;
-axios.defaults.withCredentials = true;
+
+const applyAuthInterceptor = (instance: AxiosInstance) => {
+    instance.interceptors.request.use((config) => {
+        const { token } = keycloak;
+
+        if (!token) {
+            return config;
+        }
+
+        const headers = config.headers instanceof AxiosHeaders ? config.headers : AxiosHeaders.from(config.headers ?? {});
+
+        if (!headers.has("Authorization")) {
+            headers.set("Authorization", `Bearer ${token}`);
+        }
+
+        config.headers = headers;
+        return config;
+    });
+    instance.defaults.withCredentials = true;
+};
+
+applyAuthInterceptor(normalAxios);
+applyAuthInterceptor(mockAxios);
 
 export default axios;
 
@@ -31,26 +53,33 @@ export const axiosBaseQuery =
         unknown,
         ErrorResponse
     > =>
-    async ({ url, method = "get", data, params, headers, responseType }) => {
+    async ({ url, method = "get", data, params, headers, responseType }, { signal }) => {
         try {
             const result = await axios({
                 url: baseUrl + url,
                 method,
                 data,
                 params,
-                headers: {
-                    ...headers,
-                    Authorization: `Bearer ${keycloak.token}`
-                },
-                responseType
+                headers,
+                responseType,
+                signal
             });
 
             return { data: result.data };
         } catch (axiosError) {
+            if (axiosObj.isCancel(axiosError)) {
+                throw axiosError;
+            }
+
             let errorData: ErrorResponse;
 
             if (axiosObj.isAxiosError(axiosError)) {
                 const typedError = axiosError as AxiosError<ErrorResponse>;
+
+                if (typedError.code === "ERR_CANCELED") {
+                    throw axiosError;
+                }
+
                 errorData = typedError.response?.data || {
                     code: "UNKNOWN",
                     message: "Response is empty"

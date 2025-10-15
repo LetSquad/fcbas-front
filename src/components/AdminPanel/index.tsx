@@ -31,11 +31,15 @@ export default function AdminPanel() {
                 const formData = new FormData();
                 formData.append("zip", file);
 
+                if (!keycloak.token) {
+                    setIsRegionsShapeUploadError(true);
+                    return;
+                }
+
                 await axios.post(apiUrls.regionShape(), formData, {
                     headers: {
                         "Content-Disposition": file.name,
-                        "Content-Type": "multipart/form-data",
-                        Authorization: `Bearer ${keycloak.token}`
+                        "Content-Type": "multipart/form-data"
                     }
                 });
 
@@ -59,11 +63,15 @@ export default function AdminPanel() {
                 const formData = new FormData();
                 formData.append("data", file);
 
+                if (!keycloak.token) {
+                    setIsFlightsDataUploadError(true);
+                    return;
+                }
+
                 await axios.post(apiUrls.flightData(), formData, {
                     headers: {
                         "Content-Disposition": file.name,
-                        "Content-Type": "multipart/form-data",
-                        Authorization: `Bearer ${keycloak.token}`
+                        "Content-Type": "multipart/form-data"
                     }
                 });
 

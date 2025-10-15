@@ -1,11 +1,57 @@
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import CompressionPlugin from "compression-webpack-plugin";
 import dotenv from "dotenv";
 import process from "node:process";
 import path from "path";
+import { BrotliOptions, constants as zlibConstants } from "zlib";
 import { TsCheckerRspackPlugin } from "ts-checker-rspack-plugin";
 
 import rspack, { CopyRspackPlugin, SwcLoaderOptions } from "@rspack/core";
 import ReactRefreshPlugin from "@rspack/plugin-react-refresh";
+
+class Http2PushManifestPlugin {
+    private readonly filename: string;
+
+    constructor(options: { filename?: string } = {}) {
+        this.filename = options.filename ?? "push-manifest.json";
+    }
+
+    apply(compiler: any) {
+        compiler.hooks.thisCompilation.tap("Http2PushManifestPlugin", (compilation: any) => {
+            compilation.hooks.processAssets.tap(
+                {
+                    name: "Http2PushManifestPlugin",
+                    stage: rspack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONS
+                },
+                () => {
+                    const manifest: Record<string | number, string[]> = {};
+
+                    for (const chunk of compilation.chunks) {
+                        if (!chunk) {
+                            continue;
+                        }
+
+                        const chunkName = chunk.name ?? chunk.id;
+                        if (!chunkName) {
+                            continue;
+                        }
+
+                        const files = (Array.from(chunk.files ?? []) as string[]).filter((file) =>
+                            /\.(css|js|woff2?|svg)$/i.test(file)
+                        );
+
+                        if (files.length) {
+                            manifest[chunkName] = files.map((file) => `/${file}`);
+                        }
+                    }
+
+                    const source = JSON.stringify(manifest, null, 2);
+                    compilation.emitAsset(this.filename, new rspack.sources.RawSource(source));
+                }
+            );
+        });
+    }
+}
 
 const env = dotenv.config({
     path: process.env.WITH_MOCK === "true" ? path.resolve(__dirname, ".env.local") : path.resolve(__dirname, ".env")
@@ -44,6 +90,29 @@ const devOptions = (withDevServer: boolean) => ({
 const rspack_ = (_: any, { mode }: any) => {
     const isProduction = mode === "production";
     const withDevServer = process.env.DEV_SERVER === "true";
+    const brotliCompressionOptions: BrotliOptions = {
+        params: {
+            [zlibConstants.BROTLI_PARAM_QUALITY]: 11
+        }
+    };
+
+    const compressionPlugins = isProduction
+        ? [
+            new CompressionPlugin({
+                test: /\.(js|css|svg|json|html|woff2?)$/i,
+                threshold: 10_240,
+                minRatio: 0.8
+            }),
+            new CompressionPlugin({
+                filename: "[path][base].br",
+                algorithm: "brotliCompress",
+                compressionOptions: brotliCompressionOptions,
+                test: /\.(js|css|svg|json|html|woff2?)$/i,
+                threshold: 10_240,
+                minRatio: 0.8
+            })
+        ]
+        : [];
 
     return {
         mode: isProduction ? "production" : "development",
@@ -64,13 +133,38 @@ const rspack_ = (_: any, { mode }: any) => {
         },
         optimization: {
             splitChunks: {
+                chunks: "all",
+                minSize: 20_000,
+                maxInitialRequests: 25,
                 cacheGroups: {
-                    vendor: {
+                    vendors: {
                         name: "vendors",
-                        test: /node_modules/,
+                        test: /[\\/]node_modules[\\/]/,
                         chunks: "all",
                         enforce: true,
-                        maxSize: 249_856
+                        priority: 40
+                    },
+                    flightsMap: {
+                        name: "flights-map",
+                        test: /[\\/]src[\\/]components[\\/]FlightsMap[\\/]/,
+                        chunks: "all",
+                        reuseExistingChunk: true,
+                        priority: 30,
+                        enforce: true
+                    },
+                    analyticsTables: {
+                        name: "analytics-tables",
+                        test: /[\\/]src[\\/]components[\\/].*Table[\\/]/,
+                        chunks: "all",
+                        reuseExistingChunk: true,
+                        priority: 20
+                    },
+                    adminArea: {
+                        name: "admin-area",
+                        test: /[\\/]src[\\/]pages[\\/]Admin[\\/]|[\\/]src[\\/]components[\\/]Admin[\\/]/,
+                        chunks: "all",
+                        reuseExistingChunk: true,
+                        priority: 10
                     }
                 }
             },
@@ -209,6 +303,8 @@ const rspack_ = (_: any, { mode }: any) => {
                     }
                 }
             }),
+            ...compressionPlugins,
+            isProduction && new Http2PushManifestPlugin(),
             withDevServer && new ReactRefreshPlugin()
         ].filter(Boolean)
     };

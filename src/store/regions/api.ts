@@ -22,7 +22,8 @@ export const regionsApi = createApi({
                 }
 
                 return regions;
-            }
+            },
+            keepUnusedDataFor: 3600
         })
     })
 });

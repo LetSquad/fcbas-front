@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useRef } from "react";
+
 import Flex from "@commonComponents/Flex";
 import LegendOverlay from "@components/FlightsMap/Overlays/LegendOverlay";
 import RegionOverlay from "@components/FlightsMap/Overlays/RegionOverlay";
@@ -35,8 +37,28 @@ export default function Overlays({
     topFlightsCount,
     onToggleShowFlows
 }: OverlaysProps) {
+    const ref = useRef<HTMLDivElement>(null);
+
+    const onWheel = useCallback((event: WheelEvent) => {
+        event.stopPropagation();
+    }, []);
+
+    useEffect(() => {
+        const element = ref?.current;
+
+        if (!element) {
+            return;
+        }
+
+        element.addEventListener("wheel", onWheel);
+
+        return () => {
+            element.removeEventListener("wheel", onWheel);
+        };
+    }, [onWheel, ref]);
+
     return (
-        <Flex column rowGap="10px" className={styles.container}>
+        <Flex column rowGap="10px" className={styles.container} ref={ref}>
             <LegendOverlay
                 heatmapMode={heatmapMode}
                 onChangeHeatmapMode={onChangeHeatmapMode}

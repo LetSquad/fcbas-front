@@ -1,10 +1,10 @@
 import BlockWithLoading from "@components/CommonStatistic/Blocks/BlockWithLoading";
-import { useFilterFormContext } from "@components/Dashboard/context";
+import { useFilterForm } from "@components/Dashboard/context";
 import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
 import { useGetMaxCountQuery } from "@store/analytics/api";
 
 export default function MaxCountBlock() {
-    const formData = useFilterFormContext();
+    const formData = useFilterForm();
 
     const {
         data: maxCount,
