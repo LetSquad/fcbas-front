@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from "react";
+import { Toast, toast } from "react-hot-toast";
 
 import { FormikProvider, useFormik } from "formik";
 import { DateTime } from "luxon";
@@ -6,6 +7,7 @@ import { Button, Form } from "semantic-ui-react";
 
 import axios from "@api/api";
 import apiUrls from "@api/apiUrls";
+import CustomWarningToast from "@commonComponents/CustomWarningToast";
 import Flex from "@commonComponents/Flex";
 import FormField from "@commonComponents/FormField";
 import { buildExportRows } from "@components/AdminPanel/utils";
@@ -88,11 +90,16 @@ export default function DownloadReport() {
         async (values: ReportQueryParams) => {
             setIsError(false);
             setIsLoading(true);
+            toast.dismiss("empty-report-toast");
 
             try {
                 const reportData = await getRawReport(values);
 
                 if (!reportData?.flights?.length) {
+                    toast.custom((t: Toast) => <CustomWarningToast text="Невозможно скачать отчет, так как он пустой" toast={t} />, {
+                        id: "empty-report-toast",
+                        duration: 10_000
+                    });
                     return;
                 }
 
@@ -116,11 +123,16 @@ export default function DownloadReport() {
         async (values: ReportQueryParams) => {
             setIsError(false);
             setIsLoading(true);
+            toast.dismiss("empty-report-toast");
 
             try {
                 const reportData = await getRawReport(values);
 
                 if (!reportData?.flights?.length) {
+                    toast.custom((t: Toast) => <CustomWarningToast text="Невозможно скачать отчет, так как он пустой" toast={t} />, {
+                        id: "empty-report-toast",
+                        duration: 10_000
+                    });
                     return;
                 }
 
@@ -135,6 +147,10 @@ export default function DownloadReport() {
                 const exportRows = buildExportRows(reportData.flights);
 
                 if (exportRows.length === 0) {
+                    toast.custom((t: Toast) => <CustomWarningToast text="Невозможно скачать отчет, так как он пустой" toast={t} />, {
+                        id: "empty-report-toast",
+                        duration: 10_000
+                    });
                     return;
                 }
 

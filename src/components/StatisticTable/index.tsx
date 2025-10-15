@@ -57,12 +57,6 @@ export default function StatisticTable() {
 
     const dataTableRef = useRef<DataTable<TableData[]> | null>(null);
 
-    useEffect(() => {
-        if (!statusSummary.isLoading && !statusSummary.hasError && statusSummary.hasSuccess) {
-            setTableData(formattedTableData);
-        }
-    }, [formattedTableData, statusSummary.hasError, statusSummary.hasSuccess, statusSummary.isLoading]);
-
     const filterClearTemplate = useCallback(
         (options: ColumnFilterClearTemplateOptions) => (
             <Button type="button" onClick={options.filterClearCallback} severity="secondary">
@@ -246,22 +240,14 @@ export default function StatisticTable() {
         [columnOrder]
     );
 
-    useEffect(() => {
-        savePreferences({
-            columnOrder,
-            visibleColumns,
-            regionFilter: selectedRegions
-        });
-    }, [columnOrder, selectedRegions, visibleColumns]);
-
     const handleExportCSV = useCallback(() => {
         dataTableRef.current?.exportCSV();
     }, []);
 
     const handleExportXLSX = useCallback(async () => {
-        try {
-            toast.dismiss("export-xlsx-error");
+        toast.dismiss("export-pdf-error");
 
+        try {
             if (!tableData?.length) {
                 return;
             }
@@ -283,9 +269,9 @@ export default function StatisticTable() {
     }, [tableData]);
 
     const handleExportPDF = useCallback(async () => {
-        try {
-            toast.dismiss("export-pdf-error");
+        toast.dismiss("export-pdf-error");
 
+        try {
             if (!tableData?.length) {
                 return;
             }
@@ -338,6 +324,20 @@ export default function StatisticTable() {
         }
     }, [tableData]);
 
+    useEffect(() => {
+        if (!statusSummary.isLoading && !statusSummary.hasError && statusSummary.hasSuccess) {
+            setTableData(formattedTableData);
+        }
+    }, [formattedTableData, statusSummary.hasError, statusSummary.hasSuccess, statusSummary.isLoading, formData.resolution]);
+
+    useEffect(() => {
+        savePreferences({
+            columnOrder,
+            visibleColumns,
+            regionFilter: selectedRegions
+        });
+    }, [columnOrder, selectedRegions, visibleColumns]);
+
     const exportDisabled = !tableData?.length || statusSummary.isLoading;
 
     return (
@@ -356,6 +356,7 @@ export default function StatisticTable() {
 
             <DataTable
                 ref={dataTableRef}
+                className={styles.table}
                 scrollable
                 scrollHeight="flex"
                 value={tableData || []}

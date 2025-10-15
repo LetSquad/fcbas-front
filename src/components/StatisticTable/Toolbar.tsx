@@ -4,6 +4,8 @@ import ColumnVisibilityDropdown from "@commonComponents/ButtonDropdown";
 import Flex from "@commonComponents/Flex";
 import type { TableColumnKey } from "@models/analytics/types";
 
+import styles from "./styles/Toolbar.module.scss";
+
 interface ColumnOption {
     text: string;
     value: TableColumnKey;
@@ -29,7 +31,7 @@ export default function Toolbar({
     onVisibleColumnsChange
 }: ToolbarProps) {
     return (
-        <Flex columnGap="10px" justifyEnd>
+        <Flex columnGap="10px" justifyEnd className={styles.container}>
             <Button onClick={onExportXLSX} disabled={isDisabled} primary size="small">
                 Экспорт XLSX
             </Button>

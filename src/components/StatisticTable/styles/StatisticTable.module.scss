@@ -1,6 +1,10 @@
 .container {
   height: 100%;
-  padding: 15px;
+  padding: 15px 0 0;
+}
+
+.table {
+  height: calc(100% - 48px);
 }
 
 .region-filter {
