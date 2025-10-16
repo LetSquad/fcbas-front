@@ -293,6 +293,7 @@ export interface TableData {
     maxCount: {
         count: number;
         periodStart: string | undefined;
+        resolution: TimeResolution;
     };
     averageDuration: number;
     density: number;

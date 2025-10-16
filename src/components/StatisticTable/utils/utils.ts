@@ -1,5 +1,6 @@
 import { DateTime, Duration } from "luxon";
 
+import { TimeResolution } from "@models/analytics/enums";
 import type {
     AverageCountByRegionMap,
     AverageDurationByRegionMap,
@@ -26,11 +27,27 @@ export function formatMaxCount(rowData: TableData) {
         return "-";
     }
 
-    const periodStart = rowData.maxCount.periodStart
-        ? `${DateTime.fromISO(rowData.maxCount.periodStart).toFormat("dd.MM.yyyy HH:mm")} - `
-        : "";
+    let periodStart = "";
 
-    return `${periodStart}${rowData.maxCount.count}`;
+    if (rowData.maxCount.periodStart) {
+        switch (rowData.maxCount.resolution) {
+            case TimeResolution.DAY: {
+                periodStart = DateTime.fromISO(rowData.maxCount.periodStart).toFormat("dd.MM.yyyy");
+                break;
+            }
+            case TimeResolution.HOUR: {
+                periodStart = DateTime.fromISO(rowData.maxCount.periodStart).toFormat("dd.MM.yyyy HH:mm");
+                break;
+            }
+            case TimeResolution.MONTH: {
+                periodStart = DateTime.fromISO(rowData.maxCount.periodStart).toFormat("LLL yy", { locale: "ru" });
+                break;
+            }
+            // skip default
+        }
+    }
+
+    return `${rowData.maxCount.count}${periodStart ? ` (${periodStart})` : ""}`;
 }
 
 export function formatTableData(
@@ -41,7 +58,8 @@ export function formatTableData(
     emptyDaysByRegion: EmptyDaysByRegionMap | undefined,
     densityByRegion: DensityByRegionMap | undefined,
     timeDistributionsByRegion: TimeDistributionByRegionMap | undefined,
-    maxCountByRegion: MaxCountByRegionMap | undefined
+    maxCountByRegion: MaxCountByRegionMap | undefined,
+    resolution: TimeResolution
 ): TableData[] {
     return regions
         ? Object.values(regions).map((region: Region) => ({
@@ -51,7 +69,8 @@ export function formatTableData(
               medianCount: averageCountByRegion?.regionsMap?.[region.id]?.medianFlightsCount || -1,
               maxCount: {
                   count: maxCountByRegion?.regionsMap?.[region.id]?.maxFlightsCount || -1,
-                  periodStart: maxCountByRegion?.regionsMap?.[region.id]?.maxFlightsPeriodStart
+                  periodStart: maxCountByRegion?.regionsMap?.[region.id]?.maxFlightsPeriodStart,
+                  resolution
               },
               averageDuration: averageDurationByRegion?.regionsMap?.[region.id] || -1,
               density: densityByRegion?.regionsMap?.[region.id] ? Math.round(densityByRegion.regionsMap[region.id] * 100) / 100 : -1,

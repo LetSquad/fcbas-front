@@ -1,0 +1,65 @@
+@use '@coreStyles/variables.module' as variables;
+
+.toast {
+  background-color: variables.$background-color;
+  border-radius: 7px;
+  box-shadow: variables.$primary-box-shadow;
+  display: flex;
+  max-width: 400px;
+  padding: 15px 30px 15px 15px;
+  position: relative;
+
+  &-content {
+    align-items: baseline;
+    column-gap: 10px;
+    display: flex;
+  }
+
+  &-text {
+    font-weight: bold;
+  }
+
+  &-icon {
+    height: 28px;
+    width: 28px;
+  }
+
+  &-enter {
+    animation: 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) forwards enter;
+
+  }
+
+  &-exit {
+    animation: 0.4s forwards cubic-bezier(0.06, 0.71, 0.55, 1) exit;
+  }
+}
+
+@keyframes exit {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, -1px) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 150%, -1px) scale(0.6);
+  }
+}
+
+@keyframes enter {
+  0% {
+    opacity: 0.5;
+    transform: translate3d(0, 200%, 0) scale(0.6);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.toast-dismiss-icon {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+}

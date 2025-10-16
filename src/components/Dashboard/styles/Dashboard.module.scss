@@ -16,3 +16,19 @@
   margin: 0 !important;
   padding: 0 !important;
 }
+
+.container-fullscreen {
+  height: 100%;
+
+  > div:first-child {
+    height: 0;
+  }
+}
+
+.fullscreen-layout {
+  height: 100%;
+}
+
+.tab-fullscreen {
+  height: 100%;
+}

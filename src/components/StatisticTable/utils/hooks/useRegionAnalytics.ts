@@ -108,7 +108,8 @@ export function useRegionAnalytics(): RegionAnalyticsResult {
                 emptyDaysByRegion.data,
                 densityByRegion.data,
                 timeDistributionByRegion.data,
-                maxCountByRegion.data
+                maxCountByRegion.data,
+                formData.resolution
             ),
         [
             averageCountByRegion.data,
@@ -116,6 +117,7 @@ export function useRegionAnalytics(): RegionAnalyticsResult {
             countByRegion.data,
             densityByRegion.data,
             emptyDaysByRegion.data,
+            formData.resolution,
             maxCountByRegion.data,
             regions,
             timeDistributionByRegion.data

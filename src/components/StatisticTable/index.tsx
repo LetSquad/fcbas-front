@@ -57,12 +57,6 @@ export default function StatisticTable() {
 
     const dataTableRef = useRef<DataTable<TableData[]> | null>(null);
 
-    useEffect(() => {
-        if (!statusSummary.isLoading && !statusSummary.hasError && statusSummary.hasSuccess) {
-            setTableData(formattedTableData);
-        }
-    }, [formattedTableData, statusSummary.hasError, statusSummary.hasSuccess, statusSummary.isLoading]);
-
     const filterClearTemplate = useCallback(
         (options: ColumnFilterClearTemplateOptions) => (
             <Button type="button" onClick={options.filterClearCallback} severity="secondary">
@@ -246,22 +240,14 @@ export default function StatisticTable() {
         [columnOrder]
     );
 
-    useEffect(() => {
-        savePreferences({
-            columnOrder,
-            visibleColumns,
-            regionFilter: selectedRegions
-        });
-    }, [columnOrder, selectedRegions, visibleColumns]);
-
     const handleExportCSV = useCallback(() => {
         dataTableRef.current?.exportCSV();
     }, []);
 
     const handleExportXLSX = useCallback(async () => {
-        try {
-            toast.dismiss("export-xlsx-error");
+        toast.dismiss("export-pdf-error");
 
+        try {
             if (!tableData?.length) {
                 return;
             }
@@ -282,6 +268,76 @@ export default function StatisticTable() {
         }
     }, [tableData]);
 
+    const handleExportPDF = useCallback(async () => {
+        toast.dismiss("export-pdf-error");
+
+        try {
+            if (!tableData?.length) {
+                return;
+            }
+
+            const [{ jsPDF: JsPDF }, autoTableModule, notoSansFontModule] = await Promise.all([
+                import("jspdf"),
+                import("jspdf-autotable"),
+                import("@coreUtils/fonts/notoSansRegularBase64")
+            ]);
+
+            const fontBase64 = notoSansFontModule.NOTO_SANS_REGULAR_BASE64;
+
+            const exportRows = buildExportRows(tableData);
+
+            if (exportRows.length === 0) {
+                return;
+            }
+
+            const headers = Object.keys(exportRows[0]);
+            const body = exportRows.map((row) => headers.map((header) => row[header as keyof typeof row]));
+
+            const doc = new JsPDF();
+            doc.addFileToVFS(notoSansFontModule.NOTO_SANS_REGULAR_FILE_NAME, fontBase64);
+            doc.addFont(notoSansFontModule.NOTO_SANS_REGULAR_FILE_NAME, notoSansFontModule.NOTO_SANS_REGULAR_FONT_FAMILY, "normal");
+            doc.setFont(notoSansFontModule.NOTO_SANS_REGULAR_FONT_FAMILY);
+
+            const autoTable = autoTableModule.default;
+            autoTable(doc, {
+                head: [headers],
+                body,
+                styles: {
+                    font: notoSansFontModule.NOTO_SANS_REGULAR_FONT_FAMILY,
+                    fontStyle: "normal"
+                },
+                headStyles: {
+                    font: notoSansFontModule.NOTO_SANS_REGULAR_FONT_FAMILY,
+                    fontStyle: "normal"
+                }
+            });
+
+            const timestamp = DateTime.now().toFormat("yyyyLLdd_HHmm");
+            doc.save(`region-statistics_${timestamp}.pdf`);
+        } catch (error) {
+            console.error("Не удалось экспортировать таблицу в PDF", error);
+
+            toast.error("Не удалось экспортировать таблицу в PDF. Попробуйте позже.", {
+                id: "export-pdf-error",
+                duration: 10_000
+            });
+        }
+    }, [tableData]);
+
+    useEffect(() => {
+        if (!statusSummary.isLoading && !statusSummary.hasError && statusSummary.hasSuccess) {
+            setTableData(formattedTableData);
+        }
+    }, [formattedTableData, statusSummary.hasError, statusSummary.hasSuccess, statusSummary.isLoading, formData.resolution]);
+
+    useEffect(() => {
+        savePreferences({
+            columnOrder,
+            visibleColumns,
+            regionFilter: selectedRegions
+        });
+    }, [columnOrder, selectedRegions, visibleColumns]);
+
     const exportDisabled = !tableData?.length || statusSummary.isLoading;
 
     return (
@@ -290,6 +346,7 @@ export default function StatisticTable() {
                 isDisabled={exportDisabled}
                 onExportCSV={handleExportCSV}
                 onExportXLSX={handleExportXLSX}
+                onExportPDF={handleExportPDF}
                 columnOptions={columnOptions}
                 visibleColumns={visibleColumns}
                 onVisibleColumnsChange={handleVisibleColumnsChange}
@@ -299,6 +356,7 @@ export default function StatisticTable() {
 
             <DataTable
                 ref={dataTableRef}
+                className={styles.table}
                 scrollable
                 scrollHeight="flex"
                 value={tableData || []}

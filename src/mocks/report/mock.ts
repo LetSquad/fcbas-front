@@ -10,4 +10,5 @@ export async function setupReportMocks() {
             type: "application/json"
         })
     );
+    mock.onGet(apiUrls.reportFlightsErp()).reply(200, { ...report });
 }
