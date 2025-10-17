@@ -3,7 +3,7 @@ import { Toast, toast } from "react-hot-toast";
 
 import { FormikProvider, useFormik } from "formik";
 import { DateTime } from "luxon";
-import { Button, Form } from "semantic-ui-react";
+import { Dropdown, DropdownItem, DropdownMenu, Form } from "semantic-ui-react";
 
 import axios from "@api/api";
 import apiUrls from "@api/apiUrls";
@@ -243,38 +243,34 @@ export default function DownloadReport() {
                             type={FormFieldType.DATEPICKER}
                             className={styles.field}
                         />
-                        <Button
-                            primary
-                            onClick={() => {
-                                downloadVariantRef.current = "pdf";
-                                formik.submitForm();
-                            }}
-                            className={styles.button}
-                            loading={isLoading}
-                        >
-                            Скачать отчет в PDF
-                        </Button>
-                        <Button
-                            secondary
-                            onClick={() => {
-                                downloadVariantRef.current = "xlsx";
-                                formik.submitForm();
-                            }}
-                            className={styles.button}
-                            loading={isLoading}
-                        >
-                            Скачать отчет в XLSX
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                downloadVariantRef.current = "json";
-                                formik.submitForm();
-                            }}
-                            className={styles.button}
-                            loading={isLoading}
-                        >
-                            Скачать отчет в JSON
-                        </Button>
+                        <Dropdown text="Скачать отчет" button className={styles.button} loading={isLoading} disabled={isLoading}>
+                            <DropdownMenu>
+                                <DropdownItem
+                                    onClick={() => {
+                                        downloadVariantRef.current = "pdf";
+                                        formik.submitForm();
+                                    }}
+                                >
+                                    Скачать отчет в PDF
+                                </DropdownItem>
+                                <DropdownItem
+                                    onClick={() => {
+                                        downloadVariantRef.current = "xlsx";
+                                        formik.submitForm();
+                                    }}
+                                >
+                                    Скачать отчет в XLSX
+                                </DropdownItem>
+                                <DropdownItem
+                                    onClick={() => {
+                                        downloadVariantRef.current = "json";
+                                        formik.submitForm();
+                                    }}
+                                >
+                                    Скачать отчет в JSON
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
                     </Flex>
                 </Form>
             </FormikProvider>

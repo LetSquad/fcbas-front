@@ -5,18 +5,21 @@ import TimeOfDayFlightsDiagram from "@components/CommonStatistic/Charts/TimeOfDa
 import TopAverageDurationFlightsDiagram from "@components/CommonStatistic/Charts/TopAverageDurationFlightsDiagram";
 import TopFlightsDiagram from "@components/CommonStatistic/Charts/TopFlightsDiagram";
 import TrendDiagram from "@components/CommonStatistic/Charts/TrendDiagram";
+import { useExtendedMode } from "@components/Dashboard/context";
 
 import styles from "./styles/CommonStatistic.module.scss";
 
 export default function CommonStatistic() {
+    const { isExtendedMode } = useExtendedMode();
+
     return (
         <Flex height100 width100 gap="12px" wrap className={styles.container}>
-            <Blocks />
+            {isExtendedMode && <Blocks />}
             <TrendDiagram />
             <TopFlightsDiagram />
             <TimeOfDayFlightsDiagram />
             <TopAverageDurationFlightsDiagram />
-            <FlightDensityDiagram />
+            {isExtendedMode && <FlightDensityDiagram />}
         </Flex>
     );
 }

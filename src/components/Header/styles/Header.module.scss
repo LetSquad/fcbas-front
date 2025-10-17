@@ -6,15 +6,15 @@
 
 .header {
   align-items: center;
-  background-color: transparent !important;
+  background-color: variables.$background-color !important;
   border: 0 !important;
   border-radius: 0 !important;
+  box-shadow: variables.$primary-box-shadow !important;
   flex: 0 0 auto;
   height: variables.$header-height;
   margin: 0 !important;
-  position: fixed;
+  min-height: variables.$header-height !important;
   width: 100% !important;
-  z-index: 100;
 
   @include mq($until: mobile) {
     padding: 0 20px;
@@ -25,66 +25,15 @@
   @include mq($from: tablet) {
     padding: 0 60px;
   }
-
-  &-scroll {
-    background-color: variables.$background-color !important;
-    transition: top 0.4s ease-out, background-color 0.4s ease-out;
-  }
-
-  &-visible {
-    box-shadow: variables.$primary-box-shadow !important;
-    top: 0 !important;
-    transition: top 0.4s ease-out, background-color 0.4s ease-out;
-  }
-
-  &-hidden {
-    top: -130px !important;
-    transition: top 0.4s ease-out, background-color 0.4s ease-out;
-  }
 }
 
-.sidebar,
-%header-sidebar {
-  background: #fff;
-  bottom: 0;
+.items-container {
+  column-gap: 16px;
   display: flex;
-  flex-direction: column;
-  left: 0;
-  padding: 40px 20px;
-  position: fixed;
-  right: 0;
-  top: 0;
-
-  &-show {
-    @extend %header-sidebar;
-    opacity: 1;
-    transition: opacity ease-out 0.4s, z-index ease-out 0.4s;
-    z-index: 10000;
-  }
-
-  &-close {
-    @extend %header-sidebar;
-    opacity: 0;
-    transition: opacity ease-out 0.4s, z-index ease-out 0.4s;
-    z-index: -100;
-  }
-
-  &-items-container {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    row-gap: 16px;
-  }
-
-  &-exit-item {
-    @extend %base-item-link;
-  }
-
-  &-close-icon {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-  }
+  flex: 1;
+  flex-wrap: wrap;
+  row-gap: 12px;
+  text-transform: lowercase;
 }
 
 .button {
@@ -94,6 +43,7 @@
 
   &-container {
     height: 100%;
+    padding: 5px !important;
 
     &::before {
       width: 0 !important;

@@ -1,11 +1,12 @@
 @use '@coreStyles/variables.module' as variables;
 
 .container {
-  height: calc(100% - #{variables.$filters-height});
+  height: 100%;
   width: 100%;
 
   > div:first-child {
     height: variables.$tabs-height;
+    min-height: variables.$tabs-height;
   }
 }
 
@@ -31,4 +32,40 @@
 
 .tab-fullscreen {
   height: 100%;
+}
+
+.fullscreen-layout .tab-wrapper {
+  height: 100%;
+}
+
+.tab-wrapper {
+  height: calc(100% - #{variables.$filters-height});
+  position: relative;
+  width: 100%;
+}
+
+.mode-toggle {
+  font-size: 12px;
+  position: absolute;
+  right: 16px;
+  top: 8px;
+  z-index: 1;
+
+  input:checked~label::after {
+    left: 20px !important;
+  }
+
+  label {
+    padding-left: 45px !important;
+  }
+
+  label::before {
+    height: 20px !important;
+    width: 40px !important;
+  }
+
+  label::after {
+    height: 20px !important;
+    width: 20px !important;
+  }
 }

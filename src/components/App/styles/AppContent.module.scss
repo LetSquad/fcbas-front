@@ -2,7 +2,6 @@
 
 .container {
   height: calc(100% - #{variables.$header-height});
-  margin-top: variables.$header-height;
 }
 
 .main-content-wrapper {
