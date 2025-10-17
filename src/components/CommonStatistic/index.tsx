@@ -4,6 +4,7 @@ import FlightDensityDiagram from "@components/CommonStatistic/Charts/FlightDensi
 import TimeOfDayFlightsDiagram from "@components/CommonStatistic/Charts/TimeOfDayFlightsDiagram";
 import TopAverageDurationFlightsDiagram from "@components/CommonStatistic/Charts/TopAverageDurationFlightsDiagram";
 import TopFlightsDiagram from "@components/CommonStatistic/Charts/TopFlightsDiagram";
+import TopOperatorsFlightsDiagram from "@components/CommonStatistic/Charts/TopOperatorsFlightsDiagram";
 import TrendDiagram from "@components/CommonStatistic/Charts/TrendDiagram";
 import { useExtendedMode } from "@components/Dashboard/context";
 
@@ -17,7 +18,8 @@ export default function CommonStatistic() {
             {isExtendedMode && <Blocks />}
             <TrendDiagram />
             <TopFlightsDiagram />
-            <TimeOfDayFlightsDiagram />
+            <TopOperatorsFlightsDiagram />
+            {isExtendedMode && <TimeOfDayFlightsDiagram />}
             <TopAverageDurationFlightsDiagram />
             {isExtendedMode && <FlightDensityDiagram />}
         </Flex>
