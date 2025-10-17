@@ -25,7 +25,8 @@ const apiUrls = {
     averageDurationByRegion: () => `${flightAnalyticsUrl}/average-duration/by-region`,
     averageCount: () => `${flightAnalyticsUrl}/average-count`,
     averageCountByRegion: () => `${flightAnalyticsUrl}/average-count/by-region`,
-    flightsBetweenRegion: () => `${flightAnalyticsUrl}/between-region`
+    flightsBetweenRegion: () => `${flightAnalyticsUrl}/between-region`,
+    countByOperator: () => `${flightAnalyticsUrl}/count/by-operator`
 };
 
 export default apiUrls;

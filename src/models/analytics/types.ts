@@ -22,6 +22,10 @@ export interface AnalyticsDensityResolutionQueryParams extends AnalyticsRegionsQ
     partAreaKm?: number;
 }
 
+export interface AnalyticsOperatorsQueryParams extends AnalyticsBaseQueryParams {
+    limit?: number;
+}
+
 export interface TrendPeriod {
     date: string;
     percentageChange: number;
@@ -221,6 +225,23 @@ export interface AverageCountByRegionMap {
     regionsMap: Record<number, AverageCountInfo>;
 }
 
+export interface FlightsCountByOperatorItem {
+    operator: string;
+    flightsCount: number;
+}
+
+export interface FlightsCountByOperator {
+    startDate: string;
+    finishDate: string;
+    operators: FlightsCountByOperatorItem[];
+}
+
+export interface FlightsCountByOperatorMap {
+    startDate: string;
+    finishDate: string;
+    operatorsMap: Record<string, number>;
+}
+
 export interface FlightBetweenRegions {
     departureRegionId: number;
     destinationRegionId: number;
@@ -230,6 +251,7 @@ interface FlightsBetweenRegionsFly {
     regionId: number;
     topDestinationRegions: number[];
     topDepartureRegions: number[];
+    count: number;
 }
 
 export interface FlightsBetweenRegions {
@@ -242,6 +264,7 @@ export interface FlightsBetweenRegionsFormatted {
     count: number;
     topFly: FlightBetweenRegions[];
     regionFlights: Record<number, FlightBetweenRegions[]>;
+    regionCounts: Record<number, number>;
 }
 
 export interface HeatMapInfo {

@@ -14,6 +14,6 @@ export function isSameDate(firstDay: DateTime, secondDay: DateTime) {
     return firstDay.day === secondDay.day && firstDay.month === secondDay.month && firstDay.year === secondDay.year;
 }
 
-export function toNumberRecord<TValue>(entries: [number, TValue][]) {
-    return Object.fromEntries(entries) as Record<number, TValue>;
+export function toRecord<TValue, TKey extends string | number = number>(entries: [TKey, TValue][]) {
+    return Object.fromEntries(entries) as Record<TKey, TValue>;
 }

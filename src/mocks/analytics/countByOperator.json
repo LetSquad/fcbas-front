@@ -1,0 +1,46 @@
+{
+  "startDate": "2025-10-01",
+  "finishDate": "2025-10-31",
+  "operators": [
+    {
+      "operator": "SkyWays",
+      "flightsCount": 64
+    },
+    {
+      "operator": "AeroNova",
+      "flightsCount": 52
+    },
+    {
+      "operator": "CloudJet",
+      "flightsCount": 47
+    },
+    {
+      "operator": "PolarAir",
+      "flightsCount": 41
+    },
+    {
+      "operator": "Sunrise Airways",
+      "flightsCount": 38
+    },
+    {
+      "operator": "Northwind",
+      "flightsCount": 35
+    },
+    {
+      "operator": "Aurora Flights",
+      "flightsCount": 29
+    },
+    {
+      "operator": "Vector Wings",
+      "flightsCount": 24
+    },
+    {
+      "operator": "BlueHorizon",
+      "flightsCount": 19
+    },
+    {
+      "operator": "JetPulse",
+      "flightsCount": 16
+    }
+  ]
+}

@@ -19,7 +19,7 @@ export default function RegionOverlay({ selectionActive, selectedRegionName, sel
             <div className={styles.title}>{selectedRegionName}</div>
 
             <Flex column rowGap="6px">
-                <div>{`Полётов внутри региона: ${selectedRegionStat?.averageFlightCount || 0}`}</div>
+                <div>{`Полётов внутри региона: ${selectedRegionStat?.flightCount || 0}`}</div>
 
                 <div>{`Среднее количество: ${selectedRegionStat?.averageFlightCount || 0}`}</div>
 
