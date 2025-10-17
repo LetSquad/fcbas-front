@@ -11,7 +11,8 @@ export enum HeatmapMode {
     MEDIAN_COUNT = "medianCount",
     EMPTY_DAYS_COUNT = "emptyDaysCount",
     DENSITY = "density",
-    MAX_COUNT = "maxCount"
+    MAX_COUNT = "maxCount",
+    BETWEEN_REGIONS_COUNT = "betweenRegionsCount"
 }
 
 export enum SortType {

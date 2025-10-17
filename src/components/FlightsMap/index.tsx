@@ -59,19 +59,19 @@ const STYLE = {
 export default function FlightsMap({ viewBox, regions, width, height }: FlightsMapProps) {
     const formData = useFilterForm();
 
-    // Собираем все данные для тепловой карты
-    const {
-        heatmapInfoByRegion,
-        heatDomains,
-        queriesState: { isLoadingAny: isHeatmapLoading, isFetchingAny: isHeatmapFetching, errorRefetch: heatmapErrorRefetch }
-    } = useHeatmapData({ formData, regions });
-
     const {
         data: flightsBetweenRegion,
         isLoading: isFlightsBetweenRegionLoading,
         isError: isFlightsBetweenRegionError,
         refetch: refetchFlightsBetweenRegion
     } = useGetFlightsBetweenRegionQuery();
+
+    // Собираем все данные для тепловой карты
+    const {
+        heatmapInfoByRegion,
+        heatDomains,
+        queriesState: { isLoadingAny: isHeatmapLoading, isFetchingAny: isHeatmapFetching, errorRefetch: heatmapErrorRefetch }
+    } = useHeatmapData({ formData, regions, interregionalCounts: flightsBetweenRegion?.regionCounts });
 
     const topFly = flightsBetweenRegion?.topFly;
     const regionFlights = flightsBetweenRegion?.regionFlights;
@@ -193,6 +193,15 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
                     }
 
                     return (heatMapInfo.maxCount - min) / (max - min);
+                }
+                case HeatmapMode.BETWEEN_REGIONS_COUNT: {
+                    const { min, max } = heatDomains[HeatmapMode.BETWEEN_REGIONS_COUNT];
+
+                    if (max <= min) {
+                        return 0;
+                    }
+
+                    return (heatMapInfo.interregionalFlightCount - min) / (max - min);
                 }
                 default: {
                     return 0;
@@ -406,7 +415,7 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
     );
 
     const selectedRegionName = selectedRegionId === null ? undefined : regions[selectedRegionId]?.name || `Регион ${selectedRegionId}`;
-    const selectedRegionIntra =
+    const selectedRegionStats =
         selectedRegionId === null
             ? undefined
             : heatmapInfoByRegion.get(selectedRegionId) || {
@@ -416,8 +425,11 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
                   medianFlightCount: 0,
                   emptyDays: 0,
                   density: 0,
-                  maxCount: 0
+                  maxCount: 0,
+                  interregionalFlightCount: 0
               };
+
+    const selectedRegionInterregionalCount = selectedRegionId === null ? 0 : (selectedRegionStats?.interregionalFlightCount ?? 0);
 
     const getTooltipContent = useCallback(
         (regionId: number) => {
@@ -457,6 +469,10 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
                 }
                 case HeatmapMode.MAX_COUNT: {
                     content = `Максимальное количество полетов: ${heatMapInfo.maxCount}`;
+                    break;
+                }
+                case HeatmapMode.BETWEEN_REGIONS_COUNT: {
+                    content = `Перелетов в другие регионы: ${heatMapInfo.interregionalFlightCount}`;
                     break;
                 }
                 default: {
@@ -601,7 +617,8 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
                     // Легенда всегда показывается
                     selectionActive={selectedRegionId !== null}
                     selectedRegionName={selectedRegionName}
-                    selectedRegionStat={selectedRegionIntra}
+                    selectedRegionStat={selectedRegionStats}
+                    interregionalFlightsCount={selectedRegionInterregionalCount}
                     heatmapMode={heatmapMode}
                     onChangeHeatmapMode={setHeatmapMode}
                     heatDomains={heatDomains}

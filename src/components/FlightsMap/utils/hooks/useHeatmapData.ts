@@ -18,6 +18,7 @@ import {
 interface UseHeatmapDataParams {
     formData: FormData;
     regions: Record<number, RegionShape>;
+    interregionalCounts?: Record<number, number>;
 }
 
 interface UseHeatmapDataResult {
@@ -37,14 +38,15 @@ const EMPTY_DOMAINS: Record<HeatmapMode, HeatmapDomain> = {
     [HeatmapMode.MEDIAN_COUNT]: { min: 0, max: 0 },
     [HeatmapMode.EMPTY_DAYS_COUNT]: { min: 0, max: 0 },
     [HeatmapMode.DENSITY]: { min: 0, max: 0 },
-    [HeatmapMode.MAX_COUNT]: { min: 0, max: 0 }
+    [HeatmapMode.MAX_COUNT]: { min: 0, max: 0 },
+    [HeatmapMode.BETWEEN_REGIONS_COUNT]: { min: 0, max: 0 }
 };
 
 /**
  * Собирает и объединяет все данные для теплокарты.
  * Хук инкапсулирует набор запросов и нормализацию данных, чтобы основной компонент не занимался механической склейкой.
  */
-export function useHeatmapData({ formData, regions }: UseHeatmapDataParams): UseHeatmapDataResult {
+export function useHeatmapData({ formData, regions, interregionalCounts }: UseHeatmapDataParams): UseHeatmapDataResult {
     const {
         data: countByRegions,
         isLoading: isCountByRegionsLoading,
@@ -109,7 +111,6 @@ export function useHeatmapData({ formData, regions }: UseHeatmapDataParams): Use
 
         for (const region of Object.values(regions)) {
             const averageCount = averageCountByRegions.regionsMap?.[region.id];
-            const maxCount = maxCountByRegions.regionsMap?.[region.id];
 
             map.set(region.id, {
                 flightCount: countByRegions.regionsMap?.[region.id] ?? 0,
@@ -118,12 +119,22 @@ export function useHeatmapData({ formData, regions }: UseHeatmapDataParams): Use
                 medianFlightCount: averageCount?.medianFlightsCount ?? 0,
                 emptyDays: emptyDaysByRegions.regionsMap?.[region.id] ?? 0,
                 density: densityByRegions.regionsMap?.[region.id] ?? 0,
-                maxCount: maxCount?.maxFlightsCount ?? 0
+                maxCount: maxCountByRegions.regionsMap?.[region.id]?.maxFlightsCount ?? 0,
+                interregionalFlightCount: interregionalCounts?.[region.id] ?? 0
             });
         }
 
         return map;
-    }, [averageCountByRegions, averageDurationByRegions, countByRegions, densityByRegions, emptyDaysByRegions, maxCountByRegions, regions]);
+    }, [
+        averageCountByRegions,
+        averageDurationByRegions,
+        countByRegions,
+        densityByRegions,
+        emptyDaysByRegions,
+        interregionalCounts,
+        maxCountByRegions,
+        regions
+    ]);
 
     const heatDomains = useMemo(() => {
         if (heatmapInfoByRegion.size === 0) {
@@ -137,7 +148,8 @@ export function useHeatmapData({ formData, regions }: UseHeatmapDataParams): Use
             [HeatmapMode.MEDIAN_COUNT]: { min: Number.POSITIVE_INFINITY, max: 0 },
             [HeatmapMode.EMPTY_DAYS_COUNT]: { min: Number.POSITIVE_INFINITY, max: 0 },
             [HeatmapMode.DENSITY]: { min: Number.POSITIVE_INFINITY, max: 0 },
-            [HeatmapMode.MAX_COUNT]: { min: Number.POSITIVE_INFINITY, max: 0 }
+            [HeatmapMode.MAX_COUNT]: { min: Number.POSITIVE_INFINITY, max: 0 },
+            [HeatmapMode.BETWEEN_REGIONS_COUNT]: { min: Number.POSITIVE_INFINITY, max: 0 }
         };
 
         const updateDomain = (mode: HeatmapMode, value: number) => {
@@ -158,6 +170,7 @@ export function useHeatmapData({ formData, regions }: UseHeatmapDataParams): Use
             updateDomain(HeatmapMode.DENSITY, roundedDensity);
 
             updateDomain(HeatmapMode.MAX_COUNT, info.maxCount);
+            updateDomain(HeatmapMode.BETWEEN_REGIONS_COUNT, info.interregionalFlightCount);
         }
 
         return {
@@ -167,7 +180,8 @@ export function useHeatmapData({ formData, regions }: UseHeatmapDataParams): Use
             [HeatmapMode.MEDIAN_COUNT]: normalizeDomain(domains[HeatmapMode.MEDIAN_COUNT]),
             [HeatmapMode.EMPTY_DAYS_COUNT]: normalizeDomain(domains[HeatmapMode.EMPTY_DAYS_COUNT]),
             [HeatmapMode.DENSITY]: normalizeDomain(domains[HeatmapMode.DENSITY]),
-            [HeatmapMode.MAX_COUNT]: normalizeDomain(domains[HeatmapMode.MAX_COUNT])
+            [HeatmapMode.MAX_COUNT]: normalizeDomain(domains[HeatmapMode.MAX_COUNT]),
+            [HeatmapMode.BETWEEN_REGIONS_COUNT]: normalizeDomain(domains[HeatmapMode.BETWEEN_REGIONS_COUNT])
         };
     }, [heatmapInfoByRegion]);
 

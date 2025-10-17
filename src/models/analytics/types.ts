@@ -275,6 +275,7 @@ export interface HeatMapInfo {
     emptyDays: number;
     density: number;
     maxCount: number;
+    interregionalFlightCount: number;
 }
 
 export interface HeatDomains {
@@ -306,11 +307,16 @@ export interface HeatDomains {
         min: number;
         max: number;
     };
+    [HeatmapMode.BETWEEN_REGIONS_COUNT]: {
+        min: number;
+        max: number;
+    };
 }
 
 export interface TableData {
     region: string;
     count: number;
+    interregionalCount: number;
     averageCount: number;
     medianCount: number;
     maxCount: {
@@ -348,6 +354,7 @@ export interface RegionAnalyticsResult {
 
 export type TableColumnKey =
     | "count"
+    | "interregionalCount"
     | "averageCount"
     | "medianCount"
     | "maxCount.count"
