@@ -1,4 +1,4 @@
-import { Button } from "semantic-ui-react";
+import { Dropdown, DropdownItem, DropdownMenu } from "semantic-ui-react";
 
 import ColumnVisibilityDropdown from "@commonComponents/ButtonDropdown";
 import Flex from "@commonComponents/Flex";
@@ -32,20 +32,19 @@ export default function Toolbar({
 }: ToolbarProps) {
     return (
         <Flex columnGap="10px" justifyEnd className={styles.container}>
-            <Button onClick={onExportXLSX} disabled={isDisabled} primary size="small">
-                Экспорт XLSX
-            </Button>
-            <Button onClick={onExportPDF} disabled={isDisabled} secondary size="small">
-                Экспорт PDF
-            </Button>
-            <Button onClick={onExportCSV} disabled={isDisabled} size="small">
-                Экспорт CSV
-            </Button>
+            <Dropdown text="Экспорт" button disabled={isDisabled} className={styles.dropdown}>
+                <DropdownMenu>
+                    <DropdownItem onClick={onExportXLSX}>Экспорт XLSX</DropdownItem>
+                    <DropdownItem onClick={onExportPDF}>Экспорт PDF</DropdownItem>
+                    <DropdownItem onClick={onExportCSV}>Экспорт CSV</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
             <ColumnVisibilityDropdown
                 selected={visibleColumns}
                 options={columnOptions}
                 onChange={(nextSelected) => onVisibleColumnsChange(nextSelected as TableColumnKey[])}
                 buttonText="Колонки"
+                className={styles.button}
             />
         </Flex>
     );

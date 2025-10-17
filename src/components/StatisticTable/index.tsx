@@ -293,7 +293,9 @@ export default function StatisticTable() {
             const headers = Object.keys(exportRows[0]);
             const body = exportRows.map((row) => headers.map((header) => row[header as keyof typeof row]));
 
-            const doc = new JsPDF();
+            const doc = new JsPDF({
+                orientation: "landscape"
+            });
             doc.addFileToVFS(notoSansFontModule.NOTO_SANS_REGULAR_FILE_NAME, fontBase64);
             doc.addFont(notoSansFontModule.NOTO_SANS_REGULAR_FILE_NAME, notoSansFontModule.NOTO_SANS_REGULAR_FONT_FAMILY, "normal");
             doc.setFont(notoSansFontModule.NOTO_SANS_REGULAR_FONT_FAMILY);
@@ -341,7 +343,7 @@ export default function StatisticTable() {
     const exportDisabled = !tableData?.length || statusSummary.isLoading;
 
     return (
-        <Flex column rowGap="10px" className={styles.container}>
+        <Flex column rowGap="8px" className={styles.container}>
             <Toolbar
                 isDisabled={exportDisabled}
                 onExportCSV={handleExportCSV}
