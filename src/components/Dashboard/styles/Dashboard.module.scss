@@ -6,6 +6,7 @@
 
   > div:first-child {
     height: variables.$tabs-height;
+    min-height: variables.$tabs-height;
   }
 }
 
@@ -44,8 +45,27 @@
 }
 
 .mode-toggle {
+  font-size: 12px;
   position: absolute;
   right: 16px;
   top: 8px;
   z-index: 1;
+
+  input:checked~label::after {
+    left: 20px !important;
+  }
+
+  label {
+    padding-left: 45px !important;
+  }
+
+  label::before {
+    height: 20px !important;
+    width: 40px !important;
+  }
+
+  label::after {
+    height: 20px !important;
+    width: 20px !important;
+  }
 }

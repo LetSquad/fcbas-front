@@ -88,7 +88,7 @@ export default function ChartWithLoading({
 
     return (
         <div className={classNames({ [styles.block]: !isWide, [styles.blockWide]: isWide })} ref={ref}>
-            <Flex height100 width100 column rowGap="8px">
+            <Flex height100 width100 column rowGap="6px">
                 <Flex rowGap="15px" justifySpaceBetween alignItemsCenter>
                     <span className={styles.title}>{title}</span>
                     {(!isDownloadDisabled || (sort && onSortChanged)) && (

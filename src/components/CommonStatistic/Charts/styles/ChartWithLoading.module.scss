@@ -1,5 +1,8 @@
+$title-height: 14px;
+$chart-height: 300px;
+
 .block {
-  height: 350px;
+  height: calc(#{$title-height} + #{$chart-height});
   width: calc(50% - 6px);
 
   &-wide {
@@ -8,13 +11,13 @@
 }
 
 .chart {
-  height: 330px;
+  height: $chart-height;
   position: relative;
 }
 
 .title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
-  height: 20px;
+  height: $title-height;
   margin-left: 30px;
 }
