@@ -1,7 +1,7 @@
 @use '@coreStyles/variables.module' as variables;
 
 .container {
-  height: calc(100% - #{variables.$filters-height});
+  height: 100%;
   width: 100%;
 
   > div:first-child {
@@ -31,4 +31,21 @@
 
 .tab-fullscreen {
   height: 100%;
+}
+
+.fullscreen-layout .tab-wrapper {
+  height: 100%;
+}
+
+.tab-wrapper {
+  height: calc(100% - #{variables.$filters-height});
+  position: relative;
+  width: 100%;
+}
+
+.mode-toggle {
+  position: absolute;
+  right: 16px;
+  top: 8px;
+  z-index: 1;
 }
