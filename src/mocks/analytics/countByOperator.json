@@ -3,44 +3,104 @@
   "finishDate": "2025-10-31",
   "operators": [
     {
-      "operator": "SkyWays",
-      "flightsCount": 64
+      "operator": "АО \"Аэровектор\"",
+      "flightsCount": 72,
+      "type": "UL"
     },
     {
-      "operator": "AeroNova",
-      "flightsCount": 52
+      "operator": "ООО \"Северное Небо\"",
+      "flightsCount": 68,
+      "type": "UL"
     },
     {
-      "operator": "CloudJet",
-      "flightsCount": 47
+      "operator": "ПАО \"Стратосфера\"",
+      "flightsCount": 63,
+      "type": "UL"
     },
     {
-      "operator": "PolarAir",
-      "flightsCount": 41
+      "operator": "АО \"Небесные Трассы\"",
+      "flightsCount": 59,
+      "type": "UL"
     },
     {
-      "operator": "Sunrise Airways",
-      "flightsCount": 38
+      "operator": "ООО \"Полярные авиалинии\"",
+      "flightsCount": 54,
+      "type": "UL"
     },
     {
-      "operator": "Northwind",
-      "flightsCount": 35
+      "operator": "АО \"Восток Аэро\"",
+      "flightsCount": 51,
+      "type": "UL"
     },
     {
-      "operator": "Aurora Flights",
-      "flightsCount": 29
+      "operator": "ООО \"СкайЛайн\"",
+      "flightsCount": 47,
+      "type": "UL"
     },
     {
-      "operator": "Vector Wings",
-      "flightsCount": 24
+      "operator": "АО \"Летные Маршруты\"",
+      "flightsCount": 43,
+      "type": "UL"
     },
     {
-      "operator": "BlueHorizon",
-      "flightsCount": 19
+      "operator": "ООО \"Гелиос Авиа\"",
+      "flightsCount": 39,
+      "type": "UL"
     },
     {
-      "operator": "JetPulse",
-      "flightsCount": 16
+      "operator": "АО \"Сириус Флай\"",
+      "flightsCount": 36,
+      "type": "UL"
+    },
+    {
+      "operator": "Иван Петров",
+      "flightsCount": 28,
+      "type": "FL"
+    },
+    {
+      "operator": "Ольга Синицына",
+      "flightsCount": 25,
+      "type": "FL"
+    },
+    {
+      "operator": "Дмитрий Кузнецов",
+      "flightsCount": 23,
+      "type": "FL"
+    },
+    {
+      "operator": "Анна Смирнова",
+      "flightsCount": 21,
+      "type": "FL"
+    },
+    {
+      "operator": "Алексей Ильин",
+      "flightsCount": 19,
+      "type": "FL"
+    },
+    {
+      "operator": "Марина Романова",
+      "flightsCount": 18,
+      "type": "FL"
+    },
+    {
+      "operator": "Сергей Волков",
+      "flightsCount": 17,
+      "type": "FL"
+    },
+    {
+      "operator": "Наталья Орлова",
+      "flightsCount": 15,
+      "type": "FL"
+    },
+    {
+      "operator": "Павел Андреев",
+      "flightsCount": 14,
+      "type": "FL"
+    },
+    {
+      "operator": "Елена Григорьева",
+      "flightsCount": 13,
+      "type": "FL"
     }
   ]
 }

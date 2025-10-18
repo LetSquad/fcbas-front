@@ -1,4 +1,4 @@
-import { HeatmapMode, TimeResolution } from "@models/analytics/enums";
+import { HeatmapMode, OperatorType, TimeResolution } from "@models/analytics/enums";
 import type { RegionRecords } from "@models/regions/types";
 
 export interface AnalyticsBaseQueryParams {
@@ -228,6 +228,7 @@ export interface AverageCountByRegionMap {
 export interface FlightsCountByOperatorItem {
     operator: string;
     flightsCount: number;
+    type: OperatorType;
 }
 
 export interface FlightsCountByOperator {
@@ -239,7 +240,7 @@ export interface FlightsCountByOperator {
 export interface FlightsCountByOperatorMap {
     startDate: string;
     finishDate: string;
-    operatorsMap: Record<string, number>;
+    operatorsMap: Record<OperatorType, Record<string, number>>;
 }
 
 export interface FlightBetweenRegions {

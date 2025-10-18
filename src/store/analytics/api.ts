@@ -3,6 +3,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { axiosBaseQuery } from "@api/api";
 import apiUrls from "@api/apiUrls";
 import { toRecord } from "@coreUtils/utils";
+import { OperatorType } from "@models/analytics/enums";
 import {
     AnalyticsBaseQueryParams,
     AnalyticsDensityResolutionQueryParams,
@@ -169,13 +170,22 @@ export const analyticsApi = createApi({
                 url: apiUrls.countByOperator(),
                 params: queryParams
             }),
-            transformResponse: (response: FlightsCountByOperator) => ({
-                startDate: response.startDate,
-                finishDate: response.finishDate,
-                operatorsMap: toRecord<number, string>(
-                    response.operators.map(({ operator, flightsCount }) => [operator, flightsCount] as const)
-                )
-            })
+            transformResponse: (response: FlightsCountByOperator) => {
+                const operatorsMap: Record<OperatorType, Record<string, number>> = {
+                    [OperatorType.UL]: {},
+                    [OperatorType.FL]: {}
+                };
+
+                for (const { operator, flightsCount, type } of response.operators) {
+                    operatorsMap[type][operator] = flightsCount;
+                }
+
+                return {
+                    startDate: response.startDate,
+                    finishDate: response.finishDate,
+                    operatorsMap
+                };
+            }
         })
     })
 });

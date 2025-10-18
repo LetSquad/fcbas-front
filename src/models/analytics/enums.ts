@@ -19,3 +19,8 @@ export enum SortType {
     ASC = "ASC",
     DESC = "DESC"
 }
+
+export enum OperatorType {
+    UL = "UL",
+    FL = "FL"
+}
