@@ -123,6 +123,9 @@ export default function StatisticTable() {
                 case "count": {
                     return "Количество полетов";
                 }
+                case "interregionalCount": {
+                    return "Перелеты в другие регионы";
+                }
                 case "averageCount": {
                     return `Среднее количество полетов ${resolutionDescription}`;
                 }

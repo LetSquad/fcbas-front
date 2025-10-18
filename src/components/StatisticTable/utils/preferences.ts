@@ -7,6 +7,7 @@ const STATISTIC_TABLE_STORAGE_KEY = "statisticTablePreferences";
 
 export const DEFAULT_VISIBLE_COLUMNS: TableColumnKey[] = [
     "count",
+    "interregionalCount",
     "averageCount",
     "medianCount",
     "maxCount.count",
@@ -20,6 +21,7 @@ export const DEFAULT_VISIBLE_COLUMNS: TableColumnKey[] = [
 
 export const TOP_LEVEL_COLUMN_KEYS: TableColumnKey[] = [
     "count",
+    "interregionalCount",
     "averageCount",
     "medianCount",
     "maxCount.count",
@@ -40,6 +42,7 @@ const ALL_COLUMN_KEYS_SET = new Set<TableColumnKey>(DEFAULT_COLUMN_ORDER);
 
 export const COLUMN_SELECTION_OPTIONS = [
     { value: "count", text: "Количество полетов" },
+    { value: "interregionalCount", text: "Перелеты в другие регионы" },
     { value: "averageCount", text: "Среднее количество полетов" },
     { value: "medianCount", text: "Медианное количество полетов" },
     { value: "maxCount.count", text: "Максимальное количество полетов" },

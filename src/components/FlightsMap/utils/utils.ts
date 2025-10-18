@@ -222,6 +222,9 @@ export function getHeatMapLabelFromHeatmapModeEnum(value: HeatmapMode, timeResol
         case HeatmapMode.MAX_COUNT: {
             return `Максимальное количество полетов ${getTimeResolutionDescriptionFromEnum(timeResolution)}`;
         }
+        case HeatmapMode.BETWEEN_REGIONS_COUNT: {
+            return "Перелеты в другие регионы";
+        }
         // skip default
     }
 }

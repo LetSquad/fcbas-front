@@ -9,6 +9,7 @@ import {
     useGetCountByRegionQuery,
     useGetDensityByRegionQuery,
     useGetEmptyDaysByRegionQuery,
+    useGetFlightsBetweenRegionQuery,
     useGetMaxCountByRegionQuery,
     useGetTimeDistributionByRegionQuery
 } from "@store/analytics/api";
@@ -39,6 +40,7 @@ export function useRegionAnalytics(): RegionAnalyticsResult {
     const densityByRegion = useGetDensityByRegionQuery(dateRangeArgs);
     const timeDistributionByRegion = useGetTimeDistributionByRegionQuery(dateRangeArgs);
     const maxCountByRegion = useGetMaxCountByRegionQuery(formData);
+    const flightsBetweenRegions = useGetFlightsBetweenRegionQuery();
 
     const queryStates: QueryState[] = useMemo(() => {
         const analyticsQueries = [
@@ -48,7 +50,8 @@ export function useRegionAnalytics(): RegionAnalyticsResult {
             { key: "emptyDaysByRegion", result: emptyDaysByRegion },
             { key: "densityByRegion", result: densityByRegion },
             { key: "timeDistributionByRegion", result: timeDistributionByRegion },
-            { key: "maxCountByRegion", result: maxCountByRegion }
+            { key: "maxCountByRegion", result: maxCountByRegion },
+            { key: "flightsBetweenRegions", result: flightsBetweenRegions }
         ];
 
         return analyticsQueries.map(({ key, result }) => ({
@@ -64,6 +67,7 @@ export function useRegionAnalytics(): RegionAnalyticsResult {
         countByRegion,
         densityByRegion,
         emptyDaysByRegion,
+        flightsBetweenRegions,
         maxCountByRegion,
         timeDistributionByRegion
     ]);
@@ -109,6 +113,7 @@ export function useRegionAnalytics(): RegionAnalyticsResult {
                 densityByRegion.data,
                 timeDistributionByRegion.data,
                 maxCountByRegion.data,
+                flightsBetweenRegions.data,
                 formData.resolution
             ),
         [
@@ -117,6 +122,7 @@ export function useRegionAnalytics(): RegionAnalyticsResult {
             countByRegion.data,
             densityByRegion.data,
             emptyDaysByRegion.data,
+            flightsBetweenRegions.data,
             formData.resolution,
             maxCountByRegion.data,
             regions,

@@ -13,6 +13,7 @@ export async function setupAnalyticsMocks() {
         densityByRegion,
         count,
         countByRegion,
+        countByOperator,
         averageDuration,
         averageDurationByRegion,
         averageCount,
@@ -29,6 +30,7 @@ export async function setupAnalyticsMocks() {
         import("./densityByRegion.json"),
         import("./count.json"),
         import("./countByRegion.json"),
+        import("./countByOperator.json"),
         import("./averageDuration.json"),
         import("./averageDurationByRegion.json"),
         import("./averageCount.json"),
@@ -46,6 +48,7 @@ export async function setupAnalyticsMocks() {
     mock.onGet(apiUrls.densityByRegion()).reply(200, densityByRegion);
     mock.onGet(apiUrls.count()).reply(200, count);
     mock.onGet(apiUrls.countByRegion()).reply(200, countByRegion);
+    mock.onGet(apiUrls.countByOperator()).reply(200, countByOperator);
     mock.onGet(apiUrls.averageDuration()).reply(200, averageDuration);
     mock.onGet(apiUrls.averageDurationByRegion()).reply(200, averageDurationByRegion);
     mock.onGet(apiUrls.averageCount()).reply(200, averageCount);

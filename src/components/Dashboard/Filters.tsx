@@ -136,7 +136,8 @@ export default function Filters() {
             analyticsApi.endpoints.getDensityByRegion.select(dateRangeArgs),
             analyticsApi.endpoints.getTimeDistributionByRegion.select(dateRangeArgs),
             analyticsApi.endpoints.getTimeDistribution.select(dateRangeArgs),
-            analyticsApi.endpoints.getTrend.select(dateRangeArgs)
+            analyticsApi.endpoints.getTrend.select(dateRangeArgs),
+            analyticsApi.endpoints.getFlightsCountByOperator.select(dateRangeArgs)
         ],
         [dateRangeArgs]
     );

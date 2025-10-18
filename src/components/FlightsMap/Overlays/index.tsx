@@ -12,6 +12,7 @@ interface OverlaysProps {
     selectionActive: boolean;
     selectedRegionName?: string;
     selectedRegionStat?: HeatMapInfo;
+    interregionalFlightsCount?: number;
 
     heatmapMode: HeatmapMode;
     onChangeHeatmapMode: (mode: HeatmapMode) => void;
@@ -28,6 +29,7 @@ export default function Overlays({
     selectionActive,
     selectedRegionName,
     selectedRegionStat,
+    interregionalFlightsCount,
     heatmapMode,
     onChangeHeatmapMode,
     heatDomains,
@@ -74,6 +76,7 @@ export default function Overlays({
                 selectionActive={selectionActive}
                 selectedRegionName={selectedRegionName}
                 selectedRegionStat={selectedRegionStat}
+                interregionalFlightsCount={interregionalFlightsCount}
             />
         </Flex>
     );

@@ -1,4 +1,4 @@
-import { HeatmapMode, TimeResolution } from "@models/analytics/enums";
+import { HeatmapMode, OperatorType, TimeResolution } from "@models/analytics/enums";
 import type { RegionRecords } from "@models/regions/types";
 
 export interface AnalyticsBaseQueryParams {
@@ -20,6 +20,10 @@ export interface AnalyticsRegionsResolutionQueryParams extends AnalyticsRegionsQ
 
 export interface AnalyticsDensityResolutionQueryParams extends AnalyticsRegionsQueryParams {
     partAreaKm?: number;
+}
+
+export interface AnalyticsOperatorsQueryParams extends AnalyticsBaseQueryParams {
+    limit?: number;
 }
 
 export interface TrendPeriod {
@@ -221,19 +225,39 @@ export interface AverageCountByRegionMap {
     regionsMap: Record<number, AverageCountInfo>;
 }
 
+export interface FlightsCountByOperatorItem {
+    operator: string;
+    flightsCount: number;
+}
+
+export interface FlightsCountByOperator {
+    startDate: string;
+    finishDate: string;
+    operatorsUL: FlightsCountByOperatorItem[];
+    operatorsFL: FlightsCountByOperatorItem[];
+}
+
+export interface FlightsCountByOperatorMap {
+    startDate: string;
+    finishDate: string;
+    operatorsMap: Record<OperatorType, Record<string, number>>;
+}
+
 export interface FlightBetweenRegions {
     departureRegionId: number;
     destinationRegionId: number;
+    count: number;
 }
 
 interface FlightsBetweenRegionsFly {
     regionId: number;
     topDestinationRegions: number[];
     topDepartureRegions: number[];
+    count: number;
 }
 
 export interface FlightsBetweenRegions {
-    count: number;
+    limit: number;
     topFly: FlightBetweenRegions[];
     regions: FlightsBetweenRegionsFly[];
 }
@@ -241,7 +265,8 @@ export interface FlightsBetweenRegions {
 export interface FlightsBetweenRegionsFormatted {
     count: number;
     topFly: FlightBetweenRegions[];
-    regionFlights: Record<number, FlightBetweenRegions[]>;
+    regionFlights: Record<number, Omit<FlightBetweenRegions, "count">[]>;
+    regionCounts: Record<number, number>;
 }
 
 export interface HeatMapInfo {
@@ -252,6 +277,7 @@ export interface HeatMapInfo {
     emptyDays: number;
     density: number;
     maxCount: number;
+    interregionalFlightCount: number;
 }
 
 export interface HeatDomains {
@@ -283,11 +309,16 @@ export interface HeatDomains {
         min: number;
         max: number;
     };
+    [HeatmapMode.BETWEEN_REGIONS_COUNT]: {
+        min: number;
+        max: number;
+    };
 }
 
 export interface TableData {
     region: string;
     count: number;
+    interregionalCount: number;
     averageCount: number;
     medianCount: number;
     maxCount: {
@@ -325,6 +356,7 @@ export interface RegionAnalyticsResult {
 
 export type TableColumnKey =
     | "count"
+    | "interregionalCount"
     | "averageCount"
     | "medianCount"
     | "maxCount.count"

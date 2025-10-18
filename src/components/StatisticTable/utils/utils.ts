@@ -7,6 +7,7 @@ import type {
     CountByRegionMap,
     DensityByRegionMap,
     EmptyDaysByRegionMap,
+    FlightsBetweenRegionsFormatted,
     MaxCountByRegionMap,
     TableColumnKey,
     TableData,
@@ -59,12 +60,14 @@ export function formatTableData(
     densityByRegion: DensityByRegionMap | undefined,
     timeDistributionsByRegion: TimeDistributionByRegionMap | undefined,
     maxCountByRegion: MaxCountByRegionMap | undefined,
+    flightsBetweenRegions: FlightsBetweenRegionsFormatted | undefined,
     resolution: TimeResolution
 ): TableData[] {
     return regions
         ? Object.values(regions).map((region: Region) => ({
               region: region.name,
               count: countByRegion?.regionsMap?.[region.id] || -1,
+              interregionalCount: flightsBetweenRegions?.regionCounts?.[region.id] ?? -1,
               averageCount: averageCountByRegion?.regionsMap?.[region.id]?.averageFlightsCount || -1,
               medianCount: averageCountByRegion?.regionsMap?.[region.id]?.medianFlightsCount || -1,
               maxCount: {
@@ -87,6 +90,7 @@ export function formatTableData(
 export function buildExportRows(tableData: TableData[]) {
     return tableData.map((row) => ({
         Регион: row.region,
+        "Перелеты в другие регионы": formatBaseValue(row.interregionalCount),
         "Количество полетов": formatBaseValue(row.count),
         "Среднее количество полетов": formatBaseValue(row.averageCount),
         "Медианное количество полетов": formatBaseValue(row.medianCount),
@@ -107,6 +111,9 @@ export function getColumnBodyValue(columnKey: TableColumnKey, row: TableData): s
     switch (columnKey) {
         case "count": {
             return formatBaseValue(row.count);
+        }
+        case "interregionalCount": {
+            return formatBaseValue(row.interregionalCount);
         }
         case "averageCount": {
             return formatBaseValue(row.averageCount);

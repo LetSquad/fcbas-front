@@ -10,9 +10,9 @@ interface FlowsCanvasProps {
     width: number;
     height: number;
     currentViewBox: ViewBox;
-    flows: FlightBetweenRegions[];
+    flows: Omit<FlightBetweenRegions, "count">[];
     showFlows: boolean;
-    drawFlow: (flow: FlightBetweenRegions, context: CanvasRenderingContext2D, now: number, pixelsPerWorldX: number) => void;
+    drawFlow: (flow: Omit<FlightBetweenRegions, "count">, context: CanvasRenderingContext2D, now: number, pixelsPerWorldX: number) => void;
 }
 
 /**
