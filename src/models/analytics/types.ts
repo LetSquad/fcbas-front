@@ -246,6 +246,7 @@ export interface FlightsCountByOperatorMap {
 export interface FlightBetweenRegions {
     departureRegionId: number;
     destinationRegionId: number;
+    count: number;
 }
 
 interface FlightsBetweenRegionsFly {
@@ -256,7 +257,7 @@ interface FlightsBetweenRegionsFly {
 }
 
 export interface FlightsBetweenRegions {
-    count: number;
+    limit: number;
     topFly: FlightBetweenRegions[];
     regions: FlightsBetweenRegionsFly[];
 }
@@ -264,7 +265,7 @@ export interface FlightsBetweenRegions {
 export interface FlightsBetweenRegionsFormatted {
     count: number;
     topFly: FlightBetweenRegions[];
-    regionFlights: Record<number, FlightBetweenRegions[]>;
+    regionFlights: Record<number, Omit<FlightBetweenRegions, "count">[]>;
     regionCounts: Record<number, number>;
 }
 

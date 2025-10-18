@@ -289,7 +289,7 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
 
     // Рисуем межрегиональную линию без анимации и без подписи + маркеры направления
     const drawInterRegionFlow = useCallback(
-        (flow: FlightBetweenRegions, context: CanvasRenderingContext2D, _nowMs: number, pixelsPerWorldX: number) => {
+        (flow: Omit<FlightBetweenRegions, "count">, context: CanvasRenderingContext2D, _nowMs: number, pixelsPerWorldX: number) => {
             const departureRegion = regions[flow.departureRegionId];
             const destinationRegion = regions[flow.destinationRegionId];
             if (!departureRegion || !destinationRegion || !svgRef.current) {

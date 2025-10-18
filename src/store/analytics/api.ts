@@ -142,8 +142,12 @@ export const analyticsApi = createApi({
         getFlightsBetweenRegion: build.query<FlightsBetweenRegionsFormatted, void>({
             query: () => ({ url: apiUrls.flightsBetweenRegion() }),
             transformResponse: (response: FlightsBetweenRegions) => ({
-                count: response.count,
-                topFly: response.topFly,
+                count: response.limit,
+                topFly: response.topFly.map((flight) => ({
+                    departureRegionId: flight.departureRegionId,
+                    destinationRegionId: flight.destinationRegionId,
+                    count: flight.count
+                })),
                 regionFlights: toRecord(
                     response.regions.map(
                         (region) =>

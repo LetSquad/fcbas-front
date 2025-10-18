@@ -3,6 +3,7 @@ import Blocks from "@components/CommonStatistic/Blocks";
 import FlightDensityDiagram from "@components/CommonStatistic/Charts/FlightDensityDiagram";
 import TimeOfDayFlightsDiagram from "@components/CommonStatistic/Charts/TimeOfDayFlightsDiagram";
 import TopAverageDurationFlightsDiagram from "@components/CommonStatistic/Charts/TopAverageDurationFlightsDiagram";
+import TopDirectionsFlightsDiagram from "@components/CommonStatistic/Charts/TopDirectionsFlightsDiagram";
 import TopFlightsDiagram from "@components/CommonStatistic/Charts/TopFlightsDiagram";
 import TopOperatorsFlightsDiagram from "@components/CommonStatistic/Charts/TopOperatorsFlightsDiagram";
 import TrendDiagram from "@components/CommonStatistic/Charts/TrendDiagram";
@@ -23,6 +24,7 @@ export default function CommonStatistic() {
             {isExtendedMode && <TopOperatorsFlightsDiagram operatorType={OperatorType.FL} />}
             {isExtendedMode && <TimeOfDayFlightsDiagram />}
             <TopAverageDurationFlightsDiagram />
+            {isExtendedMode && <TopDirectionsFlightsDiagram />}
             {isExtendedMode && <FlightDensityDiagram />}
         </Flex>
     );
