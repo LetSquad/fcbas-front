@@ -228,13 +228,13 @@ export interface AverageCountByRegionMap {
 export interface FlightsCountByOperatorItem {
     operator: string;
     flightsCount: number;
-    type: OperatorType;
 }
 
 export interface FlightsCountByOperator {
     startDate: string;
     finishDate: string;
-    operators: FlightsCountByOperatorItem[];
+    operatorsUL: FlightsCountByOperatorItem[];
+    operatorsFL: FlightsCountByOperatorItem[];
 }
 
 export interface FlightsCountByOperatorMap {

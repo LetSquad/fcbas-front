@@ -180,8 +180,12 @@ export const analyticsApi = createApi({
                     [OperatorType.FL]: {}
                 };
 
-                for (const { operator, flightsCount, type } of response.operators) {
-                    operatorsMap[type][operator] = flightsCount;
+                for (const { operator, flightsCount } of response.operatorsUL) {
+                    operatorsMap[OperatorType.UL][operator] = flightsCount;
+                }
+
+                for (const { operator, flightsCount } of response.operatorsFL) {
+                    operatorsMap[OperatorType.FL][operator] = flightsCount;
                 }
 
                 return {
