@@ -153,18 +153,11 @@ export const analyticsApi = createApi({
                         (region) =>
                             [
                                 region.regionId,
-                                [
-                                    ...region.topDepartureRegions.map(({ regionId: departureRegionId, count }) => ({
-                                        departureRegionId,
-                                        destinationRegionId: region.regionId,
-                                        count
-                                    })),
-                                    ...region.topDestinationRegions.map(({ regionId: destinationRegionId, count }) => ({
-                                        departureRegionId: region.regionId,
-                                        destinationRegionId,
-                                        count
-                                    }))
-                                ]
+                                region.topDestinationRegions.map(({ regionId: destinationRegionId, count }) => ({
+                                    departureRegionId: region.regionId,
+                                    destinationRegionId,
+                                    count
+                                }))
                             ] as const
                     )
                 ),

@@ -251,7 +251,6 @@ export interface FlightBetweenRegions {
 interface FlightsBetweenRegionsFly {
     regionId: number;
     topDestinationRegions: { regionId: number; count: number }[];
-    topDepartureRegions: { regionId: number; count: number }[];
     count: number;
 }
 
