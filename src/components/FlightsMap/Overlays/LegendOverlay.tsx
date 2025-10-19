@@ -1,4 +1,4 @@
-import { Checkbox, Dropdown } from "semantic-ui-react";
+import { Checkbox, Dropdown, Icon } from "semantic-ui-react";
 import { $enum } from "ts-enum-util";
 
 import Flex from "@commonComponents/Flex";
@@ -23,6 +23,7 @@ interface LegendOverlayProps {
     showFlows: boolean;
     topFlightsCount: number | undefined;
     onToggleShowFlows: (value: boolean) => void;
+    onToggleSidePanel: () => void;
 }
 
 const HEATMAP_OPTIONS = (timeResolution: TimeResolution) =>
@@ -39,13 +40,18 @@ export default function LegendOverlay({
     heatHighColor,
     showFlows,
     topFlightsCount,
-    onToggleShowFlows
+    onToggleShowFlows,
+    onToggleSidePanel
 }: LegendOverlayProps) {
     const formData = useFilterForm();
 
     return (
         <Flex column rowGap="8px" className={styles.container}>
-            <div className={styles.title}>Тепловая карта</div>
+            <Flex columnGap="10px" alignItemsBaseline justifySpaceBetween>
+                <div className={styles.title}>Тепловая карта</div>
+
+                <Icon name="angle down" link onClick={onToggleSidePanel} title="Скрыть панель информации о регионе" />
+            </Flex>
 
             <Dropdown
                 className={styles.dropdown}

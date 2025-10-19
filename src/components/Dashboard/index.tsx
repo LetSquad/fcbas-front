@@ -6,10 +6,10 @@ import { Checkbox, Loader, Tab, TabPane, TabProps } from "semantic-ui-react";
 
 import Flex from "@commonComponents/Flex";
 import LoadingErrorBlock from "@commonComponents/LoadingErrorBlock/LoadingErrorBlock";
-import { useMapFullscreen } from "@components/App/context";
+import { useExtendedMode, useMapFullscreen } from "@components/App/context";
 import CommonStatistic from "@components/CommonStatistic";
-import { ExtendedModeContext, FilterFormContext } from "@components/Dashboard/context";
-import Filters, { INITIAL_FORM_DATA } from "@components/Dashboard/Filters";
+import { FilterFormContext } from "@components/Dashboard/context";
+import Filters, { FILTERS_COLLAPSED_HEIGHT, FILTERS_EXPANDED_HEIGHT, INITIAL_FORM_DATA } from "@components/Dashboard/Filters";
 import FlightsMapWrapper from "@components/FlightsMap/FlightsMapWrapper";
 import StatisticTable from "@components/StatisticTable";
 import { FormData } from "@models/filters/types";
@@ -21,18 +21,11 @@ export default function Dashboard() {
     const { data: regions, isLoading: isRegionsLoading, isError: isRegionsError, refetch: refetchRegions } = useGetRegionsQuery();
 
     const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA());
-    const [isExtendedMode, setIsExtendedMode] = useState(false);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
+    const [isFiltersCollapsed, setIsFiltersCollapsed] = useState(true);
 
     const { isMapFullscreen, setMapFullscreen } = useMapFullscreen();
-
-    const extendedModeContextValue = useMemo(
-        () => ({
-            isExtendedMode,
-            setIsExtendedMode
-        }),
-        [isExtendedMode]
-    );
+    const { isExtendedMode, setIsExtendedMode } = useExtendedMode();
 
     const formik = useFormik<FormData>({
         onSubmit: setFormData,
@@ -94,9 +87,12 @@ export default function Dashboard() {
         return basePanes;
     }, [handleToggleMapFullscreen, isExtendedMode, isMapFullscreen, regions, withRegionsLoader]);
 
-    const handleExtendedModeChange = useCallback((_: unknown, data: { checked?: boolean }) => {
-        setIsExtendedMode(Boolean(data.checked));
-    }, []);
+    const handleExtendedModeChange = useCallback(
+        (_: unknown, data: { checked?: boolean }) => {
+            setIsExtendedMode(Boolean(data.checked));
+        },
+        [setIsExtendedMode]
+    );
 
     const handleTabChange = useCallback(
         (_: unknown, data: TabProps) => {
@@ -107,6 +103,16 @@ export default function Dashboard() {
         },
         [activeTabIndex]
     );
+
+    const tabWrapperStyle = useMemo(() => {
+        if (isMapFullscreen) {
+            return undefined;
+        }
+
+        const filtersHeight = isFiltersCollapsed ? FILTERS_COLLAPSED_HEIGHT : FILTERS_EXPANDED_HEIGHT;
+
+        return { height: `calc(100% - ${filtersHeight}px)` };
+    }, [isFiltersCollapsed, isMapFullscreen]);
 
     useEffect(() => {
         if (!isExtendedMode && activeTabIndex > 1) {
@@ -122,26 +128,26 @@ export default function Dashboard() {
     );
 
     return (
-        <ExtendedModeContext.Provider value={extendedModeContextValue}>
-            <FilterFormContext.Provider value={formData}>
-                <Flex column width100 height100 className={classNames({ [styles.fullscreenLayout]: isMapFullscreen })}>
-                    <FormikProvider value={formik}>{!isMapFullscreen && <Filters />}</FormikProvider>
-                    <div className={styles.tabWrapper}>
-                        <Tab
-                            className={classNames(styles.container, { [styles.containerFullscreen]: isMapFullscreen })}
-                            menu={isMapFullscreen ? { style: { display: "none" } } : undefined}
-                            activeIndex={activeTabIndex}
-                            onTabChange={handleTabChange}
-                            panes={panes}
-                        />
-                        {!isMapFullscreen && (
-                            <div className={styles.modeToggle}>
-                                <Checkbox toggle label="Расширенный режим" checked={isExtendedMode} onChange={handleExtendedModeChange} />
-                            </div>
-                        )}
-                    </div>
-                </Flex>
-            </FilterFormContext.Provider>
-        </ExtendedModeContext.Provider>
+        <FilterFormContext.Provider value={formData}>
+            <Flex column width100 height100 className={classNames({ [styles.fullscreenLayout]: isMapFullscreen })}>
+                <FormikProvider value={formik}>
+                    {isMapFullscreen ? null : <Filters isCollapsed={isFiltersCollapsed} onCollapseChange={setIsFiltersCollapsed} />}
+                </FormikProvider>
+                <div className={styles.tabWrapper} style={tabWrapperStyle}>
+                    <Tab
+                        className={classNames(styles.container, { [styles.containerFullscreen]: isMapFullscreen })}
+                        menu={isMapFullscreen ? { style: { display: "none" } } : undefined}
+                        activeIndex={activeTabIndex}
+                        onTabChange={handleTabChange}
+                        panes={panes}
+                    />
+                    {!isMapFullscreen && (
+                        <div className={styles.modeToggle}>
+                            <Checkbox toggle label="Расширенный режим" checked={isExtendedMode} onChange={handleExtendedModeChange} />
+                        </div>
+                    )}
+                </div>
+            </Flex>
+        </FilterFormContext.Provider>
     );
 }

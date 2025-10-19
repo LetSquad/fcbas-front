@@ -1,5 +1,6 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
+import classNames from "classnames";
 import { Button, Loader } from "semantic-ui-react";
 
 import mapSvgText from "@assets/images/map.svg?raw";
@@ -16,8 +17,8 @@ const geometryCache = new Map<string, { viewBox: ViewBox; regions: RegionShape[]
 
 export interface FlightsMapWrapperProps {
     regions: Record<number, Region>;
-    isFullscreen?: boolean;
-    onToggleFullscreen?: () => void;
+    isFullscreen: boolean;
+    onToggleFullscreen: () => void;
 }
 
 export default function FlightsMapWrapper({ regions, isFullscreen, onToggleFullscreen }: FlightsMapWrapperProps) {
@@ -30,6 +31,16 @@ export default function FlightsMapWrapper({ regions, isFullscreen, onToggleFulls
     const [regionShapes, setRegionShapes] = useState<RegionShape[] | null>(null);
     const [aspect, setAspect] = useState<number | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [isSidePanelCollapsed, setIsSidePanelCollapsed] = useState(false);
+    const [hasRegionSelection, setHasRegionSelection] = useState(false);
+
+    const handleToggleSidePanel = useCallback(() => {
+        setIsSidePanelCollapsed((prev) => !prev);
+    }, []);
+
+    const handleRegionSelectionChange = useCallback((value: boolean) => {
+        setHasRegionSelection(value);
+    }, []);
 
     // 1) Парсинг геометрии из импортированного SVG (один раз, с кешем)
     useEffect(() => {
@@ -154,20 +165,40 @@ export default function FlightsMapWrapper({ regions, isFullscreen, onToggleFulls
             )}
 
             {size && viewBox && mergedRegions && (
-                <FlightsMap viewBox={viewBox} regions={mergedRegions} width={size.width} height={size.height} />
-            )}
-
-            {onToggleFullscreen && (
-                <Button
-                    circular
-                    icon={isFullscreen ? "compress" : "expand"}
-                    type="button"
-                    title={isFullscreen ? "Свернуть карту" : "Развернуть карту"}
-                    aria-label={isFullscreen ? "Свернуть карту" : "Развернуть карту"}
-                    className={styles.fullscreenButton}
-                    onClick={onToggleFullscreen}
+                <FlightsMap
+                    viewBox={viewBox}
+                    regions={mergedRegions}
+                    width={size.width}
+                    height={size.height}
+                    isSidePanelCollapsed={isSidePanelCollapsed}
+                    onToggleSidePanel={handleToggleSidePanel}
+                    onSelectedRegionChange={handleRegionSelectionChange}
                 />
             )}
+
+            <Button
+                circular
+                icon="info"
+                type="button"
+                title="Показать панель информации о регионе"
+                tabIndex={isSidePanelCollapsed ? 0 : -1}
+                aria-hidden={!isSidePanelCollapsed}
+                className={classNames(styles.panelToggleButton, {
+                    [styles.panelToggleButtonVisible]: isSidePanelCollapsed,
+                    [styles.panelToggleButtonHighlighted]: isSidePanelCollapsed && hasRegionSelection
+                })}
+                onClick={handleToggleSidePanel}
+            />
+
+            <Button
+                circular
+                icon={isFullscreen ? "compress" : "expand"}
+                type="button"
+                title={isFullscreen ? "Свернуть карту" : "Развернуть карту"}
+                aria-label={isFullscreen ? "Свернуть карту" : "Развернуть карту"}
+                className={styles.fullscreenButton}
+                onClick={onToggleFullscreen}
+            />
         </div>
     );
 }

@@ -2,10 +2,12 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { axiosBaseQuery } from "@api/api";
 import apiUrls from "@api/apiUrls";
-import { toNumberRecord } from "@coreUtils/utils";
+import { toRecord } from "@coreUtils/utils";
+import { OperatorType } from "@models/analytics/enums";
 import {
     AnalyticsBaseQueryParams,
     AnalyticsDensityResolutionQueryParams,
+    AnalyticsOperatorsQueryParams,
     AnalyticsRegionsQueryParams,
     AnalyticsRegionsResolutionQueryParams,
     AnalyticsResolutionQueryParams,
@@ -24,6 +26,8 @@ import {
     EmptyDaysByRegionMap,
     FlightsBetweenRegions,
     FlightsBetweenRegionsFormatted,
+    FlightsCountByOperator,
+    FlightsCountByOperatorMap,
     MaxCount,
     MaxCountByRegion,
     MaxCountByRegionMap,
@@ -52,7 +56,7 @@ export const analyticsApi = createApi({
                 startDate: response.startDate,
                 finishDate: response.finishDate,
                 resolution: response.resolution,
-                regionsMap: toNumberRecord(response.regions.map(({ regionId, periods }) => [regionId, periods] as const))
+                regionsMap: toRecord(response.regions.map(({ regionId, periods }) => [regionId, periods] as const))
             })
         }),
         getTimeDistribution: build.query<TimeDistribution, AnalyticsBaseQueryParams | undefined>({
@@ -63,7 +67,7 @@ export const analyticsApi = createApi({
             transformResponse: (response: TimeDistributionByRegion) => ({
                 startDate: response.startDate,
                 finishDate: response.finishDate,
-                regionsMap: toNumberRecord(
+                regionsMap: toRecord(
                     response.regions.map(({ regionId, ...timeDistributionInfo }) => [regionId, { ...timeDistributionInfo }] as const)
                 )
             })
@@ -77,9 +81,7 @@ export const analyticsApi = createApi({
                 startDate: response.startDate,
                 finishDate: response.finishDate,
                 resolution: response.resolution,
-                regionsMap: toNumberRecord(
-                    response.regions.map(({ regionId, ...maxCountInfo }) => [regionId, { ...maxCountInfo }] as const)
-                )
+                regionsMap: toRecord(response.regions.map(({ regionId, ...maxCountInfo }) => [regionId, { ...maxCountInfo }] as const))
             })
         }),
         getEmptyDaysByRegion: build.query<EmptyDaysByRegionMap, AnalyticsRegionsQueryParams | undefined>({
@@ -87,7 +89,7 @@ export const analyticsApi = createApi({
             transformResponse: (response: EmptyDaysByRegion) => ({
                 startDate: response.startDate,
                 finishDate: response.finishDate,
-                regionsMap: toNumberRecord(response.regions.map(({ regionId, emptyDaysCount }) => [regionId, emptyDaysCount] as const))
+                regionsMap: toRecord(response.regions.map(({ regionId, emptyDaysCount }) => [regionId, emptyDaysCount] as const))
             })
         }),
         getDensityByRegion: build.query<DensityByRegionMap, AnalyticsDensityResolutionQueryParams | undefined>({
@@ -96,7 +98,7 @@ export const analyticsApi = createApi({
                 startDate: response.startDate,
                 finishDate: response.finishDate,
                 partAreaKm: response.partAreaKm,
-                regionsMap: toNumberRecord(response.regions.map(({ regionId, flightDensity }) => [regionId, flightDensity] as const))
+                regionsMap: toRecord(response.regions.map(({ regionId, flightDensity }) => [regionId, flightDensity] as const))
             })
         }),
         getCount: build.query<Count, AnalyticsBaseQueryParams | undefined>({
@@ -107,7 +109,7 @@ export const analyticsApi = createApi({
             transformResponse: (response: CountByRegion) => ({
                 startDate: response.startDate,
                 finishDate: response.finishDate,
-                regionsMap: toNumberRecord(response.regions.map(({ regionId, flightsCount }) => [regionId, flightsCount] as const))
+                regionsMap: toRecord(response.regions.map(({ regionId, flightsCount }) => [regionId, flightsCount] as const))
             })
         }),
         getAverageDuration: build.query<AverageDuration, AnalyticsBaseQueryParams | undefined>({
@@ -118,7 +120,7 @@ export const analyticsApi = createApi({
             transformResponse: (response: AverageDurationByRegion) => ({
                 startDate: response.startDate,
                 finishDate: response.finishDate,
-                regionsMap: toNumberRecord(
+                regionsMap: toRecord(
                     response.regions.map(({ regionId, averageFlightDurationSeconds }) => [regionId, averageFlightDurationSeconds] as const)
                 )
             })
@@ -132,7 +134,7 @@ export const analyticsApi = createApi({
                 startDate: response.startDate,
                 finishDate: response.finishDate,
                 resolution: response.resolution,
-                regionsMap: toNumberRecord(
+                regionsMap: toRecord(
                     response.regions.map(({ regionId, ...averageCountInfo }) => [regionId, { ...averageCountInfo }] as const)
                 )
             })
@@ -140,27 +142,53 @@ export const analyticsApi = createApi({
         getFlightsBetweenRegion: build.query<FlightsBetweenRegionsFormatted, void>({
             query: () => ({ url: apiUrls.flightsBetweenRegion() }),
             transformResponse: (response: FlightsBetweenRegions) => ({
-                count: response.count,
-                topFly: response.topFly,
-                regionFlights: toNumberRecord(
+                count: response.limit,
+                topFly: response.topFly.map((flight) => ({
+                    departureRegionId: flight.departureRegionId,
+                    destinationRegionId: flight.destinationRegionId,
+                    count: flight.count
+                })),
+                regionFlights: toRecord(
                     response.regions.map(
                         (region) =>
                             [
                                 region.regionId,
-                                [
-                                    ...region.topDepartureRegions.map((departureRegion) => ({
-                                        departureRegionId: departureRegion,
-                                        destinationRegionId: region.regionId
-                                    })),
-                                    ...region.topDestinationRegions.map((destinationRegion) => ({
-                                        departureRegionId: region.regionId,
-                                        destinationRegionId: destinationRegion
-                                    }))
-                                ]
+                                region.topDestinationRegions.map(({ regionId: destinationRegionId, count }) => ({
+                                    departureRegionId: region.regionId,
+                                    destinationRegionId,
+                                    count
+                                }))
                             ] as const
                     )
-                )
+                ),
+                regionCounts: toRecord(response.regions.map(({ regionId, count }) => [regionId, count] as const))
             })
+        }),
+        getFlightsCountByOperator: build.query<FlightsCountByOperatorMap, AnalyticsOperatorsQueryParams | undefined>({
+            query: (queryParams) => ({
+                url: apiUrls.countByOperator(),
+                params: queryParams
+            }),
+            transformResponse: (response: FlightsCountByOperator) => {
+                const operatorsMap: Record<OperatorType, Record<string, number>> = {
+                    [OperatorType.UL]: {},
+                    [OperatorType.FL]: {}
+                };
+
+                for (const { operator, flightsCount } of response.operatorsUL) {
+                    operatorsMap[OperatorType.UL][operator] = flightsCount;
+                }
+
+                for (const { operator, flightsCount } of response.operatorsFL) {
+                    operatorsMap[OperatorType.FL][operator] = flightsCount;
+                }
+
+                return {
+                    startDate: response.startDate,
+                    finishDate: response.finishDate,
+                    operatorsMap
+                };
+            }
         })
     })
 });
@@ -179,5 +207,6 @@ export const {
     useGetAverageDurationByRegionQuery,
     useGetAverageCountQuery,
     useGetAverageCountByRegionQuery,
-    useGetFlightsBetweenRegionQuery
+    useGetFlightsBetweenRegionQuery,
+    useGetFlightsCountByOperatorQuery
 } = analyticsApi;

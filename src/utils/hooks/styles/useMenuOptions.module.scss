@@ -4,8 +4,34 @@
 .item {
   @extend %base-item-link;
 
+  align-items: center;
+  color: variables.$primary-text-color;
+  display: inline-flex;
+  font-weight: 500;
+  transition: color 0.2s linear, opacity 0.2s linear;
+
+  &:visited,
+  &:active,
+  &:focus-visible {
+    color: variables.$primary-text-color;
+  }
+
+  &:hover {
+    opacity: 0.6;
+  }
+
   &-active {
-    color: variables.$primary-button-main-color;
-    font-weight: 600;
+    color: variables.$link-color;
+    font-weight: 500;
+
+    &:visited,
+    &:active,
+    &:focus-visible {
+      color: variables.$link-color;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }

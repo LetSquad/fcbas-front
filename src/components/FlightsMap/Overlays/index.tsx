@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 
+import classNames from "classnames";
+
 import Flex from "@commonComponents/Flex";
 import LegendOverlay from "@components/FlightsMap/Overlays/LegendOverlay";
 import RegionOverlay from "@components/FlightsMap/Overlays/RegionOverlay";
@@ -12,6 +14,7 @@ interface OverlaysProps {
     selectionActive: boolean;
     selectedRegionName?: string;
     selectedRegionStat?: HeatMapInfo;
+    interregionalFlightsCount?: number;
 
     heatmapMode: HeatmapMode;
     onChangeHeatmapMode: (mode: HeatmapMode) => void;
@@ -22,12 +25,15 @@ interface OverlaysProps {
     showFlows: boolean;
     topFlightsCount: number | undefined;
     onToggleShowFlows: (value: boolean) => void;
+    isCollapsed: boolean;
+    onToggleSidePanel: () => void;
 }
 
 export default function Overlays({
     selectionActive,
     selectedRegionName,
     selectedRegionStat,
+    interregionalFlightsCount,
     heatmapMode,
     onChangeHeatmapMode,
     heatDomains,
@@ -35,7 +41,9 @@ export default function Overlays({
     heatHighColor,
     showFlows,
     topFlightsCount,
-    onToggleShowFlows
+    onToggleShowFlows,
+    isCollapsed,
+    onToggleSidePanel
 }: OverlaysProps) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -58,7 +66,13 @@ export default function Overlays({
     }, [onWheel, ref]);
 
     return (
-        <Flex column rowGap="10px" className={styles.container} ref={ref}>
+        <Flex
+            column
+            rowGap="10px"
+            className={classNames(styles.container, { [styles.collapsed]: isCollapsed })}
+            ref={ref}
+            aria-hidden={isCollapsed}
+        >
             <LegendOverlay
                 heatmapMode={heatmapMode}
                 onChangeHeatmapMode={onChangeHeatmapMode}
@@ -68,12 +82,14 @@ export default function Overlays({
                 showFlows={showFlows}
                 topFlightsCount={topFlightsCount}
                 onToggleShowFlows={onToggleShowFlows}
+                onToggleSidePanel={onToggleSidePanel}
             />
 
             <RegionOverlay
                 selectionActive={selectionActive}
                 selectedRegionName={selectedRegionName}
                 selectedRegionStat={selectedRegionStat}
+                interregionalFlightsCount={interregionalFlightsCount}
             />
         </Flex>
     );
