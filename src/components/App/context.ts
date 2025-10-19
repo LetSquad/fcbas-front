@@ -5,7 +5,13 @@ interface MapFullscreenContextValue {
     setMapFullscreen: Dispatch<SetStateAction<boolean>>;
 }
 
-const MapFullscreenContext = createContext<MapFullscreenContextValue | undefined>(undefined);
+interface ExtendedModeContextValue {
+    isExtendedMode: boolean;
+    setIsExtendedMode: Dispatch<SetStateAction<boolean>>;
+}
+
+export const MapFullscreenContext = createContext<MapFullscreenContextValue | undefined>(undefined);
+export const ExtendedModeContext = createContext<ExtendedModeContextValue | undefined>(undefined);
 
 export function useMapFullscreen() {
     const context = useContext(MapFullscreenContext);
@@ -17,4 +23,12 @@ export function useMapFullscreen() {
     return context;
 }
 
-export default MapFullscreenContext;
+export function useExtendedMode() {
+    const ctx = useContext(ExtendedModeContext);
+
+    if (!ctx) {
+        throw new Error("useExtendedMode необходимо использовать внутри <ExtendedModeContext.Provider>");
+    }
+
+    return ctx;
+}

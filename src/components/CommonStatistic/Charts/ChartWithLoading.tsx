@@ -1,4 +1,4 @@
-import { PropsWithChildren, useCallback, useMemo } from "react";
+import { PropsWithChildren, useCallback, useEffect, useId, useMemo, useRef } from "react";
 import { toast } from "react-hot-toast";
 
 import classNames from "classnames";
@@ -9,6 +9,7 @@ import { Icon, Loader } from "semantic-ui-react";
 
 import Flex from "@commonComponents/Flex";
 import LoadingErrorBlock from "@commonComponents/LoadingErrorBlock/LoadingErrorBlock";
+import { useRegisterChartForExport } from "@components/CommonStatistic/context";
 import { SortType } from "@models/analytics/enums";
 
 import styles from "./styles/ChartWithLoading.module.scss";
@@ -39,6 +40,11 @@ export default function ChartWithLoading({
         quality: 1,
         type: "image/png"
     });
+
+    const registerChartForExport = useRegisterChartForExport();
+    const exportId = useId();
+
+    const getImageRef = useRef<() => Promise<Blob | null | undefined>>(() => Promise.resolve(null));
 
     const content = useMemo(() => {
         if (isLoading) {
@@ -85,6 +91,31 @@ export default function ChartWithLoading({
             });
         }
     }, [getDivPng, isLoadingPng]);
+
+    useEffect(() => {
+        getImageRef.current = async () => {
+            const dataUrl = await getDivPng();
+
+            if (!dataUrl) {
+                return null;
+            }
+
+            const response = await fetch(dataUrl);
+
+            return response.blob();
+        };
+    }, [getDivPng]);
+
+    useEffect(
+        () =>
+            registerChartForExport({
+                id: exportId,
+                title,
+                getImage: () => getImageRef.current(),
+                isDownloadDisabled: Boolean(isDownloadDisabled)
+            }),
+        [exportId, isDownloadDisabled, registerChartForExport, title]
+    );
 
     return (
         <div className={classNames({ [styles.block]: !isWide, [styles.blockWide]: isWide })} ref={ref}>
