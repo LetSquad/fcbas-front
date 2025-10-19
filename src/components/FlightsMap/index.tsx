@@ -455,10 +455,12 @@ export default function FlightsMap({
                     tangentAngle += Math.PI;
                 }
 
-                const fontSizePx = Math.max(14, Math.min(20, thicknessScreenPxValue * 2.1));
+                const baseFontSizePx = Math.max(14, Math.min(20, thicknessScreenPxValue * 2.1));
+                const zoomFontBoost = 1 + (zoom - 1) * 0.15;
+                const fontSizePx = Math.min(baseFontSizePx * zoomFontBoost, 26);
                 const fontSizeWorld = fontSizePx / pixelsPerWorldX;
-                const paddingX = 6 / pixelsPerWorldX;
-                const paddingY = 4 / pixelsPerWorldX;
+                const paddingX = (6 * zoomFontBoost) / pixelsPerWorldX;
+                const paddingY = (4 * zoomFontBoost) / pixelsPerWorldX;
                 const labelX = midX;
                 const labelY = midY;
 
@@ -534,7 +536,7 @@ export default function FlightsMap({
             context.fill();
             context.restore();
         },
-        [getRegionAnchor, regions, selectedRegionId]
+        [getRegionAnchor, regions, selectedRegionId, zoom]
     );
 
     const selectedRegionName = selectedRegionId === null ? undefined : regions[selectedRegionId]?.name || `Регион ${selectedRegionId}`;

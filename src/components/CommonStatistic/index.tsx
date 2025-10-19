@@ -171,7 +171,7 @@ export default function CommonStatistic() {
                         />
                     </Flex>
                 )}
-                <Flex height100 width100 gap="12px" wrap style={{ flex: 1 }}>
+                <Flex height100 width100 gap="12px" alignContentStart wrap style={{ flex: 1 }}>
                     {isExtendedMode && <Blocks />}
                     <TrendDiagram />
                     <TopFlightsDiagram />
