@@ -26,8 +26,9 @@ export default function Header() {
                         primary
                         className={styles.button}
                         onClick={() => {
-                            navigate(PageSlugs.BASE);
-                            logout();
+                            logout().then(() => {
+                                setTimeout(() => navigate(PageSlugs.BASE), 500);
+                            });
                         }}
                     >
                         Выйти

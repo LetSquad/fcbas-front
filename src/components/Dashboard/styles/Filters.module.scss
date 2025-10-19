@@ -8,6 +8,7 @@ $filters-collapsed-height: 28px;
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
   height: $filters-expanded-height;
   transition: height 0.2s ease;
+  z-index: 10;
 
   &-collapsed {
     align-items: center;
