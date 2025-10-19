@@ -48,7 +48,7 @@ export default function TopOperatorsFlightsDiagram({ operatorType }: TopOperator
                 <BarChart data={topOperatorsDataset} className={chartStyles.chart} layout="vertical">
                     <CartesianGrid strokeDasharray="2 5" />
                     <XAxis type="number" padding={{ right: 30 }} />
-                    <YAxis dataKey="name" type="category" width={operatorType === OperatorType.UL ? 180 : 260} />
+                    <YAxis dataKey="name" type="category" width={operatorType === OperatorType.UL ? 180 : 150} />
                     <Tooltip />
                     <Bar dataKey="value" name="Полетов" fill="#3373bc" label={{ position: "right" }} />
                 </BarChart>

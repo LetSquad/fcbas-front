@@ -56,7 +56,7 @@ export default function TopFlightsDiagram() {
                 <BarChart data={topFlightsDataset} className={chartStyles.chart} layout="vertical">
                     <CartesianGrid strokeDasharray="2 5" />
                     <XAxis type="number" padding={{ right: 30 }} />
-                    <YAxis dataKey="name" type="category" width={180} />
+                    <YAxis dataKey="name" type="category" width={200} />
                     <Tooltip />
                     <Bar dataKey="value" name="Полетов" fill="#3373bc" label={{ position: "right" }} />
                 </BarChart>

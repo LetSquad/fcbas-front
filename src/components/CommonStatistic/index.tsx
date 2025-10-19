@@ -158,17 +158,19 @@ export default function CommonStatistic() {
     return (
         <ChartsExportContext.Provider value={chartsExportContextValue}>
             <Flex column height100 width100 rowGap="8px" className={styles.container}>
-                <Flex justifyEnd>
-                    <Button
-                        icon="file pdf"
-                        content="Выгрузить все графики в PDF"
-                        primary
-                        onClick={handleExportPdf}
-                        loading={isExporting}
-                        disabled={isExportDisabled}
-                        className={styles.button}
-                    />
-                </Flex>
+                {isExtendedMode && (
+                    <Flex justifyEnd>
+                        <Button
+                            icon="file pdf"
+                            content="Выгрузить все графики в PDF"
+                            primary
+                            onClick={handleExportPdf}
+                            loading={isExporting}
+                            disabled={isExportDisabled}
+                            className={styles.button}
+                        />
+                    </Flex>
+                )}
                 <Flex height100 width100 gap="12px" wrap style={{ flex: 1 }}>
                     {isExtendedMode && <Blocks />}
                     <TrendDiagram />

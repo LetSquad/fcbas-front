@@ -73,7 +73,7 @@ $filters-collapsed-height: 28px;
     font-size: 12px !important;
   }
 
-  > div {
+  > div:first-of-type {
     height: 29px;
 
     > div {

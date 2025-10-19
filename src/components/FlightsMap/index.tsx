@@ -258,8 +258,17 @@ export default function FlightsMap({
             map.set(key, flow.count);
         }
 
+        for (const flows of Object.values(regionFlights ?? {})) {
+            for (const flow of flows) {
+                if (typeof flow.count === "number") {
+                    const key = `${flow.departureRegionId}-${flow.destinationRegionId}`;
+                    map.set(key, flow.count);
+                }
+            }
+        }
+
         return map;
-    }, [topFly]);
+    }, [regionFlights, topFly]);
 
     const visibleBetweenRegionFlows: FlightFlow[] = useMemo(() => {
         if (selectedRegionId === null) {
@@ -268,10 +277,14 @@ export default function FlightsMap({
 
         const flows = regionFlights?.[selectedRegionId] ?? [];
 
-        return flows.map((flow) => ({
-            ...flow,
-            count: flightsCountByPair.get(`${flow.departureRegionId}-${flow.destinationRegionId}`)
-        }));
+        return flows.map((flow) => {
+            const key = `${flow.departureRegionId}-${flow.destinationRegionId}`;
+
+            return {
+                ...flow,
+                count: flow.count ?? flightsCountByPair.get(key)
+            };
+        });
     }, [flightsCountByPair, regionFlights, selectedRegionId, topFly]);
 
     const bringToFront = useCallback((element: SVGElement | null) => {
@@ -442,7 +455,7 @@ export default function FlightsMap({
                     tangentAngle += Math.PI;
                 }
 
-                const fontSizePx = Math.max(16, Math.min(20, thicknessScreenPxValue * 2.1));
+                const fontSizePx = Math.max(14, Math.min(20, thicknessScreenPxValue * 2.1));
                 const fontSizeWorld = fontSizePx / pixelsPerWorldX;
                 const paddingX = 6 / pixelsPerWorldX;
                 const paddingY = 4 / pixelsPerWorldX;
