@@ -7,7 +7,7 @@ import Flex from "@commonComponents/Flex";
 import LoadingErrorBlock from "@commonComponents/LoadingErrorBlock/LoadingErrorBlock";
 import { useFilterForm } from "@components/Dashboard/context";
 import { getTimeResolutionDescriptionFromEnum } from "@components/Dashboard/utils";
-import FlowsCanvas from "@components/FlightsMap/FlowCanvas";
+import FlowsCanvas, { FlightFlow } from "@components/FlightsMap/FlowCanvas";
 import MapSvg from "@components/FlightsMap/MapSvg";
 import MapTooltip from "@components/FlightsMap/MapTooltip";
 import Overlays from "@components/FlightsMap/Overlays";
@@ -25,7 +25,6 @@ import {
 } from "@components/FlightsMap/utils/utils";
 import { useElementSize } from "@hooks/useElementSize";
 import { HeatmapMode } from "@models/analytics/enums";
-import { FlightBetweenRegions } from "@models/analytics/types";
 import { ViewBox } from "@models/map/types";
 import { RegionShape } from "@models/regions/types";
 import { useGetFlightsBetweenRegionQuery } from "@store/analytics/api";
@@ -38,6 +37,9 @@ export interface FlightsMapProps {
     regions: Record<number, RegionShape>;
     width: number;
     height: number;
+    isSidePanelCollapsed: boolean;
+    onToggleSidePanel: () => void;
+    onSelectedRegionChange: (isSelected: boolean) => void;
 }
 
 const STYLE = {
@@ -51,12 +53,30 @@ const STYLE = {
         opacityAdd: 0.08
     },
 
+    label: {
+        fontFamily: '"Inter", "Segoe UI", sans-serif',
+        fontWeight: 600,
+        textColor: "#6a6a6a",
+        strokeColor: "rgba(255, 255, 255, 0.24)",
+        shadowColor: "rgba(12, 20, 33, 0.45)"
+    },
+
     // Цвета теплокарты (от «холодного» к «горячему»)
     heatLow: "#B3D9FF",
     heatHigh: "#254b6e"
 };
 
-export default function FlightsMap({ viewBox, regions, width, height }: FlightsMapProps) {
+const COUNT_FORMATTER = new Intl.NumberFormat("ru-RU");
+
+export default function FlightsMap({
+    viewBox,
+    regions,
+    width,
+    height,
+    isSidePanelCollapsed,
+    onToggleSidePanel,
+    onSelectedRegionChange
+}: FlightsMapProps) {
     const formData = useFilterForm();
 
     const {
@@ -230,12 +250,29 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
         [getHeatValue]
     );
 
-    const visibleBetweenRegionFlows = useMemo(
-        () =>
-            // Если регион не выбран — показываем топ перелётов, иначе связи конкретного региона
-            selectedRegionId === null ? topFly || [] : regionFlights?.[selectedRegionId] || [],
-        [selectedRegionId, topFly, regionFlights]
-    );
+    const flightsCountByPair = useMemo(() => {
+        const map = new Map<string, number>();
+
+        for (const flow of topFly ?? []) {
+            const key = `${flow.departureRegionId}-${flow.destinationRegionId}`;
+            map.set(key, flow.count);
+        }
+
+        return map;
+    }, [topFly]);
+
+    const visibleBetweenRegionFlows: FlightFlow[] = useMemo(() => {
+        if (selectedRegionId === null) {
+            return (topFly ?? []).map((flow) => ({ ...flow }));
+        }
+
+        const flows = regionFlights?.[selectedRegionId] ?? [];
+
+        return flows.map((flow) => ({
+            ...flow,
+            count: flightsCountByPair.get(`${flow.departureRegionId}-${flow.destinationRegionId}`)
+        }));
+    }, [flightsCountByPair, regionFlights, selectedRegionId, topFly]);
 
     const bringToFront = useCallback((element: SVGElement | null) => {
         if (!element) {
@@ -289,7 +326,7 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
 
     // Рисуем межрегиональную линию без анимации и без подписи + маркеры направления
     const drawInterRegionFlow = useCallback(
-        (flow: Omit<FlightBetweenRegions, "count">, context: CanvasRenderingContext2D, _nowMs: number, pixelsPerWorldX: number) => {
+        (flow: FlightFlow, context: CanvasRenderingContext2D, _nowMs: number, pixelsPerWorldX: number) => {
             const departureRegion = regions[flow.departureRegionId];
             const destinationRegion = regions[flow.destinationRegionId];
             if (!departureRegion || !destinationRegion || !svgRef.current) {
@@ -388,6 +425,79 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
             context.stroke();
             context.restore();
 
+            if (typeof flow.count === "number" && Number.isFinite(flow.count) && flow.count > 0) {
+                const formattedCount = COUNT_FORMATTER.format(flow.count);
+
+                const t = 0.5;
+                const oneMinusT = 1 - t;
+                const midX = oneMinusT ** 2 * curve.p1[0] + 2 * oneMinusT * t * curve.c[0] + t ** 2 * curve.p2[0];
+                const midY = oneMinusT ** 2 * curve.p1[1] + 2 * oneMinusT * t * curve.c[1] + t ** 2 * curve.p2[1];
+
+                const dx = 2 * oneMinusT * (curve.c[0] - curve.p1[0]) + 2 * t * (curve.p2[0] - curve.c[0]);
+                const dy = 2 * oneMinusT * (curve.c[1] - curve.p1[1]) + 2 * t * (curve.p2[1] - curve.c[1]);
+
+                let tangentAngle = Math.atan2(dy, dx);
+
+                if (tangentAngle > Math.PI / 2 || tangentAngle < -Math.PI / 2) {
+                    tangentAngle += Math.PI;
+                }
+
+                const fontSizePx = Math.max(16, Math.min(20, thicknessScreenPxValue * 2.1));
+                const fontSizeWorld = fontSizePx / pixelsPerWorldX;
+                const paddingX = 6 / pixelsPerWorldX;
+                const paddingY = 4 / pixelsPerWorldX;
+                const labelX = midX;
+                const labelY = midY;
+
+                context.save();
+                context.translate(labelX, labelY);
+                context.rotate(tangentAngle);
+                context.font = `${STYLE.label.fontWeight} ${fontSizeWorld}px ${STYLE.label.fontFamily}`;
+                context.textBaseline = "middle";
+                context.textAlign = "center";
+
+                const metrics = context.measureText(formattedCount);
+                const textWidthWorld = metrics.width;
+                const textHeightWorld = fontSizeWorld;
+                const rectWidth = textWidthWorld + paddingX * 2;
+                const rectHeight = textHeightWorld + paddingY * 2;
+                const radius = rectHeight / 2;
+                const halfWidth = rectWidth / 2;
+                const halfHeight = rectHeight / 2;
+
+                context.shadowColor = STYLE.label.shadowColor;
+                context.shadowBlur = 8 / pixelsPerWorldX;
+                context.shadowOffsetX = 0;
+                context.shadowOffsetY = 2 / pixelsPerWorldX;
+
+                const labelGradient = context.createLinearGradient(-halfWidth, 0, halfWidth, 0);
+                labelGradient.addColorStop(0, STYLE.gradientStart);
+                labelGradient.addColorStop(1, STYLE.gradientEnd);
+
+                context.fillStyle = labelGradient;
+                context.beginPath();
+                context.moveTo(-halfWidth + radius, -halfHeight);
+                context.lineTo(halfWidth - radius, -halfHeight);
+                context.quadraticCurveTo(halfWidth, -halfHeight, halfWidth, -halfHeight + radius);
+                context.lineTo(halfWidth, halfHeight - radius);
+                context.quadraticCurveTo(halfWidth, halfHeight, halfWidth - radius, halfHeight);
+                context.lineTo(-halfWidth + radius, halfHeight);
+                context.quadraticCurveTo(-halfWidth, halfHeight, -halfWidth, halfHeight - radius);
+                context.lineTo(-halfWidth, -halfHeight + radius);
+                context.quadraticCurveTo(-halfWidth, -halfHeight, -halfWidth + radius, -halfHeight);
+                context.closePath();
+                context.fill();
+
+                context.shadowColor = "transparent";
+                context.lineWidth = Math.max(0.75 / pixelsPerWorldX, 0.5 / pixelsPerWorldX);
+                context.strokeStyle = STYLE.label.strokeColor;
+                context.stroke();
+
+                context.fillStyle = STYLE.label.textColor;
+                context.fillText(formattedCount, 0, 0);
+                context.restore();
+            }
+
             // МАРКЕРЫ НАПРАВЛЕНИЯ
             const originRadiusWorld = Math.max(1 / pixelsPerWorldX, (thicknessScreenPxValue * 0.9) / pixelsPerWorldX);
             const destRadiusWorld = Math.max(1 / pixelsPerWorldX, (thicknessScreenPxValue * 1.1) / pixelsPerWorldX);
@@ -452,11 +562,11 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
                     break;
                 }
                 case HeatmapMode.AVERAGE_COUNT: {
-                    content = `Среднее количество полетов (${getTimeResolutionDescriptionFromEnum(formData.resolution)}): ${heatMapInfo.averageFlightCount}`;
+                    content = `Среднее количество полетов ${getTimeResolutionDescriptionFromEnum(formData.resolution)}: ${heatMapInfo.averageFlightCount}`;
                     break;
                 }
                 case HeatmapMode.MEDIAN_COUNT: {
-                    content = `Медианное количество полетов (${getTimeResolutionDescriptionFromEnum(formData.resolution)}): ${heatMapInfo.medianFlightCount}`;
+                    content = `Медианное количество полетов ${getTimeResolutionDescriptionFromEnum(formData.resolution)}: ${heatMapInfo.medianFlightCount}`;
                     break;
                 }
                 case HeatmapMode.EMPTY_DAYS_COUNT: {
@@ -549,6 +659,10 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
         curveCacheRef.current.clear();
     }, [regions]);
 
+    useEffect(() => {
+        onSelectedRegionChange(selectedRegionId !== null);
+    }, [onSelectedRegionChange, selectedRegionId]);
+
     const hasHeatmapError = Boolean(heatmapErrorRefetch);
 
     if (hasHeatmapError || isFlightsBetweenRegionError) {
@@ -629,6 +743,8 @@ export default function FlightsMap({ viewBox, regions, width, height }: FlightsM
                     showFlows={showFlows}
                     topFlightsCount={topFlightsCount}
                     onToggleShowFlows={setShowFlows}
+                    isCollapsed={isSidePanelCollapsed}
+                    onToggleSidePanel={onToggleSidePanel}
                 />
             )}
         </div>

@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect, useMemo } from "react";
 import { flushSync } from "react-dom";
 import { useSelector } from "react-redux";
 
+import classNames from "classnames";
 import { useFormikContext } from "formik";
 import { DateTime, Interval } from "luxon";
-import { Button, Dropdown, DropdownItem, DropdownMenu, Form } from "semantic-ui-react";
+import { Button, Dropdown, DropdownItem, DropdownMenu, Form, Icon } from "semantic-ui-react";
 
 import Flex from "@commonComponents/Flex";
 import FormField from "@commonComponents/FormField";
@@ -19,11 +20,19 @@ import { RootState } from "@store/index";
 
 import styles from "./styles/Filters.module.scss";
 
+interface FiltersProps {
+    onCollapseChange: Dispatch<SetStateAction<boolean>>;
+    isCollapsed: boolean;
+}
+
 interface QuickFilterPreset {
     id: string;
     label: string;
     getValues: () => FormData;
 }
+
+export const FILTERS_EXPANDED_HEIGHT = 68;
+export const FILTERS_COLLAPSED_HEIGHT = 26;
 
 const QUICK_FILTER_PRESETS: QuickFilterPreset[] = [
     {
@@ -114,10 +123,11 @@ export const INITIAL_FORM_DATA: () => FormData = () => ({
 const areFiltersEqual = (left: FormData, right: FormData) =>
     left.startDate === right.startDate && left.finishDate === right.finishDate && left.resolution === right.resolution;
 
-export default function Filters() {
+export default function Filters({ onCollapseChange, isCollapsed }: FiltersProps) {
     const formik = useFormikContext<FormData>();
 
     const formData = useFilterForm();
+    const { startDate: appliedStartDate, finishDate: appliedFinishDate, resolution: appliedResolution } = formData;
 
     const dateRangeArgs = useMemo(
         () => ({ startDate: formData.startDate, finishDate: formData.finishDate }),
@@ -180,6 +190,28 @@ export default function Filters() {
         [formik.values.finishDate, formik.values.startDate]
     );
 
+    const formattedStartDate = useMemo(() => {
+        if (!appliedStartDate) {
+            return "";
+        }
+
+        return DateTime.fromISO(appliedStartDate).toFormat("dd.MM.yyyy");
+    }, [appliedStartDate]);
+
+    const formattedFinishDate = useMemo(() => {
+        if (!appliedFinishDate) {
+            return "";
+        }
+
+        return DateTime.fromISO(appliedFinishDate).toFormat("dd.MM.yyyy");
+    }, [appliedFinishDate]);
+
+    const resolutionLabel = useMemo(() => getTimeResolutionLabelFromEnum(appliedResolution), [appliedResolution]);
+
+    const handleToggleCollapse = useCallback(() => {
+        onCollapseChange((prev) => !prev);
+    }, [onCollapseChange]);
+
     useEffect(() => {
         const { resolution } = formik.values;
         const days = interval.toDuration("days").days ?? 0;
@@ -199,52 +231,79 @@ export default function Filters() {
     }, [formik, interval]);
 
     return (
-        <Form className={styles.form}>
-            <Flex columnGap="10px" alignItemsEnd className={styles.container}>
-                <FormField
-                    className={styles.field}
-                    name="startDate"
-                    label="Начало периода"
-                    type={FormFieldType.DATEPICKER}
-                    maxDate={formik.values.finishDate ? DateTime.fromISO(formik.values.finishDate).toJSDate() : undefined}
-                />
-                <FormField
-                    className={styles.field}
-                    name="finishDate"
-                    label="Конец периода"
-                    minDate={formik.values.startDate ? DateTime.fromISO(formik.values.startDate).toJSDate() : undefined}
-                    maxDate={new Date()}
-                    type={FormFieldType.DATEPICKER}
-                />
-                <FormField
-                    className={styles.fieldDropdown}
-                    name="resolution"
-                    label="Промежуток измерения"
-                    type={FormFieldType.DROPDOWN}
-                    options={TIME_RESOLUTION_OPTIONS(interval)}
-                    placeholder="Выберите промежуток измерения"
-                />
-                <Button
-                    type="submit"
-                    disabled={isApplyDisabled || isLoading}
-                    onClick={formik.submitForm}
-                    primary
-                    className={styles.button}
-                    loading={isLoading}
-                >
-                    Применить
-                </Button>
+        <div
+            className={classNames(styles.filtersWrapper, {
+                [styles.filtersWrapperCollapsed]: isCollapsed
+            })}
+        >
+            {isCollapsed ? (
+                <button type="button" className={styles.collapsedToggle} onClick={handleToggleCollapse} aria-expanded={!isCollapsed}>
+                    <span className={styles.filtersToggleLabel}>Фильтры</span>
+                    <Flex columnGap="8px" alignItemsBaseline>
+                        <div className={styles.filtersSummary} aria-hidden={!isCollapsed}>
+                            <span>{formattedStartDate}</span>
+                            <span>—</span>
+                            <span>{formattedFinishDate}</span>
+                            <span className={styles.filtersSummaryDivider}>·</span>
+                            <span>{resolutionLabel}</span>
+                        </div>
 
-                <Dropdown text="Периоды" button className={styles.button} loading={isLoading} disabled={isLoading}>
-                    <DropdownMenu>
-                        {QUICK_FILTER_PRESETS.map((preset) => (
-                            <DropdownItem key={preset.id} onClick={() => handlePresetSelect(preset)}>
-                                {preset.label}
-                            </DropdownItem>
-                        ))}
-                    </DropdownMenu>
-                </Dropdown>
-            </Flex>
-        </Form>
+                        <Icon name="angle down" link />
+                    </Flex>
+                </button>
+            ) : (
+                <Form>
+                    <Flex columnGap="10px" alignItemsEnd className={styles.container}>
+                        <FormField
+                            className={styles.field}
+                            name="startDate"
+                            label="Начало периода"
+                            type={FormFieldType.DATEPICKER}
+                            maxDate={formik.values.finishDate ? DateTime.fromISO(formik.values.finishDate).toJSDate() : undefined}
+                        />
+                        <FormField
+                            className={styles.field}
+                            name="finishDate"
+                            label="Конец периода"
+                            minDate={formik.values.startDate ? DateTime.fromISO(formik.values.startDate).toJSDate() : undefined}
+                            maxDate={new Date()}
+                            type={FormFieldType.DATEPICKER}
+                        />
+                        <FormField
+                            className={styles.fieldDropdown}
+                            name="resolution"
+                            label="Промежуток измерения"
+                            type={FormFieldType.DROPDOWN}
+                            options={TIME_RESOLUTION_OPTIONS(interval)}
+                            placeholder="Выберите промежуток измерения"
+                        />
+                        <Button
+                            type="submit"
+                            disabled={isApplyDisabled || isLoading}
+                            onClick={formik.submitForm}
+                            primary
+                            className={styles.button}
+                            loading={isLoading}
+                        >
+                            Применить
+                        </Button>
+
+                        <Dropdown text="Периоды" button className={styles.button} loading={isLoading} disabled={isLoading}>
+                            <DropdownMenu>
+                                {QUICK_FILTER_PRESETS.map((preset) => (
+                                    <DropdownItem key={preset.id} onClick={() => handlePresetSelect(preset)}>
+                                        {preset.label}
+                                    </DropdownItem>
+                                ))}
+                            </DropdownMenu>
+                        </Dropdown>
+
+                        <button type="button" className={styles.collapseButton} onClick={handleToggleCollapse} aria-expanded={!isCollapsed}>
+                            <Icon name="angle up" size="large" />
+                        </button>
+                    </Flex>
+                </Form>
+            )}
+        </div>
     );
 }

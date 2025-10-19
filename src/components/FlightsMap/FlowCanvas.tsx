@@ -6,13 +6,15 @@ import { ViewBox } from "@models/map/types";
 
 import styles from "./styles/FlowCanvas.module.scss";
 
+export type FlightFlow = Omit<FlightBetweenRegions, "count"> & { count?: number };
+
 interface FlowsCanvasProps {
     width: number;
     height: number;
     currentViewBox: ViewBox;
-    flows: Omit<FlightBetweenRegions, "count">[];
+    flows: FlightFlow[];
     showFlows: boolean;
-    drawFlow: (flow: Omit<FlightBetweenRegions, "count">, context: CanvasRenderingContext2D, now: number, pixelsPerWorldX: number) => void;
+    drawFlow: (flow: FlightFlow, context: CanvasRenderingContext2D, now: number, pixelsPerWorldX: number) => void;
 }
 
 /**

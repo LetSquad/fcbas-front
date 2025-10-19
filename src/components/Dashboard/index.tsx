@@ -9,7 +9,7 @@ import LoadingErrorBlock from "@commonComponents/LoadingErrorBlock/LoadingErrorB
 import { useExtendedMode, useMapFullscreen } from "@components/App/context";
 import CommonStatistic from "@components/CommonStatistic";
 import { FilterFormContext } from "@components/Dashboard/context";
-import Filters, { INITIAL_FORM_DATA } from "@components/Dashboard/Filters";
+import Filters, { FILTERS_COLLAPSED_HEIGHT, FILTERS_EXPANDED_HEIGHT, INITIAL_FORM_DATA } from "@components/Dashboard/Filters";
 import FlightsMapWrapper from "@components/FlightsMap/FlightsMapWrapper";
 import StatisticTable from "@components/StatisticTable";
 import { FormData } from "@models/filters/types";
@@ -22,6 +22,7 @@ export default function Dashboard() {
 
     const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA());
     const [activeTabIndex, setActiveTabIndex] = useState(0);
+    const [isFiltersCollapsed, setIsFiltersCollapsed] = useState(true);
 
     const { isMapFullscreen, setMapFullscreen } = useMapFullscreen();
     const { isExtendedMode, setIsExtendedMode } = useExtendedMode();
@@ -103,6 +104,16 @@ export default function Dashboard() {
         [activeTabIndex]
     );
 
+    const tabWrapperStyle = useMemo(() => {
+        if (isMapFullscreen) {
+            return undefined;
+        }
+
+        const filtersHeight = isFiltersCollapsed ? FILTERS_COLLAPSED_HEIGHT : FILTERS_EXPANDED_HEIGHT;
+
+        return { height: `calc(100% - ${filtersHeight}px)` };
+    }, [isFiltersCollapsed, isMapFullscreen]);
+
     useEffect(() => {
         if (!isExtendedMode && activeTabIndex > 1) {
             setActiveTabIndex(0);
@@ -119,8 +130,10 @@ export default function Dashboard() {
     return (
         <FilterFormContext.Provider value={formData}>
             <Flex column width100 height100 className={classNames({ [styles.fullscreenLayout]: isMapFullscreen })}>
-                <FormikProvider value={formik}>{!isMapFullscreen && <Filters />}</FormikProvider>
-                <div className={styles.tabWrapper}>
+                <FormikProvider value={formik}>
+                    {isMapFullscreen ? null : <Filters isCollapsed={isFiltersCollapsed} onCollapseChange={setIsFiltersCollapsed} />}
+                </FormikProvider>
+                <div className={styles.tabWrapper} style={tabWrapperStyle}>
                     <Tab
                         className={classNames(styles.container, { [styles.containerFullscreen]: isMapFullscreen })}
                         menu={isMapFullscreen ? { style: { display: "none" } } : undefined}
